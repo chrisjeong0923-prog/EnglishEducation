@@ -7,9 +7,11 @@ interface Props {
   definitionKh: string;
   example: string;
   exampleKh: string;
+  emoji?: string;
+  imageUrl?: string;
 }
 
-const { word, ipa, type, definition, definitionKh, example, exampleKh } = Astro.props;
+const { word, ipa, type, definition, definitionKh, example, exampleKh, emoji, imageUrl } = Astro.props;
 
 // Determine pastel category color
 const typeColors: Record<string, string> = {
@@ -53,6 +55,13 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
         </button>
       </div>
       <div class="card-body">
+        <div class="visual-container">
+          {imageUrl ? (
+            <img src={imageUrl} alt={word} class="vocab-sticker" />
+          ) : (
+            <span class="vocab-emoji">{emoji}</span>
+          )}
+        </div>
         <h2 class="word-title">{word}</h2>
         <p class="word-ipa">{ipa}</p>
       </div>
@@ -363,6 +372,46 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
 
   .flashcard-container:hover .tap-hint {
     color: var(--color-primary);
+  }
+
+  /* Visual Container styling */
+  .visual-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 110px;
+    margin-bottom: 8px;
+    transition: var(--transition-smooth);
+  }
+
+  .vocab-sticker {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.08));
+    animation: float 4s ease-in-out infinite alternate;
+  }
+
+  .vocab-emoji {
+    font-size: 4.2rem;
+    line-height: 1;
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.08));
+    animation: float 4s ease-in-out infinite alternate;
+  }
+
+  /* Hover bounce animation */
+  .flashcard-container:hover .vocab-sticker,
+  .flashcard-container:hover .vocab-emoji {
+    transform: scale(1.1) rotate(2deg);
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-6px) rotate(-1deg);
+    }
   }
 
   @keyframes speakerPulse {
