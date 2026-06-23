@@ -45,6 +45,7 @@ const listeningExercises = [
 ];
 
 const exercisesJson = JSON.stringify(listeningExercises);
+const cleanBase = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <Layout title="Listen and Write Game" description="Practice listening skills mapped by school grade. Mapped to 1st-4th grade English difficulty levels.">
@@ -59,7 +60,7 @@ const exercisesJson = JSON.stringify(listeningExercises);
     </p>
   </div>
 
-  <div class="listening-layout" data-exercises={exercisesJson}>
+  <div class="listening-layout" data-exercises={exercisesJson} data-base-url={cleanBase}>
     <!-- Active exercise player -->
     <div class="player-main glass-card">
       <div class="player-header">
@@ -168,6 +169,8 @@ const exercisesJson = JSON.stringify(listeningExercises);
     layoutEl: HTMLElement;
     exercises: any[];
     currentIndex: number;
+    baseUrl: string;
+    activeAudio: HTMLAudioElement | null;
 
     // DOM Elements
     titleEl: HTMLElement | null;
@@ -191,6 +194,8 @@ const exercisesJson = JSON.stringify(listeningExercises);
       const dataAttr = layoutEl.getAttribute('data-exercises');
       this.exercises = dataAttr ? JSON.parse(dataAttr) : [];
       this.currentIndex = 0;
+      this.baseUrl = layoutEl.getAttribute('data-base-url') || '/';
+      this.activeAudio = null;
 
       // Select elements
       this.titleEl = layoutEl.querySelector('#current-ex-title');
@@ -245,6 +250,12 @@ const exercisesJson = JSON.stringify(listeningExercises);
         window.speechSynthesis.cancel();
       }
 
+      if (this.activeAudio) {
+        this.activeAudio.pause();
+        this.activeAudio = null;
+        document.querySelectorAll('.audio-play-btn').forEach(btn => btn.classList.remove('playing'));
+      }
+
       if (this.titleEl) {
         this.titleEl.innerHTML = `
           <span class="en-text-block">${ex.title}</span>
@@ -280,24 +291,55 @@ const exercisesJson = JSON.stringify(listeningExercises);
 
     speakText(rate: number, btnElement: HTMLElement | null) {
       const ex = this.exercises[this.currentIndex];
+
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        
-        const utterance = new SpeechSynthesisUtterance(ex.text);
-        utterance.lang = 'en-US';
-        utterance.rate = rate;
-
-        utterance.onstart = () => {
-          btnElement?.classList.add('playing');
-        };
-        utterance.onend = () => {
-          btnElement?.classList.remove('playing');
-        };
-
-        window.speechSynthesis.speak(utterance);
-      } else {
-        alert("Browser speech synthesis is not supported.");
       }
+
+      if (this.activeAudio) {
+        this.activeAudio.pause();
+        document.querySelectorAll('.audio-play-btn').forEach(btn => btn.classList.remove('playing'));
+      }
+
+      // Native SpeechSynthesis Fallback Helper
+      const playFallback = () => {
+        if ('speechSynthesis' in window) {
+          const utterance = new SpeechSynthesisUtterance(ex.text);
+          utterance.lang = 'en-US';
+          utterance.rate = rate;
+          utterance.onstart = () => {
+            btnElement?.classList.add('playing');
+          };
+          utterance.onend = () => {
+            btnElement?.classList.remove('playing');
+          };
+          window.speechSynthesis.speak(utterance);
+        } else {
+          alert("Browser speech synthesis is not supported.");
+        }
+      };
+
+      const audioUrl = `${this.baseUrl}audio/listening/${ex.id}.mp3`;
+      const audio = new Audio(audioUrl);
+      
+      // Map speed: if rate <= 0.6, play at slow 0.6 speed. Otherwise normal 1.0 speed.
+      audio.playbackRate = rate <= 0.6 ? 0.6 : 1.0;
+      this.activeAudio = audio;
+
+      btnElement?.classList.add('playing');
+
+      audio.play()
+        .then(() => {
+          audio.onended = () => {
+            btnElement?.classList.remove('playing');
+            this.activeAudio = null;
+          };
+        })
+        .catch((error) => {
+          console.warn(`Local audio for exercise ${ex.id} failed. Falling back to browser SpeechSynthesis.`, error);
+          btnElement?.classList.remove('playing');
+          playFallback();
+        });
     }
 
     checkAnswer() {

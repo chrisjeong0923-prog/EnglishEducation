@@ -52,7 +52,7 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
           <span class="en-text">{type}</span>
           <span class="kh-text">{typeKhmer}</span>
         </span>
-        <button class="speak-btn" data-word={word} aria-label="Listen to pronunciation">
+        <button class="speak-btn" data-word={word} data-audio-url={`${cleanBase}audio/vocab/${word.toLowerCase()}.mp3`} aria-label="Listen to pronunciation">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="speaker-icon">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -123,26 +123,49 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
     });
   });
 
-  // Add SpeechSynthesis logic
+  // Add SpeechSynthesis & ElevenLabs Local Audio logic
   const speakButtons = document.querySelectorAll('.speak-btn');
   speakButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const word = btn.getAttribute('data-word');
-      if (word && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        
-        const utterance = new SpeechSynthesisUtterance(word);
-        utterance.lang = 'en-US';
-        utterance.rate = 0.75;
-        window.speechSynthesis.speak(utterance);
-        
+      const audioUrl = btn.getAttribute('data-audio-url');
+
+      // Native Web Speech fallback helper
+      const playFallback = () => {
+        if (word && 'speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(word);
+          utterance.lang = 'en-US';
+          utterance.rate = 0.75;
+          window.speechSynthesis.speak(utterance);
+          
+          btn.classList.add('speaking');
+          utterance.onend = () => {
+            btn.classList.remove('speaking');
+          };
+        } else {
+          alert("Text-to-speech is not supported in this browser.");
+        }
+      };
+
+      if (audioUrl) {
+        const audio = new Audio(audioUrl);
         btn.classList.add('speaking');
-        utterance.onend = () => {
-          btn.classList.remove('speaking');
-        };
+        
+        audio.play()
+          .then(() => {
+            audio.onended = () => {
+              btn.classList.remove('speaking');
+            };
+          })
+          .catch((error) => {
+            console.warn(`Local ElevenLabs audio for "${word}" failed. Falling back to browser SpeechSynthesis.`, error);
+            btn.classList.remove('speaking');
+            playFallback();
+          });
       } else {
-        alert("Text-to-speech is not supported in this browser.");
+        playFallback();
       }
     });
   });
