@@ -1,0 +1,370 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Quiz from '../components/Quiz.astro';
+
+// Grammar Quizzes
+const grade3Quiz = [
+  {
+    questionText: "She bought ____ big orange balloon at the park.",
+    questionTextKh: "នាងបានទិញប៉េងប៉ោងពណ៌ទឹកក្រូចដ៏ធំ____នៅឯសួនច្បារ។",
+    options: ["a", "an", "the", "some"],
+    correctAnswer: 0,
+    explanation: "We use 'a' before words that start with a consonant sound (like 'big'). If it was 'orange balloon' without 'big', we would say 'an orange balloon'!",
+    explanationKh: "យើងប្រើប្រាស់ 'a' នៅពីមុខពាក្យដែលផ្ដើមឡើងដោយសំឡេងព្យញ្ជនៈ (ដូចជាពាក្យ 'big' ជាដើម)។ ប្រសិនបើវាជាពាក្យ 'orange balloon' ដោយមិនមានពាក្យ 'big' នោះយើងត្រូវប្រើប្រាស់ 'an orange balloon'!"
+  },
+  {
+    questionText: "This notebook belongs to Emily. It is ____.",
+    questionTextKh: "សៀវភៅកត់ត្រានេះជារបស់ Emily។ វាគឺជាសៀវភៅរបស់____។",
+    options: ["his", "hers", "my", "she"],
+    correctAnswer: 1,
+    explanation: "We use 'hers' to show that something belongs to a girl (Emily) without repeating the word 'notebook'.",
+    explanationKh: "យើងប្រើប្រាស់ពាក្យ 'hers' ដើម្បីបង្ហាញថាអ្វីមួយជារបស់ក្មេងស្រីម្នាក់ (Emily) ដោយមិនបាច់និយាយពាក្យ 'notebook' សារជាថ្មីឡើងវិញ។"
+  },
+  {
+    questionText: "The cute dogs ran fast after ____ favorite red toy.",
+    questionTextKh: "ឆ្កែដ៏គួរឱ្យស្រឡាញ់ទាំងនោះបានរត់យ៉ាងលឿនដេញតាមកូនល្បែងពណ៌ក្រហមដ៏ចូលចិត្តរបស់____។",
+    options: ["its", "their", "they", "them"],
+    correctAnswer: 1,
+    explanation: "We use 'their' because we are talking about more than one dog ('dogs') and what belongs to them.",
+    explanationKh: "យើងប្រើប្រាស់ពាក្យ 'their' ព្រោះយើងកំពុងនិយាយអំពីសត្វឆ្កែច្រើនជាងមួយក្បាល ('dogs') និងរបស់របរដែលជារបស់ពួកវា។"
+  }
+];
+
+const grade4Quiz = [
+  {
+    questionText: "Yesterday, my family ____ to the animal zoo.",
+    questionTextKh: "កាលពីម្សិលមិញ គ្រួសាររបស់ខ្ញុំ____ទៅកាន់សួនសត្វ។",
+    options: ["go", "goes", "went", "going"],
+    correctAnswer: 2,
+    explanation: "We use the past tense 'went' because the trip happened in the past ('yesterday').",
+    explanationKh: "យើងប្រើប្រាស់ទម្រង់កិរិយាសព្ទអតីតកាល 'went' ព្រោះការធ្វើដំណើរនេះបានកើតឡើងរួចទៅហើយកាលពីអតីតកាល ('yesterday')។"
+  },
+  {
+    questionText: "If it is sunny tomorrow, we ____ play in the backyard.",
+    questionTextKh: "ប្រសិនបើថ្ងៃស្អែកមេឃស្រឡះល្អ ពួកយើង____លេងនៅទីធ្លាខាងក្រោយផ្ទះ។",
+    options: ["will", "would", "are", "do"],
+    correctAnswer: 0,
+    explanation: "We use 'will' because we are talking about something we plan to do in the future ('tomorrow').",
+    explanationKh: "យើងប្រើប្រាស់ពាក្យ 'will' ព្រោះយើងកំពុងនិយាយអំពីអ្វីមួយដែលយើងគ្រោងនឹងធ្វើនាពេលអនាគត ('tomorrow')។"
+  },
+  {
+    questionText: "Tim loves ____ fun story books before bedtime.",
+    questionTextKh: "Tim ចូលចិត្ត____សៀវភៅរឿងសប្បាយៗ មុនពេលចូលគេង។",
+    options: ["read", "reading", "to reading", "reads"],
+    correctAnswer: 1,
+    explanation: "After verbs like 'love', 'like', or 'enjoy', we use the '-ing' form of the verb ('reading').",
+    explanationKh: "បន្ទាប់ពីកិរិយាសព្ទដូចជា 'love', 'like' ឬ 'enjoy' យើងត្រូវប្រើប្រាស់ទម្រង់កិរិយាសព្ទបន្ថែម '-ing' គឺ ('reading')។"
+  }
+];
+
+const grade5Quiz = [
+  {
+    questionText: "The three ____ played happily together in the pool.",
+    questionTextKh: "កុមារទាំងបីនាក់____ បានលេងជាមួយគ្នាយ៉ាងសប្បាយរីករាយនៅក្នុងអាងទឹក។",
+    options: ["child", "childs", "children", "childrens"],
+    correctAnswer: 2,
+    explanation: "The plural of 'child' is irregular and is 'children'. We do not add 's' to form the plural.",
+    explanationKh: "ទម្រង់ពហុវចនៈរបស់ពាក្យ 'child' (កុមារ) គឺជាពាក្យមិនទៀងទាត់ គឺ 'children'។ យើងមិនបន្ថែមអក្សរ 's' នោះទេ។"
+  },
+  {
+    questionText: "Yesterday, my mother ____ a delicious chocolate cake.",
+    questionTextKh: "កាលពីម្សិលមិញ ម្ដាយរបស់ខ្ញុំ____នំសូកូឡាដ៏មានរសជាតិឆ្ងាញ់មួយ។",
+    options: ["make", "makes", "made", "making"],
+    correctAnswer: 2,
+    explanation: "Use the irregular past tense 'made' because the action happened in the past ('yesterday').",
+    explanationKh: "ប្រើប្រាស់ទម្រង់កិរិយាសព្ទអតីតកាលមិនទៀងទាត់ 'made' (បានធ្វើ) ព្រោះសកម្មភាពនេះកើតឡើងកាលពីអតីតកាល ('yesterday')។"
+  },
+  {
+    questionText: "The sleepy cat is resting ____ the warm rug.",
+    questionTextKh: "ឆ្មាដែលងងុយគេងកំពុងសម្រាក____កម្រាលព្រំដ៏កក់ក្តៅ។",
+    options: ["on", "in", "at", "under"],
+    correctAnswer: 0,
+    explanation: "We use the preposition 'on' to show that an object is sitting on a surface.",
+    explanationKh: "យើងប្រើប្រាស់ធ្នាក់ 'on' ដើម្បីបញ្ជាក់ថាវត្ថុអ្វីមួយស្ថិតនៅលើផ្ទៃនៃវត្ថុផ្សេងទៀត។"
+  }
+];
+
+const grade6Quiz = [
+  {
+    questionText: "Although it was raining, the children ____ playing in the muddy park.",
+    questionTextKh: "ទោះបីជាមេឃកំពុងភ្លៀងក៏ដោយ ក៏កុមារទាំងឡាយ____លេងនៅក្នុងសួនច្បារដែលពោរពេញទៅដោយភក់។",
+    options: ["kept", "keep", "keeps", "keeping"],
+    correctAnswer: 0,
+    explanation: "We use 'kept' (past tense of keep) because the sentence refers to a completed past scenario ('was raining').",
+    explanationKh: "យើងប្រើប្រាស់កិរិយាសព្ទអតីតកាល 'kept' ព្រោះល្បះនេះសំដៅលើសកម្មភាពអតីតកាលដែលស្របនឹងកាល ('was raining')។"
+  },
+  {
+    questionText: "This is the helpful student ____ won the first prize yesterday.",
+    questionTextKh: "នេះគឺជាសិស្សដ៏គួរឱ្យស្រឡាញ់ម្នាក់____បានឈ្នះរង្វាន់លេខមួយកាលពីម្សិលមិញ។",
+    options: ["who", "which", "whose", "whom"],
+    correctAnswer: 0,
+    explanation: "We use the relative pronoun 'who' to refer to a person ('the student').",
+    explanationKh: "យើងប្រើប្រាស់សព្វនាមទំនាក់ទំនង 'who' ដើម្បីសំដៅទៅលើមនុស្ស ('the student')។"
+  },
+  {
+    questionText: "By next week, we ____ finished our school project.",
+    questionTextKh: "ត្រឹមសប្តាហ៍ក្រោយ ពួកយើង____បញ្ចប់គម្រោងសាលារៀនរបស់យើងរួចរាល់។",
+    options: ["will have", "have", "would have", "had"],
+    correctAnswer: 0,
+    explanation: "We use the future perfect 'will have finished' to describe an action that will be completed before a future time ('next week').",
+    explanationKh: "យើងប្រើប្រាស់ទម្រង់កាលអនាគតសព្វ 'will have finished' ដើម្បីពិពណ៌នាអំពីសកម្មភាពដែលនឹងត្រូវបានបញ្ចប់រួចរាល់មុនពេលកំណត់ណាមួយនាពេលអនាគត ('next week')។"
+  }
+];
+
+// Vocabulary Quizzes
+const grade3Vocab = [
+  {
+    questionText: "What is the meaning of the word 'Happy'?",
+    questionTextKh: "តើពាក្យ 'Happy' មានន័យដូចម្ដេច?",
+    options: ["Feeling or showing joy and smiles", "Feeling sad and crying", "Being angry and loud", "Being tired and sleeping"],
+    correctAnswer: 0,
+    explanation: "'Happy' means feeling joy or showing smiles! (e.g. The happy boy laughed).",
+    explanationKh: "'Happy' មានន័យថាមានអារម្មណ៍រីករាយ ឬបង្ហាញស្នាមញញឹម! (ឧទាហរណ៍៖ ក្មេងប្រុសសប្បាយចិត្ត)"
+  },
+  {
+    questionText: "What is an 'Apple'?",
+    questionTextKh: "តើ 'Apple' គឺជាអ្វី?",
+    options: ["A sweet, round fruit (red, green, or yellow)", "A long yellow fruit monkeys love to eat", "A small flying bird in the sky", "A toy that we play with at home"],
+    correctAnswer: 0,
+    explanation: "An apple is a sweet, round fruit. (e.g. A crunchy red apple).",
+    explanationKh: "Apple (ផ្លែប៉ោម) គឺជាផ្លែឈើមូលផ្អែម ដែលអាចមានពណ៌ក្រហម បៃតង ឬលឿង។"
+  },
+  {
+    questionText: "What does it mean to 'Jump'?",
+    questionTextKh: "តើពាក្យ 'Jump' មានន័យដូចម្ដេច?",
+    options: ["To push yourself up into the air using your legs", "To walk slowly in the garden", "To sleep quietly in bed", "To eat delicious food"],
+    correctAnswer: 0,
+    explanation: "'Jump' means to push yourself up into the air. (e.g. Rabbits love to jump).",
+    explanationKh: "'Jump' (លោត) មានន័យថារុញខ្លួនអ្នកឡើងលើអាកាសដោយប្រើជើងរបស់អ្នក។"
+  }
+];
+
+const grade4Vocab = [
+  {
+    questionText: "What does it mean to 'Explore'?",
+    questionTextKh: "តើពាក្យ 'Explore' មានន័យដូចម្ដេច?",
+    options: ["To travel to a new place to learn more about it", "To close your eyes and sleep", "To write your name on paper", "To buy toys from a store"],
+    correctAnswer: 0,
+    explanation: "'Explore' means to travel somewhere to discover new things. (e.g. Explore the forest).",
+    explanationKh: "'Explore' (រុករក) មានន័យថាធ្វើដំណើរទៅកាន់ទីកន្លែងថ្មីដើម្បីស្វែងយល់បន្ថែមអំពីវា។"
+  },
+  {
+    questionText: "What is 'Courage'?",
+    questionTextKh: "តើអ្វីទៅជា 'Courage'?",
+    options: ["Being brave when doing something hard or scary", "Being afraid and running away", "Being happy and smiling all day", "Being angry at someone"],
+    correctAnswer: 0,
+    explanation: "'Courage' means bravery. (e.g. The fireman showed great courage).",
+    explanationKh: "'Courage' (ភាពក្លាហាន) មានន័យថាភាពក្លាហាននៅពេលដែលអ្នកត្រូវធ្វើអ្វីមួយដែលពិបាក ឬគួរឱ្យខ្លាច។"
+  },
+  {
+    questionText: "If you are 'Curious', what does it mean?",
+    questionTextKh: "ប្រសិនបើអ្នក 'Curious' តើមានន័យដូចម្ដេច?",
+    options: ["Wanting very much to know or learn about everything", "Wanting to sleep all day long", "Feeling sad and wanting to cry", "Being very strong"],
+    correctAnswer: 0,
+    explanation: "'Curious' means wanting to discover and learn. (e.g. The curious puppy looked inside).",
+    explanationKh: "'Curious' (ចង់ដឹងចង់ឃើញ) មានន័យថាមានបំណងប្រាថ្នង់ដឹង ឬចង់រៀនសូត្រអំពីអ្វីៗគ្រប់យ៉ាង។"
+  }
+];
+
+const grade5Vocab = [
+  {
+    questionText: "What does it mean to 'Gather'?",
+    questionTextKh: "តើពាក្យ 'Gather' មានន័យដូចម្ដេច?",
+    options: ["To bring people or things together into one group", "To throw things away", "To run very fast", "To sleep under a tree"],
+    correctAnswer: 0,
+    explanation: "'Gather' means to collect or bring together. (e.g. Gather all the colorful leaves).",
+    explanationKh: "'Gather' (ប្រមូលផ្ដុំ) មានន័យថានាំមនុស្ស ឬវត្ថុផ្សេងៗមកជួបជុំគ្នា ឬប្រមូលផ្តុំគ្នាជាក្រុមតែមួយ។"
+  },
+  {
+    questionText: "What does it mean to 'Scribble'?",
+    questionTextKh: "តើពាក្យ 'Scribble' មានន័យដូចម្ដេច?",
+    options: ["To write or draw something very quickly and untidily", "To read a book carefully", "To color nicely inside the lines", "To wash your hands with soap"],
+    correctAnswer: 0,
+    explanation: "'Scribble' means to write or draw in a messy, fast way. (e.g. Scribble with crayons).",
+    explanationKh: "'Scribble' (គូរវាសលេង) មានន័យថាសរសេរ ឬគូរអ្វីមួយយ៉ាងលឿន និងមិនសូវមានរបៀបរៀបរយ។"
+  },
+  {
+    questionText: "What does 'Peculiar' mean?",
+    questionTextKh: "តើពាក្យ 'Peculiar' មានន័យដូចម្ដេច?",
+    options: ["Strange, odd, or very different from what is normal", "Very beautiful and bright", "Very friendly and kind", "New and clean"],
+    correctAnswer: 0,
+    explanation: "'Peculiar' means unusual or odd. (e.g. A peculiar orange crest on its head).",
+    explanationKh: "'Peculiar' (ចម្លែក) មានន័យថាភាពចម្លែក ខុសប្លែកពីធម្មតា ឬខុសប្លែកពីអ្វីដែលធ្លាប់ឃើញ។"
+  }
+];
+
+const grade6Vocab = [
+  {
+    questionText: "What does 'Generous' mean?",
+    questionTextKh: "តើពាក្យ 'Generous' មានន័យដូចម្ដេច?",
+    options: ["Willing to give help, kindness, or things to others", "Selfish and keeping everything for yourself", "Always talking very loudly", "Feeling tired after school"],
+    correctAnswer: 0,
+    explanation: "'Generous' means willing to share and give. (e.g. The generous girl shared cookies).",
+    explanationKh: "'Generous' (ចិត្តទូលាយ) មានន័យថាស្ម័គ្រចិត្តផ្តល់ជំនួយ ក្តីស្រឡាញ់ ឬរបស់របរដល់អ្នកដទៃ។"
+  },
+  {
+    questionText: "What does it mean to 'Predict'?",
+    questionTextKh: "តើពាក្យ 'Predict' មានន័យដូចម្ដេច?",
+    options: ["To say what you think will happen in the future", "To remember what happened in the past", "To make a big mistake", "To study hard for a test"],
+    correctAnswer: 0,
+    explanation: "'Predict' means to foretell or guess the future outcome. (e.g. Hard to predict the weather).",
+    explanationKh: "'Predict' (ទស្សន៍ទាយ) មានន័យថានិយាយពីអ្វីដែលអ្នកគិតថានឹងកើតឡើងនាពេលអនាគត។"
+  },
+  {
+    questionText: "What is an 'Obstacle'?",
+    questionTextKh: "តើ 'Obstacle' គឺជាអ្វី?",
+    options: ["Something that blocks your way or makes it hard to do things", "A fast and smooth path", "A helpful friend who does your homework", "A gift you get on your birthday"],
+    correctAnswer: 0,
+    explanation: "An 'Obstacle' is something that gets in the way. (e.g. The fallen tree was an obstacle).",
+    explanationKh: "'Obstacle' (ឧបសគ្គ) គឺជាអ្វីមួយដែលរារាំងផ្លូវរបស់អ្នក ឬធ្វើឱ្យការធ្វើអ្វីមួយមានការលំបាក។"
+  }
+];
+---
+
+<Layout title="Grammar & Vocabulary Quizzes" description="Bilingual grammar and vocabulary quizzes mapped by school grade for Cambodian learners.">
+  <div class="quiz-page-header">
+    <h1 class="page-title">
+      <span class="en-text">Cool Quiz Games ✏️</span>
+      <span class="kh-text">ល្បែងតេស្តសាកល្បង ✏️</span>
+    </h1>
+    <p class="page-subtitle">
+      <span class="en-text">Test your English grammar and vocabulary! Your quiz level is set based on your grade selected on the homepage.</span>
+      <span class="kh-text">សាកល្បងវេយ្យាករណ៍ និងវាក្យសព្ទភាសាអង់គ្លេស! កម្រិតតេស្តត្រូវបានកំណត់ដោយផ្អែកលើថ្នាក់ដែលអ្នកបានជ្រើសរើសនៅលើទំព័រដើម។</span>
+    </p>
+  </div>
+
+  <!-- Grade 3 Quiz Panel -->
+  <div class="quiz-panel" id="grade3-quiz">
+    <div class="quizzes-layout">
+      <Quiz 
+        quizTitle="Grade 3 Grammar Quiz" 
+        quizTitleKh="ថ្នាក់ទី៣ វេយ្យាករណ៍៖ A, An និងសព្វនាម" 
+        questions={grade3Quiz} 
+      />
+      <Quiz 
+        quizTitle="Grade 3 Vocabulary Quiz" 
+        quizTitleKh="ថ្នាក់ទី៣ វាក្យសព្ទ៖ ពាក្យសិក្សារីករាយ" 
+        questions={grade3Vocab} 
+      />
+    </div>
+  </div>
+
+  <!-- Grade 4 Quiz Panel -->
+  <div class="quiz-panel" id="grade4-quiz">
+    <div class="quizzes-layout">
+      <Quiz 
+        quizTitle="Grade 4 Grammar Quiz" 
+        quizTitleKh="ថ្នាក់ទី៤ វេយ្យាករណ៍៖ កិរិយាសព្ទ និងកាល" 
+        questions={grade4Quiz} 
+      />
+      <Quiz 
+        quizTitle="Grade 4 Vocabulary Quiz" 
+        quizTitleKh="ថ្នាក់ទី៤ វាក្យសព្ទ៖ ពាក្យរុករកសប្បាយៗ" 
+        questions={grade4Vocab} 
+      />
+    </div>
+  </div>
+
+  <!-- Grade 5 Quiz Panel -->
+  <div class="quiz-panel" id="grade5-quiz">
+    <div class="quizzes-layout">
+      <Quiz 
+        quizTitle="Grade 5 Grammar Quiz" 
+        quizTitleKh="ថ្នាក់ទី៥ វេយ្យាករណ៍៖ ពហុវចនៈ និងអតីតកាល" 
+        questions={grade5Quiz} 
+      />
+      <Quiz 
+        quizTitle="Grade 5 Vocabulary Quiz" 
+        quizTitleKh="ថ្នាក់ទី៥ វាក្យសព្ទ៖ ពាក្យចម្លែកៗ" 
+        questions={grade5Vocab} 
+      />
+    </div>
+  </div>
+
+  <!-- Grade 6 Quiz Panel -->
+  <div class="quiz-panel" id="grade6-quiz">
+    <div class="quizzes-layout">
+      <Quiz 
+        quizTitle="Grade 6 Grammar Quiz" 
+        quizTitleKh="ថ្នាក់ទី៦ វេយ្យាករណ៍៖ ល្បះ និងកាលអនាគត" 
+        questions={grade6Quiz} 
+      />
+      <Quiz 
+        quizTitle="Grade 6 Vocabulary Quiz" 
+        quizTitleKh="ថ្នាក់ទី៦ វាក្យសព្ទ៖ ពាក្យកម្រិតខ្ពស់" 
+        questions={grade6Vocab} 
+      />
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Show active quiz panel based on localStorage preference
+  const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
+  const activePanel = document.getElementById(`${preferredGrade}-quiz`);
+  if (activePanel) {
+    activePanel.classList.add('active');
+  } else {
+    document.getElementById('grade3-quiz')?.classList.add('active');
+  }
+</script>
+
+<style>
+  .quiz-page-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .page-title {
+    font-size: 2.6rem;
+    margin-bottom: 8px;
+    color: #1a202c;
+  }
+
+  .page-subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.15rem;
+    font-weight: 600;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Side-by-side layout for quizzes inside a panel */
+  .quizzes-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    max-width: 1300px;
+    margin: 0 auto 60px auto;
+    align-items: start;
+  }
+
+  /* Panel display */
+  .quiz-panel {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  .quiz-panel.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .quizzes-layout {
+      grid-template-columns: 1fr;
+      max-width: 650px;
+      gap: 24px;
+    }
+  }
+</style>

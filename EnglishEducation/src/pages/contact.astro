@@ -1,0 +1,397 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Parent & Teacher Contact" description="Have questions or suggestions about our kids English lessons? Parents, teachers, and students can send us a message.">
+  <div class="contact-header">
+    <h1 class="page-title">
+      <span class="en-text">Parents & Teachers ✉️</span>
+      <span class="kh-text">មាតាបិតា និងគ្រូបង្រៀន ✉️</span>
+    </h1>
+    <p class="page-subtitle">
+      <span class="en-text">Do you have questions about our fun English games? Or suggestions for new lessons? Write us a message!</span>
+      <span class="kh-text">តើអ្នកមានសំណួរអំពីល្បែងសិក្សាភាសាអង់គ្លេសដ៏រីករាយរបស់យើងទេ? ឬសំណើសម្រាប់មេរៀនថ្មីៗ? សូមសរសេរសារមកយើង!</span>
+    </p>
+  </div>
+
+  <div class="contact-container">
+    <!-- Contact Info Card -->
+    <div class="contact-info-card glass-card">
+      <h3 class="info-title">
+        <span class="en-text">We love feedback! 🎈</span>
+        <span class="kh-text">យើងរីករាយទទួលមតិយោបល់! 🎈</span>
+      </h3>
+      
+      <p class="info-desc">
+        <span class="en-text">Our academy is built to make learning English fun and exciting. Let us know how we can make it even better for your children or students:</span>
+        <span class="kh-text">សាលារបស់យើងបង្កើតឡើងដើម្បីឱ្យការរៀនភាសាអង់គ្លេសសប្បាយ និងរំភើប។ សូមប្រាប់យើងពីរបៀបដែលយើងអាចធ្វើឱ្យវាកាន់តែល្អប្រសើរសម្រាប់កូនៗ ឬសិស្សរបស់អ្នក៖</span>
+      </p>
+      
+      <ul class="info-list">
+        <li>
+          <span class="bullet-glow"></span>
+          <span class="en-text">Suggest new flashcard topics.</span>
+          <span class="kh-text">ស្នើប្រធានបទកាតពាក្យសិក្សាថ្មីៗ។</span>
+        </li>
+        <li>
+          <span class="bullet-glow"></span>
+          <span class="en-text">Request custom grammar questions.</span>
+          <span class="kh-text">ស្នើសុំសំណួរវេយ្យាករណ៍ជាក់លាក់។</span>
+        </li>
+        <li>
+          <span class="bullet-glow"></span>
+          <span class="en-text">Share ideas for classroom learning.</span>
+          <span class="kh-text">ចែករំលែកគំនិតសម្រាប់ការរៀនក្នុងថ្នាក់។</span>
+        </li>
+      </ul>
+
+      <div class="divider"></div>
+      
+      <p class="info-note">
+        <span class="en-text">✨ <strong>Note for Teachers:</strong> You can use these games on smartboards or school tablets for classroom practice sessions.</span>
+        <span class="kh-text">✨ <strong>ចំណាំសម្រាប់គ្រូ៖</strong> អ្នកអាចប្រើល្បែងទាំងនេះនៅលើក្តារខៀនឆ្លាតវៃ ឬថេប្លេតរបស់សាលាសម្រាប់ការហ្វឹកហាត់ក្នុងថ្នាក់។</span>
+      </p>
+    </div>
+
+    <!-- Contact Form Card -->
+    <div class="contact-form-card glass-card">
+      <form id="contact-form" class="form-element">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">
+              <span class="en-text">Your Name</span>
+              <span class="kh-text">ឈ្មោះរបស់អ្នក</span>
+            </label>
+            <input type="text" id="name" required placeholder="For example: Sarah Jones" />
+          </div>
+          
+          <div class="form-group">
+            <label for="email">
+              <span class="en-text">Email Address</span>
+              <span class="kh-text">អាសយដ្ឋានអ៊ីមែល</span>
+            </label>
+            <input type="email" id="email" required placeholder="name@school.com" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">
+            <span class="en-text">What are you writing about?</span>
+            <span class="kh-text">តើអ្នកចង់សរសេរអំពីអ្វី?</span>
+          </label>
+          <select id="subject" required>
+            <option value="" disabled selected>Select a subject...</option>
+            <option value="vocabulary">Word Cards ideas</option>
+            <option value="grammar">Grammar Quizzes ideas</option>
+            <option value="listening">Listening Games feedback</option>
+            <option value="general">Something else!</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">
+            <span class="en-text">Your Message</span>
+            <span class="kh-text">សាររបស់អ្នក</span>
+          </label>
+          <textarea id="message" required placeholder="Write your ideas or questions here..." rows="5"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="en-text">Send Message 🚀</span>
+          <span class="kh-text">ផ្ញើសារចេញ 🚀</span>
+        </button>
+      </form>
+
+      <!-- Success message card (Hidden initially) -->
+      <div class="success-card hidden" id="success-card">
+        <div class="success-icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="success-check">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h3 class="success-heading">
+          <span class="en-text">Message Sent! 🎉</span>
+          <span class="kh-text">ផ្ញើសារបានសម្រេច! 🎉</span>
+        </h3>
+        <p class="success-text">
+          <span class="en-text">Thank you for writing to us. We will read your message and write back very soon!</span>
+          <span class="kh-text">សូមអរគុណសម្រាប់ការសរសេរមកកាន់យើង។ យើងនឹងអានសាររបស់អ្នក ហើយឆ្លើយតបទៅវិញយ៉ាងឆាប់រហ័ស!</span>
+        </p>
+        <button class="btn btn-secondary" id="reset-form-btn">
+          <span class="en-text">Send Another Message ✉️</span>
+          <span class="kh-text">ផ្ញើសារមួយទៀត ✉️</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const contactForm = document.getElementById('contact-form') as HTMLFormElement;
+  const successCard = document.getElementById('success-card');
+  const resetFormBtn = document.getElementById('reset-form-btn');
+
+  if (contactForm && successCard) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const submitBtn = contactForm.querySelector('.form-submit-btn') as HTMLButtonElement;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Sending...";
+      }
+
+      setTimeout(() => {
+        contactForm.classList.add('hidden');
+        successCard.classList.remove('hidden');
+        
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `
+            <span class="en-text">Send Message 🚀</span>
+            <span class="kh-text">ផ្ញើសារចេញ 🚀</span>
+          `;
+        }
+      }, 800);
+    });
+  }
+
+  if (resetFormBtn && contactForm && successCard) {
+    resetFormBtn.addEventListener('click', () => {
+      contactForm.reset();
+      successCard.classList.add('hidden');
+      contactForm.classList.remove('hidden');
+    });
+  }
+</script>
+
+<style>
+  .contact-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .page-title {
+    font-size: 2.6rem;
+    margin-bottom: 8px;
+    color: #1a202c;
+  }
+
+  .page-subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.15rem;
+    font-weight: 600;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Two-column layout */
+  .contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 32px;
+    align-items: start;
+    margin-bottom: 60px;
+  }
+
+  /* Left Side: Info Card */
+  .contact-info-card {
+    padding: 32px;
+    border: 3px solid #e2e8f0;
+  }
+
+  .info-title {
+    font-size: 1.45rem;
+    margin-bottom: 16px;
+    color: #1a202c;
+  }
+
+  .info-desc {
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .info-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .info-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .bullet-glow {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 10px var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .divider {
+    height: 3px;
+    background: #f1f5f9;
+    margin: 24px 0;
+  }
+
+  .info-note {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  /* Right Side: Form Card */
+  .contact-form-card {
+    padding: 40px;
+    border: 3px solid #e2e8f0;
+  }
+
+  .form-element {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+  }
+
+  input, select, textarea {
+    width: 100%;
+    background: #ffffff;
+    border: 3px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: #1a202c;
+    transition: var(--transition-smooth);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.01);
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='3'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+    padding-right: 40px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  select option {
+    background-color: #ffffff;
+    color: #1a202c;
+  }
+
+  .form-submit-btn {
+    align-self: flex-start;
+  }
+
+  /* Success Card States */
+  .success-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0;
+    animation: scaleUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .success-icon-wrapper {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #d1fae5;
+    border: 3px solid var(--color-success);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.2);
+  }
+
+  .success-check {
+    width: 32px;
+    height: 32px;
+    color: var(--color-success);
+  }
+
+  .success-heading {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+
+  .success-text {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    font-weight: 500;
+    max-width: 360px;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  @keyframes scaleUp {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-container {
+      grid-template-columns: 1fr;
+    }
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+    .contact-form-card {
+      padding: 24px;
+    }
+    .form-submit-btn {
+      width: 100%;
+    }
+  }
+</style>

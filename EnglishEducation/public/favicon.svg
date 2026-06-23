@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="24" fill="#11121c" />
+  <rect width="98" height="98" x="1" y="1" rx="23" stroke="#2a1c4a" stroke-width="2" />
+  <!-- Stylized EE letters with gradient -->
+  <path d="M30 35H65M30 50H55M30 65H65M30 35V65" stroke="url(#grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

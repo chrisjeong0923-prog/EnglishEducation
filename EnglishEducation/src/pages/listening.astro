@@ -1,0 +1,696 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const listeningExercises = [
+  {
+    id: 1,
+    title: "Grade 3: Cute Cat",
+    titleKh: "ថ្នាក់ទី៣៖ កូនឆ្មាគួរឱ្យស្រឡាញ់",
+    difficulty: "Level 1",
+    difficultyKh: "កម្រិត ១",
+    text: "The little cat chased the ball across the floor.",
+    clue: "Think about pets, toys, and playing.",
+    clueKh: "គិតអំពីសត្វចិញ្ចឹម របស់លេង និងការលេងកម្សាន្ត។"
+  },
+  {
+    id: 2,
+    title: "Grade 4: Washing Hands",
+    titleKh: "ថ្នាក់ទី៤៖ ការលាងសម្អាតដៃ",
+    difficulty: "Level 2",
+    difficultyKh: "កម្រិត ២",
+    text: "Please remember to wash your hands before eating lunch.",
+    clue: "Think about clean habits and eating food.",
+    clueKh: "គិតអំពីទម្លាប់អនាម័យស្អាតល្អ និងការបរិភោគអាហារ។"
+  },
+  {
+    id: 3,
+    title: "Grade 5: Beautiful Rainbow",
+    titleKh: "ថ្នាក់ទី៥៖ ឥន្ទធនូដ៏ស្រស់ស្អាត",
+    difficulty: "Level 3",
+    difficultyKh: "កម្រិត ៣",
+    text: "We saw a colorful rainbow in the sky after the rain stopped.",
+    clue: "Think about sky colors and weather.",
+    clueKh: "គិតអំពីពណ៌ចម្រុះនៅលើមេឃ និងអាកាសធាតុ។"
+  },
+  {
+    id: 4,
+    title: "Grade 6: Sandcastle Project",
+    titleKh: "ថ្នាក់ទី៦៖ គម្រោងប្រាសាទខ្សាច់",
+    difficulty: "Level 4",
+    difficultyKh: "កម្រិត ៤",
+    text: "The students worked together to build a magnificent sandcastle on the beach.",
+    clue: "Think about school projects, building things, and beach activities.",
+    clueKh: "គិតអំពីគម្រោងសាលារៀន ការសាងសង់អ្វីមួយ និងសកម្មភាពនៅលើឆ្នេរខ្សាច់។"
+  }
+];
+
+const exercisesJson = JSON.stringify(listeningExercises);
+---
+
+<Layout title="Listen and Write Game" description="Practice listening skills mapped by school grade. Mapped to 1st-4th grade English difficulty levels.">
+  <div class="listening-header">
+    <h1 class="page-title">
+      <span class="en-text">Listen & Write Game 🎧</span>
+      <span class="kh-text">ល្បែងស្តាប់ និងសរសេរ 🎧</span>
+    </h1>
+    <p class="page-subtitle">
+      <span class="en-text">Listen to the sentence read aloud for your grade, type it in the box, and check your accuracy score! You can change your grade on the home page.</span>
+      <span class="kh-text">ស្តាប់ប្រយោគអានខ្លាំងៗសម្រាប់ថ្នាក់របស់អ្នក វាយបញ្ចូលវានៅក្នុងប្រអប់ ហើយពិនិត្យមើលពិន្ទុភាពត្រឹមត្រូវ! អ្នកអាចប្តូរថ្នាក់របស់អ្នកនៅលើទំព័រដើម។</span>
+    </p>
+  </div>
+
+  <div class="listening-layout" data-exercises={exercisesJson}>
+    <!-- Active exercise player -->
+    <div class="player-main glass-card">
+      <div class="player-header">
+        <h2 id="current-ex-title">
+          <span class="en-text-block">Grade 3: Cute Cat</span>
+          <span class="kh-text-block">ថ្នាក់ទី៣៖ កូនឆ្មាគួរឱ្យស្រឡាញ់</span>
+        </h2>
+        <span class="difficulty-badge level" id="current-ex-diff">
+          <span class="en-text">Level 1</span>
+          <span class="kh-text">កម្រិត ១</span>
+        </span>
+      </div>
+
+      <div class="audio-controls">
+        <button class="audio-play-btn" id="play-normal" aria-label="Play normal speed">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="audio-icon">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span class="en-text">Play Normal Speed</span>
+          <span class="kh-text">ល្បឿនធម្មតា</span>
+        </button>
+        <button class="audio-play-btn slow" id="play-slow" aria-label="Play slow speed">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="audio-icon">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span class="en-text">Play Slow Speed (0.6x)</span>
+          <span class="kh-text">ល្បឿនយឺត (០.៦ដង)</span>
+        </button>
+      </div>
+
+      <div class="input-section">
+        <label for="dictation-input" class="input-label">
+          <span class="en-text">Type what you hear below:</span>
+          <span class="kh-text">សរសេរអ្វីដែលអ្នកបានឮខាងក្រោម៖</span>
+        </label>
+        <textarea 
+          id="dictation-input" 
+          placeholder="Start typing the sentence here... (hint: start with a capital letter!)" 
+          rows="3"
+        ></textarea>
+        <p class="clue-text">
+          💡 <strong>
+            <span class="en-text">Clue:</span>
+            <span class="kh-text">តម្រុយ៖</span>
+          </strong> 
+          <span id="current-ex-clue">
+            <span class="en-text">Think about pets, toys, and playing.</span>
+            <span class="kh-text">គិតអំពីសត្វចិញ្ចឹម របស់លេង និងការលេងកម្សាន្ត។</span>
+          </span>
+        </p>
+      </div>
+
+      <div class="actions-section">
+        <button class="btn btn-primary" id="check-btn">
+          <span class="en-text">Check My Answer! 🚀</span>
+          <span class="kh-text">ពិនិត្យចម្លើយរបស់ខ្ញុំ! 🚀</span>
+        </button>
+        <button class="btn btn-secondary" id="reveal-btn">
+          <span class="en-text">Show Answer 👁️</span>
+          <span class="kh-text">បង្ហាញចម្លើយ 👁️</span>
+        </button>
+      </div>
+
+      <!-- Result Feedback Details -->
+      <div class="result-feedback hidden" id="result-feedback">
+        <div class="feedback-card" id="feedback-card">
+          <h4 id="feedback-result-title">Perfect Match!</h4>
+          
+          <div class="text-comparison">
+            <div class="comp-box">
+              <span class="comp-label">
+                <span class="en-text">Your Writing:</span>
+                <span class="kh-text">សំណេររបស់អ្នក៖</span>
+              </span>
+              <p class="comp-text" id="user-typed-output"></p>
+            </div>
+            <div class="comp-box">
+              <span class="comp-label">
+                <span class="en-text">Correct Sentence:</span>
+                <span class="kh-text">ប្រយោគត្រឹមត្រូវ៖</span>
+              </span>
+              <p class="comp-text correct" id="correct-transcript"></p>
+            </div>
+          </div>
+          
+          <div class="score-bar-container">
+            <div class="score-header">
+              <span>
+                <span class="en-text">Your Accuracy Star:</span>
+                <span class="kh-text">ពិន្ទុភាពត្រឹមត្រូវរបស់អ្នក៖</span>
+              </span>
+              <span id="accuracy-score-text">100%</span>
+            </div>
+            <div class="score-track">
+              <div class="score-fill" id="accuracy-score-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  class ListeningPortal {
+    layoutEl: HTMLElement;
+    exercises: any[];
+    currentIndex: number;
+
+    // DOM Elements
+    titleEl: HTMLElement | null;
+    diffEl: HTMLElement | null;
+    clueEl: HTMLElement | null;
+    playNormalBtn: HTMLElement | null;
+    playSlowBtn: HTMLElement | null;
+    inputEl: HTMLTextAreaElement | null;
+    checkBtn: HTMLElement | null;
+    revealBtn: HTMLElement | null;
+    feedbackContainer: HTMLElement | null;
+    feedbackCard: HTMLElement | null;
+    feedbackTitle: HTMLElement | null;
+    userTypedOutput: HTMLElement | null;
+    correctTranscript: HTMLElement | null;
+    accuracyText: HTMLElement | null;
+    accuracyFill: HTMLElement | null;
+
+    constructor(layoutEl: HTMLElement) {
+      this.layoutEl = layoutEl;
+      const dataAttr = layoutEl.getAttribute('data-exercises');
+      this.exercises = dataAttr ? JSON.parse(dataAttr) : [];
+      this.currentIndex = 0;
+
+      // Select elements
+      this.titleEl = layoutEl.querySelector('#current-ex-title');
+      this.diffEl = layoutEl.querySelector('#current-ex-diff');
+      this.clueEl = layoutEl.querySelector('#current-ex-clue');
+      this.playNormalBtn = layoutEl.querySelector('#play-normal');
+      this.playSlowBtn = layoutEl.querySelector('#play-slow');
+      this.inputEl = layoutEl.querySelector('#dictation-input') as HTMLTextAreaElement;
+      this.checkBtn = layoutEl.querySelector('#check-btn');
+      this.revealBtn = layoutEl.querySelector('#reveal-btn');
+      this.feedbackContainer = layoutEl.querySelector('#result-feedback');
+      this.feedbackCard = layoutEl.querySelector('#feedback-card');
+      this.feedbackTitle = layoutEl.querySelector('#feedback-result-title');
+      this.userTypedOutput = layoutEl.querySelector('#user-typed-output');
+      this.correctTranscript = layoutEl.querySelector('#correct-transcript');
+      this.accuracyText = layoutEl.querySelector('#accuracy-score-text');
+      this.accuracyFill = layoutEl.querySelector('#accuracy-score-fill');
+
+      this.init();
+    }
+
+    init() {
+      if (this.playNormalBtn) {
+        this.playNormalBtn.addEventListener('click', () => this.speakText(0.85, this.playNormalBtn));
+      }
+      if (this.playSlowBtn) {
+        this.playSlowBtn.addEventListener('click', () => this.speakText(0.55, this.playSlowBtn));
+      }
+
+      if (this.checkBtn) {
+        this.checkBtn.addEventListener('click', () => this.checkAnswer());
+      }
+      if (this.revealBtn) {
+        this.revealBtn.addEventListener('click', () => this.revealTranscript());
+      }
+
+      // Auto-select grade exercise from localStorage
+      const savedGrade = localStorage.getItem('preferredGrade');
+      let targetIndex = 0;
+      if (savedGrade === 'grade4') targetIndex = 1;
+      else if (savedGrade === 'grade5') targetIndex = 2;
+      else if (savedGrade === 'grade6') targetIndex = 3;
+
+      this.selectExercise(targetIndex);
+    }
+
+    selectExercise(index: number) {
+      this.currentIndex = index;
+      const ex = this.exercises[index];
+      
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+
+      if (this.titleEl) {
+        this.titleEl.innerHTML = `
+          <span class="en-text-block">${ex.title}</span>
+          <span class="kh-text-block">${ex.titleKh}</span>
+        `;
+      }
+      if (this.diffEl) {
+        this.diffEl.innerHTML = `
+          <span class="en-text">${ex.difficulty}</span>
+          <span class="kh-text">${ex.difficultyKh}</span>
+        `;
+        this.diffEl.className = `difficulty-badge level`;
+      }
+      if (this.clueEl) {
+        this.clueEl.innerHTML = `
+          <span class="en-text">${ex.clue}</span>
+          <span class="kh-text">${ex.clueKh}</span>
+        `;
+      }
+      if (this.inputEl) this.inputEl.value = '';
+
+      if (this.feedbackContainer) {
+        this.feedbackContainer.classList.add('hidden');
+      }
+
+      if (this.revealBtn) {
+        this.revealBtn.innerHTML = `
+          <span class="en-text">Show Answer 👁️</span>
+          <span class="kh-text">បង្ហាញចម្លើយ 👁️</span>
+        `;
+      }
+    }
+
+    speakText(rate: number, btnElement: HTMLElement | null) {
+      const ex = this.exercises[this.currentIndex];
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(ex.text);
+        utterance.lang = 'en-US';
+        utterance.rate = rate;
+
+        utterance.onstart = () => {
+          btnElement?.classList.add('playing');
+        };
+        utterance.onend = () => {
+          btnElement?.classList.remove('playing');
+        };
+
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Browser speech synthesis is not supported.");
+      }
+    }
+
+    checkAnswer() {
+      const userText = this.inputEl?.value.trim() || '';
+      if (!userText) {
+        alert("Please write something first!");
+        return;
+      }
+
+      const correctText = this.exercises[this.currentIndex].text;
+      
+      const cleanUser = userText.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").replace(/\s+/g," ");
+      const cleanCorrect = correctText.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").replace(/\s+/g," ");
+
+      const userWords = cleanUser.split(' ').filter(Boolean);
+      const correctWords = cleanCorrect.split(' ').filter(Boolean);
+      
+      let matches = 0;
+      correctWords.forEach(word => {
+        if (userWords.includes(word)) {
+          matches++;
+        }
+      });
+
+      const accuracy = Math.round((matches / Math.max(correctWords.length, userWords.length)) * 100);
+
+      if (this.feedbackContainer) this.feedbackContainer.classList.remove('hidden');
+      if (this.userTypedOutput) this.userTypedOutput.innerText = userText;
+      if (this.correctTranscript) this.correctTranscript.innerText = correctText;
+      if (this.accuracyText) this.accuracyText.innerText = `${accuracy}%`;
+      if (this.accuracyFill) this.accuracyFill.style.width = `${accuracy}%`;
+
+      if (this.feedbackCard) {
+        this.feedbackCard.className = "feedback-card";
+        if (accuracy === 100) {
+          this.feedbackCard.classList.add('perfect');
+          if (this.feedbackTitle) {
+            this.feedbackTitle.innerHTML = `
+              <span class="en-text">🌟 Perfect! You write like a champion! 🌟</span>
+              <span class="kh-text">🌟 ល្អឥតខ្ចោះ! អ្នកសរសេរបានត្រឹមត្រូវទាំងស្រុង! 🌟</span>
+            `;
+          }
+        } else if (accuracy >= 80) {
+          this.feedbackCard.classList.add('good');
+          if (this.feedbackTitle) {
+            this.feedbackTitle.innerHTML = `
+              <span class="en-text">👍 Super close! Check the spelling list.</span>
+              <span class="kh-text">👍 ជិតត្រូវទាំងអស់ហើយ! ពិនិត្យមើលអក្ខរាវិរុទ្ធឡើងវិញ។</span>
+            `;
+          }
+        } else {
+          this.feedbackCard.classList.add('poor');
+          if (this.feedbackTitle) {
+            this.feedbackTitle.innerHTML = `
+              <span class="en-text">💪 Try again! Listen slowly and write what you hear.</span>
+              <span class="kh-text">💪 ព្យាយាមម្តងទៀត! ស្ដាប់សំឡេងយឺតៗ និងសរសេរអ្វីដែលអ្នកឮ។</span>
+            `;
+          }
+        }
+      }
+    }
+
+    revealTranscript() {
+      const ex = this.exercises[this.currentIndex];
+      const isHidden = this.feedbackContainer?.classList.contains('hidden');
+
+      if (isHidden) {
+        if (this.feedbackContainer) this.feedbackContainer.classList.remove('hidden');
+        if (this.userTypedOutput) this.userTypedOutput.innerText = this.inputEl?.value || "(Nothing written)";
+        if (this.correctTranscript) this.correctTranscript.innerText = ex.text;
+        
+        this.checkAnswer();
+        if (this.revealBtn) {
+          this.revealBtn.innerHTML = `
+            <span class="en-text">Hide Answer 👁️</span>
+            <span class="kh-text">លាក់ចម្លើយ 👁️</span>
+          `;
+        }
+      } else {
+        if (this.feedbackContainer) this.feedbackContainer.classList.add('hidden');
+        if (this.revealBtn) {
+          this.revealBtn.innerHTML = `
+            <span class="en-text">Show Answer 👁️</span>
+            <span class="kh-text">បង្ហាញចម្លើយ 👁️</span>
+          `;
+        }
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const layoutEl = document.querySelector('.listening-layout');
+    if (layoutEl) {
+      new ListeningPortal(layoutEl as HTMLElement);
+    }
+  });
+</script>
+
+<style>
+  .listening-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .page-title {
+    font-size: 2.6rem;
+    margin-bottom: 8px;
+    color: #1a202c;
+  }
+
+  .page-subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.15rem;
+    font-weight: 600;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Centered layout */
+  .listening-layout {
+    display: block;
+    max-width: 750px;
+    margin: 0 auto 60px auto;
+  }
+
+  .difficulty-badge {
+    align-self: flex-start;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 2px 10px;
+    border-radius: 12px;
+    border: 1.5px solid transparent;
+  }
+
+  .difficulty-badge.level {
+    background: #f3e8ff;
+    color: var(--color-primary);
+    border-color: rgba(159, 122, 234, 0.2);
+  }
+
+  /* Main Player Card */
+  .player-main {
+    padding: 40px;
+    border: 3px solid #e2e8f0;
+  }
+
+  .player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #f1f5f9;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .player-header h2 {
+    font-size: 1.6rem;
+    font-weight: 900;
+  }
+
+  /* Audio Controls */
+  .audio-controls {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .audio-play-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    color: #1a202c;
+    border: 3px solid #000000;
+    box-shadow: 0 4px 0 #000000;
+    padding: 14px 24px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 1.05rem;
+    transition: var(--transition-smooth);
+  }
+
+  .audio-play-btn:hover {
+    background: #f3e8ff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #000000;
+  }
+
+  .audio-play-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #000000;
+  }
+
+  .audio-play-btn.slow {
+    background: #ffffff;
+    color: #1a202c;
+  }
+
+  .audio-play-btn.slow:hover {
+    background: #bae6fd;
+  }
+
+  .audio-play-btn.playing {
+    background: #fef08a;
+  }
+
+  .audio-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Input area */
+  .input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .input-label {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+  }
+
+  textarea {
+    width: 100%;
+    background: #ffffff;
+    border: 3px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #2d3748;
+    resize: vertical;
+    transition: var(--transition-smooth);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: #ffffff;
+  }
+
+  .clue-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+  }
+
+  /* Actions Area */
+  .actions-section {
+    display: flex;
+    gap: 16px;
+    border-bottom: 3px solid #f1f5f9;
+    padding-bottom: 32px;
+    margin-bottom: 32px;
+  }
+
+  /* Feedback box */
+  .result-feedback {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .feedback-card {
+    border-radius: var(--radius-lg);
+    border: 3px solid #e2e8f0;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-left: 6px solid #e2e8f0;
+    box-shadow: var(--shadow-playful);
+  }
+
+  .feedback-card.perfect {
+    background: #d1fae5;
+    border-color: var(--color-success);
+    border-left-color: var(--color-success);
+    color: #065f46;
+  }
+
+  .feedback-card.good {
+    background: #bae6fd;
+    border-color: var(--color-secondary);
+    border-left-color: var(--color-secondary);
+    color: #0369a1;
+  }
+
+  .feedback-card.poor {
+    background: #fee2e2;
+    border-color: var(--color-accent);
+    border-left-color: var(--color-accent);
+    color: #991b1b;
+  }
+
+  .feedback-card h4 {
+    font-size: 1.25rem;
+    font-weight: 900;
+  }
+
+  .text-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .comp-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .comp-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--color-text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  .comp-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #2d3748;
+  }
+
+  .comp-text.correct {
+    color: #1a202c;
+    font-weight: 700;
+  }
+
+  /* Accuracy Bar */
+  .score-bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .score-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+  }
+
+  .score-track {
+    height: 12px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    border: 2px solid #e2e8f0;
+    overflow: hidden;
+  }
+
+  .score-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    transition: width 0.5s ease;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .player-main {
+      padding: 24px;
+    }
+    .text-comparison {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+</style>

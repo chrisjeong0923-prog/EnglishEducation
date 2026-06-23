@@ -1,0 +1,634 @@
+---
+interface Question {
+  questionText: string;
+  questionTextKh: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+  explanationKh: string;
+}
+
+interface Props {
+  quizTitle: string;
+  quizTitleKh: string;
+  questions: Question[];
+}
+
+const { quizTitle, quizTitleKh, questions } = Astro.props;
+const questionsJson = JSON.stringify(questions);
+---
+
+<div class="quiz-container glass-card" data-questions={questionsJson}>
+  <!-- Quiz Header -->
+  <div class="quiz-header">
+    <h3 class="quiz-title">
+      <span class="en-text">✨ {quizTitle} ✨</span>
+      <span class="kh-text">✨ {quizTitleKh} ✨</span>
+    </h3>
+    <div class="quiz-progress-container">
+      <span class="quiz-progress-text">
+        <span class="en-text">Question <span id="current-q">1</span> of {questions.length}</span>
+        <span class="kh-text">សំណួរទី <span id="current-q-kh">1</span> ក្នុងចំណោម {questions.length}</span>
+      </span>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill" style="width: 0%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Screen: Question & Options -->
+  <div class="quiz-screen" id="quiz-question-screen">
+    <p class="question-text" id="question-text"></p>
+    
+    <div class="options-container" id="options-container">
+      <!-- Options will be injected by JavaScript -->
+    </div>
+    
+    <div class="quiz-footer">
+      <div class="feedback-box hidden" id="feedback-box">
+        <p class="feedback-title" id="feedback-title"></p>
+        <p class="explanation-text" id="explanation-text"></p>
+      </div>
+      
+      <button class="btn btn-primary btn-submit" id="submit-next-btn" disabled>
+        <span class="en-text">Check Answer 🚀</span>
+        <span class="kh-text">ពិនិត្យចម្លើយ 🚀</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Screen: Score summary -->
+  <div class="quiz-screen hidden" id="quiz-result-screen">
+    <div class="result-content">
+      <div class="result-badge-container">
+        <div class="result-score-circle">
+          <span class="score-number" id="final-score">0%</span>
+        </div>
+      </div>
+      <h2 class="result-heading">
+        <span class="en-text">🎉 You Did It! 🎉</span>
+        <span class="kh-text">🎉 អ្នកធ្វើបានហើយ! 🎉</span>
+      </h2>
+      <p class="result-desc" id="result-message"></p>
+      
+      <div class="score-stats">
+        <div class="stat-card">
+          <span class="stat-value" id="correct-count">0</span>
+          <span class="stat-label">
+            <span class="en-text">Correct Star(s) 🌟</span>
+            <span class="kh-text">ផ្កាយឆ្លើយត្រូវ 🌟</span>
+          </span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="total-count">{questions.length}</span>
+          <span class="stat-label">
+            <span class="en-text">Total Questions</span>
+            <span class="kh-text">សំណួរសរុប</span>
+          </span>
+        </div>
+      </div>
+      
+      <button class="btn btn-secondary" id="restart-btn">
+        <span class="en-text">Play Again 🔄</span>
+        <span class="kh-text">លេងម្តងទៀត 🔄</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  class GrammarQuiz {
+    container: HTMLElement;
+    questions: any[];
+    currentQuestionIndex: number;
+    score: number;
+    selectedOptionIndex: number | null;
+    state: 'answering' | 'reviewed';
+
+    // DOM Elements
+    currentQEl: HTMLElement | null;
+    currentQKhEl: HTMLElement | null;
+    progressFillEl: HTMLElement | null;
+    questionTextEl: HTMLElement | null;
+    optionsContainerEl: HTMLElement | null;
+    feedbackBoxEl: HTMLElement | null;
+    feedbackTitleEl: HTMLElement | null;
+    explanationTextEl: HTMLElement | null;
+    submitNextBtnEl: HTMLButtonElement | null;
+    questionScreenEl: HTMLElement | null;
+    resultScreenEl: HTMLElement | null;
+    finalScoreEl: HTMLElement | null;
+    resultMessageEl: HTMLElement | null;
+    correctCountEl: HTMLElement | null;
+    restartBtnEl: HTMLElement | null;
+
+    constructor(container: HTMLElement) {
+      this.container = container;
+      const dataAttr = container.getAttribute('data-questions');
+      this.questions = dataAttr ? JSON.parse(dataAttr) : [];
+      this.currentQuestionIndex = 0;
+      this.score = 0;
+      this.selectedOptionIndex = null;
+      this.state = 'answering';
+
+      // Cache DOM
+      this.currentQEl = container.querySelector('#current-q');
+      this.currentQKhEl = container.querySelector('#current-q-kh');
+      this.progressFillEl = container.querySelector('#progress-fill');
+      this.questionTextEl = container.querySelector('#question-text');
+      this.optionsContainerEl = container.querySelector('#options-container');
+      this.feedbackBoxEl = container.querySelector('#feedback-box');
+      this.feedbackTitleEl = container.querySelector('#feedback-title');
+      this.explanationTextEl = container.querySelector('#explanation-text');
+      this.submitNextBtnEl = container.querySelector('#submit-next-btn');
+      this.questionScreenEl = container.querySelector('#quiz-question-screen');
+      this.resultScreenEl = container.querySelector('#quiz-result-screen');
+      this.finalScoreEl = container.querySelector('#final-score');
+      this.resultMessageEl = container.querySelector('#result-message');
+      this.correctCountEl = container.querySelector('#correct-count');
+      this.restartBtnEl = container.querySelector('#restart-btn');
+
+      this.init();
+    }
+
+    init() {
+      if (this.submitNextBtnEl) {
+        this.submitNextBtnEl.addEventListener('click', () => this.handleSubmitNext());
+      }
+      if (this.restartBtnEl) {
+        this.restartBtnEl.addEventListener('click', () => this.restartQuiz());
+      }
+      this.renderQuestion();
+    }
+
+    renderQuestion() {
+      this.state = 'answering';
+      this.selectedOptionIndex = null;
+      
+      const qNumText = (this.currentQuestionIndex + 1).toString();
+      if (this.currentQEl) this.currentQEl.innerText = qNumText;
+      if (this.currentQKhEl) this.currentQKhEl.innerText = qNumText;
+      
+      const progressPercent = (this.currentQuestionIndex / this.questions.length) * 100;
+      if (this.progressFillEl) this.progressFillEl.style.width = `${progressPercent}%`;
+
+      if (this.feedbackBoxEl) {
+        this.feedbackBoxEl.classList.add('hidden');
+        this.feedbackBoxEl.className = 'feedback-box hidden';
+      }
+
+      if (this.submitNextBtnEl) {
+        this.submitNextBtnEl.innerHTML = `
+          <span class="en-text">Check Answer 🚀</span>
+          <span class="kh-text">ពិនិត្យចម្លើយ 🚀</span>
+        `;
+        this.submitNextBtnEl.disabled = true;
+      }
+
+      const question = this.questions[this.currentQuestionIndex];
+      if (this.questionTextEl) {
+        this.questionTextEl.innerHTML = `
+          <span class="question-en">${question.questionText}</span>
+          <span class="question-kh kh-text-block">${question.questionTextKh}</span>
+        `;
+      }
+
+      // Render Options
+      if (this.optionsContainerEl) {
+        this.optionsContainerEl.innerHTML = '';
+        question.options.forEach((option: string, index: number) => {
+          const button = document.createElement('button');
+          button.className = 'option-btn';
+          button.innerText = option;
+          button.addEventListener('click', () => this.selectOption(index));
+          this.optionsContainerEl?.appendChild(button);
+        });
+      }
+    }
+
+    selectOption(index: number) {
+      if (this.state !== 'answering') return;
+      this.selectedOptionIndex = index;
+      
+      const optionButtons = this.optionsContainerEl?.querySelectorAll('.option-btn');
+      optionButtons?.forEach((btn, idx) => {
+        if (idx === index) {
+          btn.classList.add('selected');
+        } else {
+          btn.classList.remove('selected');
+        }
+      });
+
+      if (this.submitNextBtnEl) {
+        this.submitNextBtnEl.disabled = false;
+      }
+    }
+
+    handleSubmitNext() {
+      if (this.state === 'answering') {
+        this.revealAnswer();
+      } else {
+        this.nextQuestion();
+      }
+    }
+
+    revealAnswer() {
+      this.state = 'reviewed';
+      const question = this.questions[this.currentQuestionIndex];
+      const isCorrect = this.selectedOptionIndex === question.correctAnswer;
+
+      if (isCorrect) {
+        this.score++;
+      }
+
+      const optionButtons = this.optionsContainerEl?.querySelectorAll('.option-btn');
+      optionButtons?.forEach((btn, idx) => {
+        (btn as HTMLButtonElement).disabled = true;
+        if (idx === question.correctAnswer) {
+          btn.classList.add('correct');
+        } else if (idx === this.selectedOptionIndex) {
+          btn.classList.add('wrong');
+        }
+      });
+
+      if (this.feedbackBoxEl) {
+        this.feedbackBoxEl.classList.remove('hidden');
+        this.feedbackBoxEl.classList.add(isCorrect ? 'success' : 'error');
+      }
+
+      if (this.feedbackTitleEl) {
+        this.feedbackTitleEl.innerHTML = isCorrect 
+          ? '<span class="en-text">🌟 Great Job! You got it!</span><span class="kh-text">🌟 ល្អណាស់! អ្នកធ្វើបានហើយ!</span>'
+          : '<span class="en-text">😅 Oops, let\'s learn together!</span><span class="kh-text">😅 អូហ៍! តោះរៀនជាមួយគ្នា!</span>';
+      }
+
+      if (this.explanationTextEl) {
+        this.explanationTextEl.innerHTML = `
+          <span class="en-text-block">${question.explanation}</span>
+          <span class="kh-text-block">${question.explanationKh}</span>
+        `;
+      }
+
+      if (this.submitNextBtnEl) {
+        const isLastQuestion = this.currentQuestionIndex === this.questions.length - 1;
+        this.submitNextBtnEl.innerHTML = isLastQuestion 
+          ? '<span class="en-text">Show Results ⭐</span><span class="kh-text">បង្ហាញលទ្ធផល ⭐</span>'
+          : '<span class="en-text">Next Question ➡️</span><span class="kh-text">សំណួរបន្ទាប់ ➡️</span>';
+      }
+    }
+
+    nextQuestion() {
+      if (this.currentQuestionIndex < this.questions.length - 1) {
+        this.currentQuestionIndex++;
+        this.renderQuestion();
+      } else {
+        this.showResults();
+      }
+    }
+
+    showResults() {
+      if (this.questionScreenEl) this.questionScreenEl.classList.add('hidden');
+      if (this.resultScreenEl) this.resultScreenEl.classList.remove('hidden');
+      if (this.progressFillEl) this.progressFillEl.style.width = `100%`;
+
+      const scorePercent = Math.round((this.score / this.questions.length) * 100);
+      if (this.finalScoreEl) this.finalScoreEl.innerText = `${scorePercent}%`;
+      if (this.correctCountEl) this.correctCountEl.innerText = this.score.toString();
+
+      let messageHtml = "";
+      if (scorePercent === 100) {
+        messageHtml = `
+          <span class="en-text-block">🌟 Perfect score! You are an English Superstar! 🌟</span>
+          <span class="kh-text-block">🌟 ពិន្ទុពេញ! អ្នកជាកំពូលអ្នករៀនភាសាអង់គ្លេស! 🌟</span>
+        `;
+      } else if (scorePercent >= 80) {
+        messageHtml = `
+          <span class="en-text-block">Fantastic! You are doing amazing work! 🎈</span>
+          <span class="kh-text-block">អស្ចារ្យណាស់! អ្នកធ្វើបានយ៉ាងល្អ! 🎈</span>
+        `;
+      } else if (scorePercent >= 50) {
+        messageHtml = `
+          <span class="en-text-block">Nice job! Keep practicing and you will do even better next time! 👍</span>
+          <span class="kh-text-block">ការងារល្អ! បន្តព្យាយាមទៀត អ្នកនឹងធ្វើបានល្អជាងនេះនៅពេលក្រោយ! 👍</span>
+        `;
+      } else {
+        messageHtml = `
+          <span class="en-text-block">Good try! Reading the words again will help you get more correct! 📚</span>
+          <span class="kh-text-block">ព្យាយាមបានល្អ! ការអានពាក្យម្តងទៀតនឹងជួយអ្នកឱ្យឆ្លើយត្រូវកាន់តែច្រើន! 📚</span>
+        `;
+      }
+
+      if (this.resultMessageEl) this.resultMessageEl.innerHTML = messageHtml;
+    }
+
+    restartQuiz() {
+      this.currentQuestionIndex = 0;
+      this.score = 0;
+      if (this.resultScreenEl) this.resultScreenEl.classList.add('hidden');
+      if (this.questionScreenEl) this.questionScreenEl.classList.remove('hidden');
+      this.renderQuestion();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const quizContainers = document.querySelectorAll('.quiz-container');
+    quizContainers.forEach(container => {
+      new GrammarQuiz(container as HTMLElement);
+    });
+  });
+</script>
+
+<style>
+  .quiz-container {
+    max-width: 650px;
+    margin: 0 auto;
+    background: var(--bg-surface);
+    border: 3px solid #e2e8f0;
+    padding: 32px;
+    border-radius: var(--radius-lg);
+  }
+
+  .quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+    border-bottom: 3px solid #f1f5f9;
+    padding-bottom: 16px;
+  }
+
+  .quiz-title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #1a202c;
+  }
+
+  .quiz-progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-grow: 1;
+    max-width: 220px;
+  }
+
+  .quiz-progress-text {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+  }
+
+  .progress-bar-bg {
+    width: 100%;
+    height: 10px;
+    background: #f1f5f9;
+    border-radius: 5px;
+    border: 2px solid #e2e8f0;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    transition: width 0.4s ease;
+  }
+
+  .question-text {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .question-en {
+    display: block;
+  }
+
+  .question-kh {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  .options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .option-btn {
+    width: 100%;
+    padding: 16px 20px;
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: left;
+    background: #ffffff;
+    border: 3px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 0 #e2e8f0;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #cbd5e1;
+  }
+
+  .option-btn:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #cbd5e1;
+  }
+
+  .option-btn.selected {
+    background: #f3e8ff;
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 0 var(--color-primary);
+    color: #1a202c;
+  }
+
+  .option-btn.correct {
+    background: #d1fae5;
+    border-color: var(--color-success);
+    box-shadow: 0 4px 0 var(--color-success);
+    color: #1a202c;
+  }
+
+  .option-btn.wrong {
+    background: #fee2e2;
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 0 var(--color-accent);
+    color: #1a202c;
+  }
+
+  /* Quiz Footer & Feedback */
+  .quiz-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .feedback-box {
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border: 3px solid transparent;
+    animation: slideDown 0.3s ease-out;
+  }
+
+  .feedback-box.success {
+    background: #d1fae5;
+    border-color: var(--color-success);
+  }
+
+  .feedback-box.error {
+    background: #fee2e2;
+    border-color: var(--color-accent);
+  }
+
+  .feedback-title {
+    font-weight: 900;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+
+  .feedback-box.success .feedback-title {
+    color: #065f46;
+  }
+
+  .feedback-box.error .feedback-title {
+    color: #991b1b;
+  }
+
+  .explanation-text {
+    font-size: 0.95rem;
+    color: #374151;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .btn-submit {
+    align-self: flex-end;
+    min-width: 180px;
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: 0 4px 0 #000000 !important;
+  }
+
+  /* Result Screen */
+  .result-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .result-badge-container {
+    margin-bottom: 24px;
+  }
+
+  .result-score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #fef08a;
+    border: 3px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 0 #000000;
+  }
+
+  .score-number {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #000000;
+  }
+
+  .result-heading {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .result-desc {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    font-weight: 600;
+    max-width: 400px;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .score-stats {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .stat-card {
+    background: #ffffff;
+    border: 3px solid #e2e8f0;
+    box-shadow: 0 4px 0 #e2e8f0;
+    padding: 16px 24px;
+    border-radius: var(--radius-md);
+    min-width: 130px;
+  }
+
+  .stat-value {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #1a202c;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .quiz-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .quiz-progress-container {
+      max-width: 100%;
+    }
+    .btn-submit {
+      width: 100%;
+    }
+  }
+</style>

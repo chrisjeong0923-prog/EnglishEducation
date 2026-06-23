@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="English Lessons" description="Fun bilingual English lessons for school grades 3 to 6.">
+  <div class="lessons-header">
+    <h1 class="page-title">
+      <span class="en-text">Fun English Lessons 📖</span>
+      <span class="kh-text">មេរៀនភាសាអង់គ្លេសរីករាយ 📖</span>
+    </h1>
+    <p class="page-subtitle">
+      <span class="en-text">Exciting bilingual lessons to help you learn English step-by-step! Coming soon.</span>
+      <span class="kh-text">មេរៀនពីរភាសាដ៏គួរឱ្យចាប់អារម្មណ៍ ដើម្បីជួយអ្នករៀនភាសាអង់គ្លេសមួយជំហានម្តងៗ! នឹងមកដល់ឆាប់ៗនេះ។</span>
+    </p>
+  </div>
+
+  <div class="lessons-container glass-card">
+    <div class="placeholder-icon">📚</div>
+    <h2>
+      <span class="en-text">Lessons Coming Soon!</span>
+      <span class="kh-text">មេរៀននឹងមកដល់ឆាប់ៗនេះ!</span>
+    </h2>
+    <p>
+      <span class="en-text">We are preparing fun grammar, reading, and writing lessons for Grades 3, 4, 5, and 6. Check back soon for new content!</span>
+      <span class="kh-text">យើងកំពុងរៀបចំមេរៀនវេយ្យាករណ៍ ការអាន និងការសរសេរដ៏រីករាយសម្រាប់ថ្នាក់ទី៣ ទី៤ ទី៥ និងទី៦។ សូមរង់ចាំមើលខ្លឹមសារថ្មីៗឆាប់ៗនេះ!</span>
+    </p>
+  </div>
+</Layout>
+
+<style>
+  .lessons-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .page-title {
+    font-size: 2.6rem;
+    margin-bottom: 8px;
+    color: #1a202c;
+  }
+
+  .page-subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.15rem;
+    font-weight: 600;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .lessons-container {
+    max-width: 600px;
+    margin: 0 auto 60px auto;
+    padding: 60px 40px;
+    text-align: center;
+    border: 3px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 12px;
+  }
+
+  .lessons-container h2 {
+    font-size: 1.8rem;
+    color: #1a202c;
+  }
+
+  .lessons-container p {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+</style>

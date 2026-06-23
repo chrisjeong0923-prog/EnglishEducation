@@ -1,0 +1,466 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Fun English Learning for Kids" description="Interactive word games, reading cards, and fun quizzes for kids from 1st to 4th grade, localized for Cambodian learners.">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="en-text-block">Learn English with <br/><span class="text-glow">Fun Games! 🎈</span></span>
+        <span class="kh-text-block">រៀនភាសាអង់គ្លេសជាមួយ <br/><span class="text-glow">ល្បែងកម្សាន្តសប្បាយៗ! 🎈</span></span>
+      </h1>
+      
+      <p class="hero-subtitle">
+        <span class="en-text-block">Welcome to Kids English Academy! Explore our fun word cards, play cool grammar quizzes, and practice listening to happy stories. Let's start our learning adventure today! 🌟</span>
+        <span class="kh-text-block">សូមស្វាគមន៍មកកាន់វិទ្យាស្ថានភាសាអង់គ្លេសកុមារ! ស្វែងយល់ពីកាតពាក្យសិក្សាដ៏រីករាយ លេងល្បែងតេស្តសាកល្បងវេយ្យាករណ៍ និងហ្វឹកហាត់ស្តាប់រឿងរ៉ាវគួរឱ្យស្រឡាញ់។ តោះចាប់ផ្តើមការផ្សងព្រេងថ្ងៃនេះ! 🌟</span>
+      </p>
+      
+      <div class="hero-actions">
+        <a href="/vocabulary" class="btn btn-primary">
+          <span class="en-text">Start Learning! 🚀</span>
+          <span class="kh-text">ចាប់ផ្តើមរៀន! 🚀</span>
+        </a>
+        <a href="#paths" class="btn btn-secondary">
+          <span class="en-text">See Games 🎮</span>
+          <span class="kh-text">មើលល្បែងកម្សាន្ត 🎮</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grade Level Selector Section -->
+  <section class="grade-selection-section glass-card">
+    <h2 class="grade-section-title">
+      <span class="en-text">Select Your School Grade 🌟</span>
+      <span class="kh-text">ជ្រើសរើសថ្នាក់រៀនរបស់អ្នក 🌟</span>
+    </h2>
+    <p class="grade-section-subtitle">
+      <span class="en-text">Pick your grade below. The lessons and quizzes will automatically open at your level!</span>
+      <span class="kh-text">ជ្រើសរើសថ្នាក់របស់អ្នកខាងក្រោម។ មេរៀន និងតេស្តសាកល្បងទាំងអស់នឹងបង្ហាញកម្រិតដែលត្រូវនឹងថ្នាក់របស់អ្នកដោយស្វ័យប្រវត្ត!</span>
+    </p>
+    <div class="grade-bubbles">
+      <button class="grade-bubble-btn" data-grade="grade3">
+        <span class="bubble-title">
+          <span class="en-text">Grade 3</span>
+          <span class="kh-text">ថ្នាក់ទី ៣</span>
+        </span>
+        <span class="bubble-sub">
+          <span class="en-text">Level 1 English</span>
+          <span class="kh-text">កម្រិត ១ (ងាយ)</span>
+        </span>
+      </button>
+      
+      <button class="grade-bubble-btn" data-grade="grade4">
+        <span class="bubble-title">
+          <span class="en-text">Grade 4</span>
+          <span class="kh-text">ថ្នាក់ទី ៤</span>
+        </span>
+        <span class="bubble-sub">
+          <span class="en-text">Level 2 English</span>
+          <span class="kh-text">កម្រិត ២ (មធ្យម)</span>
+        </span>
+      </button>
+      
+      <button class="grade-bubble-btn" data-grade="grade5">
+        <span class="bubble-title">
+          <span class="en-text">Grade 5</span>
+          <span class="kh-text">ថ្នាក់ទី ៥</span>
+        </span>
+        <span class="bubble-sub">
+          <span class="en-text">Level 3 English</span>
+          <span class="kh-text">កម្រិត ៣ (ពិបាក)</span>
+        </span>
+      </button>
+      
+      <button class="grade-bubble-btn" data-grade="grade6">
+        <span class="bubble-title">
+          <span class="en-text">Grade 6</span>
+          <span class="kh-text">ថ្នាក់ទី ៦</span>
+        </span>
+        <span class="bubble-sub">
+          <span class="en-text">Level 4 English</span>
+          <span class="kh-text">កម្រិត ៤ (ពិបាកខ្លាំង)</span>
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Learning Paths Section -->
+  <section id="paths" class="paths-section">
+    <h2 class="section-title">
+      <span class="en-text">Pick Your Learning Game</span>
+      <span class="kh-text">ជ្រើសរើសល្បែងសិក្សារបស់អ្នក</span>
+    </h2>
+    <p class="section-subtitle">
+      <span class="en-text">Choose one of the fun sections below to practice your English!</span>
+      <span class="kh-text">ជ្រើសរើសផ្នែកដ៏រីករាយណាមួយខាងក្រោម ដើម្បីអនុវត្តភាសាអង់គ្លេសរបស់អ្នក!</span>
+    </p>
+    
+    <div class="paths-grid">
+      <!-- Vocabulary Card -->
+      <div class="path-card glass-card">
+        <div class="card-icon-wrapper purple">
+          <span>🎨</span>
+        </div>
+        <h3 class="path-title">
+          <span class="en-text">Fun Word Cards</span>
+          <span class="kh-text">កាតពាក្យសិក្សា</span>
+        </h3>
+        <p class="path-desc">
+          <span class="en-text">Learn daily words with colorful cards! Tap the card to flip it and see what the word means. Click the speaker to hear how it sounds! 🔊</span>
+          <span class="kh-text">រៀនពាក្យប្រចាំថ្ងៃជាមួយកាតចម្រុះពណ៌! ចុចលើកាតដើម្បីផ្ងារមើលន័យពាក្យ។ ចុចលើរូបបំពងសំឡេងដើម្បីស្តាប់ការបញ្ចេញសំឡេង! 🔊</span>
+        </p>
+        <a href="/vocabulary" class="path-link">
+          <span class="en-text">Play Word Cards &rarr;</span>
+          <span class="kh-text">លេងកាតពាក្យសិក្សា &rarr;</span>
+        </a>
+      </div>
+
+      <!-- Grammar Quiz Card -->
+      <div class="path-card glass-card">
+        <div class="card-icon-wrapper yellow">
+          <span>⭐</span>
+        </div>
+        <h3 class="path-title">
+          <span class="en-text">Cool Quiz Games</span>
+          <span class="kh-text">តេស្តសាកល្បង</span>
+        </h3>
+        <p class="path-desc">
+          <span class="en-text">Answer questions and collect stars! Check your answers to see explanations that make grammar easy to learn! ✏️</span>
+          <span class="kh-text">ឆ្លើយសំណួរផ្សេងៗ និងប្រមូលផ្កាយ! ពិនិត្យមើលចម្លើយរបស់អ្នក ដើម្បីមើលការពន្យល់ដែលជួយឱ្យវេយ្យាករណ៍កាន់តែងាយយល់! ✏️</span>
+        </p>
+        <a href="/quiz" class="path-link">
+          <span class="en-text">Play Quiz Games &rarr;</span>
+          <span class="kh-text">លេងតេស្តសាកល្បង &rarr;</span>
+        </a>
+      </div>
+
+      <!-- Listening Dictation Card -->
+      <div class="path-card glass-card">
+        <div class="card-icon-wrapper blue">
+          <span>🎧</span>
+        </div>
+        <h3 class="path-title">
+          <span class="en-text">Listen & Write</span>
+          <span class="kh-text">ស្តាប់ និងសរសេរ</span>
+        </h3>
+        <p class="path-desc">
+          <span class="en-text">Listen to sweet voice recordings! Choose slow or normal speed, type what you hear in the box, and find out if you got it right! 📝</span>
+          <span class="kh-text">ស្តាប់សំឡេងអានដ៏ពីរោះ! ជ្រើសរើសល្បឿនយឺត ឬធម្មតា វាយបញ្ចូលអ្វីដែលអ្នកបានឮនៅក្នុងប្រអប់ ហើយផ្ទៀងផ្ទាត់ចម្លើយរបស់អ្នក! 📝</span>
+        </p>
+        <a href="/listening" class="path-link">
+          <span class="en-text">Practice Listening &rarr;</span>
+          <span class="kh-text">ហ្វឹកហាត់ការស្តាប់ &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Features Spotlight -->
+  <section class="features-spotlight glass-card">
+    <div class="spotlight-content">
+      <h2 class="spotlight-title">
+        <span class="en-text">Voices Built Right In! 🗣️</span>
+        <span class="kh-text">មានសំឡេងអានមកជាមួយស្រាប់! 🗣️</span>
+      </h2>
+      <p class="spotlight-desc">
+        <span class="en-text">Our game uses your web browser's friendly speaking voice to read words aloud. This means you don't have to wait for large audio files to download. You can practice as much as you like, anytime, anywhere!</span>
+        <span class="kh-text">កម្មវិធីសិក្សារបស់យើងប្រើប្រាស់បច្ចេកវិទ្យាបញ្ចេញសំឡេងស្វ័យប្រវត្តិនៃកម្មវិធីរុករកវិបសាយរបស់អ្នក ដើម្បីអានពាក្យខ្លាំងៗ។ នេះមានន័យថាអ្នកមិនចាំបាច់រង់ចាំទាញយកឯកសារសំឡេងធំៗនោះទេ។ អ្នកអាចហ្វឹកហាត់បានច្រើនតាមចិត្ត ចង់រៀនពេលណាក៏បាន ទីណាក៏បាន!</span>
+      </p>
+      <div class="tech-tags">
+        <span class="tech-tag">
+          <span class="en-text">⭐ Kid-Friendly Design</span>
+          <span class="kh-text">⭐ រចនាឡើងសមរម្យសម្រាប់កុមារ</span>
+        </span>
+        <span class="tech-tag">
+          <span class="en-text">🔊 Sound Pronunciation</span>
+          <span class="kh-text">🔊 ការបញ្ចេញសំឡេងច្បាស់ៗ</span>
+        </span>
+        <span class="tech-tag">
+          <span class="en-text">💻 Play on Tablets & PCs</span>
+          <span class="kh-text">💻 ដំណើរការលើ Tablet និងកុំព្យូទ័រ</span>
+        </span>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const gradeButtons = document.querySelectorAll('.grade-bubble-btn');
+  
+  // Read and apply saved grade preference
+  const savedGrade = localStorage.getItem('preferredGrade') || 'grade3';
+  const savedButton = document.querySelector(`.grade-bubble-btn[data-grade="${savedGrade}"]`);
+  if (savedButton) {
+    savedButton.classList.add('selected');
+  }
+
+  gradeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      gradeButtons.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      
+      const grade = btn.getAttribute('data-grade');
+      if (grade) {
+        localStorage.setItem('preferredGrade', grade);
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Hero Section */
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 0 30px 0;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    z-index: 10;
+  }
+
+  .hero-title {
+    font-size: 3.4rem;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+    color: #1a202c;
+  }
+
+  .text-glow {
+    color: var(--color-primary);
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 30px;
+    line-height: 1.6;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  /* Grade selection panel styling */
+  .grade-selection-section {
+    margin: 32px 0 60px 0;
+    text-align: center;
+    border-color: rgba(167, 139, 250, 0.4);
+    box-shadow: 0 10px 30px rgba(167, 139, 250, 0.05);
+  }
+  
+  .grade-section-title {
+    font-size: 1.7rem;
+    margin-bottom: 8px;
+    color: #1a202c;
+  }
+
+  .grade-section-subtitle {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+
+  .grade-bubbles {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .grade-bubble-btn {
+    background: #ffffff;
+    border: 3px solid #000000;
+    box-shadow: 0 4px 0 #000000;
+    padding: 14px 20px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-family: var(--font-display);
+    color: #1a202c;
+    transition: var(--transition-smooth);
+    min-width: 175px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .grade-bubble-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #000000;
+    background: #f8fafc;
+  }
+
+  .grade-bubble-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #000000;
+  }
+
+  .grade-bubble-btn.selected {
+    background: #f3e8ff; /* Light Lavender */
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 0 var(--color-primary);
+  }
+
+  .bubble-title {
+    font-size: 1.25rem;
+    font-weight: 900;
+  }
+
+  .bubble-sub {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+  }
+
+  /* Paths Section */
+  .paths-section {
+    padding: 40px 0;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 1.15rem;
+    font-weight: 600;
+    max-width: 600px;
+    margin: 0 auto 48px auto;
+  }
+
+  .paths-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 24px;
+  }
+
+  .path-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px;
+  }
+
+  .card-icon-wrapper {
+    width: 54px;
+    height: 54px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    border: 3px solid #000000;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 0 #000000;
+  }
+
+  .card-icon-wrapper.purple {
+    background: #f3e8ff;
+  }
+
+  .card-icon-wrapper.yellow {
+    background: #fef08a;
+  }
+
+  .card-icon-wrapper.blue {
+    background: #bae6fd;
+  }
+
+  .path-title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 12px;
+    color: #1a202c;
+  }
+
+  .path-desc {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    flex-grow: 1;
+  }
+
+  .path-link {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+  }
+
+  .path-card:hover .path-link {
+    color: var(--color-secondary);
+    transform: translateX(4px);
+  }
+
+  /* Spotlight Section */
+  .features-spotlight {
+    margin: 40px 0 60px 0;
+  }
+
+  .spotlight-title {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+    color: #1a202c;
+  }
+
+  .spotlight-desc {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tech-tag {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #1a202c;
+    background: #f1f5f9;
+    border: 2px solid #e2e8f0;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.6rem;
+    }
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+    .paths-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,450 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Flashcard from '../components/Flashcard.astro';
+
+const grade3Words = [
+  {
+    word: "Happy",
+    ipa: "/ˈhæpi/",
+    type: "adjective",
+    definition: "Feeling or showing joy and smiles.",
+    definitionKh: "មានអារម្មណ៍រីករាយ ឬបង្ហាញស្នាមញញឹម។",
+    example: "The happy boy laughed when playing with his friendly dog.",
+    exampleKh: "ក្មេងប្រុសដែលសប្បាយចិត្តម្នាក់បានសើចសប្បាយពេលលេងជាមួយឆ្កែដ៏គួរឱ្យស្រឡាញ់របស់គេ។"
+  },
+  {
+    word: "Apple",
+    ipa: "/ˈæpl/",
+    type: "noun",
+    definition: "A sweet, round fruit that can be red, green, or yellow.",
+    definitionKh: "ផ្លែឈើមូលផ្អែម ដែលមានពណ៌ក្រហម ពណ៌បៃតង ឬពណ៌លឿង។",
+    example: "I took a big bite of the crunchy red apple for lunch.",
+    exampleKh: "ខ្ញុំបានខាំផ្លែប៉ោមពណ៌ក្រហមដ៏ស្រួយមួយម៉ាត់ធំសម្រាប់អាហារថ្ងៃត្រង់។"
+  },
+  {
+    word: "Jump",
+    ipa: "/dʒʌmp/",
+    type: "verb",
+    definition: "To push yourself up into the air using your legs.",
+    definitionKh: "រុញខ្លួនអ្នកឡើងលើអាកាសដោយប្រើជើងរបស់អ្នក។",
+    example: "Rabbits and kangaroos love to jump high in the grass.",
+    exampleKh: "ទន្សាយ និងកង់គូរូ ចូលចិត្តលោតខ្ពស់ៗនៅលើវាលស្មៅ។"
+  },
+  {
+    word: "Sun",
+    ipa: "/sʌn/",
+    type: "noun",
+    definition: "The bright star in the sky that gives us light and warmth.",
+    definitionKh: "ផ្កាយភ្លឺនៅលើមេឃដែលផ្តល់ពន្លឺ និងកំដៅដល់យើង។",
+    example: "The warm sun shines brightly in the morning.",
+    exampleKh: "ព្រះអាទិត្យដ៏កក់ក្តៅបានរះយ៉ាងត្រចះត្រចង់នៅពេលព្រឹក។"
+  },
+  {
+    word: "Read",
+    ipa: "/riːd/",
+    type: "verb",
+    definition: "To look at written words and understand them.",
+    definitionKh: "មើលពាក្យដែលបានសរសេរ និងយល់ពីន័យរបស់វា។",
+    example: "I like to read funny storybooks before sleeping.",
+    exampleKh: "ខ្ញុំចូលចិត្តអានសៀវភៅរឿងកំប្លែងមុនពេលចូលគេង។"
+  },
+  {
+    word: "Clean",
+    ipa: "/kliːn/",
+    type: "adjective",
+    definition: "Not dirty and free from dust or mud.",
+    definitionKh: "មិនកខ្វក់ និងគ្មានធូលី ឬភក់។",
+    example: "Please keep your desk clean and tidy.",
+    exampleKh: "សូមរក្សាតុរបស់អ្នកឱ្យស្អាត និងមានរបៀបរៀបរយ។"
+  },
+  {
+    word: "Water",
+    ipa: "/ˈwɔːtə/",
+    type: "noun",
+    definition: "The clear liquid that we drink and use for washing.",
+    definitionKh: "ទឹក - វត្ថុរាវថ្លាដែលយើងផឹក និងប្រើប្រាស់សម្រាប់លាងសម្អាត។",
+    example: "Drink a glass of fresh water after you play.",
+    exampleKh: "ផឹកទឹកស្អាតមួយកែវបន្ទាប់ពីអ្នកលេងរួច។"
+  },
+  {
+    word: "Run",
+    ipa: "/rʌn/",
+    type: "verb",
+    definition: "To move very fast using your legs.",
+    definitionKh: "រត់ - ផ្លាស់ទីយ៉ាងលឿនដោយប្រើជើងរបស់អ្នក។",
+    example: "The children run fast in the schoolyard.",
+    exampleKh: "កុមាររត់យ៉ាងលឿននៅក្នុងទីធ្លាសាលា។"
+  },
+  {
+    word: "Green",
+    ipa: "/ɡriːn/",
+    type: "adjective",
+    definition: "The color of leaves and grass.",
+    definitionKh: "ពណ៌បៃតង - ពណ៌នៃស្លឹកឈើ និងវាលស្មៅ។",
+    example: "The green frog sat quietly on a big leaf.",
+    exampleKh: "កង្កែបពណ៌បៃតងបានអង្គុយយ៉ាងស្ងៀមស្ងាត់នៅលើស្លឹកឈើដ៏ធំមួយ។"
+  }
+];
+
+const grade4Words = [
+  {
+    word: "Explore",
+    ipa: "/ɪkˈsplɔː/",
+    type: "verb",
+    definition: "To travel to a new place to learn more about it.",
+    definitionKh: "ធ្វើដំណើរទៅកាន់ទីកន្លែងថ្មីដើម្បីស្វែងយល់បន្ថែមអំពីវា។",
+    example: "We went to explore the forest and looked for colorful butterflies.",
+    exampleKh: "ពួកយើងបានទៅរុករកនៅក្នុងព្រៃដើម្បីស្វែងរកមេអំបៅដែលមានពណ៌ស្រស់ស្អាត។"
+  },
+  {
+    word: "Courage",
+    ipa: "/ˈkʌrɪdʒ/",
+    type: "noun",
+    definition: "Being brave when you have to do something hard or scary.",
+    definitionKh: "ភាពក្លាហាននៅពេលដែលអ្នកត្រូវធ្វើអ្វីមួយដែលពិបាក ឬគួរឱ្យខ្លាច។",
+    example: "The fireman showed great courage when saving the little cat.",
+    exampleKh: "អ្នកពន្លត់អគ្គីភ័យបានបង្ហាញពីសេចក្តីក្លាហានយ៉ាងខ្លាំងនៅពេលជួយសង្គ្រោះកូនឆ្មាដ៏តូច។"
+  },
+  {
+    word: "Curious",
+    ipa: "/ˈkjʊəriəs/",
+    type: "adjective",
+    definition: "Wanting very much to know or learn about everything.",
+    definitionKh: "មានបំណងប្រាថ្នាចង់ដឹង ឬចង់រៀនសូត្រអំពីអ្វីៗគ្រប់យ៉ាង។",
+    example: "The curious puppy looked inside the box to see what was there.",
+    exampleKh: "កូនឆ្កែដែលចង់ដឹងចង់ឃើញបានអើតមើលទៅក្នុងប្រអប់ដើម្បីចង់ដឹងថាមានអ្វីខ្លះនៅក្នុងនោះ។"
+  },
+  {
+    word: "Journey",
+    ipa: "/ˈdʒɜːni/",
+    type: "noun",
+    definition: "An act of traveling from one place to another.",
+    definitionKh: "ការធ្វើដំណើរពីកន្លែងមួយទៅកន្លែងមួយទៀត។",
+    example: "Our train journey to the countryside was exciting.",
+    exampleKh: "ការធ្វើដំណើរតាមរថភ្លើងរបស់យើងទៅកាន់ជនបទគឺគួរឱ្យរំភើបណាស់។"
+  },
+  {
+    word: "Protect",
+    ipa: "/prəˈtekt/",
+    type: "verb",
+    definition: "To keep someone or something safe from harm.",
+    definitionKh: "ការពារនរណាម្នាក់ ឬអ្វីមួយឱ្យមានសុវត្ថិភាពពីគ្រោះថ្នាក់។",
+    example: "We wear helmets to protect our heads while riding bicycles.",
+    exampleKh: "ពួកយើងពាក់មួកសុវត្ថិភាពដើម្បីការពារក្បាលរបស់យើងពេលជិះកង់។"
+  },
+  {
+    word: "Brave",
+    ipa: "/breɪv/",
+    type: "adjective",
+    definition: "Ready to face danger or pain without showing fear.",
+    definitionKh: "ក្លាហាន - ត្រៀមខ្លួនប្រឈមមុខនឹងគ្រោះថ្នាក់ ឬការឈឺចាប់ដោយមិនបង្ហាញការភ័យខ្លាច។",
+    example: "The brave little bird flew high into the sky.",
+    exampleKh: "សត្វបក្សីដ៏តូច និងក្លាហាននោះបានហោះខ្ពស់ទៅលើមេឃ។"
+  },
+  {
+    word: "Discover",
+    ipa: "/dɪˈskʌvə/",
+    type: "verb",
+    definition: "To find or learn something new for the first time.",
+    definitionKh: "ស្វែងរកឃើញ ឬរៀនអ្វីដែលថ្មីជាលើកដំបូង។",
+    example: "Scientists want to discover new stars in space.",
+    exampleKh: "អ្នកវិទ្យាសាស្ត្រចង់ស្វែងរកផ្កាយថ្មីៗនៅក្នុងទីអវកាស។"
+  },
+  {
+    word: "Library",
+    ipa: "/ˈlaɪbrəri/",
+    type: "noun",
+    definition: "A quiet place containing books that people can read or borrow.",
+    definitionKh: "បណ្ណាល័យ - កន្លែងស្ងប់ស្ងាត់ដែលមានសៀវភៅសម្រាប់អាន ឬខ្ចី។",
+    example: "I borrowed three colorful science books from the library.",
+    exampleKh: "ខ្ញុំបានខ្ចីសៀវភៅវិទ្យាសាស្ត្រចម្រុះពណ៌ចំនួនបីក្បាលពីបណ្ណាល័យ។"
+  },
+  {
+    word: "Gentle",
+    ipa: "/ˈdʒentl/",
+    type: "adjective",
+    definition: "Kind, friendly, and soft in behavior or touch.",
+    definitionKh: "ទន់ភ្លន់ គួរឱ្យស្រឡាញ់ និងរាក់ទាក់។",
+    example: "The baby fell asleep with the gentle breeze.",
+    exampleKh: "ទារកបានគេងលក់ជាមួយនឹងខ្យល់បក់ដ៏ទន់ភ្លន់។"
+  }
+];
+
+const grade5Words = [
+  {
+    word: "Gather",
+    ipa: "/ˈɡæðə/",
+    type: "verb",
+    definition: "To bring people or things together into one group.",
+    definitionKh: "នាំមនុស្ស ឬវត្ថុផ្សេងៗមកជួបជុំគ្នា ឬប្រមូលផ្តុំគ្នាជាក្រុមតែមួយ។",
+    example: "Let's gather all the colorful leaves from the garden.",
+    exampleKh: "តោះនាំគ្នាប្រមូលស្លឹកឈើដែលមានពណ៌ស្រស់ស្អាតពីក្នុងសួនច្បារ។"
+  },
+  {
+    word: "Scribble",
+    ipa: "/ˈskrɪbl/",
+    type: "verb",
+    definition: "To write or draw something very quickly and untidily.",
+    definitionKh: "សរសេរ ឬគូរអ្វីមួយយ៉ាងលឿន និងមិនសូវមានរបៀបរៀបរយ។",
+    example: "I like to scribble with colorful crayons on sketch paper.",
+    exampleKh: "ខ្ញុំចូលចិត្តគូរវាសលេងដោយប្រើដីសពណ៌នៅលើក្រដាសគំនូរ។"
+  },
+  {
+    word: "Peculiar",
+    ipa: "/pɪˈkjuːliə/",
+    type: "adjective",
+    definition: "Strange, odd, or very different from what is normal.",
+    definitionKh: "ភាពចម្លែក ខុសប្លែកពីធម្មតា ឬខុសប្លែកពីអ្វីដែលធ្លាប់ឃើញ។",
+    example: "The bird had a peculiar orange crest on top of its head.",
+    exampleKh: "សត្វបក្សីនោះមានកំប៉ោយពណ៌ទឹកក្រូចដ៏ចម្លែកមួយនៅពីលើក្បាលរបស់វា។"
+  },
+  {
+    word: "Sweet",
+    ipa: "/swiːt/",
+    type: "adjective",
+    definition: "Having a taste like sugar.",
+    definitionKh: "ផ្អែម - មានរសជាតិដូចស្ករ។",
+    example: "Sugar and ripe mangoes are very sweet.",
+    exampleKh: "ស្ករ និងស្វាយទុំគឺផ្អែមខ្លាំងណាស់។"
+  },
+  {
+    word: "Travel",
+    ipa: "/ˈtrævl/",
+    type: "verb",
+    definition: "To go from one place to another place.",
+    definitionKh: "ធ្វើដំណើរ - ទៅពីកន្លែងមួយទៅកន្លែងមួយទៀត។",
+    example: "We travel to the countryside on holidays.",
+    exampleKh: "ពួកយើងធ្វើដំណើរទៅលេងស្រុកស្រែចម្ការនៅថ្ងៃឈប់សម្រាក។"
+  },
+  {
+    word: "Forest",
+    ipa: "/ˈfɒrɪst/",
+    type: "noun",
+    definition: "A large area of land covered with many trees.",
+    definitionKh: "ព្រៃឈើ - ផ្ទៃដីដ៏ធំដែលពោរពេញទៅដោយដើមឈើជាច្រើន។",
+    example: "Many trees and wild animals live in the forest.",
+    exampleKh: "ដើមឈើ និងសត្វព្រៃជាច្រើនរស់នៅក្នុងព្រៃឈើ។"
+  },
+  {
+    word: "Healthy",
+    ipa: "/ˈhelθi/",
+    type: "adjective",
+    definition: "Strong and not sick.",
+    definitionKh: "សុខភាពល្អ - ខ្លាំងពូកែ និងមិនងាយមានជំងឺ។",
+    example: "Eating fresh fruit keeps our bodies healthy.",
+    exampleKh: "ការបរិភោគផ្លែឈើស្រស់ៗធ្វើឱ្យរាងកាយរបស់យើងមានសុខភាពល្អ។"
+  },
+  {
+    word: "Build",
+    ipa: "/bɪld/",
+    type: "verb",
+    definition: "To make something by putting parts together.",
+    definitionKh: "សាងសង់ - ធ្វើអ្វីមួយដោយផ្គុំផ្នែកផ្សេងៗចូលគ្នា។",
+    example: "They want to build a small wooden house.",
+    exampleKh: "ពួកគេចង់សាងសង់ផ្ទះឈើដ៏តូចមួយ។"
+  },
+  {
+    word: "Island",
+    ipa: "/ˈaɪlənd/",
+    type: "noun",
+    definition: "A piece of land with water all around it.",
+    definitionKh: "កោះ - ផ្ទៃដីដែលមានទឹកព័ទ្ធជុំវិញ។",
+    example: "The small island sits in the middle of the blue sea.",
+    exampleKh: "កោះដ៏តូចមួយស្ថិតនៅកណ្តាលសមុទ្រពណ៌ខៀវស្រងាត់។"
+  }
+];
+
+const grade6Words = [
+  {
+    word: "Generous",
+    ipa: "/ˈdʒenərəs/",
+    type: "adjective",
+    definition: "Willing to give help, kindness, or things to others.",
+    definitionKh: "ចិត្តទូលាយ - ស្ម័គ្រចិត្តផ្តល់ជំនួយ ក្តីស្រឡាញ់ ឬរបស់របរដល់អ្នកដទៃ។",
+    example: "The generous girl shared her delicious cookies with everyone.",
+    exampleKh: "ក្មេងស្រីចិត្តទូលាយម្នាក់បានចែករំលែកនំគុកគីដ៏មានរសជាតិឆ្ងាញ់របស់នាងទៅកាន់អ្នករាល់គ្នា។"
+  },
+  {
+    word: "Predict",
+    ipa: "/prɪˈdɪkt/",
+    type: "verb",
+    definition: "To say what you think will happen in the future.",
+    definitionKh: "ទស្សន៍ទាយ - និយាយពីអ្វីដែលអ្នកគិតថានឹងកើតឡើងនាពេលអនាគត។",
+    example: "It is hard to predict if it will rain tomorrow morning.",
+    exampleKh: "វាពិបាកក្នុងការទស្សន៍ទាយណាស់ថាតើមេឃនឹងភ្លៀងនៅព្រឹកស្អែកដែរឬទេ។"
+  },
+  {
+    word: "Obstacle",
+    ipa: "/ˈɒbstəkl/",
+    type: "noun",
+    definition: "Something that blocks your way or makes it hard to do things.",
+    definitionKh: "ឧបសគ្គ - អ្វីមួយដែលរារាំងផ្លូវរបស់អ្នក ឬធ្វើឱ្យការធ្វើអ្វីមួយមានការលំបាក។",
+    example: "The fallen tree was an obstacle on the bicycle path.",
+    exampleKh: "ដើមឈើដែលដួលរលំនោះគឺជាឧបសគ្គមួយនៅលើផ្លូវជិះកង់។"
+  },
+  {
+    word: "Neighbor",
+    ipa: "/ˈneɪbə/",
+    type: "noun",
+    definition: "A person who lives near your house.",
+    definitionKh: "អ្នកជិតខាង - មនុស្សដែលរស់នៅក្បែរផ្ទះរបស់អ្នក។",
+    example: "Our friendly neighbor helped us fix the broken fence.",
+    exampleKh: "អ្នកជិតខាងដ៏រាក់ទាក់របស់យើងបានជួយយើងជួសជុលរបងដែលខូច។"
+  },
+  {
+    word: "Search",
+    ipa: "/sɜːtʃ/",
+    type: "verb",
+    definition: "To look carefully to find someone or something.",
+    definitionKh: "ស្វែងរក - ពិនិត្យមើលឱ្យបានហ្មត់ចត់ដើម្បីស្វែងរកនរណាម្នាក់ ឬអ្វីមួយ។",
+    example: "We search for our lost kitten in the garden.",
+    exampleKh: "ពួកយើងស្វែងរកកូនឆ្មាដែលបាត់នៅក្នុងសួនច្បារ។"
+  },
+  {
+    word: "Famous",
+    ipa: "/ˈfeɪməs/",
+    type: "adjective",
+    definition: "Known and liked by many people.",
+    definitionKh: "ល្បីល្បាញ - ត្រូវបានដឹងឮ និងចូលចិត្តដោយមនុស្សជាច្រើន។",
+    example: "Angkor Wat is a famous temple in Cambodia.",
+    exampleKh: "ប្រាសាទអង្គរវត្តគឺជាប្រាសាទដ៏ល្បីល្បាញមួយនៅក្នុងប្រទេសកម្ពុជា។"
+  },
+  {
+    word: "Whisper",
+    ipa: "/ˈwɪspə/",
+    type: "verb",
+    definition: "To speak very quietly using your breath.",
+    definitionKh: "ខ្សឹប - និយាយតិចៗដោយប្រើខ្យល់ដង្ហើម។",
+    example: "Please whisper because the baby is sleeping.",
+    exampleKh: "សូមនិយាយខ្សឹបៗ ព្រោះទារកកំពុងគេងលក់។"
+  },
+  {
+    word: "Shadow",
+    ipa: "/ˈʃædəʊ/",
+    type: "noun",
+    definition: "A dark shape made when something blocks the light.",
+    definitionKh: "ស្រមោល - រូបរាងងងឹតដែលកើតឡើងនៅពេលអ្វីមួយបាំងពន្លឺ។",
+    example: "The big tree casts a dark shadow on the grass.",
+    exampleKh: "ដើមឈើដ៏ធំបានបង្កើតស្រមោលងងឹតមួយនៅលើវាលស្មៅ។"
+  },
+  {
+    word: "Pleasant",
+    ipa: "/ˈpleznt/",
+    type: "adjective",
+    definition: "Nice, warm, and friendly.",
+    definitionKh: "គួរឱ្យរីករាយ ស្រស់ស្រាយ ឬមានភាពកក់ក្តៅ។",
+    example: "We had a pleasant walk under the morning sun.",
+    exampleKh: "ពួកយើងបានដើរលេងយ៉ាងរីករាយនៅក្រោមពន្លឺព្រះអាទិត្យពេលព្រឹក។"
+  }
+];
+---
+
+<Layout title="Bilingual Word Flashcards" description="Study English vocabulary words mapped by school grade. Mapped to 1st-4th grade English difficulty levels.">
+  <div class="vocab-header">
+    <h1 class="vocab-title">
+      <span class="en-text">Fun Word Cards 📇</span>
+      <span class="kh-text">កាតពាក្យសិក្សារីករាយ 📇</span>
+    </h1>
+    <p class="vocab-subtitle">
+      <span class="en-text">Study the words for your grade! You can change your grade on the home page.</span>
+      <span class="kh-text">សិក្សាពាក្យសម្រាប់ថ្នាក់របស់អ្នក! អ្នកអាចប្តូរថ្នាក់របស់អ្នកនៅលើទំព័រដើម។</span>
+    </p>
+  </div>
+
+  <!-- Grade 3 Tab Panel -->
+  <div class="tab-panel" id="grade3">
+    <div class="cards-grid">
+      {grade3Words.map(word => (
+        <Flashcard {...word} />
+      ))}
+    </div>
+  </div>
+
+  <!-- Grade 4 Tab Panel -->
+  <div class="tab-panel" id="grade4">
+    <div class="cards-grid">
+      {grade4Words.map(word => (
+        <Flashcard {...word} />
+      ))}
+    </div>
+  </div>
+
+  <!-- Grade 5 Tab Panel -->
+  <div class="tab-panel" id="grade5">
+    <div class="cards-grid">
+      {grade5Words.map(word => (
+        <Flashcard {...word} />
+      ))}
+    </div>
+  </div>
+
+  <!-- Grade 6 Tab Panel -->
+  <div class="tab-panel" id="grade6">
+    <div class="cards-grid">
+      {grade6Words.map(word => (
+        <Flashcard {...word} />
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Show active tab panel based on localStorage preference
+  const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
+  const activePanel = document.getElementById(preferredGrade);
+  if (activePanel) {
+    activePanel.classList.add('active');
+  } else {
+    document.getElementById('grade3')?.classList.add('active');
+  }
+</script>
+
+<style>
+  .vocab-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .vocab-title {
+    font-size: 2.6rem;
+    margin-bottom: 8px;
+    color: #1a202c;
+  }
+
+  .vocab-subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.15rem;
+    font-weight: 600;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* Panels Grid */
+  .tab-panel {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    padding-bottom: 40px;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

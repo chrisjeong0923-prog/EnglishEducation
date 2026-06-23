@@ -1,0 +1,376 @@
+---
+interface Props {
+  word: string;
+  ipa: string;
+  type: string;
+  definition: string;
+  definitionKh: string;
+  example: string;
+  exampleKh: string;
+}
+
+const { word, ipa, type, definition, definitionKh, example, exampleKh } = Astro.props;
+
+// Determine pastel category color
+const typeColors: Record<string, string> = {
+  noun: 'rgba(56, 189, 248, 0.15)', // light blue
+  verb: 'rgba(251, 146, 60, 0.15)', // light orange
+  adjective: 'rgba(52, 211, 153, 0.15)', // light green
+};
+
+const typeBorders: Record<string, string> = {
+  noun: '#38bdf8',
+  verb: '#fb923c',
+  adjective: '#34d399',
+};
+
+const typeTranslations: Record<string, string> = {
+  noun: 'នាមសព្ទ (Noun)',
+  verb: 'កិរិយាសព្ទ (Verb)',
+  adjective: 'គុណនាម (Adj)',
+};
+
+const badgeColor = typeColors[type.toLowerCase()] || 'rgba(167, 139, 250, 0.15)';
+const borderColor = typeBorders[type.toLowerCase()] || '#a78bfa';
+const typeKhmer = typeTranslations[type.toLowerCase()] || type;
+---
+
+<div class="flashcard-container">
+  <div class="flashcard-inner">
+    
+    <!-- Front of the Card -->
+    <div class="card-side card-front" style={`border-color: ${borderColor};`}>
+      <div class="card-header">
+        <span class="word-type" style={`background-color: ${badgeColor}; border-color: ${borderColor}; color: #1a202c;`}>
+          <span class="en-text">{type}</span>
+          <span class="kh-text">{typeKhmer}</span>
+        </span>
+        <button class="speak-btn" data-word={word} aria-label="Listen to pronunciation">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="speaker-icon">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <h2 class="word-title">{word}</h2>
+        <p class="word-ipa">{ipa}</p>
+      </div>
+      <div class="card-footer">
+        <span class="tap-hint en-text">👉 Tap Card to Flip! 👈</span>
+        <span class="tap-hint kh-text">👉 ចុចលើកាតដើម្បីផ្ងារ! 👈</span>
+      </div>
+    </div>
+    
+    <!-- Back of the Card -->
+    <div class="card-side card-back" style={`border-color: ${borderColor};`}>
+      <div class="card-header">
+        <span class="word-type" style={`background-color: ${badgeColor}; border-color: ${borderColor}; color: #1a202c;`}>
+          <span class="en-text">{type}</span>
+          <span class="kh-text">{typeKhmer}</span>
+        </span>
+      </div>
+      <div class="card-body">
+        <p class="definition-label">
+          <span class="en-text">What it means:</span>
+          <span class="kh-text">ន័យពាក្យ៖</span>
+        </p>
+        <p class="word-definition">{definition}</p>
+        <p class="word-definition-kh kh-text-block">{definitionKh}</p>
+        
+        <div class="divider"></div>
+        
+        <p class="example-label">
+          <span class="en-text">Practice Sentence:</span>
+          <span class="kh-text">ល្បះឧទាហរណ៍៖</span>
+        </p>
+        <p class="word-example">"{example}"</p>
+        <p class="word-example-kh kh-text-block">"{exampleKh}"</p>
+      </div>
+      <div class="card-footer">
+        <span class="tap-hint en-text">👉 Tap Card to Flip Back! 👈</span>
+        <span class="tap-hint kh-text">👉 ចុចលើកាតដើម្បីផ្កាប់វិញ! 👈</span>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<script>
+  // Add flipping logic
+  const cards = document.querySelectorAll('.flashcard-container');
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('.speak-btn')) {
+        return;
+      }
+      card.classList.toggle('flipped');
+    });
+  });
+
+  // Add SpeechSynthesis logic
+  const speakButtons = document.querySelectorAll('.speak-btn');
+  speakButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const word = btn.getAttribute('data-word');
+      if (word && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.75;
+        window.speechSynthesis.speak(utterance);
+        
+        btn.classList.add('speaking');
+        utterance.onend = () => {
+          btn.classList.remove('speaking');
+        };
+      } else {
+        alert("Text-to-speech is not supported in this browser.");
+      }
+    });
+  });
+</script>
+
+<style>
+  .flashcard-container {
+    perspective: 1000px;
+    width: 100%;
+    height: 340px;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .flashcard-container:hover {
+    transform: scale(1.03);
+  }
+
+  .flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-style: preserve-3d;
+  }
+
+  .flashcard-container.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+  }
+
+  .card-side {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: var(--bg-surface);
+    border: 3px solid #e2e8f0;
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-playful);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+
+  .flashcard-container:hover .card-side {
+    box-shadow: 0 12px 30px rgba(159, 122, 234, 0.15);
+    border-color: var(--color-primary);
+  }
+
+  .card-front {
+    z-index: 2;
+    transform: rotateY(0deg);
+  }
+
+  .card-back {
+    transform: rotateY(180deg);
+    background: #fdfdfd;
+  }
+
+  /* Card Header styling */
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .word-type {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+  }
+
+  .speak-btn {
+    background: #ffffff;
+    border: 2.5px solid #000000;
+    box-shadow: 0 3px 0 #000000;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #1a202c;
+    transition: var(--transition-smooth);
+  }
+
+  .speak-btn:hover {
+    background: #fef08a;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 #000000;
+  }
+
+  .speak-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #000000;
+  }
+
+  .speak-btn.speaking {
+    background: #bae6fd;
+    animation: speakerPulse 1s infinite alternate;
+  }
+
+  .speaker-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Card Body styling */
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .word-title {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: #1a202c;
+  }
+
+  .word-ipa {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* Back Card Details */
+  .card-back .card-body {
+    text-align: left;
+    justify-content: flex-start;
+    gap: 4px;
+    padding-top: 10px;
+    overflow-y: auto;
+    padding-right: 6px;
+  }
+
+  .card-back .card-body::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .card-back .card-body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .card-back .card-body::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+  }
+
+  .card-back .card-body::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+
+  .definition-label, .example-label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    letter-spacing: 0.5px;
+  }
+
+  .word-definition {
+    font-size: 1.05rem;
+    color: #2d3748;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .word-definition-kh {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .divider {
+    height: 3px;
+    background: #f1f5f9;
+    margin: 12px 0;
+    border-radius: 2px;
+  }
+
+  .word-example {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .word-example-kh {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* Card Footer styling */
+  .card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tap-hint {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-weight: 700;
+    transition: var(--transition-smooth);
+  }
+
+  .flashcard-container:hover .tap-hint {
+    color: var(--color-primary);
+  }
+
+  @keyframes speakerPulse {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.08);
+    }
+  }
+</style>
