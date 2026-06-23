@@ -55,7 +55,7 @@ const listeningExercises = [
 ];
 
 // ElevenLabs Configuration
-const VOICE_ID = 'EXAVITQu4vr4xnSDxMaL'; // Bella - clear female voice (free tier compatible)
+const VOICE_ID = 'pNInz6obpgDQGcFmaJgB'; // Adam - deep male narrator (free tier compatible)
 const API_URL = `https://api.elevenlabs.io/v1/text-to-speech/${VOICE_ID}`;
 
 // Helper to make API request and save file
