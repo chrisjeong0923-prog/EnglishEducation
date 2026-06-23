@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Fun English Learning for Kids" description="Interactive word games, reading cards, and fun quizzes for kids from 1st to 4th grade, localized for Cambodian learners.">
@@ -17,7 +18,7 @@ import Layout from '../layouts/Layout.astro';
       </p>
       
       <div class="hero-actions">
-        <a href="/vocabulary" class="btn btn-primary">
+        <a href={`${baseUrl}vocabulary`} class="btn btn-primary">
           <span class="en-text">Start Learning! 🚀</span>
           <span class="kh-text">ចាប់ផ្តើមរៀន! 🚀</span>
         </a>
@@ -111,7 +112,7 @@ import Layout from '../layouts/Layout.astro';
           <span class="en-text">Learn daily words with colorful cards! Tap the card to flip it and see what the word means. Click the speaker to hear how it sounds! 🔊</span>
           <span class="kh-text">រៀនពាក្យប្រចាំថ្ងៃជាមួយកាតចម្រុះពណ៌! ចុចលើកាតដើម្បីផ្ងារមើលន័យពាក្យ។ ចុចលើរូបបំពងសំឡេងដើម្បីស្តាប់ការបញ្ចេញសំឡេង! 🔊</span>
         </p>
-        <a href="/vocabulary" class="path-link">
+        <a href={`${baseUrl}vocabulary`} class="path-link">
           <span class="en-text">Play Word Cards &rarr;</span>
           <span class="kh-text">លេងកាតពាក្យសិក្សា &rarr;</span>
         </a>
@@ -130,7 +131,7 @@ import Layout from '../layouts/Layout.astro';
           <span class="en-text">Answer questions and collect stars! Check your answers to see explanations that make grammar easy to learn! ✏️</span>
           <span class="kh-text">ឆ្លើយសំណួរផ្សេងៗ និងប្រមូលផ្កាយ! ពិនិត្យមើលចម្លើយរបស់អ្នក ដើម្បីមើលការពន្យល់ដែលជួយឱ្យវេយ្យាករណ៍កាន់តែងាយយល់! ✏️</span>
         </p>
-        <a href="/quiz" class="path-link">
+        <a href={`${baseUrl}quiz`} class="path-link">
           <span class="en-text">Play Quiz Games &rarr;</span>
           <span class="kh-text">លេងតេស្តសាកល្បង &rarr;</span>
         </a>
@@ -149,7 +150,7 @@ import Layout from '../layouts/Layout.astro';
           <span class="en-text">Listen to sweet voice recordings! Choose slow or normal speed, type what you hear in the box, and find out if you got it right! 📝</span>
           <span class="kh-text">ស្តាប់សំឡេងអានដ៏ពីរោះ! ជ្រើសរើសល្បឿនយឺត ឬធម្មតា វាយបញ្ចូលអ្វីដែលអ្នកបានឮនៅក្នុងប្រអប់ ហើយផ្ទៀងផ្ទាត់ចម្លើយរបស់អ្នក! 📝</span>
         </p>
-        <a href="/listening" class="path-link">
+        <a href={`${baseUrl}listening`} class="path-link">
           <span class="en-text">Practice Listening &rarr;</span>
           <span class="kh-text">ហ្វឹកហាត់ការស្តាប់ &rarr;</span>
         </a>

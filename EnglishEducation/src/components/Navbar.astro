@@ -1,11 +1,13 @@
 ---
 const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.replace(/\/$/, ""); // Remove trailing slash
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const currentPath = pathname.replace(/\/$/, "").replace(new RegExp(`^${base}`), "");
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <header class="navbar-header">
   <div class="navbar-container">
-    <a href="/" class="logo">
+    <a href={baseUrl} class="logo">
       🎈 <span class="logo-accent">Kids</span>Edu
     </a>
     
@@ -18,27 +20,27 @@ const currentPath = pathname.replace(/\/$/, ""); // Remove trailing slash
     
     <div class="nav-wrapper" id="navMenu">
       <nav class="nav-menu">
-        <a href="/" class={currentPath === "" ? "active nav-link" : "nav-link"}>
+        <a href={baseUrl} class={currentPath === "" ? "active nav-link" : "nav-link"}>
           <span class="en-text">🏠 Home</span>
           <span class="kh-text">🏠 ទំព័រដើម</span>
         </a>
-        <a href="/vocabulary" class={currentPath === "/vocabulary" ? "active nav-link" : "nav-link"}>
+        <a href={`${baseUrl}vocabulary`} class={currentPath === "/vocabulary" ? "active nav-link" : "nav-link"}>
           <span class="en-text">📇 Words</span>
           <span class="kh-text">📇 ពាក្យសិក្សា</span>
         </a>
-        <a href="/quiz" class={currentPath === "/quiz" ? "active nav-link" : "nav-link"}>
+        <a href={`${baseUrl}quiz`} class={currentPath === "/quiz" ? "active nav-link" : "nav-link"}>
           <span class="en-text">✏️ Quiz</span>
           <span class="kh-text">✏️ តេស្តសាកល្បង</span>
         </a>
-        <a href="/listening" class={currentPath === "/listening" ? "active nav-link" : "nav-link"}>
+        <a href={`${baseUrl}listening`} class={currentPath === "/listening" ? "active nav-link" : "nav-link"}>
           <span class="en-text">🎧 Listen</span>
           <span class="kh-text">🎧 ស្តាប់កម្សាន្ត</span>
         </a>
-        <a href="/lessons" class={currentPath === "/lessons" ? "active nav-link" : "nav-link"}>
+        <a href={`${baseUrl}lessons`} class={currentPath === "/lessons" ? "active nav-link" : "nav-link"}>
           <span class="en-text">📖 Lessons</span>
           <span class="kh-text">📖 មេរៀន</span>
         </a>
-        <a href="/contact" class={currentPath === "/contact" ? "active nav-link" : "nav-link"}>
+        <a href={`${baseUrl}contact`} class={currentPath === "/contact" ? "active nav-link" : "nav-link"}>
           <span class="en-text">✉️ Contact</span>
           <span class="kh-text">✉️ ទំនាក់ទំនង</span>
         </a>
