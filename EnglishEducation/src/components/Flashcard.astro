@@ -13,6 +13,11 @@ interface Props {
 
 const { word, ipa, type, definition, definitionKh, example, exampleKh, emoji, imageUrl } = Astro.props;
 
+// Robustly resolve image paths relative to the base URL
+const cleanBase = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const cleanImage = imageUrl ? (imageUrl.startsWith('/') ? imageUrl.slice(1) : imageUrl) : '';
+const resolvedImageUrl = imageUrl ? `${cleanBase}${cleanImage}` : '';
+
 // Determine pastel category color
 const typeColors: Record<string, string> = {
   noun: 'rgba(56, 189, 248, 0.15)', // light blue
@@ -57,7 +62,7 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
       <div class="card-body">
         <div class="visual-container">
           {imageUrl ? (
-            <img src={imageUrl.startsWith('/') ? `${import.meta.env.BASE_URL}${imageUrl.slice(1)}` : imageUrl} alt={word} class="vocab-sticker" />
+            <img src={resolvedImageUrl} alt={word} class="vocab-sticker" />
           ) : (
             <span class="vocab-emoji">{emoji}</span>
           )}

@@ -7,6 +7,7 @@ interface Props {
 }
 
 const { title, description = "Fun English lessons, word games, and grammar quizzes for kids." } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <!doctype html>
@@ -14,7 +15,7 @@ const { title, description = "Fun English lessons, word games, and grammar quizz
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title} | Kids English Academy</title>
 		<meta name="description" content={description} />
