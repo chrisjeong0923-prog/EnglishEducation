@@ -168,7 +168,7 @@ export const profileManager = {
 
   // Create new profile
   createProfile(nickname: string, avatar: string, grade: string): UserProfile {
-    const uniqueId = "profile_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5);
+    const uniqueId = "profile_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7);
     const newProfile: UserProfile = {
       id: uniqueId,
       nickname: nickname.trim() || "Young Learner",
@@ -328,7 +328,7 @@ export const profileManager = {
       const parsed = JSON.parse(jsonString) as any;
       // Basic validation
       if (typeof parsed.nickname === "string" && typeof parsed.avatar === "string" && typeof parsed.grade === "string") {
-        const uniqueId = parsed.id || ("profile_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5));
+        const uniqueId = parsed.id || ("profile_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7));
         const validatedProfile: UserProfile = {
           id: uniqueId,
           nickname: parsed.nickname,
