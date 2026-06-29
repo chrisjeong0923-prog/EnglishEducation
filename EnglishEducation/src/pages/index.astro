@@ -7,6 +7,9 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-content">
+      <!-- Welcome Profile Banner -->
+      <div id="welcome-profile-banner" class="welcome-profile-banner hidden"></div>
+
       <h1 class="hero-title">
         <span class="en-text-block">Learn English with <br/><span class="text-glow">Fun Games! 🎈</span></span>
         <span class="kh-text-block">រៀនភាសាអង់គ្លេសជាមួយ <br/><span class="text-glow">ល្បែងកម្សាន្តសប្បាយៗ! 🎈</span></span>
@@ -185,18 +188,251 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
       </div>
     </div>
   </section>
+
+  <!-- Registration Modal Overlay -->
+  <div id="register-modal-overlay" class="modal-overlay hidden">
+    <div class="modal-card glass-card">
+      
+      <!-- VIEW A: PROFILE SWITCHER VIEW -->
+      <div id="modal-view-switcher" class="modal-view hidden">
+        <div class="modal-header">
+          <span class="modal-balloon">🎈</span>
+          <h2 class="modal-title">
+            <span class="en-text">Who is learning today?</span>
+            <span class="kh-text">តើអ្នកណានឹងរៀនថ្ងៃនេះ?</span>
+          </h2>
+          <p class="modal-subtitle">
+            <span class="en-text">Select your profile to continue your learning adventure!</span>
+            <span class="kh-text">ជ្រើសរើសគណនីរបស់អ្នក ដើម្បីបន្តដំណើរផ្សងព្រេងសិក្សា!</span>
+          </p>
+        </div>
+        
+        <!-- Grid for profile choices -->
+        <div class="modal-profile-picker-grid" id="modal-profile-list">
+          <!-- Injected dynamically -->
+        </div>
+
+        <div class="modal-actions-switcher">
+          <button type="button" id="btn-modal-go-create" class="btn btn-primary">
+            <span class="en-text">+ Add Profile</span>
+            <span class="kh-text">+ បង្កើតគណនី</span>
+          </button>
+          <button type="button" id="btn-modal-skip-switcher" class="btn btn-secondary">
+            <span class="en-text">Skip</span>
+            <span class="kh-text">រំលង</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- VIEW B: PROFILE CREATION VIEW -->
+      <div id="modal-view-create" class="modal-view">
+        <div class="modal-header">
+          <span class="modal-balloon">✨</span>
+          <h2 class="modal-title">
+            <span class="en-text">Create Your Profile!</span>
+            <span class="kh-text">បង្កើតគណនីរបស់អ្នក!</span>
+          </h2>
+          <p class="modal-subtitle">
+            <span class="en-text">Save your English stars and earn cool animal badges!</span>
+            <span class="kh-text">សន្សំផ្កាយភាសាអង់គ្លេស និងទទួលបានមេដាយសត្វស្អាតៗ!</span>
+          </p>
+        </div>
+
+        <form id="modal-register-form" class="playful-form">
+          <!-- Avatar Selection -->
+          <div class="form-group">
+            <label class="form-label">
+              <span class="en-text">Choose Your Companion:</span>
+              <span class="kh-text">ជ្រើសរើសមិត្តសត្វរបស់អ្នក៖</span>
+            </label>
+            <div class="modal-avatar-grid">
+              <label class="avatar-label-modal">
+                <input type="radio" name="modal-avatar" value="🐼" checked />
+                <span class="modal-avatar-emoji">🐼</span>
+              </label>
+              <label class="avatar-label-modal">
+                <input type="radio" name="modal-avatar" value="🦁" />
+                <span class="modal-avatar-emoji">🦁</span>
+              </label>
+              <label class="avatar-label-modal">
+                <input type="radio" name="modal-avatar" value="🦊" />
+                <span class="modal-avatar-emoji">🦊</span>
+              </label>
+              <label class="avatar-label-modal">
+                <input type="radio" name="modal-avatar" value="🐨" />
+                <span class="modal-avatar-emoji">🐨</span>
+              </label>
+              <label class="avatar-label-modal">
+                <input type="radio" name="modal-avatar" value="🐰" />
+                <span class="modal-avatar-emoji">🐰</span>
+              </label>
+              <label class="avatar-label-modal">
+                <input type="radio" name="modal-avatar" value="🐸" />
+                <span class="modal-avatar-emoji">🐸</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Nickname Input -->
+          <div class="form-group">
+            <label for="modal-nickname" class="form-label">
+              <span class="en-text">Nickname:</span>
+              <span class="kh-text">ឈ្មោះហៅក្រៅ៖</span>
+            </label>
+            <input 
+              type="text" 
+              id="modal-nickname" 
+              placeholder="Type your name here..." 
+              maxlength="15" 
+              required 
+              class="playful-input"
+            />
+          </div>
+
+          <!-- Grade Selection -->
+          <div class="form-group">
+            <label for="modal-grade" class="form-label">
+              <span class="en-text">School Grade:</span>
+              <span class="kh-text">ថ្នាក់រៀន៖</span>
+            </label>
+            <select id="modal-grade" class="playful-select">
+              <option value="grade3">Grade 3 / ថ្នាក់ទី ៣</option>
+              <option value="grade4">Grade 4 / ថ្នាក់ទី ៤</option>
+              <option value="grade5">Grade 5 / ថ្នាក់ទី ៥</option>
+              <option value="grade6">Grade 6 / ថ្នាក់ទី ៦</option>
+            </select>
+          </div>
+
+          <div class="modal-actions">
+            <button type="submit" class="btn btn-primary">
+              <span class="en-text">Let's Go! 🚀</span>
+              <span class="kh-text">តោះរៀន! 🚀</span>
+            </button>
+            <button type="button" id="btn-modal-back-switcher" class="btn btn-secondary hidden">
+              <span class="en-text">Back</span>
+              <span class="kh-text">ត្រឡប់ក្រោយ</span>
+            </button>
+            <button type="button" id="btn-modal-skip" class="btn btn-secondary">
+              <span class="en-text">Skip</span>
+              <span class="kh-text">រំលងសិន</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
 </Layout>
 
 <script>
+  import { profileManager } from '../scripts/profileManager';
+
   const gradeButtons = document.querySelectorAll('.grade-bubble-btn');
+  const registerModal = document.getElementById('register-modal-overlay');
+  const modalForm = document.getElementById('modal-register-form') as HTMLFormElement;
+  const skipBtn = document.getElementById('btn-modal-skip');
+  const welcomeBanner = document.getElementById('welcome-profile-banner');
   
-  // Read and apply saved grade preference
-  const savedGrade = localStorage.getItem('preferredGrade') || 'grade3';
-  const savedButton = document.querySelector(`.grade-bubble-btn[data-grade="${savedGrade}"]`);
-  if (savedButton) {
-    savedButton.classList.add('selected');
+  // Views & toggle buttons
+  const viewSwitcher = document.getElementById('modal-view-switcher');
+  const viewCreate = document.getElementById('modal-view-create');
+  const goCreateBtn = document.getElementById('btn-modal-go-create');
+  const backToSwitcherBtn = document.getElementById('btn-modal-back-switcher');
+  const skipSwitcherBtn = document.getElementById('btn-modal-skip-switcher');
+
+  // Read and apply active profile
+  let currentGrade = 'grade3';
+  const activeProfile = profileManager.getProfile();
+  
+  if (activeProfile) {
+    currentGrade = activeProfile.grade;
+    if (welcomeBanner) {
+      welcomeBanner.innerHTML = `
+        <span class="en-text">🌟 Welcome back, ${activeProfile.avatar} ${activeProfile.nickname}! Ready to learn? <a href="#" id="welcome-switch-user" class="switch-link">Switch User 🔄</a></span>
+        <span class="kh-text">🌟 ស្វាគមន៍ត្រឡប់មកវិញ, ${activeProfile.avatar} ${activeProfile.nickname}! តោះចាប់ផ្តើមរៀន? <a href="#" id="welcome-switch-user-kh" class="switch-link">ប្តូរគណនី 🔄</a></span>
+      `;
+      welcomeBanner.classList.remove('hidden');
+
+      // Bind switcher links on homepage banner
+      document.querySelectorAll('.switch-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          showProfilePrompt();
+        });
+      });
+    }
+  } else {
+    currentGrade = localStorage.getItem('preferredGrade') || 'grade3';
+    // Trigger modal if not logged in and not skipped
+    const isSkipped = localStorage.getItem('profilePromptSkipped') === 'true';
+    if (!isSkipped && registerModal) {
+      setTimeout(() => {
+        showProfilePrompt();
+      }, 800);
+    }
   }
 
+  // Helper to trigger and render the switcher/creator modal
+  function showProfilePrompt() {
+    if (!registerModal) return;
+    const profiles = profileManager.getProfilesList();
+    
+    if (profiles.length > 0) {
+      // Show Switcher View
+      viewCreate?.classList.add('hidden');
+      viewSwitcher?.classList.remove('hidden');
+      backToSwitcherBtn?.classList.remove('hidden');
+      
+      const listEl = document.getElementById('modal-profile-list');
+      if (listEl) {
+        listEl.innerHTML = '';
+        profiles.forEach(p => {
+          const stars = profileManager.calculateStars(p);
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'modal-profile-card';
+          btn.innerHTML = `
+            <div class="modal-profile-avatar">${p.avatar}</div>
+            <div class="modal-profile-info">
+              <div class="modal-profile-name">${p.nickname}</div>
+              <div class="modal-profile-stars">⭐ ${stars} Stars</div>
+            </div>
+          `;
+          btn.addEventListener('click', () => {
+            profileManager.setActiveProfile(p.id);
+            registerModal.classList.add('hidden');
+            location.reload();
+          });
+          listEl.appendChild(btn);
+        });
+      }
+    } else {
+      // Show Creation View directly
+      viewSwitcher?.classList.add('hidden');
+      viewCreate?.classList.remove('hidden');
+      backToSwitcherBtn?.classList.add('hidden');
+    }
+
+    registerModal.classList.remove('hidden');
+  }
+
+  // Bind Switcher sub-actions
+  goCreateBtn?.addEventListener('click', () => {
+    viewSwitcher?.classList.add('hidden');
+    viewCreate?.classList.remove('hidden');
+  });
+
+  backToSwitcherBtn?.addEventListener('click', () => {
+    viewCreate?.classList.add('hidden');
+    viewSwitcher?.classList.remove('hidden');
+  });
+
+  const activeBtn = document.querySelector(`.grade-bubble-btn[data-grade="${currentGrade}"]`);
+  if (activeBtn) {
+    activeBtn.classList.add('selected');
+  }
+
+  // Handle homepage grade button select
   gradeButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       gradeButtons.forEach(b => b.classList.remove('selected'));
@@ -205,9 +441,39 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
       const grade = btn.getAttribute('data-grade');
       if (grade) {
         localStorage.setItem('preferredGrade', grade);
+        const profile = profileManager.getProfile();
+        if (profile) {
+          profile.grade = grade;
+          profileManager.saveProfile(profile);
+        }
       }
     });
   });
+
+  // Modal Registration submit handler
+  if (modalForm) {
+    modalForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nicknameEl = document.getElementById('modal-nickname') as HTMLInputElement;
+      const gradeEl = document.getElementById('modal-grade') as HTMLSelectElement;
+      const avatarEl = document.querySelector('input[name="modal-avatar"]:checked') as HTMLInputElement;
+
+      if (nicknameEl && gradeEl && avatarEl) {
+        profileManager.createProfile(nicknameEl.value, avatarEl.value, gradeEl.value);
+        registerModal?.classList.add('hidden');
+        location.reload();
+      }
+    });
+  }
+
+  // Modal skip button handlers
+  const handleSkip = () => {
+    localStorage.setItem('profilePromptSkipped', 'true');
+    registerModal?.classList.add('hidden');
+  };
+
+  skipBtn?.addEventListener('click', handleSkip);
+  skipSwitcherBtn?.addEventListener('click', handleSkip);
 </script>
 
 <style>
@@ -453,6 +719,185 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
     border-radius: 20px;
   }
 
+  /* Welcome Profile Banner */
+  .welcome-profile-banner {
+    display: inline-flex;
+    align-items: center;
+    background: #f3e8ff;
+    border: 2px solid var(--color-primary);
+    border-radius: 20px;
+    padding: 8px 18px;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(159, 122, 234, 0.15);
+    animation: bounceBanner 2s infinite alternate;
+  }
+
+  @keyframes bounceBanner {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-4px); }
+  }
+
+  /* Modal Overlay styling */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(26, 32, 44, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+    animation: fadeInOverlay 0.3s ease-out;
+  }
+
+  .modal-card {
+    max-width: 480px;
+    width: 100%;
+    background: #ffffff;
+    border: 3px solid #000000;
+    box-shadow: 0 12px 0 #000000;
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    animation: zoomBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .modal-balloon {
+    font-size: 2.8rem;
+    display: inline-block;
+    animation: waveBalloon 2s infinite ease-in-out;
+  }
+
+  .modal-title {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+    font-family: var(--font-display);
+    font-weight: 900;
+  }
+
+  .modal-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  /* Modal Avatar Grid */
+  .modal-avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .avatar-label-modal {
+    cursor: pointer;
+  }
+
+  .avatar-label-modal input[type="radio"] {
+    display: none;
+  }
+
+  .modal-avatar-emoji {
+    font-size: 1.8rem;
+    padding: 8px;
+    border: 2.5px solid #e2e8f0;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    box-shadow: 0 2px 0 #e2e8f0;
+    transition: var(--transition-smooth);
+  }
+
+  .avatar-label-modal input[type="radio"]:checked + .modal-avatar-emoji {
+    background: #f3e8ff;
+    border-color: var(--color-primary);
+    box-shadow: 0 3px 0 var(--color-primary);
+    transform: scale(1.1);
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .modal-actions .btn {
+    flex: 1;
+  }
+
+  /* Form layouts in modal */
+  .modal-card .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+    text-align: left;
+  }
+
+  .modal-card .form-label {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #1a202c;
+  }
+
+  .modal-card .playful-input {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 2.5px solid #000000;
+    box-shadow: 0 3px 0 #000000;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+  }
+
+  .modal-card .playful-select {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 2.5px solid #000000;
+    box-shadow: 0 3px 0 #000000;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+  }
+
+  @keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes zoomBounce {
+    from {
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes waveBalloon {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-4px) rotate(4deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+  }
+
   @media (max-width: 768px) {
     .hero-title {
       font-size: 2.6rem;
@@ -463,5 +908,84 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
     .paths-grid {
       grid-template-columns: 1fr;
     }
+    .modal-avatar-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+  }
+
+  /* Multi profile switcher styles */
+  .modal-view {
+    width: 100%;
+  }
+
+  .modal-profile-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+    max-height: 260px;
+    overflow-y: auto;
+    padding: 6px;
+  }
+
+  .modal-profile-card {
+    background: #ffffff;
+    border: 3px solid #000000;
+    border-radius: var(--radius-md);
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #000000;
+    transition: var(--transition-smooth);
+    width: 100%;
+  }
+
+  .modal-profile-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 0 #000000;
+    background: #fdfafd;
+  }
+
+  .modal-profile-avatar {
+    font-size: 2.2rem;
+  }
+
+  .modal-profile-info {
+    text-align: center;
+  }
+
+  .modal-profile-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #1a202c;
+  }
+
+  .modal-profile-stars {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--color-text-muted);
+  }
+
+  .modal-actions-switcher {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .switch-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 800;
+    margin-left: 8px;
+    display: inline-block;
+  }
+
+  .switch-link:hover {
+    color: var(--color-secondary);
   }
 </style>

@@ -18,7 +18,7 @@ const { quizTitle, quizTitleKh, questions } = Astro.props;
 const questionsJson = JSON.stringify(questions);
 ---
 
-<div class="quiz-container glass-card" data-questions={questionsJson}>
+<div class="quiz-container glass-card" data-questions={questionsJson} data-title={quizTitle}>
   <!-- Quiz Header -->
   <div class="quiz-header">
     <h3 class="quiz-title">
@@ -97,8 +97,11 @@ const questionsJson = JSON.stringify(questions);
 </div>
 
 <script>
+  import { profileManager } from '../scripts/profileManager';
+
   class GrammarQuiz {
     container: HTMLElement;
+    quizTitle: string;
     questions: any[];
     currentQuestionIndex: number;
     score: number;
@@ -124,6 +127,7 @@ const questionsJson = JSON.stringify(questions);
 
     constructor(container: HTMLElement) {
       this.container = container;
+      this.quizTitle = container.getAttribute('data-title') || 'Grammar Quiz';
       const dataAttr = container.getAttribute('data-questions');
       this.questions = dataAttr ? JSON.parse(dataAttr) : [];
       this.currentQuestionIndex = 0;
@@ -317,6 +321,42 @@ const questionsJson = JSON.stringify(questions);
           <span class="kh-text-block">ព្យាយាមបានល្អ! ការអានពាក្យម្តងទៀតនឹងជួយអ្នកឱ្យឆ្លើយត្រូវកាន់តែច្រើន! 📚</span>
         `;
       }
+
+      // Save score to profile
+      const activeProfile = profileManager.getProfile();
+      let saveNoticeHtml = '';
+      if (activeProfile) {
+        const oldStars = profileManager.calculateStars(activeProfile);
+        profileManager.saveQuizScore(this.quizTitle, scorePercent);
+        const newProfile = profileManager.getProfile()!;
+        const newStars = profileManager.calculateStars(newProfile);
+        const starsEarned = newStars - oldStars;
+
+        if (starsEarned > 0) {
+          saveNoticeHtml = `
+            <div class="save-notice-toast animate-bounce">
+              <span class="en-text">🎉 +${starsEarned} Star(s) added to your profile! Total: ${newStars} ⭐</span>
+              <span class="kh-text">🎉 បានបន្ថែមផ្កាយ +${starsEarned} ទៅគណនីរបស់អ្នក! សរុប៖ ${newStars} ⭐</span>
+            </div>
+          `;
+        } else {
+          saveNoticeHtml = `
+            <div class="save-notice-toast">
+              <span class="en-text">💾 Score saved to your profile! Current total: ${newStars} ⭐</span>
+              <span class="kh-text">💾 ពិន្ទុត្រូវបានរក្សាទុកក្នុងគណនីរបស់អ្នក! សរុប៖ ${newStars} ⭐</span>
+            </div>
+          `;
+        }
+      } else {
+        saveNoticeHtml = `
+          <div class="save-notice-toast warning">
+            <span class="en-text">💡 Create a profile to save your scores and earn badges!</span>
+            <span class="kh-text">💡 បង្កើតគណនីដើម្បីរក្សាទុកពិន្ទុ និងទទួលបានមេដាយសមិទ្ធផល!</span>
+          </div>
+        `;
+      }
+      
+      messageHtml += saveNoticeHtml;
 
       if (this.resultMessageEl) this.resultMessageEl.innerHTML = messageHtml;
     }
@@ -630,5 +670,38 @@ const questionsJson = JSON.stringify(questions);
     .btn-submit {
       width: 100%;
     }
+  }
+
+  /* Score submission alerts */
+  .save-notice-toast {
+    margin-top: 20px;
+    padding: 10px 18px;
+    background: #d1fae5;
+    color: #065f46;
+    border: 2px solid var(--color-success);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(52, 211, 153, 0.15);
+  }
+
+  .save-notice-toast.warning {
+    background: #fffbeb;
+    color: #92400e;
+    border-color: var(--color-warning);
+    box-shadow: 0 4px 10px rgba(251, 191, 36, 0.15);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  .animate-bounce {
+    animation: bounce 1s infinite;
   }
 </style>

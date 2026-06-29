@@ -156,6 +156,7 @@ const exercisesJson = JSON.stringify(listeningExercises);
             <div class="score-track">
               <div class="score-fill" id="accuracy-score-fill" style="width: 100%;"></div>
             </div>
+            <div id="listening-save-status"></div>
           </div>
         </div>
       </div>
@@ -164,10 +165,13 @@ const exercisesJson = JSON.stringify(listeningExercises);
 </Layout>
 
 <script>
+  import { profileManager } from '../scripts/profileManager';
+
   class ListeningPortal {
     layoutEl: HTMLElement;
     exercises: any[];
     currentIndex: number;
+    saveStatusEl: HTMLElement | null;
 
     // DOM Elements
     titleEl: HTMLElement | null;
@@ -208,6 +212,7 @@ const exercisesJson = JSON.stringify(listeningExercises);
       this.correctTranscript = layoutEl.querySelector('#correct-transcript');
       this.accuracyText = layoutEl.querySelector('#accuracy-score-text');
       this.accuracyFill = layoutEl.querySelector('#accuracy-score-fill');
+      this.saveStatusEl = layoutEl.querySelector('#listening-save-status');
 
       this.init();
     }
@@ -272,6 +277,10 @@ const exercisesJson = JSON.stringify(listeningExercises);
         this.feedbackContainer.classList.add('hidden');
       }
 
+      if (this.saveStatusEl) {
+        this.saveStatusEl.innerHTML = '';
+      }
+
       if (this.revealBtn) {
         this.revealBtn.innerHTML = `
           <span class="en-text">Show Answer 👁️</span>
@@ -331,6 +340,42 @@ const exercisesJson = JSON.stringify(listeningExercises);
       if (this.correctTranscript) this.correctTranscript.innerText = correctText;
       if (this.accuracyText) this.accuracyText.innerText = `${accuracy}%`;
       if (this.accuracyFill) this.accuracyFill.style.width = `${accuracy}%`;
+
+      // Save score to profile
+      const activeExercise = this.exercises[this.currentIndex];
+      const activeProfile = profileManager.getProfile();
+      if (this.saveStatusEl) {
+        if (activeProfile) {
+          const oldStars = profileManager.calculateStars(activeProfile);
+          profileManager.saveListeningScore(activeExercise.id, accuracy);
+          const newProfile = profileManager.getProfile()!;
+          const newStars = profileManager.calculateStars(newProfile);
+          const starsEarned = newStars - oldStars;
+
+          if (starsEarned > 0) {
+            this.saveStatusEl.innerHTML = `
+              <div class="save-status-toast animate-bounce-small">
+                <span class="en-text">🎉 +${starsEarned} Star(s) added to your profile! Total: ${newStars} ⭐</span>
+                <span class="kh-text">🎉 បានបន្ថែមផ្កាយ +${starsEarned} ទៅគណនីរបស់អ្នក! សរុប៖ ${newStars} ⭐</span>
+              </div>
+            `;
+          } else {
+            this.saveStatusEl.innerHTML = `
+              <div class="save-status-toast">
+                <span class="en-text">💾 Score saved to your profile! Current total: ${newStars} ⭐</span>
+                <span class="kh-text">💾 ពិន្ទុត្រូវបានរក្សាទុកក្នុងគណនីរបស់អ្នក! សរុប៖ ${newStars} ⭐</span>
+              </div>
+            `;
+          }
+        } else {
+          this.saveStatusEl.innerHTML = `
+            <div class="save-status-toast warning">
+              <span class="en-text">💡 Create a profile to save your listening scores and earn badges!</span>
+              <span class="kh-text">💡 បង្កើតគណនីដើម្បីរក្សាទុកពិន្ទុ និងទទួលបានមេដាយសមិទ្ធផល!</span>
+            </div>
+          `;
+        }
+      }
 
       if (this.feedbackCard) {
         this.feedbackCard.className = "feedback-card";
@@ -694,5 +739,39 @@ const exercisesJson = JSON.stringify(listeningExercises);
       grid-template-columns: 1fr;
       gap: 16px;
     }
+  }
+
+  /* Save status alerts styling */
+  .save-status-toast {
+    margin-top: 16px;
+    padding: 10px 18px;
+    background: #d1fae5;
+    color: #065f46;
+    border: 2px solid var(--color-success);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(52, 211, 153, 0.12);
+  }
+
+  .save-status-toast.warning {
+    background: #fffbeb;
+    color: #92400e;
+    border-color: var(--color-warning);
+    box-shadow: 0 4px 10px rgba(251, 191, 36, 0.12);
+  }
+
+  @keyframes bounceSmall {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+
+  .animate-bounce-small {
+    animation: bounceSmall 1s infinite;
   }
 </style>

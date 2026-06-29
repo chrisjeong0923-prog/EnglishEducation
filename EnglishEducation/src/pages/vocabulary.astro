@@ -379,6 +379,22 @@ const grade6Words = [
     </p>
   </div>
 
+  <!-- Vocabulary Mastery Progress Bar -->
+  <div class="vocab-progress-wrapper glass-card">
+    <div class="vocab-progress-info">
+      <h3 class="progress-title">
+        <span class="en-text">Grade Word Mastery 🌟</span>
+        <span class="kh-text">វឌ្ឍនភាពសិក្សាពាក្យ 🌟</span>
+      </h3>
+      <span class="vocab-count-badge">
+        <span id="vocab-progress-num">0</span> / 9
+      </span>
+    </div>
+    <div class="vocab-progress-bar-bg">
+      <div class="vocab-progress-bar-fill" id="vocab-progress-bar" style="width: 0%;"></div>
+    </div>
+  </div>
+
   <!-- Grade 3 Tab Panel -->
   <div class="tab-panel" id="grade3">
     <div class="cards-grid">
@@ -417,6 +433,8 @@ const grade6Words = [
 </Layout>
 
 <script>
+  import { profileManager } from '../scripts/profileManager';
+
   // Show active tab panel based on localStorage preference
   const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
   const activePanel = document.getElementById(preferredGrade);
@@ -425,6 +443,84 @@ const grade6Words = [
   } else {
     document.getElementById('grade3')?.classList.add('active');
   }
+
+  // Populate learned buttons on startup
+  function initLearnedButtons() {
+    const profile = profileManager.getProfile();
+    if (profile) {
+      const learnedWords = profile.learnedWords || [];
+      document.querySelectorAll('.learn-btn').forEach(btn => {
+        const word = btn.getAttribute('data-word');
+        if (word && learnedWords.includes(word)) {
+          btn.classList.add('learned');
+        }
+      });
+    }
+  }
+
+  // Dynamic Page Progress updater
+  function updateVocabProgress() {
+    const activeTab = document.querySelector('.tab-panel.active');
+    const progressNum = document.getElementById('vocab-progress-num');
+    const progressBar = document.getElementById('vocab-progress-bar');
+    
+    if (!activeTab || !progressNum || !progressBar) return;
+
+    // All flashcards in this active grade tab (selecting just front learn-btn to count unique words)
+    const uniqueCards = activeTab.querySelectorAll('.card-front .learn-btn');
+    const totalWords = uniqueCards.length || 9;
+    
+    let learnedCount = 0;
+    uniqueCards.forEach(btn => {
+      if (btn.classList.contains('learned')) {
+        learnedCount++;
+      }
+    });
+
+    progressNum.innerText = learnedCount.toString();
+    const pct = Math.min(100, Math.round((learnedCount / totalWords) * 100));
+    progressBar.style.width = `${pct}%`;
+  }
+
+  // Event delegation for marking words learned
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.learn-btn');
+    if (!btn) return;
+    
+    e.stopPropagation();
+    const word = btn.getAttribute('data-word');
+    if (!word) return;
+
+    const profile = profileManager.getProfile();
+    if (!profile) {
+      const isEn = !document.documentElement.classList.contains('lang-khmer');
+      const alertMsg = isEn 
+        ? "Please create a profile first to save your word progress! Click 'Join Academy' in the menu."
+        : "សូមបង្កើតគណនីដំបូង ដើម្បីរក្សាទុកវឌ្ឍនភាពសិក្សារបស់អ្នក! ចុច 'ចុះឈ្មោះរៀន' នៅក្នុងម៉ឺនុយខាងលើ។";
+      alert(alertMsg);
+      return;
+    }
+
+    const isCurrentlyLearned = btn.classList.contains('learned');
+    
+    if (isCurrentlyLearned) {
+      profileManager.unmarkWordAsLearned(word);
+    } else {
+      profileManager.markWordAsLearned(word);
+    }
+
+    // Toggle class on all buttons of this word (front and back of card)
+    document.querySelectorAll(`.learn-btn[data-word="${word}"]`).forEach(el => {
+      el.classList.toggle('learned', !isCurrentlyLearned);
+    });
+
+    // Update gauge
+    updateVocabProgress();
+  });
+
+  // Run on startup
+  initLearnedButtons();
+  updateVocabProgress();
 </script>
 
 <style>
@@ -474,5 +570,57 @@ const grade6Words = [
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* Progress Card Styles */
+  .vocab-progress-wrapper {
+    max-width: 600px;
+    margin: -10px auto 40px auto;
+    padding: 20px 24px;
+    background: #ffffff;
+    border-color: rgba(167, 139, 250, 0.3);
+    box-shadow: var(--shadow-playful);
+    border-radius: var(--radius-lg);
+  }
+
+  .vocab-progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .progress-title {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #1a202c;
+  }
+
+  .vocab-count-badge {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    background: #f3e8ff;
+    padding: 2px 12px;
+    border-radius: 12px;
+    border: 2px solid rgba(159, 122, 234, 0.2);
+  }
+
+  .vocab-progress-bar-bg {
+    width: 100%;
+    height: 12px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    border: 2px solid #e2e8f0;
+    overflow: hidden;
+  }
+
+  .vocab-progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    width: 0%;
+    border-radius: 6px;
+    transition: width 0.5s ease;
   }
 </style>

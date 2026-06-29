@@ -52,12 +52,17 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
           <span class="en-text">{type}</span>
           <span class="kh-text">{typeKhmer}</span>
         </span>
-        <button class="speak-btn" data-word={word} aria-label="Listen to pronunciation">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="speaker-icon">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-          </svg>
-        </button>
+        <div class="card-actions">
+          <button class="speak-btn" data-word={word} aria-label="Listen to pronunciation">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="speaker-icon">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          </button>
+          <button class="learn-btn" data-word={word} aria-label="Mark as learned">
+            <span class="learn-check">✓</span>
+          </button>
+        </div>
       </div>
       <div class="card-body">
         <div class="visual-container">
@@ -76,13 +81,15 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
       </div>
     </div>
     
-    <!-- Back of the Card -->
     <div class="card-side card-back" style={`border-color: ${borderColor};`}>
       <div class="card-header">
         <span class="word-type" style={`background-color: ${badgeColor}; border-color: ${borderColor}; color: #1a202c;`}>
           <span class="en-text">{type}</span>
           <span class="kh-text">{typeKhmer}</span>
         </span>
+        <button class="learn-btn" data-word={word} aria-label="Mark as learned">
+          <span class="learn-check">✓</span>
+        </button>
       </div>
       <div class="card-body">
         <p class="definition-label">
@@ -116,7 +123,7 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
   cards.forEach(card => {
     card.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
-      if (target.closest('.speak-btn')) {
+      if (target.closest('.speak-btn') || target.closest('.learn-btn')) {
         return;
       }
       card.classList.toggle('flipped');
@@ -426,5 +433,62 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
     100% {
       transform: scale(1.08);
     }
+  }
+
+  /* Progress learn checkmark styling */
+  .card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .learn-btn {
+    background: #ffffff;
+    border: 2.5px solid #000000;
+    box-shadow: 0 3px 0 #000000;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    transition: var(--transition-smooth);
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  .learn-btn:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 #000000;
+  }
+
+  .learn-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #000000;
+  }
+
+  .learn-btn.learned {
+    background: var(--color-success);
+    color: #ffffff;
+    border-color: #047857;
+    box-shadow: 0 3px 0 #047857;
+    animation: bounceCheck 0.4s ease-out;
+  }
+
+  .learn-btn.learned:hover {
+    box-shadow: 0 5px 0 #047857;
+  }
+
+  .learn-btn.learned:active {
+    box-shadow: 0 1px 0 #047857;
+  }
+
+  @keyframes bounceCheck {
+    0% { transform: scale(0.6); }
+    70% { transform: scale(1.2); }
+    100% { transform: scale(1); }
   }
 </style>

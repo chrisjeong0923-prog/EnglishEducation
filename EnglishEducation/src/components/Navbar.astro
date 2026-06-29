@@ -46,6 +46,9 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
         </a>
       </nav>
 
+      <!-- Profile Status Card -->
+      <div id="navbar-profile-container" class="navbar-profile-container"></div>
+
       <!-- Language Toggle Button -->
       <button class="lang-toggle-btn" id="langToggle" aria-label="Switch language">
         <span class="en-text">🇰🇭 ខ្មែរ</span>
@@ -56,6 +59,8 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 </header>
 
 <script>
+  import { profileManager } from '../scripts/profileManager';
+
   const menuToggle = document.getElementById('menuToggle');
   const navMenu = document.getElementById('navMenu');
   const langToggle = document.getElementById('langToggle');
@@ -75,6 +80,97 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
       localStorage.setItem('preferredLang', isKhmer ? 'khmer' : 'english');
     });
   }
+
+  // Dynamic Profile Navbar status
+  function updateNavbarProfile() {
+    const container = document.getElementById('navbar-profile-container');
+    if (!container) return;
+
+    const profile = profileManager.getProfile();
+    const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+
+    if (profile) {
+      const stars = profileManager.calculateStars(profile);
+      container.innerHTML = `
+        <div class="nav-profile-wrapper">
+          <a href="${baseUrl}profile" class="nav-profile-chip" title="View Profile">
+            <span class="chip-avatar">${profile.avatar}</span>
+            <span class="chip-info">
+              <span class="chip-name">${profile.nickname}</span>
+              <span class="chip-stars">⭐ ${stars}</span>
+            </span>
+          </a>
+          <button type="button" class="nav-switch-btn" id="navbar-switch-toggle" title="Switch Profile">
+            🔄
+          </button>
+          <div class="nav-switch-dropdown hidden" id="navbar-switch-dropdown">
+            <div class="dropdown-header">Switch User / ប្តូរគណនី</div>
+            <div class="dropdown-list" id="navbar-switch-list">
+              <!-- Injected profiles -->
+            </div>
+            <a href="${baseUrl}profile" class="dropdown-add-btn">+ Add Profile</a>
+          </div>
+        </div>
+      `;
+    } else {
+      container.innerHTML = `
+        <a href="${baseUrl}profile" class="nav-profile-btn">
+          <span class="en-text">Join Academy 🚀</span>
+          <span class="kh-text">ចុះឈ្មោះរៀន 🚀</span>
+        </a>
+      `;
+    }
+  }
+
+  // Handle switch click toggle
+  document.addEventListener('click', (e: any) => {
+    const toggle = document.getElementById('navbar-switch-toggle');
+    const dropdown = document.getElementById('navbar-switch-dropdown');
+    
+    if (toggle && dropdown) {
+      if (toggle.contains(e.target)) {
+        dropdown.classList.toggle('hidden');
+        renderNavbarDropdownList();
+      } else if (!dropdown.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    }
+  });
+
+  function renderNavbarDropdownList() {
+    const listEl = document.getElementById('navbar-switch-list');
+    if (!listEl) return;
+    listEl.innerHTML = '';
+
+    const profiles = profileManager.getProfilesList();
+    const activeProfile = profileManager.getProfile();
+
+    const otherProfiles = profiles.filter(p => p.id !== activeProfile?.id);
+    if (otherProfiles.length === 0) {
+      listEl.innerHTML = `<div class="dropdown-empty">No other profiles / គ្មានគណនីផ្សេង</div>`;
+      return;
+    }
+
+    otherProfiles.forEach(p => {
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'dropdown-item';
+      item.innerHTML = `
+        <span class="item-avatar">${p.avatar}</span>
+        <span class="item-name">${p.nickname}</span>
+      `;
+      item.addEventListener('click', () => {
+        profileManager.setActiveProfile(p.id);
+        location.reload();
+      });
+      listEl.appendChild(item);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', updateNavbarProfile);
+  window.addEventListener('profileChanged', updateNavbarProfile);
+  // Initial check
+  updateNavbarProfile();
 </script>
 
 <style>
@@ -187,6 +283,98 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
     box-shadow: 0 1px 0 #000000;
   }
 
+  /* Profile Status styles */
+  .navbar-profile-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-profile-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 2.5px solid #000000;
+    box-shadow: 0 3px 0 #000000;
+    padding: 4px 10px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: #1a202c;
+    transition: var(--transition-smooth);
+  }
+
+  .nav-profile-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 #000000;
+    background: #fdfcfa;
+  }
+
+  .nav-profile-chip:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #000000;
+  }
+
+  .chip-avatar {
+    font-size: 1.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chip-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.1;
+  }
+
+  .chip-name {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 900;
+    max-width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .chip-stars {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--color-warning);
+    -webkit-text-stroke: 0.5px #000000;
+  }
+
+  .nav-profile-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    color: #ffffff;
+    border: 2.5px solid #000000;
+    box-shadow: 0 3px 0 #000000;
+    padding: 6px 14px;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 800;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+  }
+
+  .nav-profile-btn:hover {
+    background: #8b5cf6;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 #000000;
+    color: #ffffff;
+  }
+
+  .nav-profile-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #000000;
+  }
+
   /* Mobile menu toggle */
   .mobile-toggle {
     display: none;
@@ -266,5 +454,106 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
     .mobile-toggle.open .bar:nth-child(3) {
       transform: translateY(-8px) rotate(-45deg);
     }
+  }
+
+  /* Switch profile dropdown styles */
+  .nav-profile-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-switch-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background 0.2s;
+  }
+
+  .nav-switch-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-switch-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 220px;
+    background: #ffffff;
+    border: 3px solid #000000;
+    border-radius: var(--radius-md);
+    box-shadow: 0 6px 0 #000000;
+    padding: 12px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: slideDown 0.2s ease-out;
+  }
+
+  .dropdown-header {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    border-bottom: 2px dashed #e2e8f0;
+    padding-bottom: 6px;
+  }
+
+  .dropdown-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-weight: 700;
+    color: #1a202c;
+  }
+
+  .dropdown-item:hover {
+    background: #f7fafc;
+  }
+
+  .item-avatar {
+    font-size: 1.4rem;
+  }
+
+  .dropdown-empty {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    padding: 8px 0;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .dropdown-add-btn {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    border-top: 2px dashed #e2e8f0;
+    padding-top: 8px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-add-btn:hover {
+    color: var(--color-secondary);
   }
 </style>

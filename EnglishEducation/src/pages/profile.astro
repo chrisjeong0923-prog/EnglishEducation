@@ -1,0 +1,1381 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="My Progress & Profile" description="Create your profile, track your English learning progress, and see your collection of achievement badges!">
+  
+  <div class="profile-page-wrapper">
+    
+    <!-- ==========================================
+         1. PROFILE CREATION / REGISTRATION VIEW
+         ========================================== -->
+    <div id="profile-create-view" class="glass-card form-card hidden">
+      <div class="view-header">
+        <span class="header-icon">🚀</span>
+        <h1 class="page-title">
+          <span class="en-text">Join Kids English Academy!</span>
+          <span class="kh-text">ចូលរួមវិទ្យាស្ថានភាសាអង់គ្លេសកុមារ!</span>
+        </h1>
+        <p class="page-subtitle">
+          <span class="en-text">Choose your avatar and enter your nickname to start tracking your stars and badges!</span>
+          <span class="kh-text">ជ្រើសរើសរូបតំណាង និងវាយបញ្ចូលឈ្មោះហៅក្រៅ ដើម្បីចាប់ផ្តើមសន្សំពិន្ទុផ្កាយ និងមេដាយ!</span>
+        </p>
+      </div>
+
+      <form id="create-profile-form" class="playful-form">
+        <!-- Avatar Grid Selection -->
+        <div class="form-group">
+          <label class="form-label">
+            <span class="en-text">Choose Your Animal Companion:</span>
+            <span class="kh-text">ជ្រើសរើសមិត្តសត្វរបស់អ្នក៖</span>
+          </label>
+          <div class="avatar-selection-grid">
+            <label class="avatar-label">
+              <input type="radio" name="avatar" value="🐼" checked />
+              <div class="avatar-choice">
+                <span class="avatar-emoji">🐼</span>
+                <span class="avatar-name">Panda</span>
+              </div>
+            </label>
+            <label class="avatar-label">
+              <input type="radio" name="avatar" value="🦁" />
+              <div class="avatar-choice">
+                <span class="avatar-emoji">🦁</span>
+                <span class="avatar-name">Lion</span>
+              </div>
+            </label>
+            <label class="avatar-label">
+              <input type="radio" name="avatar" value="🦊" />
+              <div class="avatar-choice">
+                <span class="avatar-emoji">🦊</span>
+                <span class="avatar-name">Fox</span>
+              </div>
+            </label>
+            <label class="avatar-label">
+              <input type="radio" name="avatar" value="🐨" />
+              <div class="avatar-choice">
+                <span class="avatar-emoji">🐨</span>
+                <span class="avatar-name">Koala</span>
+              </div>
+            </label>
+            <label class="avatar-label">
+              <input type="radio" name="avatar" value="🐰" />
+              <div class="avatar-choice">
+                <span class="avatar-emoji">🐰</span>
+                <span class="avatar-name">Rabbit</span>
+              </div>
+            </label>
+            <label class="avatar-label">
+              <input type="radio" name="avatar" value="🐸" />
+              <div class="avatar-choice">
+                <span class="avatar-emoji">🐸</span>
+                <span class="avatar-name">Frog</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Nickname Input -->
+        <div class="form-group">
+          <label for="reg-nickname" class="form-label">
+            <span class="en-text">What is your Nickname?</span>
+            <span class="kh-text">តើឈ្មោះហៅក្រៅរបស់អ្នកជាអ្វី?</span>
+          </label>
+          <input 
+            type="text" 
+            id="reg-nickname" 
+            placeholder="Type your name here..." 
+            maxlength="15" 
+            required 
+            class="playful-input"
+          />
+        </div>
+
+        <!-- Grade Selector -->
+        <div class="form-group">
+          <label for="reg-grade" class="form-label">
+            <span class="en-text">Select Your School Grade:</span>
+            <span class="kh-text">ជ្រើសរើសថ្នាក់រៀនរបស់អ្នក៖</span>
+          </label>
+          <select id="reg-grade" class="playful-select">
+            <option value="grade3">Grade 3 / ថ្នាក់ទី ៣ (Level 1)</option>
+            <option value="grade4">Grade 4 / ថ្នាក់ទី ៤ (Level 2)</option>
+            <option value="grade5">Grade 5 / ថ្នាក់ទី ៥ (Level 3)</option>
+            <option value="grade6">Grade 6 / ថ្នាក់ទី ៦ (Level 4)</option>
+          </select>
+        </div>
+
+        <div class="registration-actions">
+          <button type="submit" class="btn btn-primary btn-large">
+            <span class="en-text">Let's Start Learning! 🚀</span>
+            <span class="kh-text">តោះទៅរៀនទាំងអស់គ្នា! 🚀</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-large hidden" id="btn-cancel-create">
+            <span class="en-text">Cancel & Go Back ↩️</span>
+            <span class="kh-text">បោះបង់ & ត្រឡប់ក្រោយ ↩️</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Option to Import Progress -->
+      <div class="import-footer">
+        <p class="import-prompt">
+          <span class="en-text">Have a saved backup?</span>
+          <span class="kh-text">មានឯកសារចម្លងទុកពីមុនមែនទេ?</span>
+        </p>
+        <button class="btn btn-secondary btn-sm" id="btn-import-prompt-reg">
+          <span>📥 Upload Backup</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         2. DASHBOARD VIEW (FOR ACTIVE PROFILES)
+         ========================================== -->
+    <div id="profile-dashboard-view" class="hidden">
+      
+      <!-- Quick Switcher Bubble panel -->
+      <div class="profile-quick-switcher glass-card">
+        <h3 class="switcher-title">
+          <span class="en-text">Switch Learner Profile / ជ្រើសរើសគណនីសិក្សារហ័ស:</span>
+        </h3>
+        <div class="switcher-bubbles-container" id="dash-switcher-bubbles">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+      
+      <!-- Profile Welcome Card -->
+      <div class="dashboard-header-card glass-card">
+        <div class="header-profile-info">
+          <div class="dashboard-avatar-circle" id="dash-avatar-display">🐼</div>
+          <div class="profile-text-group">
+            <h1 class="welcome-heading">
+              <span class="en-text">Hello, <span id="dash-nickname-display">Learner</span>! 👋</span>
+              <span class="kh-text">សួស្តី <span id="dash-nickname-display-kh">សិស្ស</span>! 👋</span>
+            </h1>
+            <span class="badge-grade" id="dash-grade-badge">Grade 3</span>
+            <p class="profile-rank-text">
+              <span class="en-text">Rank: <strong id="rank-text">English Explorer</strong></span>
+              <span class="kh-text">កម្រិត៖ <strong id="rank-text-kh">អ្នករុករកភាសាអង់គ្លេស</strong></span>
+            </p>
+          </div>
+        </div>
+        
+        <!-- Big Star Counter Badge -->
+        <div class="header-score-stats">
+          <div class="star-badge-main">
+            <span class="star-icon-glowing">⭐</span>
+            <span class="star-count-num" id="dash-stars-display">0</span>
+            <span class="star-count-label">
+              <span class="en-text">Stars Saved</span>
+              <span class="kh-text">ផ្កាយសន្សំបាន</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Dashboard Grid -->
+      <div class="dashboard-grid">
+        
+        <!-- Subject Progress Tracking Card -->
+        <div class="dashboard-col glass-card">
+          <h2 class="card-section-title">
+            <span class="en-text">Learning Stats 📊</span>
+            <span class="kh-text">ស្ថិតិនៃការសិក្សា 📊</span>
+          </h2>
+          
+          <div class="stats-list">
+            <!-- Vocabulary Progress Row -->
+            <div class="progress-row">
+              <div class="progress-row-header">
+                <span class="prog-title">🎨 <span class="en-text">Words Learned</span><span class="kh-text">កាតពាក្យសិក្សា</span></span>
+                <span class="prog-value" id="stats-vocab-text">0 / 36</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill vocab" id="stats-vocab-bar" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Quiz Scores Row -->
+            <div class="progress-row">
+              <div class="progress-row-header">
+                <span class="prog-title">✏️ <span class="en-text">Quizzes Finished</span><span class="kh-text">តេស្តដែលបានលេង</span></span>
+                <span class="prog-value" id="stats-quiz-text">0 / 8</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill quiz" id="stats-quiz-bar" style="width: 0%"></div>
+              </div>
+              <p class="average-text">
+                <span class="en-text">Average High Score: <strong id="stats-quiz-avg">0%</strong></span>
+                <span class="kh-text">មធ្យមភាគពិន្ទុខ្ពស់បំផុត៖ <strong id="stats-quiz-avg-kh">0%</strong></span>
+              </p>
+            </div>
+
+            <!-- Listening Row -->
+            <div class="progress-row">
+              <div class="progress-row-header">
+                <span class="prog-title">🎧 <span class="en-text">Listening Dictations</span><span class="kh-text">ការស្តាប់ និងសរសេរ</span></span>
+                <span class="prog-value" id="stats-listen-text">0 / 4</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill listening" id="stats-listen-bar" style="width: 0%"></div>
+              </div>
+              <p class="average-text">
+                <span class="en-text">Average Dictation Accuracy: <strong id="stats-listen-avg">0%</strong></span>
+                <span class="kh-text">មធ្យមភាគភាពត្រឹមត្រូវ៖ <strong id="stats-listen-avg-kh">0%</strong></span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badges Showcase Card -->
+        <div class="dashboard-col glass-card">
+          <h2 class="card-section-title">
+            <span class="en-text">Achievement Badges 🏆</span>
+            <span class="kh-text">មេដាយសមិទ្ធផល 🏆</span>
+          </h2>
+          <p class="card-section-subtitle">
+            <span class="en-text">Complete vocabulary learning, get perfect scores, and collect stars to unlock badges!</span>
+            <span class="kh-text">បំពេញការសិក្សាពាក្យ ឆ្លើយសំណួរឱ្យបានពិន្ទុពេញ និងសន្សំផ្កាយ ដើម្បីបើកសោរមេដាយសមិទ្ធផល!</span>
+          </p>
+
+          <div class="badges-deck" id="badges-container">
+            <!-- Badges will be injected here by script -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings & Utilities Grid -->
+      <div class="settings-grid">
+        <!-- Edit Profile Card -->
+        <div class="glass-card settings-card">
+          <h2 class="card-section-title">
+            <span class="en-text">Edit Profile ⚙️</span>
+            <span class="kh-text">កែប្រែព័ត៌មានគណនី ⚙️</span>
+          </h2>
+          <form id="edit-profile-form" class="playful-form select-inline">
+            <div class="form-group inline">
+              <label for="edit-nickname" class="form-label">
+                <span class="en-text">Nickname:</span>
+                <span class="kh-text">ឈ្មោះហៅក្រៅ៖</span>
+              </label>
+              <input type="text" id="edit-nickname" class="playful-input sm" required maxlength="15"/>
+            </div>
+            
+            <div class="form-group inline">
+              <label for="edit-grade" class="form-label">
+                <span class="en-text">Grade:</span>
+                <span class="kh-text">ថ្នាក់៖</span>
+              </label>
+              <select id="edit-grade" class="playful-select sm">
+                <option value="grade3">Grade 3</option>
+                <option value="grade4">Grade 4</option>
+                <option value="grade5">Grade 5</option>
+                <option value="grade6">Grade 6</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                <span class="en-text">Companion Avatar:</span>
+                <span class="kh-text">រូបតំណាង៖</span>
+              </label>
+              <div class="avatar-edit-chips" id="edit-avatar-chips">
+                <!-- Injected edit avatar chips -->
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm">
+              <span class="en-text">Save Changes 💾</span>
+              <span class="kh-text">រក្សាទុកការផ្លាស់ប្តូរ 💾</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Backup & Reset Card -->
+        <div class="glass-card settings-card dark-borders">
+          <h2 class="card-section-title">
+            <span class="en-text">Backup & Reset 💾</span>
+            <span class="kh-text">ចម្លងទុក និងកំណត់ឡើងវិញ 💾</span>
+          </h2>
+          <p class="settings-desc">
+            <span class="en-text">Save your achievements file to transfer progress to another tablet or laptop, or clear all data to start fresh.</span>
+            <span class="kh-text">រក្សាទុកឯកសារសមិទ្ធផលរបស់អ្នកដើម្បីផ្ទេរទៅកាន់ឧបករណ៍ផ្សេង ឬសម្អាតទិន្នន័យដើម្បីរៀនសារឡើងវិញ។</span>
+          </p>
+
+          <div class="settings-actions">
+            <button class="btn btn-secondary btn-sm" id="btn-export-profile">
+              <span>📤 Export Progress</span>
+            </button>
+            
+            <button class="btn btn-secondary btn-sm" id="btn-import-prompt-dash">
+              <span>📥 Import Progress</span>
+            </button>
+
+            <button class="btn btn-danger btn-sm" id="btn-delete-profile">
+              <span class="en-text">Clear Profile 🗑️</span>
+              <span class="kh-text">លុបគណនីចោល 🗑️</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Invisible file inputs for importing -->
+    <input type="file" id="import-file-selector" accept=".json" class="hidden" />
+
+  </div>
+</Layout>
+
+<script>
+  import { profileManager, BADGES } from '../scripts/profileManager';
+
+  // DOM elements cache
+  const createView = document.getElementById('profile-create-view');
+  const dashboardView = document.getElementById('profile-dashboard-view');
+  const createForm = document.getElementById('create-profile-form') as HTMLFormElement;
+  const editForm = document.getElementById('edit-profile-form') as HTMLFormElement;
+  const fileSelector = document.getElementById('import-file-selector') as HTMLInputElement;
+
+  // View state initial controller
+  function initProfilePage() {
+    const profile = profileManager.getProfile();
+
+    if (profile) {
+      createView?.classList.add('hidden');
+      dashboardView?.classList.remove('hidden');
+      renderDashboard(profile);
+      populateEditForm(profile);
+    } else {
+      dashboardView?.classList.add('hidden');
+      createView?.classList.remove('hidden');
+    }
+
+    // Toggle Cancel button visibility based on existing profiles
+    const cancelBtn = document.getElementById('btn-cancel-create');
+    if (cancelBtn) {
+      if (profileManager.hasProfile()) {
+        cancelBtn.classList.remove('hidden');
+        cancelBtn.addEventListener('click', () => {
+          location.reload();
+        });
+      } else {
+        cancelBtn.classList.add('hidden');
+      }
+    }
+  }
+
+  // Render stats and information in the dashboard
+  function renderDashboard(profile: any) {
+    const stars = profileManager.calculateStars(profile);
+    const unlockedBadges = profileManager.getUnlockedBadges(profile);
+
+    // Header updates
+    const avatarEl = document.getElementById('dash-avatar-display');
+    const nicknameEl = document.getElementById('dash-nickname-display');
+    const nicknameKhEl = document.getElementById('dash-nickname-display-kh');
+    const starsEl = document.getElementById('dash-stars-display');
+    const gradeBadge = document.getElementById('dash-grade-badge');
+    const rankEl = document.getElementById('rank-text');
+    const rankKhEl = document.getElementById('rank-text-kh');
+
+    if (avatarEl) avatarEl.innerText = profile.avatar;
+    if (nicknameEl) nicknameEl.innerText = profile.nickname;
+    if (nicknameKhEl) nicknameKhEl.innerText = profile.nickname;
+    if (starsEl) starsEl.innerText = stars.toString();
+    
+    if (gradeBadge) {
+      const gradeMapping: Record<string, string> = {
+        grade3: "Grade 3 / ថ្នាក់ទី ៣",
+        grade4: "Grade 4 / ថ្នាក់ទី ៤",
+        grade5: "Grade 5 / ថ្នាក់ទី ៥",
+        grade6: "Grade 6 / ថ្នាក់ទី ៦",
+      };
+      gradeBadge.innerText = gradeMapping[profile.grade] || profile.grade;
+    }
+
+    // Rank logic
+    let rankNameEn = "English Explorer";
+    let rankNameKh = "អ្នករុករកភាសាអង់គ្លេស";
+    if (stars >= 40) {
+      rankNameEn = "Grand Scholar 👑";
+      rankNameKh = "កំពូលអ្នកប្រាជ្ញ 👑";
+    } else if (stars >= 25) {
+      rankNameEn = "Language Master 🏆";
+      rankNameKh = "កំពូលអ្នកភាសា 🏆";
+    } else if (stars >= 12) {
+      rankNameEn = "Star Learner 🌟";
+      rankNameKh = "សិស្សឆ្នើមលំដាប់ផ្កាយ 🌟";
+    } else if (stars >= 5) {
+      rankNameEn = "Happy Adventurer 🎈";
+      rankNameKh = "អ្នកផ្សងព្រេងរីករាយ 🎈";
+    }
+    if (rankEl) rankEl.innerText = rankNameEn;
+    if (rankKhEl) rankKhEl.innerText = rankNameKh;
+
+    // --- Statistics ---
+    
+    // 1. Vocabulary
+    const totalVocabWords = 36;
+    const learnedCount = profile.learnedWords.length;
+    const vocabPct = Math.min(100, Math.round((learnedCount / totalVocabWords) * 100));
+    const vocabText = document.getElementById('stats-vocab-text');
+    const vocabBar = document.getElementById('stats-vocab-bar');
+    if (vocabText) vocabText.innerText = `${learnedCount} / ${totalVocabWords}`;
+    if (vocabBar) vocabBar.style.width = `${vocabPct}%`;
+
+    // 2. Quizzes
+    const totalQuizzesCount = 8;
+    const finishedQuizzes = Object.keys(profile.quizScores).length;
+    const quizPct = Math.min(100, Math.round((finishedQuizzes / totalQuizzesCount) * 100));
+    const quizText = document.getElementById('stats-quiz-text');
+    const quizBar = document.getElementById('stats-quiz-bar');
+    if (quizText) quizText.innerText = `${finishedQuizzes} / ${totalQuizzesCount}`;
+    if (quizBar) quizBar.style.width = `${quizPct}%`;
+
+    // Average Quiz Score
+    const quizScoresArray = Object.values(profile.quizScores) as number[];
+    const avgQuizScore = quizScoresArray.length > 0 
+      ? Math.round(quizScoresArray.reduce((a, b) => a + b, 0) / quizScoresArray.length) 
+      : 0;
+    const quizAvgEl = document.getElementById('stats-quiz-avg');
+    const quizAvgKhEl = document.getElementById('stats-quiz-avg-kh');
+    if (quizAvgEl) quizAvgEl.innerText = `${avgQuizScore}%`;
+    if (quizAvgKhEl) quizAvgKhEl.innerText = `${avgQuizScore}%`;
+
+    // 3. Listening Exercises
+    const totalListeningCount = 4;
+    const completedListeningCount = Object.keys(profile.listeningScores).length;
+    const listeningPct = Math.min(100, Math.round((completedListeningCount / totalListeningCount) * 100));
+    const listenText = document.getElementById('stats-listen-text');
+    const listenBar = document.getElementById('stats-listen-bar');
+    if (listenText) listenText.innerText = `${completedListeningCount} / ${totalListeningCount}`;
+    if (listenBar) listenBar.style.width = `${listeningPct}%`;
+
+    // Average Listening Score
+    const listenScoresArray = Object.values(profile.listeningScores) as number[];
+    const avgListenScore = listenScoresArray.length > 0 
+      ? Math.round(listenScoresArray.reduce((a, b) => a + b, 0) / listenScoresArray.length) 
+      : 0;
+    const listenAvgEl = document.getElementById('stats-listen-avg');
+    const listenAvgKhEl = document.getElementById('stats-listen-avg-kh');
+    if (listenAvgEl) listenAvgEl.innerText = `${avgListenScore}%`;
+    if (listenAvgKhEl) listenAvgKhEl.innerText = `${avgListenScore}%`;
+
+    // --- Badges ---
+    const badgesContainer = document.getElementById('badges-container');
+    if (badgesContainer) {
+      badgesContainer.innerHTML = '';
+      BADGES.forEach(badge => {
+        const isUnlocked = unlockedBadges.includes(badge.id);
+        const card = document.createElement('div');
+        card.className = `badge-card ${isUnlocked ? 'unlocked' : 'locked'}`;
+        card.innerHTML = `
+          <div class="badge-icon-bubble">${badge.icon}</div>
+          <h4 class="badge-name">
+            <span class="en-text">${badge.nameEn}</span>
+            <span class="kh-text">${badge.nameKh}</span>
+          </h4>
+          <p class="badge-description">
+            <span class="en-text">${badge.descEn}</span>
+            <span class="kh-text">${badge.descKh}</span>
+          </p>
+          <span class="lock-status-badge">${isUnlocked ? '✓ Unlocked' : '🔒 Locked'}</span>
+        `;
+        badgesContainer.appendChild(card);
+      });
+    }
+
+    // --- Quick Switcher Panel ---
+    const switcherContainer = document.getElementById('dash-switcher-bubbles');
+    if (switcherContainer) {
+      switcherContainer.innerHTML = '';
+      const allProfiles = profileManager.getProfilesList();
+      
+      allProfiles.forEach(p => {
+        const isActive = p.id === profile.id;
+        const bubble = document.createElement('button');
+        bubble.type = 'button';
+        bubble.className = `switcher-bubble-btn ${isActive ? 'active' : ''}`;
+        bubble.innerHTML = `
+          <span class="bubble-avatar">${p.avatar}</span>
+          <span class="bubble-name">${p.nickname}</span>
+        `;
+        if (!isActive) {
+          bubble.addEventListener('click', () => {
+            profileManager.setActiveProfile(p.id);
+            location.reload();
+          });
+        }
+        switcherContainer.appendChild(bubble);
+      });
+
+      // Add new profile option bubble
+      const addBubble = document.createElement('button');
+      addBubble.type = 'button';
+      addBubble.className = 'switcher-bubble-btn add-new';
+      addBubble.innerHTML = `
+        <span class="bubble-avatar">➕</span>
+        <span class="bubble-name">Add Profile</span>
+      `;
+      addBubble.addEventListener('click', () => {
+        createView?.classList.remove('hidden');
+        dashboardView?.classList.add('hidden');
+      });
+      switcherContainer.appendChild(addBubble);
+    }
+  }
+
+  // Populate form values for editing profile
+  function populateEditForm(profile: any) {
+    const editNickname = document.getElementById('edit-nickname') as HTMLInputElement;
+    const editGrade = document.getElementById('edit-grade') as HTMLSelectElement;
+    const editAvatarContainer = document.getElementById('edit-avatar-chips');
+
+    if (editNickname) editNickname.value = profile.nickname;
+    if (editGrade) editGrade.value = profile.grade;
+
+    if (editAvatarContainer) {
+      const avatars = ["🐼", "🦁", "🦊", "🐨", "🐰", "🐸"];
+      editAvatarContainer.innerHTML = '';
+      avatars.forEach(av => {
+        const isChecked = av === profile.avatar;
+        const chip = document.createElement('label');
+        chip.className = 'edit-avatar-chip';
+        chip.innerHTML = `
+          <input type="radio" name="edit-avatar" value="${av}" ${isChecked ? 'checked' : ''} />
+          <span class="edit-avatar-choice">${av}</span>
+        `;
+        editAvatarContainer.appendChild(chip);
+      });
+    }
+  }
+
+  // Handle Profile Creation submission
+  if (createForm) {
+    createForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nicknameInput = document.getElementById('reg-nickname') as HTMLInputElement;
+      const gradeInput = document.getElementById('reg-grade') as HTMLSelectElement;
+      const avatarInput = document.querySelector('input[name="avatar"]:checked') as HTMLInputElement;
+
+      if (nicknameInput && gradeInput && avatarInput) {
+        profileManager.createProfile(nicknameInput.value, avatarInput.value, gradeInput.value);
+        initProfilePage();
+      }
+    });
+  }
+
+  // Handle Profile Editing submission
+  if (editForm) {
+    editForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nicknameInput = document.getElementById('edit-nickname') as HTMLInputElement;
+      const gradeInput = document.getElementById('edit-grade') as HTMLSelectElement;
+      const avatarInput = document.querySelector('input[name="edit-avatar"]:checked') as HTMLInputElement;
+
+      const profile = profileManager.getProfile();
+      if (profile && nicknameInput && gradeInput && avatarInput) {
+        profile.nickname = nicknameInput.value.trim() || "Young Learner";
+        profile.grade = gradeInput.value;
+        profile.avatar = avatarInput.value;
+        profileManager.saveProfile(profile);
+        // Sync local storage preference
+        localStorage.setItem("preferredGrade", profile.grade);
+        alert("Profile updated successfully!");
+        location.reload();
+      }
+    });
+  }
+
+  // --- Backup Functions ---
+
+  // Export progress to file
+  const exportBtn = document.getElementById('btn-export-profile');
+  if (exportBtn) {
+    exportBtn.addEventListener('click', () => {
+      const profile = profileManager.getProfile();
+      if (!profile) return;
+
+      const dataStr = profileManager.exportProfileData();
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `kids-edu-progress-${profile.nickname.toLowerCase()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  }
+
+  // Bind file import triggers
+  const importRegBtn = document.getElementById('btn-import-prompt-reg');
+  const importDashBtn = document.getElementById('btn-import-prompt-dash');
+  
+  const triggerFileSelect = () => {
+    fileSelector?.click();
+  };
+
+  importRegBtn?.addEventListener('click', triggerFileSelect);
+  importDashBtn?.addEventListener('click', triggerFileSelect);
+
+  // File selected handler
+  fileSelector?.addEventListener('change', (e: any) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      const content = event.target.result;
+      const success = profileManager.importProfileData(content);
+      if (success) {
+        alert("🎉 Progress imported successfully!");
+        initProfilePage();
+        location.reload();
+      } else {
+        alert("❌ Failed to load progress. The file format is incorrect.");
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  // Delete profile handler
+  const deleteBtn = document.getElementById('btn-delete-profile');
+  if (deleteBtn) {
+    deleteBtn.addEventListener('click', () => {
+      const isEn = !document.documentElement.classList.contains('lang-khmer');
+      const msg = isEn 
+        ? "Are you sure you want to clear your profile? This will delete all your stars, badges, and learning progress permanently!"
+        : "តើអ្នកពិតជាចង់លុបគណនីរបស់អ្នកមែនទេ? ការធ្វើបែបនេះនឹងលុបផ្កាយ មេដាយ និងវឌ្ឍនភាពសិក្សាទាំងអស់ជាអចិន្ត្រៃយ៍!";
+      
+      if (confirm(msg)) {
+        profileManager.deleteProfile();
+        initProfilePage();
+        location.reload();
+      }
+    });
+  }
+
+  // Initial load run
+  initProfilePage();
+</script>
+
+<style>
+  .profile-page-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+  }
+
+  /* Shared structures */
+  .view-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .header-icon {
+    font-size: 3.5rem;
+    display: inline-block;
+    margin-bottom: 12px;
+    animation: pulse 2s infinite ease-in-out;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+  }
+
+  .page-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 600;
+  }
+
+  /* Playful Form items */
+  .playful-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-label {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #1a202c;
+  }
+
+  .playful-input {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 3px solid #000000;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 0 #000000;
+    transition: var(--transition-smooth);
+    background: #ffffff;
+  }
+
+  .playful-input:focus {
+    outline: none;
+    background: #fdfcfa;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #000000;
+  }
+
+  .playful-select {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 3px solid #000000;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 0 #000000;
+    background: #ffffff;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+  }
+
+  .playful-select:focus {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #000000;
+  }
+
+  .btn-large {
+    padding: 16px 32px;
+    font-size: 1.25rem;
+    margin-top: 10px;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  /* Avatar selection grid */
+  .avatar-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 14px;
+  }
+
+  .avatar-label {
+    cursor: pointer;
+  }
+
+  .avatar-label input[type="radio"] {
+    display: none;
+  }
+
+  .avatar-choice {
+    background: #ffffff;
+    border: 3px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 0 #e2e8f0;
+  }
+
+  .avatar-emoji {
+    font-size: 2.2rem;
+  }
+
+  .avatar-name {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--color-text-muted);
+  }
+
+  .avatar-label input[type="radio"]:checked + .avatar-choice {
+    background: #f3e8ff;
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 0 var(--color-primary);
+    transform: scale(1.05);
+  }
+
+  .avatar-label input[type="radio"]:checked + .avatar-choice .avatar-name {
+    color: var(--color-primary);
+  }
+
+  .avatar-label input[type="radio"]:checked + .avatar-choice .avatar-emoji {
+    animation: bounceEmoji 1s infinite alternate;
+  }
+
+  /* Setup import section */
+  .import-footer {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 2px dashed #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .import-prompt {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .btn-sm {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Dashboard Header style */
+  .dashboard-header-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 36px;
+    background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%);
+    border-color: rgba(167, 139, 250, 0.4);
+    box-shadow: 0 12px 30px rgba(167, 139, 250, 0.08);
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .header-profile-info {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .dashboard-avatar-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 4px solid #000000;
+    box-shadow: 0 6px 0 #000000;
+    font-size: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 4s infinite ease-in-out;
+  }
+
+  .profile-text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .welcome-heading {
+    font-size: 2.2rem;
+    color: #1a202c;
+    letter-spacing: -0.5px;
+  }
+
+  .badge-grade {
+    background: #f3e8ff;
+    color: var(--color-primary);
+    border: 2px solid rgba(159, 122, 234, 0.3);
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .profile-rank-text {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  .profile-rank-text strong {
+    color: var(--color-primary);
+  }
+
+  /* Big stars counter */
+  .star-badge-main {
+    background: #ffffff;
+    border: 3px solid #000000;
+    box-shadow: 0 6px 0 #000000;
+    border-radius: var(--radius-lg);
+    padding: 16px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+  }
+
+  .star-icon-glowing {
+    font-size: 2.4rem;
+    animation: rotateStar 4s infinite linear;
+  }
+
+  .star-count-num {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 950;
+    color: #1a202c;
+    line-height: 1;
+    margin-top: 4px;
+  }
+
+  .star-count-label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Dashboard Grid layouts */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .card-section-title {
+    font-size: 1.6rem;
+    margin-bottom: 16px;
+    color: #1a202c;
+    border-bottom: 3px solid #f1f5f9;
+    padding-bottom: 10px;
+  }
+
+  .card-section-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  /* Stats Rows */
+  .stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .progress-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .progress-row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .prog-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.05rem;
+    color: #1a202c;
+  }
+
+  .prog-value {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--color-text-muted);
+  }
+
+  .progress-bar-container {
+    width: 100%;
+    height: 12px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    border: 2px solid #e2e8f0;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.8s ease-out;
+  }
+
+  .progress-bar-fill.vocab {
+    background: linear-gradient(90deg, #c084fc, #9f7aea); /* Purples */
+  }
+
+  .progress-bar-fill.quiz {
+    background: linear-gradient(90deg, #fde047, #facc15); /* Yellows */
+  }
+
+  .progress-bar-fill.listening {
+    background: linear-gradient(90deg, #38bdf8, #0ea5e9); /* Blues */
+  }
+
+  .average-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+  }
+
+  .average-text strong {
+    color: #1a202c;
+  }
+
+  /* Badges layout */
+  .badges-deck {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 16px;
+  }
+
+  .badge-card {
+    background: #ffffff;
+    border: 3px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    padding: 16px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 0 #e2e8f0;
+    transition: var(--transition-smooth);
+  }
+
+  .badge-icon-bubble {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    margin-bottom: 10px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+    transition: var(--transition-smooth);
+  }
+
+  .badge-name {
+    font-size: 0.85rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 4px;
+    color: #1a202c;
+  }
+
+  .badge-description {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    line-height: 1.3;
+    flex-grow: 1;
+    margin-bottom: 8px;
+  }
+
+  .lock-status-badge {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  /* Unlocked Badge glow styles */
+  .badge-card.unlocked {
+    border-color: #cbd5e1;
+    background: linear-gradient(135deg, #ffffff 0%, #fefcf0 100%);
+    box-shadow: var(--shadow-playful);
+    transform: scale(1.02);
+  }
+
+  .badge-card.unlocked .badge-icon-bubble {
+    background: #fef08a;
+    border-color: #facc15;
+    box-shadow: 0 0 10px rgba(250, 204, 21, 0.4);
+    animation: pulseGlow 2.5s infinite alternate;
+  }
+
+  .badge-card.unlocked .lock-status-badge {
+    background: #d1fae5;
+    color: #065f46;
+  }
+
+  .badge-card.locked {
+    opacity: 0.65;
+  }
+
+  .badge-card.locked .badge-icon-bubble {
+    filter: grayscale(1);
+  }
+
+  /* Settings section styling */
+  .settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 8px;
+  }
+
+  .settings-card {
+    padding: 28px;
+  }
+
+  .playful-form.select-inline {
+    gap: 16px;
+  }
+
+  .form-group.inline {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .playful-input.sm, .playful-select.sm {
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    max-width: 250px;
+  }
+
+  .avatar-edit-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .edit-avatar-chip {
+    cursor: pointer;
+  }
+
+  .edit-avatar-chip input[type="radio"] {
+    display: none;
+  }
+
+  .edit-avatar-choice {
+    font-size: 1.6rem;
+    padding: 6px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-sm);
+    display: block;
+    background: #ffffff;
+    box-shadow: 0 2px 0 #e2e8f0;
+    transition: var(--transition-smooth);
+  }
+
+  .edit-avatar-chip input[type="radio"]:checked + .edit-avatar-choice {
+    background: #f3e8ff;
+    border-color: var(--color-primary);
+    box-shadow: 0 3px 0 var(--color-primary);
+    transform: scale(1.08);
+  }
+
+  .settings-desc {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .settings-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn-danger {
+    background: var(--color-accent);
+    color: #ffffff;
+    border: 2.5px solid #000000;
+    box-shadow: 0 3px 0 #000000;
+  }
+
+  .btn-danger:hover {
+    background: #e11d48;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 #000000;
+    color: #ffffff;
+  }
+
+  .btn-danger:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #000000;
+  }
+
+  .dark-borders {
+    border-color: #cbd5e1;
+  }
+
+  /* Animations */
+  @keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes pulseGlow {
+    0% { box-shadow: 0 0 5px rgba(250, 204, 21, 0.3); }
+    100% { box-shadow: 0 0 15px rgba(250, 204, 21, 0.7); }
+  }
+
+  @keyframes bounceEmoji {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-4px); }
+  }
+
+  @keyframes rotateStar {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.15); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-header-card {
+      padding: 24px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .header-profile-info {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .profile-text-group {
+      align-items: center;
+    }
+
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .settings-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .form-group.inline {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .playful-input.sm, .playful-select.sm {
+      max-width: 100%;
+    }
+  }
+
+  /* Quick switcher bubbles layout styles */
+  .profile-quick-switcher {
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    border-color: rgba(167, 139, 250, 0.2);
+    background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
+  }
+
+  .switcher-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .switcher-bubbles-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .switcher-bubble-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #ffffff;
+    border: 3px solid #e2e8f0;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: 800;
+    color: var(--color-text-muted);
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 0 #e2e8f0;
+  }
+
+  .switcher-bubble-btn:hover {
+    transform: translateY(-2px);
+    border-color: #000000;
+    box-shadow: 0 6px 0 #000000;
+    color: #1a202c;
+  }
+
+  .switcher-bubble-btn.active {
+    background: #f3e8ff;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    box-shadow: 0 4px 0 var(--color-primary);
+    transform: scale(1.03);
+  }
+
+  .switcher-bubble-btn.add-new {
+    border-style: dashed;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    box-shadow: 0 4px 0 rgba(167, 139, 250, 0.2);
+  }
+
+  .switcher-bubble-btn.add-new:hover {
+    border-style: solid;
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+    box-shadow: 0 6px 0 var(--color-secondary);
+  }
+
+  .bubble-avatar {
+    font-size: 1.3rem;
+  }
+
+  .bubble-name {
+    font-size: 0.95rem;
+  }
+
+  .registration-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 500px) {
+    .registration-actions .btn {
+      width: 100%;
+    }
+  }
+</style>
