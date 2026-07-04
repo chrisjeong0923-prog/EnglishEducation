@@ -322,6 +322,33 @@ import Layout from '../layouts/Layout.astro';
 
     </div>
 
+    <!-- Custom Deletion Confirmation Modal -->
+    <div id="delete-confirm-modal" class="modal-overlay hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <span class="modal-balloon">⚠️</span>
+          <h2 class="modal-title">
+            <span class="en-text">Are you sure?</span>
+            <span class="kh-text">តើអ្នកពិតជាចង់លុប?</span>
+          </h2>
+          <p class="modal-subtitle">
+            <span class="en-text">This will delete all your stars, badges, and learning progress permanently!</span>
+            <span class="kh-text">ការធ្វើបែបនេះនឹងលុបផ្កាយ មេដាយ និងវឌ្ឍនភាពសិក្សាទាំងអស់ជាអចិន្ត្រៃយ៍!</span>
+          </p>
+        </div>
+        <div class="modal-actions">
+          <button id="btn-delete-confirm-yes" class="btn btn-danger">
+            <span class="en-text">Yes, Delete 🗑️</span>
+            <span class="kh-text">បាទ/ចាស, លុបចោល 🗑️</span>
+          </button>
+          <button id="btn-delete-confirm-no" class="btn btn-secondary">
+            <span class="en-text">Cancel ↩️</span>
+            <span class="kh-text">បោះបង់ ↩️</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Invisible file inputs for importing -->
     <input type="file" id="import-file-selector" accept=".json" class="hidden" />
 
@@ -640,20 +667,38 @@ import Layout from '../layouts/Layout.astro';
     reader.readAsText(file);
   });
 
-  // Delete profile handler
+  // Delete profile handler using custom modal
   const deleteBtn = document.getElementById('btn-delete-profile');
-  if (deleteBtn) {
+  const deleteConfirmModal = document.getElementById('delete-confirm-modal');
+  const btnDeleteConfirmYes = document.getElementById('btn-delete-confirm-yes');
+  const btnDeleteConfirmNo = document.getElementById('btn-delete-confirm-no');
+
+  if (deleteBtn && deleteConfirmModal) {
     deleteBtn.addEventListener('click', () => {
-      const isEn = !document.documentElement.classList.contains('lang-khmer');
-      const msg = isEn 
-        ? "Are you sure you want to clear your profile? This will delete all your stars, badges, and learning progress permanently!"
-        : "តើអ្នកពិតជាចង់លុបគណនីរបស់អ្នកមែនទេ? ការធ្វើបែបនេះនឹងលុបផ្កាយ មេដាយ និងវឌ្ឍនភាពសិក្សាទាំងអស់ជាអចិន្ត្រៃយ៍!";
-      
-      if (confirm(msg)) {
-        profileManager.deleteProfile();
-        initProfilePage();
-        location.reload();
+      deleteConfirmModal.classList.remove('hidden');
+    });
+  }
+
+  if (btnDeleteConfirmNo && deleteConfirmModal) {
+    btnDeleteConfirmNo.addEventListener('click', () => {
+      deleteConfirmModal.classList.add('hidden');
+    });
+  }
+
+  if (deleteConfirmModal) {
+    deleteConfirmModal.addEventListener('click', (e) => {
+      if (e.target === deleteConfirmModal) {
+        deleteConfirmModal.classList.add('hidden');
       }
+    });
+  }
+
+  if (btnDeleteConfirmYes && deleteConfirmModal) {
+    btnDeleteConfirmYes.addEventListener('click', () => {
+      profileManager.deleteProfile();
+      deleteConfirmModal.classList.add('hidden');
+      initProfilePage();
+      location.reload();
     });
   }
 
@@ -1376,6 +1421,85 @@ import Layout from '../layouts/Layout.astro';
   @media (max-width: 500px) {
     .registration-actions .btn {
       width: 100%;
+    }
+  }
+
+  /* Custom Confirmation Modal Styling */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(26, 32, 44, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+    animation: fadeInOverlay 0.3s ease-out;
+  }
+
+  .modal-card {
+    max-width: 480px;
+    width: 100%;
+    background: #ffffff;
+    border: 3px solid #000000;
+    box-shadow: 0 12px 0 #000000;
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    animation: zoomBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .modal-balloon {
+    font-size: 2.8rem;
+    display: inline-block;
+    animation: pulse 2s infinite ease-in-out;
+  }
+
+  .modal-title {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+    font-family: var(--font-display);
+    font-weight: 900;
+  }
+
+  .modal-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .modal-actions .btn {
+    flex: 1;
+  }
+
+  @keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes zoomBounce {
+    from {
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
     }
   }
 </style>
