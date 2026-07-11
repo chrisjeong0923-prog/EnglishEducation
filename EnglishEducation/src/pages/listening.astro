@@ -54,8 +54,8 @@ const exercisesJson = JSON.stringify(listeningExercises);
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="audio-icon">
             <polygon points="5 3 19 12 5 21 5 3"></polygon>
           </svg>
-          <span class="en-text">Play Slow Speed (0.6x)</span>
-          <span class="kh-text">ល្បឿនយឺត (០.៦ដង)</span>
+          <span class="en-text">Play Slow Speed (0.4x)</span>
+          <span class="kh-text">ល្បឿនយឺត (០.៤ដង)</span>
         </button>
       </div>
 
@@ -215,10 +215,10 @@ const exercisesJson = JSON.stringify(listeningExercises);
 
     init() {
       if (this.playNormalBtn) {
-        this.playNormalBtn.addEventListener('click', () => this.speakText(0.85, this.playNormalBtn));
+        this.playNormalBtn.addEventListener('click', () => this.speakText(0.60, this.playNormalBtn));
       }
       if (this.playSlowBtn) {
-        this.playSlowBtn.addEventListener('click', () => this.speakText(0.55, this.playSlowBtn));
+        this.playSlowBtn.addEventListener('click', () => this.speakText(0.40, this.playSlowBtn));
       }
 
       if (this.checkBtn) {
