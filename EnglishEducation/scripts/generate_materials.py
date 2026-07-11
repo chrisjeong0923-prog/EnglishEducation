@@ -316,6 +316,7 @@ You MUST conform to the JSON schema specified in responseSchema. Return only val
             new_quizzes.append({
                 "grade": grade,
                 "type": q['type'],
+                "pdfUrl": f"/lessons/pdf/grade{grade}/{slug}.pdf",
                 "questionText": q['questionText'],
                 "questionTextKh": q['questionTextKh'],
                 "options": q['options'],

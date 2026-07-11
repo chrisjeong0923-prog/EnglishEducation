@@ -12,7 +12,8 @@
     ],
     "correctAnswer": 1,
     "explanation": "The lesson on page 3 shows a shark in the water, specifically a 'blue shark'.",
-    "explanationKh": "មេរៀននៅលើទំព័រទី 3 បង្ហាញត្រីឆ្លាមនៅក្នុងទឹក ជាពិសេស 'ត្រីឆ្លាមពណ៌ខៀវ'។"
+    "explanationKh": "មេរៀននៅលើទំព័រទី 3 បង្ហាញត្រីឆ្លាមនៅក្នុងទឹក ជាពិសេស 'ត្រីឆ្លាមពណ៌ខៀវ'។",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
   },
   {
     "grade": 4,
@@ -27,7 +28,8 @@
     ],
     "correctAnswer": 2,
     "explanation": "On page 3, the sentence is 'I see a yellow fish.'",
-    "explanationKh": "នៅលើទំព័រទី 3 ប្រយោគបានសរសេរថា 'ខ្ញុំឃើញត្រីពណ៌លឿងមួយ។'"
+    "explanationKh": "នៅលើទំព័រទី 3 ប្រយោគបានសរសេរថា 'ខ្ញុំឃើញត្រីពណ៌លឿងមួយ។'",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
   },
   {
     "grade": 4,
@@ -42,7 +44,8 @@
     ],
     "correctAnswer": 2,
     "explanation": "We do not use 'a' before a plural noun like 'sharks' when it is preceded by a number. The correct form is 'two big sharks'.",
-    "explanationKh": "យើងមិនប្រើ 'a' មុននាមពហុវចនៈដូចជា 'sharks' ទេនៅពេលដែលមានលេខនៅពីមុខ។ ទម្រង់ត្រឹមត្រូវគឺ 'two big sharks'។"
+    "explanationKh": "យើងមិនប្រើ 'a' មុននាមពហុវចនៈដូចជា 'sharks' ទេនៅពេលដែលមានលេខនៅពីមុខ។ ទម្រង់ត្រឹមត្រូវគឺ 'two big sharks'។",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
   },
   {
     "grade": 4,
@@ -57,7 +60,8 @@
     ],
     "correctAnswer": 2,
     "explanation": "The picture shows a fish that is yellow.",
-    "explanationKh": "រូបភាពបង្ហាញត្រីដែលមានពណ៌លឿង។"
+    "explanationKh": "រូបភាពបង្ហាញត្រីដែលមានពណ៌លឿង។",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
   },
   {
     "grade": 4,
@@ -72,7 +76,8 @@
     ],
     "correctAnswer": 1,
     "explanation": "When you see more than one thing, you don't use 'a' or 'an'.",
-    "explanationKh": "នៅពេលអ្នកឃើញវត្ថុច្រើនជាងមួយ អ្នកមិនប្រើ 'a' ឬ 'an' ទេ។"
+    "explanationKh": "នៅពេលអ្នកឃើញវត្ថុច្រើនជាងមួយ អ្នកមិនប្រើ 'a' ឬ 'an' ទេ។",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
   },
   {
     "grade": 4,
@@ -87,7 +92,8 @@
     ],
     "correctAnswer": 2,
     "explanation": "The sky is usually blue on a sunny day.",
-    "explanationKh": "មេឃជាធម្មតាមានពណ៌ខៀវនៅថ្ងៃដែលមានពន្លឺព្រះអាទិត្យ។"
+    "explanationKh": "មេឃជាធម្មតាមានពណ៌ខៀវនៅថ្ងៃដែលមានពន្លឺព្រះអាទិត្យ។",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
   },
   {
     "grade": 4,
@@ -102,7 +108,8 @@
     ],
     "correctAnswer": 1,
     "explanation": "The common order for adjectives is size, opinion, then color before the noun. (big, scary, blue).",
-    "explanationKh": "លំដាប់ទូទៅនៃគុណនាមគឺ ទំហំ មតិ បន្ទាប់មកពណ៌មុននាម។ (ធំ, គួរឱ្យខ្លាច, ខៀវ)។"
+    "explanationKh": "លំដាប់ទូទៅនៃគុណនាមគឺ ទំហំ មតិ បន្ទាប់មកពណ៌មុននាម។ (ធំ, គួរឱ្យខ្លាច, ខៀវ)។",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
   },
   {
     "grade": 4,
@@ -117,6 +124,7 @@
     ],
     "correctAnswer": 2,
     "explanation": "'Big' means large, which is the opposite of 'small'.",
-    "explanationKh": "'Big' មានន័យថាធំ ដែលផ្ទុយពី 'small'។"
+    "explanationKh": "'Big' មានន័យថាធំ ដែលផ្ទុយពី 'small'។",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
   }
 ]

@@ -94,10 +94,44 @@ const questionsJson = JSON.stringify(questions);
       </button>
     </div>
   </div>
+
+  <!-- PDF Viewer Dialog -->
+  <dialog class="pdf-dialog" closedby="any">
+    <div class="dialog-header">
+      <h3 class="dialog-title">
+        <span class="en-text">📖 Lesson PDF Reference</span>
+        <span class="kh-text">📖 ឯកសារយោងមេរៀន PDF</span>
+      </h3>
+      <button type="button" class="btn-close-dialog">✖️</button>
+    </div>
+    <div class="dialog-body">
+      <iframe class="pdf-viewer-frame" src="" width="100%" height="100%"></iframe>
+    </div>
+  </dialog>
 </div>
 
 <script>
   import { profileManager } from '../scripts/profileManager';
+
+  function formatQuestionText(text: string, pdfUrl: string | undefined, isKhmer: boolean): string {
+    if (!pdfUrl) return text;
+    
+    const regex = isKhmer 
+      ? /(ទំព័រទី\s*(\d+|[០-៩]+))/g
+      : /([Pp]age\s+(\d+))/g;
+      
+    return text.replace(regex, (match, fullMatch, pageNum) => {
+      let page = pageNum;
+      if (isKhmer) {
+        const khmerNumerals: Record<string, string> = {
+          '០': '0', '១': '1', '២': '2', '៣': '3', '៤': '4',
+          '៥': '5', '៦': '6', '៧': '7', '៨': '8', '៩': '9'
+        };
+        page = pageNum.split('').map((char: string) => khmerNumerals[char] || char).join('');
+      }
+      return `<button type="button" class="pdf-ref-link" data-pdf="${pdfUrl}" data-page="${page}">${match} 📄</button>`;
+    });
+  }
 
   class GrammarQuiz {
     container: HTMLElement;
@@ -162,6 +196,39 @@ const questionsJson = JSON.stringify(questions);
       if (this.restartBtnEl) {
         this.restartBtnEl.addEventListener('click', () => this.restartQuiz());
       }
+
+      // Setup PDF Dialog close handlers
+      const dialog = this.container.querySelector('.pdf-dialog') as HTMLDialogElement | null;
+      const closeBtn = this.container.querySelector('.btn-close-dialog') as HTMLButtonElement | null;
+      const iframe = this.container.querySelector('.pdf-viewer-frame') as HTMLIFrameElement | null;
+      
+      if (dialog && closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          dialog.close();
+          if (iframe) iframe.src = '';
+        });
+        
+        dialog.addEventListener('close', () => {
+          if (iframe) iframe.src = '';
+        });
+        
+        // Fallback for light dismiss (backdrop click)
+        if (!('closedBy' in HTMLDialogElement.prototype)) {
+          dialog.addEventListener('click', (event) => {
+            if (event.target !== dialog) return;
+            const rect = dialog.getBoundingClientRect();
+            const isDialogContent = (
+              rect.top <= event.clientY &&
+              event.clientY <= rect.top + rect.height &&
+              rect.left <= event.clientX &&
+              event.clientX <= rect.left + rect.width
+            );
+            if (isDialogContent) return;
+            dialog.close();
+          });
+        }
+      }
+
       this.renderQuestion();
     }
 
@@ -208,10 +275,24 @@ const questionsJson = JSON.stringify(questions);
 
       const question = this.questions[this.currentQuestionIndex];
       if (this.questionTextEl) {
+        const enText = formatQuestionText(question.questionText, question.pdfUrl, false);
+        const khText = formatQuestionText(question.questionTextKh, question.pdfUrl, true);
         this.questionTextEl.innerHTML = `
-          <span class="question-en">${question.questionText}</span>
-          <span class="question-kh kh-text-block">${question.questionTextKh}</span>
+          <span class="question-en">${enText}</span>
+          <span class="question-kh kh-text-block">${khText}</span>
         `;
+
+        // Setup click listeners for the newly added buttons
+        this.questionTextEl.querySelectorAll('.pdf-ref-link').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const pdf = btn.getAttribute('data-pdf');
+            const page = btn.getAttribute('data-page');
+            if (pdf) {
+              this.openPdfViewer(pdf, page);
+            }
+          });
+        });
       }
 
       // Render Options
@@ -384,6 +465,17 @@ const questionsJson = JSON.stringify(questions);
       if (this.resultScreenEl) this.resultScreenEl.classList.add('hidden');
       if (this.questionScreenEl) this.questionScreenEl.classList.remove('hidden');
       this.renderQuestion();
+    }
+
+    openPdfViewer(pdfUrl: string, pageNum: string | null) {
+      const dialog = this.container.querySelector('.pdf-dialog') as HTMLDialogElement | null;
+      const iframe = this.container.querySelector('.pdf-viewer-frame') as HTMLIFrameElement | null;
+      if (!dialog || !iframe) return;
+      
+      const fullUrl = pageNum ? `${pdfUrl}#page=${pageNum}` : pdfUrl;
+      iframe.src = fullUrl;
+      
+      dialog.showModal();
     }
   }
 
@@ -720,5 +812,92 @@ const questionsJson = JSON.stringify(questions);
 
   .animate-bounce {
     animation: bounce 1s infinite;
+  }
+
+  /* PDF Viewer Dialog styles */
+  dialog.pdf-dialog {
+    width: 90%;
+    max-width: 800px;
+    height: 80%;
+    border: 3px solid #cbd5e1;
+    border-radius: var(--radius-lg);
+    background: white;
+    padding: 0;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+  dialog.pdf-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+  
+  .dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background: #f8fafc;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  
+  .dialog-title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #1e293b;
+  }
+  
+  .btn-close-dialog {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background-color 0.2s;
+  }
+  
+  .btn-close-dialog:hover {
+    transform: scale(1.1);
+    background-color: #e2e8f0;
+  }
+  
+  .dialog-body {
+    width: 100%;
+    height: calc(100% - 60px);
+    background: #f1f5f9;
+  }
+  
+  .dialog-body iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* PDF Reference button styling */
+  .pdf-ref-link {
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    font-family: inherit;
+    vertical-align: middle;
+  }
+  
+  .pdf-ref-link:hover {
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-color: #93c5fd;
   }
 </style>
