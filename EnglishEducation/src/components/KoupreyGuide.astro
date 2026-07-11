@@ -207,8 +207,8 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
           const stars = profileManager.calculateStars(profile);
           if (stars > 0) {
             currentTip = {
-              en: `Wow! You have collected ${stars} stars! I'm so proud of you!`,
-              kh: ''
+              en: '',
+              kh: `អស្ចារ្យណាស់ អ្នកប្រមូលបានផ្កាយ ${stars} ហើយ! ខ្ញុំពិតជាមានមោទនភាពចំពោះអ្នកណាស់! 🏆`
             };
           }
         }
@@ -217,9 +217,16 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         
-        const utterance = new SpeechSynthesisUtterance(currentTip.en);
-        utterance.lang = 'en-US';
-        utterance.rate = 0.75; // Slower, friendlier kids reading speed
+        const utterance = new SpeechSynthesisUtterance(currentTip.kh);
+        utterance.lang = 'km-KH';
+        utterance.rate = 0.85;
+
+        // Try to locate a native Khmer voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const khmerVoice = voices.find(v => v.lang.startsWith('km') || v.lang.startsWith('kh'));
+        if (khmerVoice) {
+          utterance.voice = khmerVoice;
+        }
 
         this.speakBtn.classList.add('playing');
         utterance.onstart = () => {
@@ -262,13 +269,20 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
         this.textKh.innerText = "កុំបារម្ភអី! ពិនិត្យមេរៀនឡើងវិញហើយសាកល្បងម្តងទៀត! 💪";
       }
 
-      // Read result out loud!
+      // Read result out loud in Khmer!
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        const text = this.textEn.innerText;
+        const text = this.textKh.innerText;
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US';
-        utterance.rate = 0.8;
+        utterance.lang = 'km-KH';
+        utterance.rate = 0.85;
+
+        const voices = window.speechSynthesis.getVoices();
+        const khmerVoice = voices.find(v => v.lang.startsWith('km') || v.lang.startsWith('kh'));
+        if (khmerVoice) {
+          utterance.voice = khmerVoice;
+        }
+
         window.speechSynthesis.speak(utterance);
       }
 
