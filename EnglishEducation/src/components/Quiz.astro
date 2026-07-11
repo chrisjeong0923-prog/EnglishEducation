@@ -479,6 +479,7 @@ const questionsJson = JSON.stringify(questions);
       const absoluteUrl = new URL(fullPdfUrl, window.location.origin).href;
       
       const fullUrl = pageNum ? `${absoluteUrl}#page=${pageNum}` : absoluteUrl;
+      console.log("[PDF Viewer Debug] Loading URL:", fullUrl);
       iframe.src = fullUrl;
       
       dialog.showModal();
