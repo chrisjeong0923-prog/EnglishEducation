@@ -9,9 +9,12 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
   <!-- Speech Bubble Overlay -->
   <div class="kiri-speech-bubble hidden" id="kiri-bubble">
     <button class="kiri-bubble-close" id="kiri-bubble-close-btn" aria-label="Close speech bubble">&times;</button>
-    <div class="kiri-bubble-content">
-      <p class="en-text" id="kiri-text-en">Hi! I'm Kiri. Ready to learn English today?</p>
-      <p class="kh-text" id="kiri-text-kh">សួស្តី! ខ្ញុំឈ្មោះគិរី។ តើអ្នកត្រៀមខ្លួនរៀនភាសាអង់គ្លេសនៅថ្ងៃនេះទេ?</p>
+    <div class="kiri-bubble-content-wrapper">
+      <div class="kiri-bubble-content">
+        <p class="en-text" id="kiri-text-en">Hi! I'm Kiri. Ready to learn English today?</p>
+        <p class="kh-text" id="kiri-text-kh">សួស្តី! ខ្ញុំឈ្មោះគិរី។ តើអ្នកត្រៀមខ្លួនរៀនភាសាអង់គ្លេសនៅថ្ងៃនេះទេ?</p>
+      </div>
+      <button class="kiri-speech-btn" id="kiri-speak-btn" title="Listen to Kiri" aria-label="Listen to Kiri">🔊</button>
     </div>
   </div>
 
@@ -24,7 +27,7 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
   </div>
 </div>
 
-<!-- Kiri toggle widget (mini button in bottom-corner when hidden) -->
+<!-- Kiri restore widget (mini button in bottom-corner when hidden) -->
 <button class="kiri-restore-widget hidden" id="kiri-restore-btn" title="Show Kiri Mascot" aria-label="Show Kiri">
   🐮 Guide
 </button>
@@ -46,34 +49,41 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
     mascotCloseBtn: HTMLElement;
     restoreBtn: HTMLElement;
     avatar: HTMLElement;
+    speakBtn: HTMLElement;
     basePath: string;
 
-    // Bilingual Contextual Tips Map
-    tipsMap: Record<string, Tip> = {
-      'root': {
-        en: "Hi! I'm Kiri the Kouprey. Choose your school grade to start learning! 🎒",
-        kh: "សួស្តី! ខ្ញុំឈ្មោះគិរី។ ជ្រើសរើសថ្នាក់រៀនរបស់អ្នកដើម្បីចាប់ផ្តើមរៀន! 🎒"
-      },
-      'lessons': {
-        en: "Let's read a story together! Click on a lesson to open the PDF. 📖",
-        kh: "តោះទៅអានរឿងទាំងអស់គ្នា! ចុចលើមេរៀនដើម្បីបើកឯកសារ PDF។ 📖"
-      },
-      'vocabulary': {
-        en: "Tap the word cards to see illustrations and hear pronunciations! 🔊",
-        kh: "ចុចលើកាតពាក្យដើម្បីមើលរូបភាព និងស្តាប់របៀបបញ្ចេញសំឡេង! 🔊"
-      },
-      'quiz': {
-        en: "Good luck! You can check the PDF references if you get stuck. ✏️",
-        kh: "ជូនពរលទ្ធផលល្អ! អ្នកអាចមើលឯកសារ PDF យោងបានប្រសិនបើពិបាក។ ✏️"
-      },
-      'listening': {
-        en: "Try listening at Slow Speed if you need help spelling! 🎧",
-        kh: "ព្យាយាមស្តាប់សំឡេងយឺតៗ ប្រសិនបើអ្នកត្រូវការជំនួយក្នុងការសរសេរ! 🎧"
-      },
-      'profile': {
-        en: "Earn stars by playing quizzes and dictation games! ⭐",
-        kh: "ទទួលបានផ្កាយដោយការឆ្លើយកម្រងសំណួរ និងល្បែងសរសេរតាមអាន! ⭐"
-      }
+    // Active tip state
+    activeTipKey: string;
+    currentTipIndex: number;
+
+    // Rotating Bilingual Tips Database
+    tipsMap: Record<string, Tip[]> = {
+      'root': [
+        { en: "Hi! I'm Kiri the Kouprey. Choose your school grade to start learning! 🎒", kh: "សួស្តី! ខ្ញុំឈ្មោះគិរី។ ជ្រើសរើសថ្នាក់រៀនរបស់អ្នកដើម្បីចាប់ផ្តើមរៀន! 🎒" },
+        { en: "Ready to earn some stars today? Let's play vocabulary and quiz games! ⭐", kh: "តើអ្នកត្រៀមខ្លួនរួចរាល់ដើម្បីទទួលបានផ្កាយនៅថ្ងៃនេះទេ? តោះទៅលេងល្បែងទាំងអស់គ្នា! ⭐" },
+        { en: "You can click on me anytime to cycle through fresh tips! 🗣️", kh: "អ្នកអាចចុចលើរូបខ្ញុំពេលណាក៏បាន ដើម្បីស្តាប់ដំបូន្មានថ្មីៗ! 🗣️" }
+      ],
+      'lessons': [
+        { en: "Let's read a story together! Click on a lesson card to open the PDF. 📖", kh: "តោះទៅអានរឿងទាំងអស់គ្នា! ចុចលើកាតមេរៀនដើម្បីបើកឯកសារ PDF។ 📖" },
+        { en: "Reading stories out loud helps you build reading speed and accent! 🗣️", kh: "ការអានរឿងខ្លាំងៗជួយអ្នកបង្កើនល្បឿនអាន និងការបញ្ចេញសំឡេង! 🗣️" }
+      ],
+      'vocabulary': [
+        { en: "Tap the word cards to see pictures and hear pronunciations! 🔊", kh: "ចុចលើកាតពាក្យដើម្បីមើលរូបភាព និងស្តាប់របៀបបញ្ចេញសំឡេង! 🔊" },
+        { en: "Try to say the example sentences out loud. Practicing builds confidence! 🌟", kh: "ព្យាយាមអានប្រយោគគំរូឱ្យខ្លាំងៗ។ ការអនុវត្តជួយបង្កើតភាពជឿជាក់! 🌟" },
+        { en: "Can you make a fun English sentence using the word 'shark'? 🦈", kh: "តើអ្នកអាចបង្កើតប្រយោគភាសាអង់គ្លេសដ៏ល្អមួយដោយប្រើពាក្យ 'shark' បានទេ? 🦈" }
+      ],
+      'quiz': [
+        { en: "Take a quiz to test your memory and earn achievement badges! ✏️", kh: "ឆ្លើយសំណួរដើម្បីសាកល្បងការចងចាំរបស់អ្នក និងទទួលបានមេដាយសមិទ្ធផល! ✏️" },
+        { en: "Stuck? Tap the page reference link to open the PDF page helper popup! 📄", kh: "ពិបាកមែនទេ? ចុចលើតំណភ្ជាប់យោងទំព័រ ដើម្បីបើកជំនួយការទំព័រ PDF! 📄" }
+      ],
+      'listening': [
+        { en: "Listen to the sentence read aloud, and write it in the box! 🎧", kh: "ស្តាប់ប្រយោគដែលអានខ្លាំងៗ រួចសរសេរវានៅក្នុងប្រអប់! 🎧" },
+        { en: "You can play the audio at Slow Speed if you need help spelling! 🐌", kh: "អ្នកអាចចាក់សំឡេងក្នុងល្បឿនយឺត ប្រសិនបើអ្នកត្រូវការជំនួយក្នុងការសរសេរ! 🐌" }
+      ],
+      'profile': [
+        { en: "Check your learning progress, stars count, and unlocked badges! 🏆", kh: "ពិនិត្យមើលវឌ្ឍនភាពសិក្សា ចំនួនផ្កាយ និងមេដាយដែលអ្នកបានដោះសោ! 🏆" },
+        { en: "You can change your profile color or reset stats in the settings! 🎨", kh: "អ្នកអាចប្តូរពណ៌គណនីរបស់អ្នក ឬកំណត់វឌ្ឍនភាពឡើងវិញនៅក្នុងការកំណត់! 🎨" }
+      ]
     };
 
     constructor() {
@@ -85,8 +95,11 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
       this.mascotCloseBtn = document.getElementById('kiri-mascot-close-btn')!;
       this.restoreBtn = document.getElementById('kiri-restore-btn')!;
       this.avatar = document.getElementById('kiri-avatar')!;
+      this.speakBtn = document.getElementById('kiri-speak-btn')!;
+
+      this.activeTipKey = 'root';
+      this.currentTipIndex = 0;
       
-      // Resolve base path from meta tag or window location
       this.basePath = (window as any).Astro?.base || '/EnglishEducation/';
       if (!this.basePath.endsWith('/')) this.basePath += '/';
 
@@ -94,13 +107,22 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
     }
 
     init() {
+      // Resolve the active page category
+      const pathname = window.location.pathname;
+      if (pathname.includes('/lessons')) this.activeTipKey = 'lessons';
+      else if (pathname.includes('/vocabulary')) this.activeTipKey = 'vocabulary';
+      else if (pathname.includes('/quiz')) this.activeTipKey = 'quiz';
+      else if (pathname.includes('/listening')) this.activeTipKey = 'listening';
+      else if (pathname.includes('/profile')) this.activeTipKey = 'profile';
+      else this.activeTipKey = 'root';
+
       // Restore states from localStorage
       const isGuideHidden = localStorage.getItem('kiri-guide-hidden') === 'true';
       if (isGuideHidden) {
         this.restoreBtn.classList.remove('hidden');
       } else {
         this.container.classList.remove('hidden');
-        // Show bubble with delay
+        // Show initial bubble tip with delay
         setTimeout(() => this.showTip(), 800);
       }
 
@@ -120,7 +142,12 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
       });
 
       this.avatar.addEventListener('click', () => {
-        this.toggleBubble();
+        this.cycleOrShowTip();
+      });
+
+      this.speakBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.speakCurrentTip();
       });
 
       // Listen for custom game/quiz score achieve events
@@ -131,20 +158,12 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
     }
 
     showTip() {
-      const pathname = window.location.pathname;
-      let activeTipKey = 'root';
-
-      // Map paths to key
-      if (pathname.includes('/lessons')) activeTipKey = 'lessons';
-      else if (pathname.includes('/vocabulary')) activeTipKey = 'vocabulary';
-      else if (pathname.includes('/quiz')) activeTipKey = 'quiz';
-      else if (pathname.includes('/listening')) activeTipKey = 'listening';
-      else if (pathname.includes('/profile')) activeTipKey = 'profile';
-
-      let tip = this.tipsMap[activeTipKey];
+      const tips = this.tipsMap[this.activeTipKey] || [];
+      let tip = tips[this.currentTipIndex];
+      if (!tip) return;
 
       // Custom dynamic check for Profile page
-      if (activeTipKey === 'profile') {
+      if (this.activeTipKey === 'profile') {
         const profile = profileManager.getProfile();
         if (profile) {
           const stars = profileManager.calculateStars(profile);
@@ -163,16 +182,73 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
       this.bubble.classList.add('animate-pop-in');
     }
 
+    cycleOrShowTip() {
+      if (this.bubble.classList.contains('hidden')) {
+        this.showTip();
+      } else {
+        // Cycle to next tip in array
+        const tips = this.tipsMap[this.activeTipKey] || [];
+        if (tips.length > 1) {
+          this.currentTipIndex = (this.currentTipIndex + 1) % tips.length;
+          this.showTip();
+        }
+      }
+    }
+
+    speakCurrentTip() {
+      const tips = this.tipsMap[this.activeTipKey] || [];
+      let currentTip = tips[this.currentTipIndex];
+      if (!currentTip) return;
+
+      // Handle custom profile override text if active
+      if (this.activeTipKey === 'profile') {
+        const profile = profileManager.getProfile();
+        if (profile) {
+          const stars = profileManager.calculateStars(profile);
+          if (stars > 0) {
+            currentTip = {
+              en: `Wow! You have collected ${stars} stars! I'm so proud of you!`,
+              kh: ''
+            };
+          }
+        }
+      }
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(currentTip.en);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.75; // Slower, friendlier kids reading speed
+
+        this.speakBtn.classList.add('playing');
+        utterance.onstart = () => {
+          this.avatar.classList.add('talking');
+        };
+        utterance.onend = () => {
+          this.speakBtn.classList.remove('playing');
+          this.avatar.classList.remove('talking');
+        };
+        utterance.onerror = () => {
+          this.speakBtn.classList.remove('playing');
+          this.avatar.classList.remove('talking');
+        };
+
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Audio speech synthesis is not supported on this browser.");
+      }
+    }
+
     handleScoreEvent(accuracy: number) {
-      // Temporarily bypass hide state to celebrate!
       if (this.container.classList.contains('hidden')) {
         this.container.classList.remove('hidden');
         this.restoreBtn.classList.add('hidden');
       }
 
-      // Add temporary bounce animations to avatar
+      // Add temporary jumping/celebrating animations
       this.avatar.classList.add('celebrating');
-      setTimeout(() => this.avatar.classList.remove('celebrating'), 2000);
+      setTimeout(() => this.avatar.classList.remove('celebrating'), 2500);
 
       // Set tip texts based on performance
       if (accuracy === 100) {
@@ -186,24 +262,32 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
         this.textKh.innerText = "កុំបារម្ភអី! ពិនិត្យមេរៀនឡើងវិញហើយសាកល្បងម្តងទៀត! 💪";
       }
 
+      // Read result out loud!
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const text = this.textEn.innerText;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+        window.speechSynthesis.speak(utterance);
+      }
+
       this.bubble.classList.remove('hidden');
       this.bubble.classList.add('animate-pop-in');
-    }
-
-    toggleBubble() {
-      if (this.bubble.classList.contains('hidden')) {
-        this.showTip();
-      } else {
-        this.hideBubble();
-      }
     }
 
     hideBubble() {
       this.bubble.classList.add('hidden');
       this.bubble.classList.remove('animate-pop-in');
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      this.speakBtn.classList.remove('playing');
+      this.avatar.classList.remove('talking');
     }
 
     hideGuideFully() {
+      this.hideBubble();
       this.container.classList.add('hidden');
       this.restoreBtn.classList.remove('hidden');
       localStorage.setItem('kiri-guide-hidden', 'true');
@@ -218,7 +302,6 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Only run if elements exist
     if (document.getElementById('kiri-guide')) {
       new KoupreyGuide();
     }
@@ -235,7 +318,7 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 12px;
+    gap: 16px;
     pointer-events: none; /* Let clicks pass through empty spaces */
   }
 
@@ -245,23 +328,24 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
   }
 
   .kiri-mascot-avatar {
-    width: 80px;
-    height: 80px;
+    width: 110px;
+    height: 110px;
     cursor: pointer;
     border-radius: 50%;
     background: white;
-    border: 3px solid #000;
-    box-shadow: 0 6px 0 #000;
+    border: 4px solid #000;
+    box-shadow: 0 8px 0 #000;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: visible;
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    animation: bobbing 3s ease-in-out infinite;
+    animation: bobbing 3.5s ease-in-out infinite;
   }
 
-  .kiri-mascot-avatar:hover {
-    transform: scale(1.1) rotate(5deg);
+  /* Talking vibration */
+  .kiri-mascot-avatar.talking {
+    animation: talkingWave 0.2s ease infinite alternate;
   }
 
   /* Celebrating jump animation */
@@ -270,25 +354,31 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
   }
 
   .kiri-img {
-    width: 76px;
+    width: 104px;
     height: auto;
     object-fit: contain;
     border-radius: 50%;
-    margin-top: -6px; /* Offset waving avatar look */
+    margin-top: -8px; /* Offset waving avatar look */
+  }
+
+  /* Hover interactivity wiggle */
+  .kiri-mascot-avatar:hover {
+    transform: scale(1.08);
+    animation: wiggle 0.6s ease infinite alternate;
   }
 
   /* Close guide button */
   .kiri-mascot-close {
     position: absolute;
-    top: -6px;
-    left: -6px;
-    width: 24px;
-    height: 24px;
+    top: -4px;
+    left: -4px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     background: #ef4444;
     color: white;
     border: 2px solid #000;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 900;
     display: flex;
     align-items: center;
@@ -303,20 +393,59 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
     transform: scale(1.2);
   }
 
-  /* Speech Bubble styling */
+  /* Speech Bubble layout styling */
   .kiri-speech-bubble {
     position: relative;
     pointer-events: auto;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.97);
     border: 3px solid #000;
     border-radius: var(--radius-lg);
     box-shadow: 0 8px 0 #000;
     padding: 16px 20px;
-    max-width: 260px;
+    max-width: 280px;
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #1e293b;
+  }
+
+  .kiri-bubble-content-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: space-between;
+    padding-top: 6px;
+  }
+
+  .kiri-bubble-content {
+    flex: 1;
+  }
+
+  /* Speech button audio read-out styling */
+  .kiri-speech-btn {
+    background: #f1f5f9;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 0 #000;
+    transition: transform 0.1s ease, background-color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .kiri-speech-btn:hover {
+    background: #e2e8f0;
+    transform: scale(1.1);
+  }
+
+  .kiri-speech-btn.playing {
+    background: #e9d5ff;
+    animation: speakerPulse 1s infinite alternate;
   }
 
   /* Speech bubble tail pointer */
@@ -324,7 +453,7 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
     content: '';
     position: absolute;
     bottom: -15px;
-    right: 28px;
+    right: 42px;
     border-width: 15px 15px 0;
     border-style: solid;
     border-color: #000 transparent;
@@ -336,7 +465,7 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
     content: '';
     position: absolute;
     bottom: -10px;
-    right: 28px;
+    right: 42px;
     border-width: 15px 15px 0;
     border-style: solid;
     border-color: #fff transparent;
@@ -352,7 +481,7 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
     right: 8px;
     background: transparent;
     border: none;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: 900;
     color: #64748b;
     cursor: pointer;
@@ -374,7 +503,7 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
   }
 
   .kiri-bubble-content .kh-text {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     color: var(--color-primary);
   }
 
@@ -388,10 +517,10 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
     color: #000;
     border: 3px solid #000;
     box-shadow: 0 4px 0 #000;
-    padding: 8px 16px;
+    padding: 10px 18px;
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: transform 0.1s ease;
@@ -414,11 +543,26 @@ const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
 
   @keyframes bobbing {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
+    50% { transform: translateY(-5px); }
+  }
+
+  @keyframes wiggle {
+    0% { transform: scale(1.08) rotate(-4deg); }
+    100% { transform: scale(1.08) rotate(4deg); }
   }
 
   @keyframes jumping {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-16px) scaleY(1.05); }
+    100% { transform: translateY(-20px) scaleY(1.06); }
+  }
+
+  @keyframes talkingWave {
+    0% { transform: translateY(0) rotate(-1deg); }
+    100% { transform: translateY(-2px) rotate(1deg); }
+  }
+
+  @keyframes speakerPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
   }
 </style>
