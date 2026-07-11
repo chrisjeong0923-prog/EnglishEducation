@@ -472,7 +472,9 @@ const questionsJson = JSON.stringify(questions);
       const iframe = this.container.querySelector('.pdf-viewer-frame') as HTMLIFrameElement | null;
       if (!dialog || !iframe) return;
       
-      const fullUrl = pageNum ? `${pdfUrl}#page=${pageNum}` : pdfUrl;
+      const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+      const fullPdfUrl = pdfUrl.startsWith(base) ? pdfUrl : `${base}${pdfUrl}`;
+      const fullUrl = pageNum ? `${fullPdfUrl}#page=${pageNum}` : fullPdfUrl;
       iframe.src = fullUrl;
       
       dialog.showModal();
