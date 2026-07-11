@@ -18,5 +18,35 @@
     "text": "I see a big red dog.",
     "clue": "The size and color of the dog.",
     "clueKh": "ទំហំ និងពណ៌របស់ឆ្កែ។"
+  },
+  {
+    "id": 3,
+    "title": "What do you see?",
+    "titleKh": "តើអ្នកឃើញអ្វី?",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "I see a yellow fish.",
+    "clue": "A sentence about seeing one yellow animal.",
+    "clueKh": "ប្រយោគអំពីការឃើញសត្វពណ៌លឿងមួយ។"
+  },
+  {
+    "id": 4,
+    "title": "Describe the dog.",
+    "titleKh": "រៀបរាប់អំពីឆ្កែ។",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "I see a small red dog.",
+    "clue": "A sentence describing the size and color of a dog.",
+    "clueKh": "ប្រយោគពិពណ៌នាអំពីទំហំ និងពណ៌របស់ឆ្កែ។"
+  },
+  {
+    "id": 5,
+    "title": "What do you see in the sky?",
+    "titleKh": "តើអ្នកឃើញអ្វីនៅលើមេឃ?",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "I see a big pretty rainbow.",
+    "clue": "A sentence about seeing a colorful arch in the sky.",
+    "clueKh": "ប្រយោគអំពីការឃើញធ្នូពណ៌ចម្រុះនៅលើមេឃ។"
   }
 ]

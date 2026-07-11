@@ -113,7 +113,7 @@ def main():
 Analyze the attached lesson PDF visually and contextually.
 Based on this lesson, generate the following learning materials and translations:
 1. Translate the English lesson title '{title}' and description '{desc}' into natural, grade-appropriate Khmer.
-2. "vocabulary": A list of 5 to 10 vocabulary words found in the text. Provide word, ipa phonetic transcription, type (must be "noun", "verb", "adjective", or "adverb"), fitting emoji, English definition, Khmer translation definition, English example sentence, and Khmer translation example.
+2. "vocabulary": A list of all primary vocabulary words explicitly listed in the PDF. Provide word, ipa phonetic transcription, type (must be "noun", "verb", "adjective", or "adverb"), fitting emoji, English definition, Khmer translation definition, English example sentence, and Khmer translation example.
 3. "quizzes": A list of 3 to 5 multiple-choice questions (grammar or vocabulary type). Provide questionText, questionTextKh, options (exactly 4 strings), correctAnswer (0-indexed integer choice), explanation in English, and explanationKh in Khmer.
 4. "listening": A list of 1 to 3 listening exercise sentences. Provide title, titleKh, text (the actual spelling sentence read aloud), clue hint, and clueKh hint translation.
 
@@ -239,8 +239,11 @@ You MUST conform to the JSON schema specified in responseSchema. Return only val
     dest_dir = os.path.join(project_root, 'public', 'lessons', 'pdf', f'grade{grade}')
     os.makedirs(dest_dir, exist_ok=True)
     pdf_dest_path = os.path.join(dest_dir, f"{slug}.pdf")
-    shutil.copy(pdf_path, pdf_dest_path)
-    print(f"  -> Copied PDF to: public/lessons/pdf/grade{grade}/{slug}.pdf")
+    try:
+        shutil.copy(pdf_path, pdf_dest_path)
+        print(f"  -> Copied PDF to: public/lessons/pdf/grade{grade}/{slug}.pdf")
+    except shutil.SameFileError:
+        print(f"  -> PDF already exists in destination: public/lessons/pdf/grade{grade}/{slug}.pdf")
 
     # Resolve Khmer translations if left blank
     actual_title_kh = title_kh if title_kh else generated.get('titleKh', title)

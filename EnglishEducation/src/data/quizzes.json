@@ -47,16 +47,76 @@
   {
     "grade": 4,
     "type": "vocabulary",
-    "questionText": "What is the opposite of 'small'?",
-    "questionTextKh": "តើពាក្យផ្ទុយនៃ 'small' គឺអ្វី?",
+    "questionText": "What do you see? (Referring to an image of a yellow fish)",
+    "questionTextKh": "តើអ្នកឃើញអ្វី? (សំដៅលើរូបភាពត្រីពណ៌លឿង)",
     "options": [
-      "red",
-      "big",
-      "scary",
-      "yellow"
+      "I see a red fish.",
+      "I see a blue fish.",
+      "I see a yellow fish.",
+      "I see a green fish."
+    ],
+    "correctAnswer": 2,
+    "explanation": "The picture shows a fish that is yellow.",
+    "explanationKh": "រូបភាពបង្ហាញត្រីដែលមានពណ៌លឿង។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "questionText": "Which sentence is correct when you see two sharks?",
+    "questionTextKh": "តើប្រយោគមួយណាត្រឹមត្រូវនៅពេលអ្នកឃើញត្រីឆ្លាមពីរ?",
+    "options": [
+      "I see a two sharks.",
+      "I see two sharks.",
+      "I see two a sharks.",
+      "I see sharks a two."
     ],
     "correctAnswer": 1,
-    "explanation": "The lesson on page 4 and 7 shows 'small' and 'big' as contrasting sizes for dogs and ants.",
-    "explanationKh": "មេរៀននៅលើទំព័រទី 4 និង 7 បង្ហាញ 'small' និង 'big' ជាទំហំផ្ទុយគ្នាសម្រាប់ឆ្កែ និងស្រមោច។"
+    "explanation": "When you see more than one thing, you don't use 'a' or 'an'.",
+    "explanationKh": "នៅពេលអ្នកឃើញវត្ថុច្រើនជាងមួយ អ្នកមិនប្រើ 'a' ឬ 'an' ទេ។"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "questionText": "What color is the sky on a sunny day?",
+    "questionTextKh": "តើមេឃមានពណ៌អ្វីនៅថ្ងៃដែលមានពន្លឺព្រះអាទិត្យ?",
+    "options": [
+      "Red",
+      "Yellow",
+      "Blue",
+      "Green"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The sky is usually blue on a sunny day.",
+    "explanationKh": "មេឃជាធម្មតាមានពណ៌ខៀវនៅថ្ងៃដែលមានពន្លឺព្រះអាទិត្យ។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "questionText": "Which sentence describes the object correctly? (Referring to an image of a big scary blue shark)",
+    "questionTextKh": "តើប្រយោគមួយណាពិពណ៌នាអំពីវត្ថុបានត្រឹមត្រូវ? (សំដៅលើរូបភាពត្រីឆ្លាមពណ៌ខៀវធំគួរឱ្យខ្លាច)",
+    "options": [
+      "I see a blue scary big shark.",
+      "I see a big scary blue shark.",
+      "I see a shark scary big blue.",
+      "I see a scary blue big shark."
+    ],
+    "correctAnswer": 1,
+    "explanation": "The common order for adjectives is size, opinion, then color before the noun. (big, scary, blue).",
+    "explanationKh": "លំដាប់ទូទៅនៃគុណនាមគឺ ទំហំ មតិ បន្ទាប់មកពណ៌មុននាម។ (ធំ, គួរឱ្យខ្លាច, ខៀវ)។"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "questionText": "What is the opposite of 'small'?",
+    "questionTextKh": "តើពាក្យ 'small' ផ្ទុយនឹងពាក្យអ្វី?",
+    "options": [
+      "Pretty",
+      "Scary",
+      "Big",
+      "Red"
+    ],
+    "correctAnswer": 2,
+    "explanation": "'Big' means large, which is the opposite of 'small'.",
+    "explanationKh": "'Big' មានន័យថាធំ ដែលផ្ទុយពី 'small'។"
   }
 ]

@@ -241,36 +241,132 @@ const initialLessons = JSON.stringify(lessonsData);
   // Target password hash (passed from compile-time environment)
   const TARGET_HASH = targetHash;
 
-  // DOM elements for Auth
-  const loginCard = document.getElementById('admin-login-card');
-  const loginForm = document.getElementById('login-form');
-  const loginPassword = document.getElementById('admin-password');
-  const loginError = document.getElementById('login-error');
-  const dashboardContainer = document.getElementById('admin-dashboard-container');
-  const btnAdminLogout = document.getElementById('btn-admin-logout');
+  // DOM elements for Auth (declared globally, initialized in init)
+  let loginCard;
+  let loginForm;
+  let loginPassword;
+  let loginError;
+  let dashboardContainer;
+  let btnAdminLogout;
 
-  // Load from template attributes
-  const container = document.querySelector('.admin-container');
-  if (container) {
-    vocab = JSON.parse(container.getAttribute('data-vocab') || '[]');
-    quizzes = JSON.parse(container.getAttribute('data-quizzes') || '[]');
-    listening = JSON.parse(container.getAttribute('data-listening') || '[]');
-    lessons = JSON.parse(container.getAttribute('data-lessons') || '[]');
+  // DOM for tabs & filters (declared globally, initialized in init)
+  let tabTriggers;
+  let tabContents;
+  let inputRepo;
+  let inputBranch;
+  let repoLabel;
+  let btnSaveRepo;
+
+  let deployStatusLabel;
+  let deployStatusDesc;
+  let deployProgressFill;
+
+  // Fallback SHA-256 implementation if crypto.subtle is unavailable (e.g. non-localhost HTTP)
+  function sha256Fallback(ascii) {
+    function rightRotate(value, amount) {
+      return (value >>> amount) | (value << (32 - amount));
+    }
+    const mathPow = Math.pow;
+    const maxWord = mathPow(2, 32);
+    let result = '';
+    const words = [];
+    const asciiLength = ascii.length * 8;
+    const hash = sha256Fallback.h = sha256Fallback.h || [];
+    const k = sha256Fallback.k = sha256Fallback.k || [];
+    let primeCounter = k.length;
+    const isPrime = {};
+    for (let candidate = 2; primeCounter < 64; candidate++) {
+      if (!isPrime[candidate]) {
+        for (let i = 0; i < 313; i += candidate) {
+          isPrime[i] = 1;
+        }
+        hash[primeCounter] = (mathPow(candidate, .5) * maxWord) | 0;
+        k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+      }
+    }
+    ascii += '\x80';
+    while (ascii.length % 64 - 56) ascii += '\x00';
+    for (let i = 0; i < ascii.length; i++) {
+      const j = ascii.charCodeAt(i);
+      words[i >> 2] |= j << ((3 - i % 4) * 8);
+    }
+    words[words.length] = ((asciiLength / maxWord) | 0);
+    words[words.length] = (asciiLength | 0);
+    const H = hash.slice(0);
+    for (let chunkStart = 0; chunkStart < words.length; chunkStart += 16) {
+      const w_temp = words.slice(chunkStart, chunkStart + 16);
+      for (let i = 16; i < 64; i++) {
+        const s0 = rightRotate(w_temp[i - 15], 7) ^ rightRotate(w_temp[i - 15], 18) ^ (w_temp[i - 15] >>> 3);
+        const s1 = rightRotate(w_temp[i - 2], 17) ^ rightRotate(w_temp[i - 2], 19) ^ (w_temp[i - 2] >>> 10);
+        w_temp[i] = (w_temp[i - 16] + s0 + w_temp[i - 7] + s1) | 0;
+      }
+      let a = H[0], b = H[1], c = H[2], d = H[3], e = H[4], f = H[5], g = H[6], h = H[7];
+      for (let i = 0; i < 64; i++) {
+        const S1 = rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25);
+        const ch = (e & f) ^ (~e & g);
+        const temp1 = (h + S1 + ch + k[i] + w_temp[i]) | 0;
+        const S0 = rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22);
+        const maj = (a & b) ^ (a & c) ^ (b & c);
+        const temp2 = (S0 + maj) | 0;
+        h = g; g = f; f = e; e = (d + temp1) | 0; d = c; c = b; b = a; a = (temp1 + temp2) | 0;
+      }
+      H[0] = (H[0] + a) | 0; H[1] = (H[1] + b) | 0; H[2] = (H[2] + c) | 0; H[3] = (H[3] + d) | 0;
+      H[4] = (H[4] + e) | 0; H[5] = (H[5] + f) | 0; H[6] = (H[6] + g) | 0; H[7] = (H[7] + h) | 0;
+    }
+    for (let i = 0; i < 8; i++) {
+      const hex = (H[i] >>> 0).toString(16);
+      result += ('00000000' + hex).slice(-8);
+    }
+    return result;
   }
 
-  // DOM for tabs & filters
-  const tabTriggers = document.querySelectorAll('.tab-trigger');
-  const tabContents = document.querySelectorAll('.tab-content');
-  const inputRepo = document.getElementById('github-repo');
-  const inputBranch = document.getElementById('github-branch');
-  const repoLabel = document.getElementById('repo-label');
-  const btnSaveRepo = document.getElementById('btn-save-repo');
+  // SHA-256 tool with fallback support
+  async function sha256(message) {
+    if (typeof crypto !== 'undefined' && crypto.subtle) {
+      try {
+        const msgBuffer = new TextEncoder().encode(message);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        return hashHex;
+      } catch (err) {
+        console.warn('SubtleCrypto error, falling back to JS implementation:', err);
+      }
+    }
+    return sha256Fallback(message);
+  }
 
-  const deployStatusLabel = document.getElementById('deploy-status-label');
-  const deployStatusDesc = document.getElementById('deploy-status-desc');
-  const deployProgressFill = document.getElementById('deploy-progress-fill');
+  // Initialize the admin module
+  function init() {
+    // DOM elements for Auth
+    loginCard = document.getElementById('admin-login-card');
+    loginForm = document.getElementById('login-form');
+    loginPassword = document.getElementById('admin-password');
+    loginError = document.getElementById('login-error');
+    dashboardContainer = document.getElementById('admin-dashboard-container');
+    btnAdminLogout = document.getElementById('btn-admin-logout');
 
-  document.addEventListener('DOMContentLoaded', () => {
+    // DOM for tabs & filters
+    tabTriggers = document.querySelectorAll('.tab-trigger');
+    tabContents = document.querySelectorAll('.tab-content');
+    inputRepo = document.getElementById('github-repo');
+    inputBranch = document.getElementById('github-branch');
+    repoLabel = document.getElementById('repo-label');
+    btnSaveRepo = document.getElementById('btn-save-repo');
+
+    deployStatusLabel = document.getElementById('deploy-status-label');
+    deployStatusDesc = document.getElementById('deploy-status-desc');
+    deployProgressFill = document.getElementById('deploy-progress-fill');
+
+    // Load from template attributes
+    const container = document.querySelector('.admin-container');
+    if (container) {
+      vocab = JSON.parse(container.getAttribute('data-vocab') || '[]');
+      quizzes = JSON.parse(container.getAttribute('data-quizzes') || '[]');
+      listening = JSON.parse(container.getAttribute('data-listening') || '[]');
+      lessons = JSON.parse(container.getAttribute('data-lessons') || '[]');
+    }
+
     checkAuthentication();
 
     // Load config preferences
@@ -278,11 +374,11 @@ const initialLessons = JSON.stringify(lessonsData);
     const savedBranch = localStorage.getItem('cms_git_branch');
     if (savedRepo) {
       gitRepo = savedRepo;
-      inputRepo.value = savedRepo;
+      if (inputRepo) inputRepo.value = savedRepo;
     }
     if (savedBranch) {
       gitBranch = savedBranch;
-      inputBranch.value = savedBranch;
+      if (inputBranch) inputBranch.value = savedBranch;
     }
 
     if (repoLabel) {
@@ -291,7 +387,7 @@ const initialLessons = JSON.stringify(lessonsData);
 
     renderCurrentTab();
     setupEventHandlers();
-  });
+  }
 
   // --- Auth Helper logic ---
   async function checkAuthentication() {
@@ -306,30 +402,21 @@ const initialLessons = JSON.stringify(lessonsData);
     }
   }
 
-  // SHA-256 tool
-  async function sha256(message) {
-    const msgBuffer = new TextEncoder().encode(message);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    return hashHex;
-  }
-
   function setupEventHandlers() {
     // Handle login submission
     loginForm?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const password = loginPassword.value;
+      const password = loginPassword ? loginPassword.value : '';
       const hashed = await sha256(password);
 
       if (hashed === TARGET_HASH) {
         sessionStorage.setItem('cms_admin_auth', 'true');
         loginError?.classList.add('hidden');
-        loginPassword.value = '';
+        if (loginPassword) loginPassword.value = '';
         checkAuthentication();
       } else {
         loginError?.classList.remove('hidden');
-        loginPassword.value = '';
+        if (loginPassword) loginPassword.value = '';
       }
     });
 
@@ -339,7 +426,7 @@ const initialLessons = JSON.stringify(lessonsData);
       checkAuthentication();
     });
 
-    tabTriggers.forEach(btn => {
+    tabTriggers?.forEach(btn => {
       btn.addEventListener('click', () => {
         tabTriggers.forEach(t => t.classList.remove('active'));
         tabContents.forEach(c => c.classList.remove('active'));
@@ -372,15 +459,24 @@ const initialLessons = JSON.stringify(lessonsData);
     });
 
     btnSaveRepo?.addEventListener('click', () => {
-      gitRepo = inputRepo.value.trim();
-      gitBranch = inputBranch.value.trim();
-      localStorage.setItem('cms_git_repo', gitRepo);
-      localStorage.setItem('cms_git_branch', gitBranch);
-      if (repoLabel) {
-        repoLabel.innerText = `${gitRepo}:${gitBranch}`;
+      if (inputRepo && inputBranch) {
+        gitRepo = inputRepo.value.trim();
+        gitBranch = inputBranch.value.trim();
+        localStorage.setItem('cms_git_repo', gitRepo);
+        localStorage.setItem('cms_git_branch', gitBranch);
+        if (repoLabel) {
+          repoLabel.innerText = `${gitRepo}:${gitBranch}`;
+        }
+        startDeploymentTracking();
       }
-      startDeploymentTracking();
     });
+  }
+
+  // Safe run on page ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 
   function renderCurrentTab() {
