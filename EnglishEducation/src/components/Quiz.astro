@@ -397,6 +397,9 @@ const questionsJson = JSON.stringify(questions);
       if (this.finalScoreEl) this.finalScoreEl.innerText = `${scorePercent}%`;
       if (this.correctCountEl) this.correctCountEl.innerText = this.score.toString();
 
+      // Dispatch mascot score event
+      window.dispatchEvent(new CustomEvent('kiri-score-achieved', { detail: { accuracy: scorePercent } }));
+
       let messageHtml = "";
       if (scorePercent === 100) {
         messageHtml = `

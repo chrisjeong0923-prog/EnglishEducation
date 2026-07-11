@@ -416,6 +416,9 @@ const exercisesJson = JSON.stringify(listeningExercises);
       if (this.accuracyText) this.accuracyText.innerText = `${accuracy}%`;
       if (this.accuracyFill) this.accuracyFill.style.width = `${accuracy}%`;
 
+      // Dispatch mascot score event
+      window.dispatchEvent(new CustomEvent('kiri-score-achieved', { detail: { accuracy: accuracy } }));
+
       // Save score to profile
       const activeProfile = profileManager.getProfile();
       if (this.saveStatusEl) {

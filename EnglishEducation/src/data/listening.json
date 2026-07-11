@@ -78,5 +78,75 @@
     "text": "I am on the car.",
     "clue": "Listen to know my position related to the car.",
     "clueKh": "ស្តាប់ដើម្បីដឹងពីទីតាំងរបស់ខ្ញុំទាក់ទងនឹងឡាន។"
+  },
+  {
+    "id": 9,
+    "title": "Red Dog",
+    "titleKh": "ឆ្កែពណ៌ក្រហម",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "I see a red dog.",
+    "clue": "A sentence about seeing a red dog.",
+    "clueKh": "ប្រយោគអំពីការឃើញឆ្កែពណ៌ក្រហមមួយ។"
+  },
+  {
+    "id": 10,
+    "title": "Scary Shark",
+    "titleKh": "ត្រីឆ្លាមគួរឱ្យខ្លាច",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "I see a scary blue shark!",
+    "clue": "A sentence describing a scary blue shark.",
+    "clueKh": "ប្រយោគពិពណ៌នាអំពីត្រីឆ្លាមពណ៌ខៀវគួរឱ្យខ្លាចមួយ។"
+  },
+  {
+    "id": 11,
+    "title": "Two Sharks",
+    "titleKh": "ត្រីឆ្លាមពីរ",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "I see two big scary blue sharks!",
+    "clue": "A sentence describing multiple big, scary, blue sharks.",
+    "clueKh": "ប្រយោគពិពណ៌នាអំពីត្រីឆ្លាមពណ៌ខៀវធំៗគួរឱ្យខ្លាចចំនួនពីរ។"
+  },
+  {
+    "id": 12,
+    "title": "Where is My Key?",
+    "titleKh": "តើកូនសោរបស់ខ្ញុំនៅឯណា?",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "Where is my key?",
+    "clue": "Ask for the location of my key.",
+    "clueKh": "សួររកទីតាំងកូនសោរបស់ខ្ញុំ។"
+  },
+  {
+    "id": 13,
+    "title": "Where is Your Phone?",
+    "titleKh": "តើទូរស័ព្ទរបស់អ្នកនៅឯណា?",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "Where is your phone?",
+    "clue": "Ask for the location of your phone.",
+    "clueKh": "សួររកទីតាំងទូរស័ព្ទរបស់អ្នក។"
+  },
+  {
+    "id": 14,
+    "title": "Where are My Glasses?",
+    "titleKh": "តើវ៉ែនតារបស់ខ្ញុំនៅឯណា?",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "Where are my glasses?",
+    "clue": "Ask for the location of my glasses.",
+    "clueKh": "សួររកទីតាំងវ៉ែនតារបស់ខ្ញុំ។"
+  },
+  {
+    "id": 15,
+    "title": "Under the Car",
+    "titleKh": "នៅក្រោមឡាន",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "I am under the car.",
+    "clue": "Describe being under the car.",
+    "clueKh": "ពិពណ៌នាអំពីការនៅក្រោមឡាន។"
   }
 ]

@@ -1,0 +1,424 @@
+---
+// src/components/KoupreyGuide.astro
+const base = import.meta.env.BASE_URL;
+const baseWithSlash = base.endsWith('/') ? base : `${base}/`;
+const mascotUrl = `${baseWithSlash}images/kouprey-mascot.png`;
+---
+
+<div class="kiri-guide-container hidden" id="kiri-guide">
+  <!-- Speech Bubble Overlay -->
+  <div class="kiri-speech-bubble hidden" id="kiri-bubble">
+    <button class="kiri-bubble-close" id="kiri-bubble-close-btn" aria-label="Close speech bubble">&times;</button>
+    <div class="kiri-bubble-content">
+      <p class="en-text" id="kiri-text-en">Hi! I'm Kiri. Ready to learn English today?</p>
+      <p class="kh-text" id="kiri-text-kh">សួស្តី! ខ្ញុំឈ្មោះគិរី។ តើអ្នកត្រៀមខ្លួនរៀនភាសាអង់គ្លេសនៅថ្ងៃនេះទេ?</p>
+    </div>
+  </div>
+
+  <!-- Mascot Wrapper -->
+  <div class="kiri-mascot-wrapper">
+    <button class="kiri-mascot-close" id="kiri-mascot-close-btn" title="Hide Kiri Mascot" aria-label="Hide Kiri">&times;</button>
+    <div class="kiri-mascot-avatar" id="kiri-avatar">
+      <img src={mascotUrl} alt="Kiri the Kouprey Mascot Guide" class="kiri-img" />
+    </div>
+  </div>
+</div>
+
+<!-- Kiri toggle widget (mini button in bottom-corner when hidden) -->
+<button class="kiri-restore-widget hidden" id="kiri-restore-btn" title="Show Kiri Mascot" aria-label="Show Kiri">
+  🐮 Guide
+</button>
+
+<script>
+  import { profileManager } from '../scripts/profileManager';
+
+  interface Tip {
+    en: string;
+    kh: string;
+  }
+
+  class KoupreyGuide {
+    container: HTMLElement;
+    bubble: HTMLElement;
+    textEn: HTMLElement;
+    textKh: HTMLElement;
+    bubbleCloseBtn: HTMLElement;
+    mascotCloseBtn: HTMLElement;
+    restoreBtn: HTMLElement;
+    avatar: HTMLElement;
+    basePath: string;
+
+    // Bilingual Contextual Tips Map
+    tipsMap: Record<string, Tip> = {
+      'root': {
+        en: "Hi! I'm Kiri the Kouprey. Choose your school grade to start learning! 🎒",
+        kh: "សួស្តី! ខ្ញុំឈ្មោះគិរី។ ជ្រើសរើសថ្នាក់រៀនរបស់អ្នកដើម្បីចាប់ផ្តើមរៀន! 🎒"
+      },
+      'lessons': {
+        en: "Let's read a story together! Click on a lesson to open the PDF. 📖",
+        kh: "តោះទៅអានរឿងទាំងអស់គ្នា! ចុចលើមេរៀនដើម្បីបើកឯកសារ PDF។ 📖"
+      },
+      'vocabulary': {
+        en: "Tap the word cards to see illustrations and hear pronunciations! 🔊",
+        kh: "ចុចលើកាតពាក្យដើម្បីមើលរូបភាព និងស្តាប់របៀបបញ្ចេញសំឡេង! 🔊"
+      },
+      'quiz': {
+        en: "Good luck! You can check the PDF references if you get stuck. ✏️",
+        kh: "ជូនពរលទ្ធផលល្អ! អ្នកអាចមើលឯកសារ PDF យោងបានប្រសិនបើពិបាក។ ✏️"
+      },
+      'listening': {
+        en: "Try listening at Slow Speed if you need help spelling! 🎧",
+        kh: "ព្យាយាមស្តាប់សំឡេងយឺតៗ ប្រសិនបើអ្នកត្រូវការជំនួយក្នុងការសរសេរ! 🎧"
+      },
+      'profile': {
+        en: "Earn stars by playing quizzes and dictation games! ⭐",
+        kh: "ទទួលបានផ្កាយដោយការឆ្លើយកម្រងសំណួរ និងល្បែងសរសេរតាមអាន! ⭐"
+      }
+    };
+
+    constructor() {
+      this.container = document.getElementById('kiri-guide')!;
+      this.bubble = document.getElementById('kiri-bubble')!;
+      this.textEn = document.getElementById('kiri-text-en')!;
+      this.textKh = document.getElementById('kiri-text-kh')!;
+      this.bubbleCloseBtn = document.getElementById('kiri-bubble-close-btn')!;
+      this.mascotCloseBtn = document.getElementById('kiri-mascot-close-btn')!;
+      this.restoreBtn = document.getElementById('kiri-restore-btn')!;
+      this.avatar = document.getElementById('kiri-avatar')!;
+      
+      // Resolve base path from meta tag or window location
+      this.basePath = (window as any).Astro?.base || '/EnglishEducation/';
+      if (!this.basePath.endsWith('/')) this.basePath += '/';
+
+      this.init();
+    }
+
+    init() {
+      // Restore states from localStorage
+      const isGuideHidden = localStorage.getItem('kiri-guide-hidden') === 'true';
+      if (isGuideHidden) {
+        this.restoreBtn.classList.remove('hidden');
+      } else {
+        this.container.classList.remove('hidden');
+        // Show bubble with delay
+        setTimeout(() => this.showTip(), 800);
+      }
+
+      // Event listeners
+      this.bubbleCloseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.hideBubble();
+      });
+
+      this.mascotCloseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.hideGuideFully();
+      });
+
+      this.restoreBtn.addEventListener('click', () => {
+        this.restoreGuide();
+      });
+
+      this.avatar.addEventListener('click', () => {
+        this.toggleBubble();
+      });
+
+      // Listen for custom game/quiz score achieve events
+      window.addEventListener('kiri-score-achieved', (event: any) => {
+        const accuracy = event.detail?.accuracy || 0;
+        this.handleScoreEvent(accuracy);
+      });
+    }
+
+    showTip() {
+      const pathname = window.location.pathname;
+      let activeTipKey = 'root';
+
+      // Map paths to key
+      if (pathname.includes('/lessons')) activeTipKey = 'lessons';
+      else if (pathname.includes('/vocabulary')) activeTipKey = 'vocabulary';
+      else if (pathname.includes('/quiz')) activeTipKey = 'quiz';
+      else if (pathname.includes('/listening')) activeTipKey = 'listening';
+      else if (pathname.includes('/profile')) activeTipKey = 'profile';
+
+      let tip = this.tipsMap[activeTipKey];
+
+      // Custom dynamic check for Profile page
+      if (activeTipKey === 'profile') {
+        const profile = profileManager.getProfile();
+        if (profile) {
+          const stars = profileManager.calculateStars(profile);
+          if (stars > 0) {
+            tip = {
+              en: `Wow! You have collected ${stars} stars! I'm so proud of you! 🏆`,
+              kh: `អស្ចារ្យណាស់ អ្នកប្រមូលបានផ្កាយ ${stars} ហើយ! ខ្ញុំពិតជាមានមោទនភាពចំពោះអ្នកណាស់! 🏆`
+            };
+          }
+        }
+      }
+
+      this.textEn.innerText = tip.en;
+      this.textKh.innerText = tip.kh;
+      this.bubble.classList.remove('hidden');
+      this.bubble.classList.add('animate-pop-in');
+    }
+
+    handleScoreEvent(accuracy: number) {
+      // Temporarily bypass hide state to celebrate!
+      if (this.container.classList.contains('hidden')) {
+        this.container.classList.remove('hidden');
+        this.restoreBtn.classList.add('hidden');
+      }
+
+      // Add temporary bounce animations to avatar
+      this.avatar.classList.add('celebrating');
+      setTimeout(() => this.avatar.classList.remove('celebrating'), 2000);
+
+      // Set tip texts based on performance
+      if (accuracy === 100) {
+        this.textEn.innerText = "Perfect score! You're an English Champion! 🎉";
+        this.textKh.innerText = "ពិន្ទុល្អឥតខ្ចោះ! អ្នកគឺជាជើងឯកភាសាអង់គ្លេស! 🎉";
+      } else if (accuracy >= 80) {
+        this.textEn.innerText = "Great job! Let's try again for a perfect score! 👍";
+        this.textKh.innerText = "ធ្វើបានល្អណាស់! សាកល្បងម្ដងទៀតដើម្បីទទួលបានពិន្ទុល្អឥតខ្ចោះ! 👍";
+      } else {
+        this.textEn.innerText = "Don't worry! Review the lesson and let's try again! 💪";
+        this.textKh.innerText = "កុំបារម្ភអី! ពិនិត្យមេរៀនឡើងវិញហើយសាកល្បងម្តងទៀត! 💪";
+      }
+
+      this.bubble.classList.remove('hidden');
+      this.bubble.classList.add('animate-pop-in');
+    }
+
+    toggleBubble() {
+      if (this.bubble.classList.contains('hidden')) {
+        this.showTip();
+      } else {
+        this.hideBubble();
+      }
+    }
+
+    hideBubble() {
+      this.bubble.classList.add('hidden');
+      this.bubble.classList.remove('animate-pop-in');
+    }
+
+    hideGuideFully() {
+      this.container.classList.add('hidden');
+      this.restoreBtn.classList.remove('hidden');
+      localStorage.setItem('kiri-guide-hidden', 'true');
+    }
+
+    restoreGuide() {
+      this.restoreBtn.classList.add('hidden');
+      this.container.classList.remove('hidden');
+      localStorage.setItem('kiri-guide-hidden', 'false');
+      setTimeout(() => this.showTip(), 400);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only run if elements exist
+    if (document.getElementById('kiri-guide')) {
+      new KoupreyGuide();
+    }
+  });
+</script>
+
+<style>
+  /* Container placement bottom right */
+  .kiri-guide-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    pointer-events: none; /* Let clicks pass through empty spaces */
+  }
+
+  .kiri-mascot-wrapper {
+    position: relative;
+    pointer-events: auto;
+  }
+
+  .kiri-mascot-avatar {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #000;
+    box-shadow: 0 6px 0 #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: bobbing 3s ease-in-out infinite;
+  }
+
+  .kiri-mascot-avatar:hover {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  /* Celebrating jump animation */
+  .kiri-mascot-avatar.celebrating {
+    animation: jumping 0.5s ease infinite alternate;
+  }
+
+  .kiri-img {
+    width: 76px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 50%;
+    margin-top: -6px; /* Offset waving avatar look */
+  }
+
+  /* Close guide button */
+  .kiri-mascot-close {
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ef4444;
+    color: white;
+    border: 2px solid #000;
+    font-size: 0.9rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 0 #000;
+    z-index: 2;
+    transition: transform 0.1s ease;
+  }
+
+  .kiri-mascot-close:hover {
+    transform: scale(1.2);
+  }
+
+  /* Speech Bubble styling */
+  .kiri-speech-bubble {
+    position: relative;
+    pointer-events: auto;
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid #000;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 0 #000;
+    padding: 16px 20px;
+    max-width: 260px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: #1e293b;
+  }
+
+  /* Speech bubble tail pointer */
+  .kiri-speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    right: 28px;
+    border-width: 15px 15px 0;
+    border-style: solid;
+    border-color: #000 transparent;
+    display: block;
+    width: 0;
+  }
+
+  .kiri-speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 28px;
+    border-width: 15px 15px 0;
+    border-style: solid;
+    border-color: #fff transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+  }
+
+  /* Close bubble button */
+  .kiri-bubble-close {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #64748b;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .kiri-bubble-close:hover {
+    color: #000;
+  }
+
+  .kiri-bubble-content p {
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .kiri-bubble-content .en-text {
+    margin-bottom: 6px;
+  }
+
+  .kiri-bubble-content .kh-text {
+    font-size: 0.8rem;
+    color: var(--color-primary);
+  }
+
+  /* Restore widget button styling */
+  .kiri-restore-widget {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: white;
+    color: #000;
+    border: 3px solid #000;
+    box-shadow: 0 4px 0 #000;
+    padding: 8px 16px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.9rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+  }
+
+  .kiri-restore-widget:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #000;
+  }
+
+  /* Pop in animation */
+  .animate-pop-in {
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+
+  @keyframes popIn {
+    0% { transform: scale(0.8) translateY(10px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  @keyframes bobbing {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  @keyframes jumping {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-16px) scaleY(1.05); }
+  }
+</style>
