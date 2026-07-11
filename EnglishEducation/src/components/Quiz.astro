@@ -169,6 +169,23 @@ const questionsJson = JSON.stringify(questions);
       this.state = 'answering';
       this.selectedOptionIndex = null;
       
+      if (this.questions.length === 0) {
+        const qNumText = "0";
+        if (this.currentQEl) this.currentQEl.innerText = qNumText;
+        if (this.currentQKhEl) this.currentQKhEl.innerText = qNumText;
+        if (this.progressFillEl) this.progressFillEl.style.width = "0%";
+        if (this.questionTextEl) {
+          this.questionTextEl.innerHTML = `
+            <span class="question-en">No quiz questions available for this grade.</span>
+            <span class="question-kh kh-text-block">មិនមានសំណួរសម្រាប់កម្រិតថ្នាក់នេះទេ។</span>
+          `;
+        }
+        if (this.submitNextBtnEl) {
+          this.submitNextBtnEl.style.display = "none";
+        }
+        return;
+      }
+      
       const qNumText = (this.currentQuestionIndex + 1).toString();
       if (this.currentQEl) this.currentQEl.innerText = qNumText;
       if (this.currentQKhEl) this.currentQKhEl.innerText = qNumText;

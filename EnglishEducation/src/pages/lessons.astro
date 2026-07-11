@@ -1,5 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import lessonsData from '../data/lessons.json';
+
+const grade3Lessons = lessonsData.filter(l => l.grade === 3);
+const grade4Lessons = lessonsData.filter(l => l.grade === 4);
+const grade5Lessons = lessonsData.filter(l => l.grade === 5);
+const grade6Lessons = lessonsData.filter(l => l.grade === 6);
 ---
 
 <Layout title="English Lessons" description="Fun bilingual English lessons for school grades 3 to 6.">
@@ -9,23 +15,250 @@ import Layout from '../layouts/Layout.astro';
       <span class="kh-text">មេរៀនភាសាអង់គ្លេសរីករាយ 📖</span>
     </h1>
     <p class="page-subtitle">
-      <span class="en-text">Exciting bilingual lessons to help you learn English step-by-step! Coming soon.</span>
-      <span class="kh-text">មេរៀនពីរភាសាដ៏គួរឱ្យចាប់អារម្មណ៍ ដើម្បីជួយអ្នករៀនភាសាអង់គ្លេសមួយជំហានម្តងៗ! នឹងមកដល់ឆាប់ៗនេះ។</span>
+      <span class="en-text">Exciting bilingual lessons to help you learn English step-by-step! Your lesson level is based on your grade selected on the homepage.</span>
+      <span class="kh-text">មេរៀនពីរភាសាដ៏គួរឱ្យចាប់អារម្មណ៍ ដើម្បីជួយអ្នករៀនភាសាអង់គ្លេសមួយជំហានម្តងៗ! កម្រិតមេរៀនត្រូវបានកំណត់ដោយផ្អែកលើថ្នាក់ដែលអ្នកបានជ្រើសរើសនៅលើទំព័រដើម។</span>
     </p>
   </div>
 
-  <div class="lessons-container glass-card">
-    <div class="placeholder-icon">📚</div>
-    <h2>
-      <span class="en-text">Lessons Coming Soon!</span>
-      <span class="kh-text">មេរៀននឹងមកដល់ឆាប់ៗនេះ!</span>
-    </h2>
-    <p>
-      <span class="en-text">We are preparing fun grammar, reading, and writing lessons for Grades 3, 4, 5, and 6. Check back soon for new content!</span>
-      <span class="kh-text">យើងកំពុងរៀបចំមេរៀនវេយ្យាករណ៍ ការអាន និងការសរសេរដ៏រីករាយសម្រាប់ថ្នាក់ទី៣ ទី៤ ទី៥ និងទី៦។ សូមរង់ចាំមើលខ្លឹមសារថ្មីៗឆាប់ៗនេះ!</span>
-    </p>
+  <!-- Grade 3 Lessons Panel -->
+  <div class="lessons-panel" id="grade3-lessons">
+    <div class="lessons-grid">
+      {grade3Lessons.length === 0 ? (
+        <div class="no-lessons glass-card">
+          <p class="en-text">No lessons added yet for Grade 3.</p>
+          <p class="kh-text">មិនទាន់មានមេរៀនសម្រាប់ថ្នាក់ទី៣នៅឡើយទេ។</p>
+        </div>
+      ) : (
+        grade3Lessons.map(lesson => (
+          <div class="lesson-card glass-card" data-title={lesson.title} data-title-kh={lesson.titleKh} data-content={lesson.content} data-content-kh={lesson.contentKh} data-pdf-url={lesson.pdfUrl}>
+            <div class="lesson-icon">📚</div>
+            <h2 class="lesson-card-title">
+              <span class="en-text">{lesson.title}</span>
+              <span class="kh-text">{lesson.titleKh}</span>
+            </h2>
+            <p class="lesson-desc">
+              <span class="en-text">{lesson.description}</span>
+              <span class="kh-text">{lesson.descriptionKh}</span>
+            </p>
+            <button class="btn btn-primary start-lesson-btn">
+              <span class="en-text">Read Lesson ➔</span>
+              <span class="kh-text">អានមេរៀន ➔</span>
+            </button>
+          </div>
+        ))
+      )}
+    </div>
   </div>
+
+  <!-- Grade 4 Lessons Panel -->
+  <div class="lessons-panel" id="grade4-lessons">
+    <div class="lessons-grid">
+      {grade4Lessons.length === 0 ? (
+        <div class="no-lessons glass-card">
+          <p class="en-text">No lessons added yet for Grade 4.</p>
+          <p class="kh-text">មិនទាន់មានមេរៀនសម្រាប់ថ្នាក់ទី៤នៅឡើយទេ។</p>
+        </div>
+      ) : (
+        grade4Lessons.map(lesson => (
+          <div class="lesson-card glass-card" data-title={lesson.title} data-title-kh={lesson.titleKh} data-content={lesson.content} data-content-kh={lesson.contentKh} data-pdf-url={lesson.pdfUrl}>
+            <div class="lesson-icon">🔍</div>
+            <h2 class="lesson-card-title">
+              <span class="en-text">{lesson.title}</span>
+              <span class="kh-text">{lesson.titleKh}</span>
+            </h2>
+            <p class="lesson-desc">
+              <span class="en-text">{lesson.description}</span>
+              <span class="kh-text">{lesson.descriptionKh}</span>
+            </p>
+            <button class="btn btn-primary start-lesson-btn">
+              <span class="en-text">Read Lesson ➔</span>
+              <span class="kh-text">អានមេរៀន ➔</span>
+            </button>
+          </div>
+        ))
+      )}
+    </div>
+  </div>
+
+  <!-- Grade 5 Lessons Panel -->
+  <div class="lessons-panel" id="grade5-lessons">
+    <div class="lessons-grid">
+      {grade5Lessons.length === 0 ? (
+        <div class="no-lessons glass-card">
+          <p class="en-text">No lessons added yet for Grade 5.</p>
+          <p class="kh-text">មិនទាន់មានមេរៀនសម្រាប់ថ្នាក់ទី៥នៅឡើយទេ។</p>
+        </div>
+      ) : (
+        grade5Lessons.map(lesson => (
+          <div class="lesson-card glass-card" data-title={lesson.title} data-title-kh={lesson.titleKh} data-content={lesson.content} data-content-kh={lesson.contentKh} data-pdf-url={lesson.pdfUrl}>
+            <div class="lesson-icon">🧺</div>
+            <h2 class="lesson-card-title">
+              <span class="en-text">{lesson.title}</span>
+              <span class="kh-text">{lesson.titleKh}</span>
+            </h2>
+            <p class="lesson-desc">
+              <span class="en-text">{lesson.description}</span>
+              <span class="kh-text">{lesson.descriptionKh}</span>
+            </p>
+            <button class="btn btn-primary start-lesson-btn">
+              <span class="en-text">Read Lesson ➔</span>
+              <span class="kh-text">អានមេរៀន ➔</span>
+            </button>
+          </div>
+        ))
+      )}
+    </div>
+  </div>
+
+  <!-- Grade 6 Lessons Panel -->
+  <div class="lessons-panel" id="grade6-lessons">
+    <div class="lessons-grid">
+      {grade6Lessons.length === 0 ? (
+        <div class="no-lessons glass-card">
+          <p class="en-text">No lessons added yet for Grade 6.</p>
+          <p class="kh-text">មិនទាន់មានមេរៀនសម្រាប់ថ្នាក់ទី៦នៅឡើយទេ។</p>
+        </div>
+      ) : (
+        grade6Lessons.map(lesson => (
+          <div class="lesson-card glass-card" data-title={lesson.title} data-title-kh={lesson.titleKh} data-content={lesson.content} data-content-kh={lesson.contentKh} data-pdf-url={lesson.pdfUrl}>
+            <div class="lesson-icon">🚀</div>
+            <h2 class="lesson-card-title">
+              <span class="en-text">{lesson.title}</span>
+              <span class="kh-text">{lesson.titleKh}</span>
+            </h2>
+            <p class="lesson-desc">
+              <span class="en-text">{lesson.description}</span>
+              <span class="kh-text">{lesson.descriptionKh}</span>
+            </p>
+            <button class="btn btn-primary start-lesson-btn">
+              <span class="en-text">Read Lesson ➔</span>
+              <span class="kh-text">អានមេរៀន ➔</span>
+            </button>
+          </div>
+        ))
+      )}
+    </div>
+  </div>
+
+  <!-- Interactive Lesson Dialog Modal -->
+  <dialog id="lesson-dialog" closedby="any" class="lesson-modal">
+    <form method="dialog" class="modal-form">
+      <div class="modal-header">
+        <h2 id="modal-lesson-title">
+          <span class="en-text">Lesson</span>
+          <span class="kh-text">មេរៀន</span>
+        </h2>
+        <button type="submit" class="close-icon-btn" aria-label="Close Modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Embedded PDF Viewer Container -->
+        <div id="modal-pdf-container" class="pdf-viewer-container hidden">
+          <iframe id="modal-pdf-iframe" src="" width="100%" height="480px" style="border: 3px solid #000; border-radius: var(--radius-md); box-shadow: var(--shadow-playful); margin-bottom: 20px; background-color: #f1f5f9;"></iframe>
+        </div>
+        <div class="lesson-dialog-content en-text" id="modal-lesson-content-en"></div>
+        <div class="lesson-dialog-content kh-text" id="modal-lesson-content-kh"></div>
+      </div>
+      <div class="modal-footer">
+        <a id="modal-pdf-link" href="#" target="_blank" class="btn btn-secondary hidden">
+          <span class="en-text">↗️ Open PDF in New Tab</span>
+          <span class="kh-text">↗️ បើក PDF ក្នុងផ្ទាំងថ្មី</span>
+        </a>
+        <button type="submit" class="btn btn-primary">
+          <span class="en-text">I Understand! 👍</span>
+          <span class="kh-text">ខ្ញុំយល់ហើយ! 👍</span>
+        </button>
+      </div>
+    </form>
+  </dialog>
 </Layout>
+
+<script>
+  // Show active lessons panel based on localStorage preference
+  const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
+  const activePanel = document.getElementById(`${preferredGrade}-lessons`);
+  if (activePanel) {
+    activePanel.classList.add('active');
+  } else {
+    document.getElementById('grade3-lessons')?.classList.add('active');
+  }
+
+  // Setup modal popups
+  const dialog = document.getElementById('lesson-dialog') as HTMLDialogElement;
+  const modalTitle = document.getElementById('modal-lesson-title');
+  const modalContentEn = document.getElementById('modal-lesson-content-en');
+  const modalContentKh = document.getElementById('modal-lesson-content-kh');
+  const pdfLink = document.getElementById('modal-pdf-link') as HTMLAnchorElement;
+  const pdfContainer = document.getElementById('modal-pdf-container');
+  const pdfIframe = document.getElementById('modal-pdf-iframe') as HTMLIFrameElement;
+
+  if (dialog && modalTitle && modalContentEn && modalContentKh) {
+    // Add event listener to all start-lesson-btn clicks
+    document.addEventListener('click', (e) => {
+      const card = (e.target as HTMLElement).closest('.lesson-card');
+      if (!card) return;
+
+      const title = card.getAttribute('data-title') || '';
+      const titleKh = card.getAttribute('data-title-kh') || '';
+      const content = card.getAttribute('data-content') || '';
+      const contentKh = card.getAttribute('data-content-kh') || '';
+      const pdfUrl = card.getAttribute('data-pdf-url') || '';
+
+      // Populate dialog
+      modalTitle.innerHTML = `
+        <span class="en-text">${title}</span>
+        <span class="kh-text">${titleKh}</span>
+      `;
+      
+      // Preserve line breaks for content
+      modalContentEn.innerHTML = content.replace(/\n/g, '<br>');
+      modalContentKh.innerHTML = contentKh.replace(/\n/g, '<br>');
+
+      // PDF handling
+      if (pdfContainer && pdfIframe) {
+        if (pdfUrl) {
+          const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+          const fullPdfUrl = pdfUrl.startsWith(base) ? pdfUrl : `${base}${pdfUrl}`;
+          pdfIframe.src = fullPdfUrl;
+          pdfContainer.classList.remove('hidden');
+          if (pdfLink) {
+            pdfLink.href = fullPdfUrl;
+            pdfLink.classList.remove('hidden');
+          }
+        } else {
+          pdfIframe.src = '';
+          pdfContainer.classList.add('hidden');
+          if (pdfLink) pdfLink.classList.add('hidden');
+        }
+      }
+
+      dialog.showModal();
+    });
+
+    // Stop PDF load and clean iframe source on dialog close
+    dialog.addEventListener('close', () => {
+      if (pdfIframe) {
+        pdfIframe.src = '';
+      }
+    });
+
+    // Fallback for browsers without closedby="any" support
+    if (!('closedBy' in HTMLDialogElement.prototype)) {
+      dialog.addEventListener('click', (event) => {
+        if (event.target !== dialog) return;
+        const rect = dialog.getBoundingClientRect();
+        const isDialogContent = (
+          rect.top <= event.clientY &&
+          event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.left + rect.width
+        );
+        if (!isDialogContent) {
+          dialog.close();
+        }
+      });
+    }
+  }
+</script>
 
 <style>
   .lessons-header {
@@ -43,36 +276,173 @@ import Layout from '../layouts/Layout.astro';
     color: var(--color-text-muted);
     font-size: 1.15rem;
     font-weight: 600;
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
+    line-height: 1.5;
   }
 
-  .lessons-container {
-    max-width: 600px;
+  .lessons-panel {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  .lessons-panel.active {
+    display: block;
+  }
+
+  .lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+    max-width: 1100px;
     margin: 0 auto 60px auto;
-    padding: 60px 40px;
+  }
+
+  .no-lessons {
+    grid-column: 1 / -1;
     text-align: center;
-    border: 3px solid #e2e8f0;
+    padding: 60px 40px;
+  }
+
+  .no-lessons p {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+  }
+
+  .lesson-card {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
+    cursor: pointer;
   }
 
-  .placeholder-icon {
-    font-size: 4rem;
-    margin-bottom: 12px;
+  .lesson-icon {
+    font-size: 2.5rem;
+    background: #f3e8ff;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid rgba(159, 122, 234, 0.2);
   }
 
-  .lessons-container h2 {
-    font-size: 1.8rem;
+  .lesson-card:nth-child(even) .lesson-icon {
+    background: #ecfeff;
+    border-color: rgba(6, 182, 212, 0.2);
+  }
+
+  .lesson-card-title {
+    font-size: 1.5rem;
     color: #1a202c;
   }
 
-  .lessons-container p {
+  .lesson-desc {
     color: var(--color-text-muted);
-    font-size: 1.05rem;
-    font-weight: 600;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .start-lesson-btn {
+    width: 100%;
+    margin-top: auto;
+  }
+
+  /* Modal Styling */
+  .lesson-modal {
+    border: 3px solid #000;
+    border-radius: var(--radius-lg);
+    padding: 0;
+    max-width: 800px;
+    width: 90%;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+    overflow: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .lesson-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+  }
+
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+  }
+
+  .modal-header {
+    background: #f8fafc;
+    padding: 20px 24px;
+    border-bottom: 3px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-header h2 {
+    font-size: 1.6rem;
+    color: #1a202c;
+  }
+
+  .close-icon-btn {
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+  }
+
+  .close-icon-btn:hover {
+    color: var(--color-accent);
+  }
+
+  .modal-body {
+    padding: 30px 24px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .lesson-dialog-content {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  /* Style differences for Khmer */
+  html.lang-khmer .lesson-dialog-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .modal-footer {
+    padding: 20px 24px;
+    background: #f8fafc;
+    border-top: 3px solid #e2e8f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>

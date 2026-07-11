@@ -1,0 +1,90 @@
+[
+  {
+    "grade": 4,
+    "word": "see",
+    "ipa": "/siː/",
+    "type": "verb",
+    "emoji": "👀",
+    "definition": "to perceive with your eyes",
+    "definitionKh": "ការយល់ឃើញដោយភ្នែក",
+    "example": "I see a yellow fish.",
+    "exampleKh": "ខ្ញុំឃើញត្រីពណ៌លឿងមួយ។"
+  },
+  {
+    "grade": 4,
+    "word": "fish",
+    "ipa": "/fɪʃ/",
+    "type": "noun",
+    "emoji": "🐠",
+    "definition": "an animal that lives in water and has fins and gills",
+    "definitionKh": "សត្វដែលរស់នៅក្នុងទឹក មានព្រុយ និងអញ្ចាញ",
+    "example": "I see a fish in the sea.",
+    "exampleKh": "ខ្ញុំឃើញត្រីនៅក្នុងសមុទ្រ។"
+  },
+  {
+    "grade": 4,
+    "word": "red",
+    "ipa": "/rɛd/",
+    "type": "adjective",
+    "emoji": "🔴",
+    "definition": "a primary color, like the color of blood or a tomato",
+    "definitionKh": "ពណ៌ចម្បង ដូចជាពណ៌ឈាម ឬប៉េងប៉ោះ",
+    "example": "I see a red dog.",
+    "exampleKh": "ខ្ញុំឃើញឆ្កែពណ៌ក្រហមមួយ។"
+  },
+  {
+    "grade": 4,
+    "word": "scary",
+    "ipa": "/ˈskɛəri/",
+    "type": "adjective",
+    "emoji": "👻",
+    "definition": "causing fear; frightening",
+    "definitionKh": "ដែលបង្កឲ្យមានការភ័យខ្លាច",
+    "example": "I see a scary shark!",
+    "exampleKh": "ខ្ញុំឃើញត្រីឆ្លាមគួរឲ្យខ្លាចមួយ!"
+  },
+  {
+    "grade": 4,
+    "word": "big",
+    "ipa": "/bɪɡ/",
+    "type": "adjective",
+    "emoji": "🐘",
+    "definition": "of considerable size or extent; large",
+    "definitionKh": "ដែលមានទំហំធំ ឬធំធាត់",
+    "example": "I see a big dog.",
+    "exampleKh": "ខ្ញុំឃើញឆ្កែធំមួយ។"
+  },
+  {
+    "grade": 4,
+    "word": "small",
+    "ipa": "/smɔːl/",
+    "type": "adjective",
+    "emoji": "🐜",
+    "definition": "of a size that is less than normal or usual",
+    "definitionKh": "ដែលមានទំហំតូចជាងធម្មតា",
+    "example": "I see a small dog.",
+    "exampleKh": "ខ្ញុំឃើញឆ្កែតូចមួយ។"
+  },
+  {
+    "grade": 4,
+    "word": "rainbow",
+    "ipa": "/ˈreɪnboʊ/",
+    "type": "noun",
+    "emoji": "🌈",
+    "definition": "an arch of colors in the sky, caused by the refraction and dispersion of the sun's light by rain or other water droplets",
+    "definitionKh": "ឥន្ទធនូ គឺជាធ្នូនៃពណ៌នៅលើមេឃ ដែលបង្កឡើងដោយការបាក់បែក និងការបែកខ្ចាត់ខ្ចាយពន្លឺព្រះអាទិត្យដោយដំណក់ទឹកភ្លៀង។",
+    "example": "I see a pretty rainbow.",
+    "exampleKh": "ខ្ញុំឃើញឥន្ទធនូដ៏ស្រស់ស្អាតមួយ។"
+  },
+  {
+    "grade": 4,
+    "word": "blue",
+    "ipa": "/bluː/",
+    "type": "adjective",
+    "emoji": "🔵",
+    "definition": "a primary color, like the color of the sky or the sea",
+    "definitionKh": "ពណ៌ចម្បង ដូចជាពណ៌មេឃ ឬសមុទ្រ",
+    "example": "I see a blue shark.",
+    "exampleKh": "ខ្ញុំឃើញត្រីឆ្លាមពណ៌ខៀវមួយ។"
+  }
+]

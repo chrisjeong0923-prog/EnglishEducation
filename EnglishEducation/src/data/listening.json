@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "What I See",
+    "titleKh": "អ្វីដែលខ្ញុំឃើញ",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "I see a yellow fish.",
+    "clue": "A yellow aquatic animal.",
+    "clueKh": "សត្វទឹកពណ៌លឿងមួយ។"
+  },
+  {
+    "id": 2,
+    "title": "Describe the Dog",
+    "titleKh": "រៀបរាប់អំពីឆ្កែ",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "I see a big red dog.",
+    "clue": "The size and color of the dog.",
+    "clueKh": "ទំហំ និងពណ៌របស់ឆ្កែ។"
+  }
+]

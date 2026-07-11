@@ -1,48 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const listeningExercises = [
-  {
-    id: 1,
-    title: "Grade 3: Cute Cat",
-    titleKh: "ថ្នាក់ទី៣៖ កូនឆ្មាគួរឱ្យស្រឡាញ់",
-    difficulty: "Level 1",
-    difficultyKh: "កម្រិត ១",
-    text: "The little cat chased the ball across the floor.",
-    clue: "Think about pets, toys, and playing.",
-    clueKh: "គិតអំពីសត្វចិញ្ចឹម របស់លេង និងការលេងកម្សាន្ត។"
-  },
-  {
-    id: 2,
-    title: "Grade 4: Washing Hands",
-    titleKh: "ថ្នាក់ទី៤៖ ការលាងសម្អាតដៃ",
-    difficulty: "Level 2",
-    difficultyKh: "កម្រិត ២",
-    text: "Please remember to wash your hands before eating lunch.",
-    clue: "Think about clean habits and eating food.",
-    clueKh: "គិតអំពីទម្លាប់អនាម័យស្អាតល្អ និងការបរិភោគអាហារ។"
-  },
-  {
-    id: 3,
-    title: "Grade 5: Beautiful Rainbow",
-    titleKh: "ថ្នាក់ទី៥៖ ឥន្ទធនូដ៏ស្រស់ស្អាត",
-    difficulty: "Level 3",
-    difficultyKh: "កម្រិត ៣",
-    text: "We saw a colorful rainbow in the sky after the rain stopped.",
-    clue: "Think about sky colors and weather.",
-    clueKh: "គិតអំពីពណ៌ចម្រុះនៅលើមេឃ និងអាកាសធាតុ។"
-  },
-  {
-    id: 4,
-    title: "Grade 6: Sandcastle Project",
-    titleKh: "ថ្នាក់ទី៦៖ គម្រោងប្រាសាទខ្សាច់",
-    difficulty: "Level 4",
-    difficultyKh: "កម្រិត ៤",
-    text: "The students worked together to build a magnificent sandcastle on the beach.",
-    clue: "Think about school projects, building things, and beach activities.",
-    clueKh: "គិតអំពីគម្រោងសាលារៀន ការសាងសង់អ្វីមួយ និងសកម្មភាពនៅលើឆ្នេរខ្សាច់។"
-  }
-];
+import listeningExercises from '../data/listening.json';
 
 const exercisesJson = JSON.stringify(listeningExercises);
 ---
