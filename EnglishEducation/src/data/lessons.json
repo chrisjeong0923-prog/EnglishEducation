@@ -9,5 +9,16 @@
     "content": "Study materials generated from PDF lesson \"What I See\". Download the attached PDF to review full reading materials.",
     "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"What I See\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
     "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
+  },
+  {
+    "id": "where-is-it",
+    "grade": 4,
+    "title": "Where is it?",
+    "titleKh": "តើវា​នៅឯណា?",
+    "description": "Click to open lesson",
+    "descriptionKh": "ស្វែងយល់ពីទីតាំងរបស់វត្ថុជុំវិញខ្លួន។",
+    "content": "Study materials generated from PDF lesson \"Where is it?\". Download the attached PDF to review full reading materials.",
+    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"Where is it?\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf"
   }
 ]

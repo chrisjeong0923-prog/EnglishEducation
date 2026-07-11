@@ -48,5 +48,35 @@
     "text": "I see a big pretty rainbow.",
     "clue": "A sentence about seeing a colorful arch in the sky.",
     "clueKh": "ប្រយោគអំពីការឃើញធ្នូពណ៌ចម្រុះនៅលើមេឃ។"
+  },
+  {
+    "id": 6,
+    "title": "Finding the Key",
+    "titleKh": "ការស្វែងរកកូនសោ",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "Your key is under the table.",
+    "clue": "Listen for the location of the key.",
+    "clueKh": "ស្តាប់ទីតាំងរបស់កូនសោ។"
+  },
+  {
+    "id": 7,
+    "title": "Phone Location",
+    "titleKh": "ទីតាំងទូរស័ព្ទ",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "My phone is on the sofa.",
+    "clue": "Listen for where the phone is.",
+    "clueKh": "ស្តាប់មើលថាទូរស័ព្ទនៅឯណា។"
+  },
+  {
+    "id": 8,
+    "title": "About the Car",
+    "titleKh": "អំពីឡាន",
+    "difficulty": "Level 2",
+    "difficultyKh": "កម្រិត ២",
+    "text": "I am on the car.",
+    "clue": "Listen to know my position related to the car.",
+    "clueKh": "ស្តាប់ដើម្បីដឹងពីទីតាំងរបស់ខ្ញុំទាក់ទងនឹងឡាន។"
   }
 ]

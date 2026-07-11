@@ -185,5 +185,126 @@
     "definitionKh": "ទាក់ទាញតាមរបៀបឆ្ងាញ់ ឬស្រស់ស្អាត។",
     "example": "I see a big pretty rainbow.",
     "exampleKh": "ខ្ញុំឃើញឥន្ទធនូដ៏ធំស្អាតមួយ។"
+  },
+  {
+    "grade": 4,
+    "word": "key",
+    "ipa": "",
+    "type": "noun",
+    "emoji": "🔑",
+    "definition": "A small metal object used for opening or locking something.",
+    "definitionKh": "វត្ថុលោហៈតូចមួយដែលប្រើសម្រាប់បើក ឬចាក់សោអ្វីមួយ។",
+    "example": "Where is my key?",
+    "exampleKh": "តើកូនសោរបស់ខ្ញុំនៅឯណា?"
+  },
+  {
+    "grade": 4,
+    "word": "phone",
+    "ipa": "",
+    "type": "noun",
+    "emoji": "📱",
+    "definition": "A device used for talking to someone from a different place.",
+    "definitionKh": "ឧបករណ៍ប្រើសម្រាប់និយាយជាមួយអ្នកណាម្នាក់ពីទីកន្លែងផ្សេង។",
+    "example": "My phone is on the sofa.",
+    "exampleKh": "ទូរស័ព្ទរបស់ខ្ញុំនៅ​លើសាឡុង។"
+  },
+  {
+    "grade": 4,
+    "word": "glasses",
+    "ipa": "",
+    "type": "noun",
+    "emoji": "👓",
+    "definition": "A pair of lenses set in a frame and worn on the nose and ears to correct or assist defective eyesight.",
+    "definitionKh": "កញ្ចក់ពីរភ្ជាប់នឹងស៊ុមពាក់លើច្រមុះ និងត្រចៀក ដើម្បីកែតម្រូវ ឬជួយដល់ភ្នែកដែលមានបញ្ហា។",
+    "example": "Where are my glasses?",
+    "exampleKh": "តើវ៉ែនតារបស់ខ្ញុំនៅឯណា?"
+  },
+  {
+    "grade": 4,
+    "word": "lamp",
+    "ipa": "",
+    "type": "noun",
+    "emoji": "💡",
+    "definition": "A device for giving light, either one that burns oil or gas, or one that uses electricity.",
+    "definitionKh": "ឧបករណ៍សម្រាប់ផ្តល់ពន្លឺ អាចជាប្រភេទដុតប្រេង ឬឧស្ម័ន ឬប្រភេទប្រើអគ្គិសនី។",
+    "example": "The lamp is on the table.",
+    "exampleKh": "ចង្កៀងនៅ​លើតុ។"
+  },
+  {
+    "grade": 4,
+    "word": "head",
+    "ipa": "",
+    "type": "noun",
+    "emoji": "👤",
+    "definition": "The upper part of the human body, containing the brain, eyes, ears, nose, and mouth.",
+    "definitionKh": "ផ្នែកខាងលើនៃរាងកាយមនុស្ស ដែលមានខួរក្បាល ភ្នែក ត្រចៀក ច្រមុះ និងមាត់។",
+    "example": "My head hurts.",
+    "exampleKh": "ក្បាលរបស់ខ្ញុំឈឺ។"
+  },
+  {
+    "grade": 4,
+    "word": "sofa",
+    "ipa": "",
+    "type": "noun",
+    "emoji": "🛋️",
+    "definition": "A long upholstered seat with a back and arms, for seating more than one person.",
+    "definitionKh": "កៅអីវែងមានខ្នង និងដៃសម្រាប់អង្គុយបានច្រើននាក់។",
+    "example": "The cat is sleeping on the sofa.",
+    "exampleKh": "ឆ្មាកំពុងដេកនៅ​លើសាឡុង។"
+  },
+  {
+    "grade": 4,
+    "word": "car",
+    "ipa": "",
+    "type": "noun",
+    "emoji": "🚗",
+    "definition": "A road vehicle, typically with four wheels, powered by an internal combustion engine or electric motor and able to carry a small number of people.",
+    "definitionKh": "យានជំនិះផ្លូវគោក ជាធម្មតាមានកង់បួន ដំណើរការដោយម៉ាស៊ីនចំហេះខាងក្នុង ឬម៉ូទ័រអគ្គិសនី ហើយអាចដឹកមនុស្សបានតិចតួច។",
+    "example": "I have a red car.",
+    "exampleKh": "ខ្ញុំមានឡានពណ៌ក្រហម។"
+  },
+  {
+    "grade": 4,
+    "word": "on",
+    "ipa": "",
+    "type": "adverb",
+    "emoji": "⬆️",
+    "definition": "Situated at, covering, or forming part of the upper surface of something.",
+    "definitionKh": "ស្ថិតនៅ គ្របដណ្តប់ ឬបង្កើតជាផ្នែកនៃផ្ទៃខាងលើនៃអ្វីមួយ។",
+    "example": "The book is on the table.",
+    "exampleKh": "សៀវភៅនៅ​លើតុ។"
+  },
+  {
+    "grade": 4,
+    "word": "under",
+    "ipa": "",
+    "type": "adverb",
+    "emoji": "⬇️",
+    "definition": "Extending or directly below.",
+    "definitionKh": "លាតសន្ធឹង ឬស្ថិតនៅ​ខាងក្រោមដោយផ្ទាល់។",
+    "example": "The cat is under the bed.",
+    "exampleKh": "ឆ្មា​នៅ​ក្រោមគ្រែ។"
+  },
+  {
+    "grade": 4,
+    "word": "my",
+    "ipa": "",
+    "type": "adjective",
+    "emoji": "🙋‍♂️",
+    "definition": "Belonging to or associated with the speaker.",
+    "definitionKh": "ជារបស់ ឬទាក់ទងនឹងអ្នកនិយាយ។",
+    "example": "This is my car.",
+    "exampleKh": "នេះជាឡានរបស់ខ្ញុំ។"
+  },
+  {
+    "grade": 4,
+    "word": "your",
+    "ipa": "",
+    "type": "adjective",
+    "emoji": "🧑‍🤝‍🧑",
+    "definition": "Belonging to or associated with the person or people that the speaker is addressing.",
+    "definitionKh": "ជារបស់ ឬទាក់ទងនឹងបុគ្គល ឬមនុស្សដែលអ្នកនិយាយកំពុងនិយាយជាមួយ។",
+    "example": "Is this your phone?",
+    "exampleKh": "តើនេះជាទូរស័ព្ទរបស់អ្នកឬ?"
   }
 ]

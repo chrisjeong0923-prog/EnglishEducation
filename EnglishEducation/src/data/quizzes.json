@@ -126,5 +126,85 @@
     "explanation": "'Big' means large, which is the opposite of 'small'.",
     "explanationKh": "'Big' មានន័យថាធំ ដែលផ្ទុយពី 'small'។",
     "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Where _____ my glasses?",
+    "questionTextKh": "តើវ៉ែនតារបស់ខ្ញុំ​នៅឯណា?",
+    "options": [
+      "is",
+      "am",
+      "are",
+      "be"
+    ],
+    "correctAnswer": 2,
+    "explanation": "''Glasses'' is a plural noun, so we use ''are''.",
+    "explanationKh": "''Glasses'' គឺជា​នាមពហុវចនៈ ដូច្នេះយើងប្រើ ''are''។"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "My phone is _____ the sofa.",
+    "questionTextKh": "ទូរស័ព្ទរបស់ខ្ញុំនៅ _____ សាឡុង។",
+    "options": [
+      "under",
+      "on",
+      "in",
+      "next to"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The lesson shows the phone resting on the top surface of the sofa, meaning ''on'' the sofa.",
+    "explanationKh": "មេរៀនបានបង្ហាញទូរស័ព្ទស្ថិតនៅ​លើផ្ទៃខាងលើនៃសាឡុង ដូច្នេះគឺ ''on'' the sofa។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "This is _____ car.",
+    "questionTextKh": "នេះជា _____ ឡាន។",
+    "options": [
+      "I",
+      "my",
+      "mine",
+      "me"
+    ],
+    "correctAnswer": 1,
+    "explanation": "''My'' is a possessive adjective used before a noun to show ownership.",
+    "explanationKh": "''My'' គឺជាគុណនាមកម្មសិទ្ធិដែលប្រើមុននាមដើម្បីបង្ហាញពីភាពជាម្ចាស់។"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "What do you use to open a door?",
+    "questionTextKh": "តើអ្នកប្រើអ្វីដើម្បីបើកទ្វារ?",
+    "options": [
+      "phone",
+      "lamp",
+      "key",
+      "glasses"
+    ],
+    "correctAnswer": 2,
+    "explanation": "A key is a small metal object used to lock or unlock doors.",
+    "explanationKh": "កូនសោគឺជាវត្ថុលោហៈតូចមួយដែលប្រើដើម្បីចាក់សោរ ឬដោះសោទ្វារ។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "The boy is hiding _____ the table.",
+    "questionTextKh": "ក្មេងប្រុសកំពុងលាក់ខ្លួន _____ តុ។",
+    "options": [
+      "on",
+      "over",
+      "under",
+      "beside"
+    ],
+    "correctAnswer": 2,
+    "explanation": "''Under'' means directly below something.",
+    "explanationKh": "''Under'' មានន័យថាស្ថិតនៅ​ខាងក្រោមអ្វីមួយដោយផ្ទាល់។"
   }
 ]
