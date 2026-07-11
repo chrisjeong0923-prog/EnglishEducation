@@ -472,9 +472,12 @@ const questionsJson = JSON.stringify(questions);
       const iframe = this.container.querySelector('.pdf-viewer-frame') as HTMLIFrameElement | null;
       if (!dialog || !iframe) return;
       
-      const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-      const fullPdfUrl = pdfUrl.startsWith(base) ? pdfUrl : `${base}${pdfUrl}`;
-      const fullUrl = pageNum ? `${fullPdfUrl}#page=${pageNum}` : fullPdfUrl;
+      const base = import.meta.env.BASE_URL; // e.g., "/EnglishEducation/" or "/"
+      const cleanPdfUrl = pdfUrl.startsWith('/') ? pdfUrl.substring(1) : pdfUrl;
+      const fullPdfUrl = `${base}${cleanPdfUrl}`;
+      const absoluteUrl = new URL(fullPdfUrl, window.location.origin).href;
+      
+      const fullUrl = pageNum ? `${absoluteUrl}#page=${pageNum}` : absoluteUrl;
       iframe.src = fullUrl;
       
       dialog.showModal();
