@@ -46,14 +46,14 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
   <div class="flashcard-inner">
     
     <!-- Front of the Card -->
-    <div class="card-side card-front" style={`border-color: ${borderColor};`}>
+    <div class="card-side card-front" style={`--type-border-color: ${borderColor};`}>
       <div class="card-header">
-        <span class="word-type" style={`background-color: ${badgeColor}; border-color: ${borderColor}; color: #1a202c;`}>
+        <span class="word-type" style={`background-color: ${badgeColor}; color: #1a202c;`}>
           <span class="en-text">{type}</span>
           <span class="kh-text">{typeKhmer}</span>
         </span>
         <div class="card-actions">
-          <button class="speak-btn" data-word={word} aria-label="Listen to pronunciation">
+          <button class="speak-btn" data-word={word} data-emoji={emoji} data-type={type} aria-label="Listen to pronunciation">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="speaker-icon">
               <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
               <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -81,9 +81,9 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
       </div>
     </div>
     
-    <div class="card-side card-back" style={`border-color: ${borderColor};`}>
+    <div class="card-side card-back" style={`--type-border-color: ${borderColor};`}>
       <div class="card-header">
-        <span class="word-type" style={`background-color: ${badgeColor}; border-color: ${borderColor}; color: #1a202c;`}>
+        <span class="word-type" style={`background-color: ${badgeColor}; color: #1a202c;`}>
           <span class="en-text">{type}</span>
           <span class="kh-text">{typeKhmer}</span>
         </span>
@@ -126,9 +126,72 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
       if (target.closest('.speak-btn') || target.closest('.learn-btn')) {
         return;
       }
+      
+      card.classList.add('flipping');
       card.classList.toggle('flipped');
+      
+      // Remove flipping class after transition completes
+      setTimeout(() => {
+        card.classList.remove('flipping');
+      }, 600);
     });
   });
+
+  // Helper to map words/emojis to specific cartoon animations
+  function getAnimationClass(word: string, emoji: string, type: string): string {
+    const w = word.toLowerCase();
+    
+    // Marine/Swimming (Fish, sharks, coral polyps, waves)
+    if (
+      ['fish', 'shark', 'sea', 'coral'].includes(w) ||
+      ['🐟', '🦈', '🐠', '🌊'].includes(emoji)
+    ) {
+      return 'anim-swim-active';
+    }
+    
+    // Hop/Jump (Animals)
+    if (
+      ['dog', 'cat', 'elephant', 'rabbit', 'bear', 'frog'].includes(w) ||
+      ['🐶', '🐘', '🐱', '🐸', '🐰', '🐻'].includes(emoji)
+    ) {
+      return 'anim-jump-active';
+    }
+    
+    // Spooky floating ghost
+    if (
+      w === 'scary' ||
+      emoji === '👻'
+    ) {
+      return 'anim-ghost-active';
+    }
+    
+    // Jingling mechanical objects
+    if (
+      w === 'key' ||
+      ['🔑', '🔔', '🚪', '🪙'].includes(emoji)
+    ) {
+      return 'anim-jingle-active';
+    }
+    
+    // Horizontal eye scanning
+    if (
+      ['see', 'look', 'watch', 'eye'].includes(w) ||
+      ['👀', '👁️'].includes(emoji)
+    ) {
+      return 'anim-scan-active';
+    }
+    
+    // Color pulsating glows
+    if (
+      ['red', 'yellow', 'blue', 'green', 'orange', 'purple'].includes(w) ||
+      ['❤️', '💛', '💙', '💚', '🧡', '💜'].includes(emoji)
+    ) {
+      return 'anim-glow-active';
+    }
+    
+    // Default playful pop
+    return 'anim-pop-active';
+  }
 
   // Add SpeechSynthesis logic
   const speakButtons = document.querySelectorAll('.speak-btn');
@@ -136,15 +199,39 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const word = btn.getAttribute('data-word');
+      const emoji = btn.getAttribute('data-emoji') || '';
+      const type = btn.getAttribute('data-type') || '';
+      
       if (word && 'speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         
-        const utterance = new SpeechSynthesisUtterance(word);
+        const utterance = new SpeechSynthesisUtterance(word.toLowerCase());
         utterance.lang = 'en-US';
-        utterance.rate = 0.75;
+        utterance.rate = 0.6;
         window.speechSynthesis.speak(utterance);
         
         btn.classList.add('speaking');
+        const container = btn.closest('.flashcard-container') as any;
+        const animClass = getAnimationClass(word, emoji, type);
+        
+        if (container) {
+          // Clear any active animation timeout to prevent sudden truncation
+          if (container._animTimeout) {
+            clearTimeout(container._animTimeout);
+            container.classList.remove(container._lastAnimClass || animClass);
+          }
+          
+          container.classList.add(animClass);
+          container._lastAnimClass = animClass;
+          
+          // Keep the class active for a fixed 1.5s matching CSS duration limits
+          container._animTimeout = setTimeout(() => {
+            container.classList.remove(animClass);
+            container._animTimeout = null;
+            container._lastAnimClass = null;
+          }, 1500);
+        }
+        
         utterance.onend = () => {
           btn.classList.remove('speaking');
         };
@@ -165,15 +252,20 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
   }
 
   .flashcard-container:hover {
-    transform: scale(1.03);
+    transform: scale(1.04) translateY(-4px);
   }
 
   .flashcard-inner {
     position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.6s cubic-bezier(0.34, 1, 0.64, 1);
     transform-style: preserve-3d;
+  }
+
+  /* Use a smooth snapping curve without overshooting backface angle (prevents flicker) */
+  .flashcard-container.flipping .flashcard-inner {
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   .flashcard-container.flipped .flashcard-inner {
@@ -189,19 +281,19 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     background: var(--bg-surface);
-    border: 3px solid #e2e8f0;
+    border: 3.5px solid #000000;
     border-radius: var(--radius-lg);
     padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: var(--shadow-playful);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    box-shadow: 6px 6px 0px var(--type-border-color, #000000);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.3s ease;
+    transform-style: preserve-3d;
   }
 
   .flashcard-container:hover .card-side {
-    box-shadow: 0 12px 30px rgba(159, 122, 234, 0.15);
-    border-color: var(--color-primary);
+    box-shadow: 9px 9px 0px var(--type-border-color, #000000);
   }
 
   .card-front {
@@ -229,13 +321,13 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
     letter-spacing: 0.5px;
     padding: 4px 12px;
     border-radius: 20px;
-    border: 2px solid transparent;
+    border: 2px solid #000000;
   }
 
   .speak-btn {
     background: #ffffff;
     border: 2.5px solid #000000;
-    box-shadow: 0 3px 0 #000000;
+    box-shadow: 3px 3px 0px #000000;
     border-radius: 50%;
     width: 44px;
     height: 44px;
@@ -244,18 +336,18 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
     justify-content: center;
     cursor: pointer;
     color: #1a202c;
-    transition: var(--transition-smooth);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.15s ease, box-shadow 0.15s ease;
   }
 
   .speak-btn:hover {
     background: #fef08a;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 0 #000000;
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px #000000;
   }
 
   .speak-btn:active {
-    transform: translateY(2px);
-    box-shadow: 0 1px 0 #000000;
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px #000000;
   }
 
   .speak-btn.speaking {
@@ -402,6 +494,7 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
     object-fit: contain;
     filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.08));
     animation: float 4s ease-in-out infinite alternate;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .vocab-emoji {
@@ -409,12 +502,50 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
     line-height: 1;
     filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.08));
     animation: float 4s ease-in-out infinite alternate;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: inline-block;
   }
 
   /* Hover bounce animation */
   .flashcard-container:hover .vocab-sticker,
   .flashcard-container:hover .vocab-emoji {
-    transform: scale(1.1) rotate(2deg);
+    transform: scale(1.12) rotate(3deg);
+  }
+
+  /* Active custom animations triggered by speaking */
+  .flashcard-container.anim-swim-active .vocab-sticker,
+  .flashcard-container.anim-swim-active .vocab-emoji {
+    animation: animSwim 1.5s ease-in-out;
+  }
+
+  .flashcard-container.anim-jump-active .vocab-sticker,
+  .flashcard-container.anim-jump-active .vocab-emoji {
+    animation: animJump 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .flashcard-container.anim-ghost-active .vocab-sticker,
+  .flashcard-container.anim-ghost-active .vocab-emoji {
+    animation: animGhost 1.5s ease-in-out;
+  }
+
+  .flashcard-container.anim-jingle-active .vocab-sticker,
+  .flashcard-container.anim-jingle-active .vocab-emoji {
+    animation: animJingle 1.2s ease-in-out;
+  }
+
+  .flashcard-container.anim-scan-active .vocab-sticker,
+  .flashcard-container.anim-scan-active .vocab-emoji {
+    animation: animScan 1.5s ease-in-out;
+  }
+
+  .flashcard-container.anim-glow-active .vocab-sticker,
+  .flashcard-container.anim-glow-active .vocab-emoji {
+    animation: animGlow 1.5s ease-in-out;
+  }
+
+  .flashcard-container.anim-pop-active .vocab-sticker,
+  .flashcard-container.anim-pop-active .vocab-emoji {
+    animation: animPop 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   @keyframes float {
@@ -422,8 +553,60 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
       transform: translateY(0px) rotate(0deg);
     }
     100% {
-      transform: translateY(-6px) rotate(-1deg);
+      transform: translateY(-8px) rotate(-2deg);
     }
+  }
+
+  @keyframes animSwim {
+    0% { transform: translateX(0) scaleX(1); }
+    20% { transform: translateX(-45px) scaleX(1) rotate(-5deg); }
+    45% { transform: translateX(-45px) scaleX(-1); }
+    50% { transform: translateX(-45px) scaleX(-1); }
+    75% { transform: translateX(45px) scaleX(-1) rotate(5deg); }
+    95% { transform: translateX(45px) scaleX(1); }
+    100% { transform: translateX(0) scaleX(1); }
+  }
+
+  @keyframes animJump {
+    0% { transform: translateY(0) scale(1, 1); }
+    15% { transform: translateY(0) scale(1.2, 0.75); }
+    35% { transform: translateY(-30px) scale(0.85, 1.2); }
+    60% { transform: translateY(5px) scale(1.05, 0.95); }
+    80% { transform: translateY(-5px) scale(0.98, 1.02); }
+    100% { transform: translateY(0) scale(1, 1); }
+  }
+
+  @keyframes animGhost {
+    0% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
+    25% { transform: translateY(-20px) scale(1.1) rotate(5deg); opacity: 0.5; filter: blur(1.5px); }
+    50% { transform: translateY(-10px) scale(0.95) rotate(-5deg); opacity: 0.75; }
+    75% { transform: translateY(-20px) scale(1.05) rotate(3deg); opacity: 0.5; filter: blur(1.5px); }
+    100% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
+  }
+
+  @keyframes animJingle {
+    0%, 100% { transform: rotate(0) scale(1); }
+    15%, 45%, 75% { transform: rotate(-15deg) scale(1.05); }
+    30%, 60%, 90% { transform: rotate(15deg) scale(1.05); }
+  }
+
+  @keyframes animScan {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-15px) scale(1.05); }
+    60% { transform: translateX(15px) scale(1.05); }
+  }
+
+  @keyframes animGlow {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(167, 139, 250, 0)); }
+    50% { transform: scale(1.2); filter: drop-shadow(0 0 20px var(--color-primary)); }
+  }
+
+  @keyframes animPop {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.25) rotate(-6deg); }
+    60% { transform: scale(0.85) rotate(6deg); }
+    80% { transform: scale(1.05) rotate(-2deg); }
+    100% { transform: scale(1) rotate(0); }
   }
 
   @keyframes speakerPulse {
@@ -431,7 +614,7 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
       transform: scale(1);
     }
     100% {
-      transform: scale(1.08);
+      transform: scale(1.15);
     }
   }
 
@@ -445,7 +628,7 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
   .learn-btn {
     background: #ffffff;
     border: 2.5px solid #000000;
-    box-shadow: 0 3px 0 #000000;
+    box-shadow: 3px 3px 0px #000000;
     border-radius: 50%;
     width: 44px;
     height: 44px;
@@ -454,36 +637,38 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
     justify-content: center;
     cursor: pointer;
     color: var(--color-text-muted);
-    transition: var(--transition-smooth);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
     font-size: 1.3rem;
     font-weight: bold;
   }
 
   .learn-btn:hover {
     background: #e2e8f0;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 0 #000000;
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px #000000;
   }
 
   .learn-btn:active {
-    transform: translateY(2px);
-    box-shadow: 0 1px 0 #000000;
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px #000000;
   }
 
   .learn-btn.learned {
     background: var(--color-success);
     color: #ffffff;
-    border-color: #047857;
-    box-shadow: 0 3px 0 #047857;
+    border-color: #000000;
+    box-shadow: 3px 3px 0px #000000;
     animation: bounceCheck 0.4s ease-out;
   }
 
   .learn-btn.learned:hover {
-    box-shadow: 0 5px 0 #047857;
+    box-shadow: 5px 5px 0px #000000;
+    transform: translate(-2px, -2px);
   }
 
   .learn-btn.learned:active {
-    box-shadow: 0 1px 0 #047857;
+    box-shadow: 1px 1px 0px #000000;
+    transform: translate(2px, 2px);
   }
 
   @keyframes bounceCheck {

@@ -16,7 +16,7 @@ const grade6Quiz = quizzesData.filter(q => q.grade === 6 && q.type === 'grammar'
 const grade6Vocab = quizzesData.filter(q => q.grade === 6 && q.type === 'vocabulary');
 ---
 
-<Layout title="Grammar & Vocabulary Quizzes" description="Bilingual grammar and vocabulary quizzes mapped by school grade for Cambodian learners.">
+<Layout title="Grammar & Vocabulary Quizzes" description="Bilingual grammar and vocabulary quizzes mapped by school grade for Cambodian learners." theme="green">
   <div class="quiz-page-header">
     <h1 class="page-title">
       <span class="en-text">Cool Quiz Games ✏️</span>
@@ -94,13 +94,23 @@ const grade6Vocab = quizzesData.filter(q => q.grade === 6 && q.type === 'vocabul
 </Layout>
 
 <script>
-  // Show active quiz panel based on localStorage preference
-  const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
-  const activePanel = document.getElementById(`${preferredGrade}-quiz`);
-  if (activePanel) {
-    activePanel.classList.add('active');
-  } else {
-    document.getElementById('grade3-quiz')?.classList.add('active');
+  function initQuizPage() {
+    // Show active quiz panel based on localStorage preference
+    const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
+    const activePanel = document.getElementById(`${preferredGrade}-quiz`);
+    if (activePanel) {
+      activePanel.classList.add('active');
+    } else {
+      document.getElementById('grade3-quiz')?.classList.add('active');
+    }
+  }
+
+  // Defer execution safely
+  if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', initQuizPage);
+    if (document.readyState !== 'loading') {
+      initQuizPage();
+    }
   }
 </script>
 

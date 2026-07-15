@@ -306,5 +306,192 @@
     "definitionKh": "ជារបស់ ឬទាក់ទងនឹងបុគ្គល ឬមនុស្សដែលអ្នកនិយាយកំពុងនិយាយជាមួយ។",
     "example": "Is this your phone?",
     "exampleKh": "តើនេះជាទូរស័ព្ទរបស់អ្នកឬ?"
+  },
+  {
+    "grade": 5,
+    "word": "weather",
+    "ipa": "/ˈweðər/",
+    "type": "noun",
+    "emoji": "🌦️",
+    "definition": "What the sky and air are like outside, such as sunny, rainy, or snowy.",
+    "definitionKh": "សភាពមេឃ និងខ្យល់អាកាសនៅខាងក្រៅ ដូចជាមានថ្ងៃរះ ភ្លៀងធ្លាក់ ឬធ្លាក់ទឹកកក។",
+    "example": "How is the weather?",
+    "exampleKh": "តើអាកាសធាតុយ៉ាងណាដែរ?"
+  },
+  {
+    "grade": 5,
+    "word": "sun",
+    "ipa": "/sʌn/",
+    "type": "noun",
+    "emoji": "☀️",
+    "definition": "The bright star that gives us light and warmth.",
+    "definitionKh": "ផ្កាយភ្លឺដែលផ្ដល់ពន្លឺ និងភាពកក់ក្ដៅដល់យើង។",
+    "example": "The sun is shining brightly today.",
+    "exampleKh": "ថ្ងៃនេះព្រះអាទិត្យរះយ៉ាងភ្លឺស្វាង។"
+  },
+  {
+    "grade": 5,
+    "word": "sunny",
+    "ipa": "/ˈsʌni/",
+    "type": "adjective",
+    "emoji": "☀️",
+    "definition": "Full of sunshine; bright with light from the sun.",
+    "definitionKh": "ពោរពេញដោយពន្លឺថ្ងៃ; ភ្លឺថ្លាដោយពន្លឺពីព្រះអាទិត្យ។",
+    "example": "It is sunny outside.",
+    "exampleKh": "នៅខាងក្រៅមានពន្លឺថ្ងៃ។"
+  },
+  {
+    "grade": 5,
+    "word": "cloud",
+    "ipa": "/klaʊd/",
+    "type": "noun",
+    "emoji": "☁️",
+    "definition": "A white or gray mass of water drops in the sky.",
+    "definitionKh": "ម៉ាសពណ៌ស ឬពណ៌ប្រផេះនៃដំណក់ទឹកនៅលើមេឃ។",
+    "example": "I see the clouds.",
+    "exampleKh": "ខ្ញុំឃើញពពក។"
+  },
+  {
+    "grade": 5,
+    "word": "rain",
+    "ipa": "/reɪn/",
+    "type": "noun",
+    "emoji": "🌧️",
+    "definition": "Water that falls in drops from clouds to the ground.",
+    "definitionKh": "ទឹកដែលធ្លាក់ជាដំណក់ៗពីពពកមកដី។",
+    "example": "I see rain.",
+    "exampleKh": "ខ្ញុំឃើញភ្លៀង។"
+  },
+  {
+    "grade": 5,
+    "word": "rainy",
+    "ipa": "/ˈreɪni/",
+    "type": "adjective",
+    "emoji": "🌧️",
+    "definition": "Having a lot of rain.",
+    "definitionKh": "មានភ្លៀងធ្លាក់ច្រើន។",
+    "example": "Don't forget your umbrella, it's a rainy day.",
+    "exampleKh": "កុំភ្លេចឆ័ត្ររបស់អ្នក ព្រោះវាជាថ្ងៃដែលមានភ្លៀង។"
+  },
+  {
+    "grade": 5,
+    "word": "wind",
+    "ipa": "/wɪnd/",
+    "type": "noun",
+    "emoji": "🌬️",
+    "definition": "The movement of air.",
+    "definitionKh": "ចលនានៃខ្យល់។",
+    "example": "The wind is blowing.",
+    "exampleKh": "ខ្យល់កំពុងបក់។"
+  },
+  {
+    "grade": 5,
+    "word": "windy",
+    "ipa": "/ˈwɪndi/",
+    "type": "adjective",
+    "emoji": "🌬️",
+    "definition": "Having a lot of wind.",
+    "definitionKh": "មានខ្យល់បក់ខ្លាំង។",
+    "example": "It's too windy to play outside today.",
+    "exampleKh": "ថ្ងៃនេះមានខ្យល់ខ្លាំងពេកមិនអាចលេងនៅខាងក្រៅបានទេ។"
+  },
+  {
+    "grade": 5,
+    "word": "snow",
+    "ipa": "/snəʊ/",
+    "type": "noun",
+    "emoji": "❄️",
+    "definition": "Soft, white pieces of ice that fall from the sky in cold weather.",
+    "definitionKh": "ដុំទឹកកកពណ៌សទន់ៗដែលធ្លាក់ពីលើមេឃក្នុងអាកាសធាតុត្រជាក់។",
+    "example": "I see snow.",
+    "exampleKh": "ខ្ញុំឃើញព្រិល។"
+  },
+  {
+    "grade": 5,
+    "word": "snowy",
+    "ipa": "/ˈsnəʊi/",
+    "type": "adjective",
+    "emoji": "❄️",
+    "definition": "Covered with snow, or having a lot of snow.",
+    "definitionKh": "គ្របដណ្ដប់ដោយព្រិល ឬមានព្រិលធ្លាក់ច្រើន។",
+    "example": "We built a snowman on a snowy afternoon.",
+    "exampleKh": "យើងបានសង់តុក្កតាព្រិលនៅរសៀលដែលមានព្រិលធ្លាក់។"
+  },
+  {
+    "grade": 5,
+    "word": "outside",
+    "ipa": "/ˌaʊtˈsaɪd/",
+    "type": "adverb",
+    "emoji": "🌳",
+    "definition": "Not inside a building; in the open air.",
+    "definitionKh": "មិនមែននៅក្នុងអាគារទេ; នៅទីវាលខាងក្រៅ។",
+    "example": "It is snowy outside.",
+    "exampleKh": "នៅខាងក្រៅមានព្រិលធ្លាក់។"
+  },
+  {
+    "grade": 3,
+    "word": "hello",
+    "ipa": "/həˈloʊ/",
+    "type": "adverb",
+    "emoji": "👋",
+    "definition": "A greeting used when meeting or addressing someone.",
+    "definitionKh": "ពាក្យសម្រាប់ស្វាគមន៍នៅពេលជួប ឬនិយាយទៅកាន់នរណាម្នាក់។",
+    "example": "Hello! My name is Alice.",
+    "exampleKh": "សួស្តី! ខ្ញុំឈ្មោះ Alice។"
+  },
+  {
+    "grade": 3,
+    "word": "boy",
+    "ipa": "/bɔɪ/",
+    "type": "noun",
+    "emoji": "👦",
+    "definition": "A young male human.",
+    "definitionKh": "មនុស្សប្រុសវ័យក្មេង។",
+    "example": "I am a boy.",
+    "exampleKh": "ខ្ញុំជាក្មេងប្រុស។"
+  },
+  {
+    "grade": 3,
+    "word": "girl",
+    "ipa": "/ɡɜːrl/",
+    "type": "noun",
+    "emoji": "👧",
+    "definition": "A young female human.",
+    "definitionKh": "មនុស្សស្រីវ័យក្មេង។",
+    "example": "I am a girl.",
+    "exampleKh": "ខ្ញុំជាក្មេងស្រី។"
+  },
+  {
+    "grade": 3,
+    "word": "dog",
+    "ipa": "/dɒɡ/",
+    "type": "noun",
+    "emoji": "🐶",
+    "definition": "A common animal often kept as a pet, known for its loyalty.",
+    "definitionKh": "សត្វចិញ្ចឹមទូទៅដែលល្បីល្បាញដោយសារភាពស្មោះត្រង់របស់វា។",
+    "example": "I have a dog.",
+    "exampleKh": "ខ្ញុំមានឆ្កែមួយក្បាល។"
+  },
+  {
+    "grade": 3,
+    "word": "He",
+    "ipa": "/hiː/",
+    "type": "noun",
+    "emoji": "👨",
+    "definition": "A pronoun used to refer to a male person or animal that has already been mentioned or is easily identified.",
+    "definitionKh": "សព្វនាមសម្រាប់សំដៅលើមនុស្សប្រុស ឬសត្វឈ្មោលដែលបានលើកឡើងរួចហើយ ឬអាចកំណត់អត្តសញ្ញាណបានយ៉ាងងាយស្រួល។",
+    "example": "He is a boy.",
+    "exampleKh": "គាត់ជាក្មេងប្រុស។"
+  },
+  {
+    "grade": 3,
+    "word": "She",
+    "ipa": "/ʃiː/",
+    "type": "noun",
+    "emoji": "👩",
+    "definition": "A pronoun used to refer to a female person or animal that has already been mentioned or is easily identified.",
+    "definitionKh": "សព្វនាមសម្រាប់សំដៅលើមនុស្សស្រី ឬសត្វញីដែលបានលើកឡើងរួចហើយ ឬអាចកំណត់អត្តសញ្ញាណបានយ៉ាងងាយស្រួល។",
+    "example": "She is a girl.",
+    "exampleKh": "នាងជាក្មេងស្រី។"
   }
 ]

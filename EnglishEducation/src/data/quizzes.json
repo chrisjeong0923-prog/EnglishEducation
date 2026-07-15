@@ -206,5 +206,149 @@
     "correctAnswer": 2,
     "explanation": "''Under'' means directly below something.",
     "explanationKh": "''Under'' មានន័យថាស្ថិតនៅ​ខាងក្រោមអ្វីមួយដោយផ្ទាល់។"
+  },
+  {
+    "grade": 5,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "How do you answer the question 'How is the weather?' when the sun is shining brightly?",
+    "questionTextKh": "តើអ្នកឆ្លើយសំណួរ 'How is the weather?' យ៉ាងដូចម្តេច នៅពេលដែលព្រះអាទិត្យរះយ៉ាងភ្លឺស្វាង?",
+    "options": [
+      "It is sun.",
+      "It is sunny.",
+      "It is the sun.",
+      "It is sun + y."
+    ],
+    "correctAnswer": 1,
+    "explanation": "To describe sunny weather, we use the adjective 'sunny'. 'Sun' is a noun.",
+    "explanationKh": "ដើម្បីពិពណ៌នាអាកាសធាតុដែលមានពន្លឺថ្ងៃ យើងប្រើគុណនាម 'sunny'។ 'Sun' គឺជាកិរិយាស័ព្ទ។"
+  },
+  {
+    "grade": 5,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Which word describes a day when there is a lot of rain?",
+    "questionTextKh": "តើពាក្យមួយណាពិពណ៌នាអំពីថ្ងៃដែលមានភ្លៀងធ្លាក់ច្រើន?",
+    "options": [
+      "Rain",
+      "Raining",
+      "Rainy",
+      "Wet"
+    ],
+    "correctAnswer": 2,
+    "explanation": "'Rainy' is the adjective used to describe a day with a lot of rain. 'Rain' is the noun, and 'raining' is the present participle verb.",
+    "explanationKh": "'Rainy' គឺជាគុណនាមដែលប្រើដើម្បីពិពណ៌នាថ្ងៃដែលមានភ្លៀងធ្លាក់ច្រើន។ 'Rain' គឺជាកិរិយាស័ព្ទ ហើយ 'raining' គឺជាបច្ចុប្បន្នកាលនៃកិរិយាស័ព្ទ។"
+  },
+  {
+    "grade": 5,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Complete the sentence: 'I see _______ clouds.'",
+    "questionTextKh": "បំពេញប្រយោគ៖ 'I see _______ clouds។'",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "some"
+    ],
+    "correctAnswer": 2,
+    "explanation": "According to the grammar rule on page 4, when talking about clouds we always say 'the clouds' (using 'the' and plural 's').",
+    "explanationKh": "យោងទៅតាមច្បាប់វេយ្យាករណ៍នៅលើទំព័រទី 4 នៅពេលនិយាយអំពីពពក យើងតែងតែនិយាយថា 'the clouds' (ដោយប្រើ 'the' និង 's' ពហុវចនៈ)។"
+  },
+  {
+    "grade": 5,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Look at the drawing on page 3. How is the weather?",
+    "questionTextKh": "មើលរូបភាពនៅលើទំព័រទី 3។ តើអាកាសធាតុយ៉ាងណាដែរ?",
+    "options": [
+      "It is snow.",
+      "It is snowing.",
+      "It is snowy outside.",
+      "It is wind."
+    ],
+    "correctAnswer": 2,
+    "explanation": "On page 3, the stick figure describes the snowy weather as: 'It is snowy outside'.",
+    "explanationKh": "នៅលើទំព័រទី 3 រូបមនុស្សក្បាលមូលបានពិពណ៌នាអំពីអាកាសធាតុព្រិលធ្លាក់ថា៖ 'It is snowy outside'។"
+  },
+  {
+    "grade": 5,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Complete the sentence to describe seeing snow: 'I see _______.'",
+    "questionTextKh": "បំពេញប្រយោគដើម្បីពិពណ៌នាអំពីការឃើញព្រិល៖ 'I see _______។'",
+    "options": [
+      "the snow",
+      "snow",
+      "snows",
+      "the snows"
+    ],
+    "correctAnswer": 1,
+    "explanation": "As shown on page 4, we say 'I see snow' (and 'I see rain') without using 'the' or adding plural 's'.",
+    "explanationKh": "ដូចដែលបានបង្ហាញនៅលើទំព័រទី 4 យើងនិយាយថា 'I see snow' (និង 'I see rain') ដោយមិនប្រើ 'the' ឬបន្ថែម 's' ពហុវចនៈនោះទេ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "What do you say when you meet someone new?",
+    "questionTextKh": "តើអ្នកនិយាយអ្វីនៅពេលអ្នកជួបនរណាម្នាក់ថ្មី?",
+    "options": [
+      "Goodbye",
+      "Thank you",
+      "Hello",
+      "Sorry"
+    ],
+    "correctAnswer": 2,
+    "explanation": "'Hello' is a common greeting used when you meet someone.",
+    "explanationKh": "'សួស្តី' គឺជាពាក្យស្វាគមន៍ទូទៅដែលប្រើនៅពេលអ្នកជួបនរណាម្នាក់។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "If someone is a young female, what do we call her?",
+    "questionTextKh": "បើសិនជានរណាម្នាក់ជាមនុស្សស្រីវ័យក្មេង តើយើងហៅនាងថាអ្វី?",
+    "options": [
+      "boy",
+      "girl",
+      "dog",
+      "cat"
+    ],
+    "correctAnswer": 1,
+    "explanation": "A young female human is called a 'girl'.",
+    "explanationKh": "មនុស្សស្រីវ័យក្មេងត្រូវបានគេហៅថា 'ក្មេងស្រី'។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Which word do we use for a male person?",
+    "questionTextKh": "តើយើងប្រើពាក្យណាសម្រាប់មនុស្សប្រុស?",
+    "options": [
+      "She",
+      "He",
+      "It",
+      "They"
+    ],
+    "correctAnswer": 1,
+    "explanation": "'He' is used for a male person.",
+    "explanationKh": "ពាក្យ 'He' ត្រូវបានប្រើសម្រាប់មនុស្សប្រុស។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Fill in the blank: 'My name ____ Alice.'",
+    "questionTextKh": "បំពេញចន្លោះទទេ: 'My name ____ Alice។'",
+    "options": [
+      "am",
+      "are",
+      "is",
+      "be"
+    ],
+    "correctAnswer": 2,
+    "explanation": "We use 'is' with 'My name' to state a name.",
+    "explanationKh": "យើងប្រើ 'is' ជាមួយ 'My name' ដើម្បីប្រាប់ឈ្មោះ។"
   }
 ]

@@ -502,9 +502,10 @@ const questionsJson = JSON.stringify(questions);
     max-width: 650px;
     margin: 0 auto;
     background: var(--bg-surface);
-    border: 3px solid #e2e8f0;
+    border: 3.5px solid #000000;
     padding: 32px;
     border-radius: var(--radius-lg);
+    box-shadow: 6px 6px 0px #000000;
   }
 
   .quiz-header {
@@ -544,7 +545,7 @@ const questionsJson = JSON.stringify(questions);
     height: 10px;
     background: #f1f5f9;
     border-radius: 5px;
-    border: 2px solid #e2e8f0;
+    border: 2.5px solid #000000;
     overflow: hidden;
   }
 
@@ -589,44 +590,43 @@ const questionsJson = JSON.stringify(questions);
     font-weight: 700;
     text-align: left;
     background: #ffffff;
-    border: 3px solid #e2e8f0;
+    border: 3px solid #000000;
     border-radius: var(--radius-md);
     color: var(--color-text);
     cursor: pointer;
     transition: var(--transition-smooth);
-    box-shadow: 0 4px 0 #e2e8f0;
+    box-shadow: 4px 4px 0px #000000;
   }
 
   .option-btn:hover:not(:disabled) {
-    border-color: #cbd5e1;
     background: #f8fafc;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 0 #cbd5e1;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000000;
   }
 
   .option-btn:active:not(:disabled) {
-    transform: translateY(2px);
-    box-shadow: 0 2px 0 #cbd5e1;
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000000;
   }
 
   .option-btn.selected {
     background: #f3e8ff;
-    border-color: var(--color-primary);
-    box-shadow: 0 4px 0 var(--color-primary);
+    border-color: #000000;
+    box-shadow: 4px 4px 0px var(--color-primary);
     color: #1a202c;
   }
 
   .option-btn.correct {
     background: #d1fae5;
-    border-color: var(--color-success);
-    box-shadow: 0 4px 0 var(--color-success);
+    border-color: #000000;
+    box-shadow: 4px 4px 0px var(--color-success);
     color: #1a202c;
   }
 
   .option-btn.wrong {
     background: #fee2e2;
-    border-color: var(--color-accent);
-    box-shadow: 0 4px 0 var(--color-accent);
+    border-color: #000000;
+    box-shadow: 4px 4px 0px var(--color-accent);
     color: #1a202c;
   }
 
@@ -640,18 +640,16 @@ const questionsJson = JSON.stringify(questions);
   .feedback-box {
     padding: 20px;
     border-radius: var(--radius-md);
-    border: 3px solid transparent;
+    border: 3px solid #000000;
     animation: slideDown 0.3s ease-out;
   }
 
   .feedback-box.success {
     background: #d1fae5;
-    border-color: var(--color-success);
   }
 
   .feedback-box.error {
     background: #fee2e2;
-    border-color: var(--color-accent);
   }
 
   .feedback-title {
@@ -705,11 +703,11 @@ const questionsJson = JSON.stringify(questions);
     height: 140px;
     border-radius: 50%;
     background: #fef08a;
-    border: 3px solid #000000;
+    border: 3.5px solid #000000;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 0 #000000;
+    box-shadow: 6px 6px 0px #000000;
   }
 
   .score-number {
@@ -741,8 +739,8 @@ const questionsJson = JSON.stringify(questions);
 
   .stat-card {
     background: #ffffff;
-    border: 3px solid #e2e8f0;
-    box-shadow: 0 4px 0 #e2e8f0;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
     padding: 16px 24px;
     border-radius: var(--radius-md);
     min-width: 130px;
@@ -797,7 +795,7 @@ const questionsJson = JSON.stringify(questions);
     padding: 10px 18px;
     background: #d1fae5;
     color: #065f46;
-    border: 2px solid var(--color-success);
+    border: 2.5px solid #000000;
     border-radius: var(--radius-md);
     font-size: 0.95rem;
     font-weight: 800;
@@ -805,14 +803,14 @@ const questionsJson = JSON.stringify(questions);
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 4px 10px rgba(52, 211, 153, 0.15);
+    box-shadow: 4px 4px 0px #000000;
   }
 
   .save-notice-toast.warning {
     background: #fffbeb;
     color: #92400e;
-    border-color: var(--color-warning);
-    box-shadow: 0 4px 10px rgba(251, 191, 36, 0.15);
+    border-color: #000000;
+    box-shadow: 4px 4px 0px #000000;
   }
 
   @keyframes bounce {

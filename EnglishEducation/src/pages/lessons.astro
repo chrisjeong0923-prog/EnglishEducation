@@ -8,7 +8,7 @@ const grade5Lessons = lessonsData.filter(l => l.grade === 5);
 const grade6Lessons = lessonsData.filter(l => l.grade === 6);
 ---
 
-<Layout title="English Lessons" description="Fun bilingual English lessons for school grades 3 to 6.">
+<Layout title="English Lessons" description="Fun bilingual English lessons for school grades 3 to 6." theme="blue">
   <div class="lessons-header">
     <h1 class="page-title">
       <span class="en-text">Fun English Lessons 📖</span>
@@ -173,89 +173,98 @@ const grade6Lessons = lessonsData.filter(l => l.grade === 6);
 </Layout>
 
 <script>
-  // Show active lessons panel based on localStorage preference
-  const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
-  const activePanel = document.getElementById(`${preferredGrade}-lessons`);
-  if (activePanel) {
-    activePanel.classList.add('active');
-  } else {
-    document.getElementById('grade3-lessons')?.classList.add('active');
-  }
+  function initLessonsPage() {
+    // Show active lessons panel based on localStorage preference
+    const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
+    const activePanel = document.getElementById(`${preferredGrade}-lessons`);
+    if (activePanel) {
+      activePanel.classList.add('active');
+    } else {
+      document.getElementById('grade3-lessons')?.classList.add('active');
+    }
 
-  // Setup modal popups
-  const dialog = document.getElementById('lesson-dialog') as HTMLDialogElement;
-  const modalTitle = document.getElementById('modal-lesson-title');
-  const modalContentEn = document.getElementById('modal-lesson-content-en');
-  const modalContentKh = document.getElementById('modal-lesson-content-kh');
-  const pdfLink = document.getElementById('modal-pdf-link') as HTMLAnchorElement;
-  const pdfContainer = document.getElementById('modal-pdf-container');
-  const pdfIframe = document.getElementById('modal-pdf-iframe') as HTMLIFrameElement;
+    // Setup modal popups
+    const dialog = document.getElementById('lesson-dialog') as HTMLDialogElement;
+    const modalTitle = document.getElementById('modal-lesson-title');
+    const modalContentEn = document.getElementById('modal-lesson-content-en');
+    const modalContentKh = document.getElementById('modal-lesson-content-kh');
+    const pdfLink = document.getElementById('modal-pdf-link') as HTMLAnchorElement;
+    const pdfContainer = document.getElementById('modal-pdf-container');
+    const pdfIframe = document.getElementById('modal-pdf-iframe') as HTMLIFrameElement;
 
-  if (dialog && modalTitle && modalContentEn && modalContentKh) {
-    // Add event listener to all start-lesson-btn clicks
-    document.addEventListener('click', (e) => {
-      const card = (e.target as HTMLElement).closest('.lesson-card');
-      if (!card) return;
+    if (dialog && modalTitle && modalContentEn && modalContentKh) {
+      // Add event listener to all start-lesson-btn clicks
+      document.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('.lesson-card');
+        if (!btn) return;
+        
+        const titleEn = btn.getAttribute('data-title') || '';
+        const titleKh = btn.getAttribute('data-title-kh') || '';
+        const contentEn = btn.getAttribute('data-content') || '';
+        const contentKh = btn.getAttribute('data-content-kh') || '';
+        const pdfUrl = btn.getAttribute('data-pdf-url') || '';
 
-      const title = card.getAttribute('data-title') || '';
-      const titleKh = card.getAttribute('data-title-kh') || '';
-      const content = card.getAttribute('data-content') || '';
-      const contentKh = card.getAttribute('data-content-kh') || '';
-      const pdfUrl = card.getAttribute('data-pdf-url') || '';
+        modalTitle.innerHTML = `
+          <span class="en-text">${titleEn}</span>
+          <span class="kh-text">${titleKh}</span>
+        `;
+        modalContentEn.innerText = contentEn;
+        modalContentKh.innerText = contentKh;
 
-      // Populate dialog
-      modalTitle.innerHTML = `
-        <span class="en-text">${title}</span>
-        <span class="kh-text">${titleKh}</span>
-      `;
-      
-      // Preserve line breaks for content
-      modalContentEn.innerHTML = content.replace(/\n/g, '<br>');
-      modalContentKh.innerHTML = contentKh.replace(/\n/g, '<br>');
-
-      // PDF handling
-      if (pdfContainer && pdfIframe) {
         if (pdfUrl) {
-          const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-          const fullPdfUrl = pdfUrl.startsWith(base) ? pdfUrl : `${base}${pdfUrl}`;
-          pdfIframe.src = fullPdfUrl;
-          pdfContainer.classList.remove('hidden');
           if (pdfLink) {
-            pdfLink.href = fullPdfUrl;
+            const baseUrl = import.meta.env.BASE_URL;
+            const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+            const cleanPdf = pdfUrl.startsWith('/') ? pdfUrl.substring(1) : pdfUrl;
+            pdfLink.href = `${cleanBase}${cleanPdf}`;
             pdfLink.classList.remove('hidden');
           }
+          if (pdfContainer) {
+            pdfContainer.classList.remove('hidden');
+          }
         } else {
-          pdfIframe.src = '';
-          pdfContainer.classList.add('hidden');
-          if (pdfLink) pdfLink.classList.add('hidden');
+          if (pdfLink) {
+            pdfLink.classList.add('hidden');
+          }
+          if (pdfContainer) {
+            pdfContainer.classList.add('hidden');
+          }
         }
-      }
 
-      dialog.showModal();
-    });
+        dialog.showModal();
+      });
 
-    // Stop PDF load and clean iframe source on dialog close
-    dialog.addEventListener('close', () => {
-      if (pdfIframe) {
-        pdfIframe.src = '';
-      }
-    });
-
-    // Fallback for browsers without closedby="any" support
-    if (!('closedBy' in HTMLDialogElement.prototype)) {
-      dialog.addEventListener('click', (event) => {
-        if (event.target !== dialog) return;
-        const rect = dialog.getBoundingClientRect();
-        const isDialogContent = (
-          rect.top <= event.clientY &&
-          event.clientY <= rect.top + rect.height &&
-          rect.left <= event.clientX &&
-          event.clientX <= rect.left + rect.width
-        );
-        if (!isDialogContent) {
-          dialog.close();
+      // Clear iframe source on close
+      dialog.addEventListener('close', () => {
+        if (pdfIframe) {
+          pdfIframe.src = '';
         }
       });
+
+      // Fallback for browsers without closedby="any" support
+      if (!('closedBy' in HTMLDialogElement.prototype)) {
+        dialog.addEventListener('click', (event) => {
+          if (event.target !== dialog) return;
+          const rect = dialog.getBoundingClientRect();
+          const isDialogContent = (
+            rect.top <= event.clientY &&
+            event.clientY <= rect.top + rect.height &&
+            rect.left <= event.clientX &&
+            event.clientX <= rect.left + rect.width
+          );
+          if (!isDialogContent) {
+            dialog.close();
+          }
+        });
+      }
+    }
+  }
+
+  // Defer execution safely
+  if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', initLessonsPage);
+    if (document.readyState !== 'loading') {
+      initLessonsPage();
     }
   }
 </script>

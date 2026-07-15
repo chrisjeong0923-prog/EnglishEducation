@@ -1,12 +1,14 @@
 ---
 import Navbar from '../components/Navbar.astro';
+import DoodleBorders from '../components/DoodleBorders.astro';
 
 interface Props {
 	title: string;
 	description?: string;
+	theme?: 'yellow' | 'green' | 'blue' | 'purple' | 'default';
 }
 
-const { title, description = "Fun English lessons, word games, and grammar quizzes for kids." } = Astro.props;
+const { title, description = "Fun English lessons, word games, and grammar quizzes for kids.", theme = 'default' } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
@@ -22,7 +24,7 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kantumruy+Pro:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Kantumruy+Pro:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 		
 		<!-- Inline Blocking Script to Prevent FOUT of Language -->
 		<script is:inline>
@@ -34,7 +36,10 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 			})();
 		</script>
 	</head>
-	<body>
+	<body class={`theme-${theme}`}>
+		<!-- Playful original cartoon doodles peeking from borders -->
+		<DoodleBorders />
+
 		<!-- Fun Pastel Backdrop -->
 		<div class="pastel-container">
 			<div class="pastel-orb orb-yellow"></div>
@@ -66,17 +71,17 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 <style is:global>
 	:root {
 		--font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-		--font-display: 'Outfit', var(--font-sans);
+		--font-display: 'Fredoka', 'Outfit', var(--font-sans);
 
 		/* Colors - Playful Light Pastel Palette */
 		--bg-light: #faf9f6;
 		--bg-surface: #ffffff;
 		--bg-surface-hover: #fdfcfa;
-		--border-color: rgba(226, 232, 240, 0.8);
+		--border-color: #000000;
 		--border-glow: rgba(167, 139, 250, 0.4);
 		
-		--color-text: #2d3748;
-		--color-text-muted: #718096;
+		--color-text: #1a202c;
+		--color-text-muted: #4a5568;
 		
 		/* Playful pastel accents */
 		--color-primary: #9f7aea; /* Gentle Purple */
@@ -90,7 +95,7 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 		--radius-md: 16px;
 		--radius-sm: 10px;
 		--transition-smooth: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-		--shadow-playful: 0 10px 25px -5px rgba(159, 122, 234, 0.1), 0 8px 10px -6px rgba(159, 122, 234, 0.05);
+		--shadow-playful: 6px 6px 0px #000000;
 	}
 
 	/* ==========================================
@@ -218,7 +223,7 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 	/* Playful workbook-style cards */
 	.glass-card {
 		background: var(--bg-surface);
-		border: 3px solid #e2e8f0;
+		border: 3.5px solid #000000;
 		border-radius: var(--radius-lg);
 		padding: 32px;
 		transition: var(--transition-smooth);
@@ -226,30 +231,9 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 		position: relative;
 	}
 
-	.glass-card::after {
-		content: '';
-		position: absolute;
-		z-index: -1;
-		top: 3px;
-		left: 3px;
-		right: -3px;
-		bottom: -3px;
-		background: #cbd5e1;
-		border-radius: var(--radius-lg);
-		transition: var(--transition-smooth);
-	}
-
 	.glass-card:hover {
-		transform: translate(-2px, -2px);
-		border-color: #cbd5e1;
-	}
-
-	.glass-card:hover::after {
-		top: 6px;
-		left: 6px;
-		right: -6px;
-		bottom: -6px;
-		background: rgba(167, 139, 250, 0.2);
+		transform: translate(-3px, -3px);
+		box-shadow: 9px 9px 0px #000000;
 	}
 
 	/* Typography helper */
@@ -276,46 +260,76 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 		font-size: 1.1rem;
 		font-weight: 800;
 		border-radius: var(--radius-md);
-		border: 3px solid #000000;
+		border: 3.5px solid #000000;
 		cursor: pointer;
 		transition: var(--transition-smooth);
 		text-decoration: none;
 		position: relative;
+		box-shadow: 4px 4px 0px #000000;
 	}
 
 	.btn-primary {
 		background: #fef08a;
 		color: #1a202c;
-		box-shadow: 0 4px 0 #000000;
 	}
 
 	.btn-primary:hover {
 		background: #fde047;
-		transform: translateY(-2px);
-		box-shadow: 0 6px 0 #000000;
+		transform: translate(-2px, -2px);
+		box-shadow: 6px 6px 0px #000000;
 	}
 
 	.btn-primary:active {
-		transform: translateY(2px);
-		box-shadow: 0 2px 0 #000000;
+		transform: translate(2px, 2px);
+		box-shadow: 2px 2px 0px #000000;
 	}
 
 	.btn-secondary {
 		background: #ffffff;
 		color: #1a202c;
-		box-shadow: 0 4px 0 #000000;
 	}
 
 	.btn-secondary:hover {
 		background: #f8fafc;
-		transform: translateY(-2px);
-		box-shadow: 0 6px 0 #000000;
-		border-color: #000000;
+		transform: translate(-2px, -2px);
+		box-shadow: 6px 6px 0px #000000;
 	}
 
 	.btn-secondary:active {
-		transform: translateY(2px);
-		box-shadow: 0 2px 0 #000000;
+		transform: translate(2px, 2px);
+		box-shadow: 2px 2px 0px #000000;
+	}
+
+	/* Theme overrides for background */
+	body.theme-yellow .pastel-container {
+		background: radial-gradient(circle, #fffdf2 40%, #fdf5d3 100%);
+	}
+	body.theme-yellow .pastel-orb {
+		opacity: 0.25;
+	}
+
+	body.theme-green .pastel-container {
+		background: radial-gradient(circle, #f4fdf7 40%, #daf8e3 100%);
+	}
+	body.theme-green .pastel-orb {
+		opacity: 0.25;
+		background: #a7f3d0;
+	}
+
+	body.theme-blue .pastel-container {
+		background: radial-gradient(circle, #f5f7ff 40%, #dbe2ff 100%);
+	}
+	body.theme-blue .pastel-orb {
+		opacity: 0.25;
+		background: #bfdbfe;
+	}
+
+	body.theme-purple .pastel-container {
+		background: radial-gradient(circle, #faf5ff 40%, #e9d5ff 100%);
+	}
+	body.theme-purple .pastel-orb {
+		opacity: 0.25;
+		background: #e9d5ff;
 	}
 
 	/* Footer styling */

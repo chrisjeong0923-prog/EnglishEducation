@@ -20,5 +20,27 @@
     "content": "Study materials generated from PDF lesson \"Where is it?\". Download the attached PDF to review full reading materials.",
     "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"Where is it?\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
     "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf"
+  },
+  {
+    "id": "how-is-the-weather",
+    "grade": 5,
+    "title": "How Is The Weather",
+    "titleKh": "អាកាសធាតុយ៉ាងណា?",
+    "description": "Come learn about different types of weather like sun, rain, wind, and snow! We'll discover how to talk about what the weather is doing today and how to use special words to describe it.",
+    "descriptionKh": "មកស្វែងយល់អំពីប្រភេទអាកាសធាតុផ្សេងៗដូចជា ថ្ងៃ ភ្លៀង ខ្យល់ និងព្រិល! យើងនឹងរៀនពីរបៀបនិយាយអំពីអាកាសធាតុថ្ងៃនេះ និងរបៀបប្រើពាក្យពិសេសដើម្បីពិពណ៌នាវា។",
+    "content": "Study materials generated from PDF lesson \"How Is The Weather\". Download the attached PDF to review full reading materials.",
+    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"How Is The Weather\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf"
+  },
+  {
+    "id": "hello",
+    "grade": 3,
+    "title": "Hello",
+    "titleKh": "សួស្តី",
+    "description": "Learn to say 'Hello' and introduce yourself! You'll also learn words for 'boy', 'girl', and 'dog', and how to use 'He' and 'She'.",
+    "descriptionKh": "រៀននិយាយថា 'សួស្តី' និងណែនាំខ្លួនឯង! អ្នកក៏នឹងរៀនពាក្យសម្រាប់ 'ក្មេងប្រុស' 'ក្មេងស្រី' និង 'ឆ្កែ' ហើយរបៀបប្រើ 'He' និង 'She' ផងដែរ។",
+    "content": "Study materials generated from PDF lesson \"Hello\". Download the attached PDF to review full reading materials.",
+    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"Hello\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf"
   }
 ]

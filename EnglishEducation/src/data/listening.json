@@ -148,5 +148,55 @@
     "text": "I am under the car.",
     "clue": "Describe being under the car.",
     "clueKh": "ពិពណ៌នាអំពីការនៅក្រោមឡាន។"
+  },
+  {
+    "id": 16,
+    "title": "What's the weather like?",
+    "titleKh": "អាកាសធាតុយ៉ាងណា?",
+    "difficulty": "Level 3",
+    "difficultyKh": "កម្រិត ៣",
+    "text": "It is snowy outside.",
+    "clue": "Listen for the weather with white flakes falling.",
+    "clueKh": "ស្តាប់ការពិពណ៌នាអំពីអាកាសធាតុដែលមានព្រិលធ្លាក់ពណ៌ស។"
+  },
+  {
+    "id": 17,
+    "title": "What do you see?",
+    "titleKh": "តើអ្នកឃើញអ្វី?",
+    "difficulty": "Level 3",
+    "difficultyKh": "កម្រិត ៣",
+    "text": "I see the clouds.",
+    "clue": "Remember the grammar rule for clouds on page 4!",
+    "clueKh": "ចងចាំច្បាប់វេយ្យាករណ៍សម្រាប់ពពកនៅលើទំព័រទី 4!"
+  },
+  {
+    "id": 18,
+    "title": "Listen to the weather!",
+    "titleKh": "ស្តាប់ការពិពណ៌នាអាកាសធាតុ!",
+    "difficulty": "Level 3",
+    "difficultyKh": "កម្រិត ៣",
+    "text": "I see rain.",
+    "clue": "Listen to what I see falling from the sky.",
+    "clueKh": "ស្តាប់នូវអ្វីដែលខ្ញុំឃើញធ្លាក់ពីលើមេឃ។"
+  },
+  {
+    "id": 19,
+    "title": "My Name",
+    "titleKh": "ឈ្មោះរបស់ខ្ញុំ",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "Hello. My name is Sam.",
+    "clue": "Listen for the name.",
+    "clueKh": "ស្ដាប់រកឈ្មោះ។"
+  },
+  {
+    "id": 20,
+    "title": "Identifying Gender",
+    "titleKh": "កំណត់ភេទ",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "She is a girl. He is a boy.",
+    "clue": "Listen for 'She' and 'He'.",
+    "clueKh": "ស្ដាប់រកពាក្យ 'She' និង 'He'។"
   }
 ]

@@ -9,7 +9,7 @@ const grade5Words = vocabularyData.filter(word => word.grade === 5);
 const grade6Words = vocabularyData.filter(word => word.grade === 6);
 ---
 
-<Layout title="Bilingual Word Flashcards" description="Study English vocabulary words mapped by school grade. Mapped to 1st-4th grade English difficulty levels.">
+<Layout title="Bilingual Word Flashcards" description="Study English vocabulary words mapped by school grade. Mapped to 1st-4th grade English difficulty levels." theme="yellow">
   <div class="vocab-header">
     <h1 class="vocab-title">
       <span class="en-text">Fun Word Cards 📇</span>
@@ -75,16 +75,10 @@ const grade6Words = vocabularyData.filter(word => word.grade === 6);
 </Layout>
 
 <script>
+  import confetti from 'canvas-confetti';
   import { profileManager } from '../scripts/profileManager';
 
-  // Show active tab panel based on localStorage preference
-  const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
-  const activePanel = document.getElementById(preferredGrade);
-  if (activePanel) {
-    activePanel.classList.add('active');
-  } else {
-    document.getElementById('grade3')?.classList.add('active');
-  }
+  // Initialization will be performed inside DOMContentLoaded below to ensure elements are parsed.
 
   // Populate learned buttons on startup
   function initLearnedButtons() {
@@ -154,6 +148,19 @@ const grade6Words = vocabularyData.filter(word => word.grade === 6);
       profileManager.unmarkWordAsLearned(word);
     } else {
       profileManager.markWordAsLearned(word);
+      
+      // Fire confetti burst from the button's position!
+      const rect = btn.getBoundingClientRect();
+      const x = (rect.left + rect.width / 2) / window.innerWidth;
+      const y = (rect.top + rect.height / 2) / window.innerHeight;
+      
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { x, y },
+        colors: ['#9f7aea', '#06b6d4', '#fb7185', '#34d399', '#fbbf24'],
+        disableForReducedMotion: true
+      });
     }
 
     // Toggle class on all buttons of this word (front and back of card)
@@ -165,9 +172,35 @@ const grade6Words = vocabularyData.filter(word => word.grade === 6);
     updateVocabProgress();
   });
 
-  // Run on startup
-  initLearnedButtons();
-  updateVocabProgress();
+  function initPage() {
+    // Show active tab panel based on localStorage preference
+    const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
+    const activePanel = document.getElementById(preferredGrade);
+
+    if (activePanel) {
+      activePanel.classList.add('active');
+    } else {
+      document.getElementById('grade3')?.classList.add('active');
+    }
+
+    // Set sibling index for staggered animations
+    document.querySelectorAll('.cards-grid').forEach(grid => {
+      Array.from(grid.children).forEach((el, index) => {
+        (el as HTMLElement).style.setProperty('--sibling-index', (index + 1).toString());
+      });
+    });
+
+    initLearnedButtons();
+    updateVocabProgress();
+  }
+
+  // Run on startup safely
+  if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', initPage);
+    if (document.readyState !== 'loading') {
+      initPage();
+    }
+  }
 </script>
 
 <style>
@@ -194,7 +227,6 @@ const grade6Words = vocabularyData.filter(word => word.grade === 6);
   /* Panels Grid */
   .tab-panel {
     display: none;
-    animation: fadeIn 0.4s ease-out;
   }
 
   .tab-panel.active {
@@ -208,14 +240,26 @@ const grade6Words = vocabularyData.filter(word => word.grade === 6);
     padding-bottom: 40px;
   }
 
-  @keyframes fadeIn {
-    from {
+  .tab-panel.active .cards-grid > :global(.flashcard-container) {
+    --stagger-time: 0.08s;
+    animation: popReveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    animation-delay: calc(var(--sibling-index, 1) * var(--stagger-time));
+  }
+
+  @keyframes popReveal {
+    0% {
       opacity: 0;
-      transform: translateY(8px);
+      transform: scale(0.85) translateY(30px);
     }
-    to {
+    100% {
       opacity: 1;
-      transform: translateY(0);
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tab-panel.active .cards-grid > :global(.flashcard-container) {
+      animation: none !important;
     }
   }
 
@@ -225,8 +269,8 @@ const grade6Words = vocabularyData.filter(word => word.grade === 6);
     margin: -10px auto 40px auto;
     padding: 20px 24px;
     background: #ffffff;
-    border-color: rgba(167, 139, 250, 0.3);
-    box-shadow: var(--shadow-playful);
+    border: 3.5px solid #000000;
+    box-shadow: 6px 6px 0px #000000;
     border-radius: var(--radius-lg);
   }
 
@@ -251,7 +295,7 @@ const grade6Words = vocabularyData.filter(word => word.grade === 6);
     background: #f3e8ff;
     padding: 2px 12px;
     border-radius: 12px;
-    border: 2px solid rgba(159, 122, 234, 0.2);
+    border: 2px solid #000000;
   }
 
   .vocab-progress-bar-bg {
@@ -259,7 +303,7 @@ const grade6Words = vocabularyData.filter(word => word.grade === 6);
     height: 12px;
     background: #f1f5f9;
     border-radius: 6px;
-    border: 2px solid #e2e8f0;
+    border: 2.5px solid #000000;
     overflow: hidden;
   }
 
