@@ -1,6 +1,7 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import DoodleBorders from '../components/DoodleBorders.astro';
+import Celebration from '../components/Celebration.astro';
 
 interface Props {
 	title: string;
@@ -65,6 +66,8 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 				</p>
 			</div>
 		</footer>
+
+		<Celebration />
 	</body>
 </html>
 
