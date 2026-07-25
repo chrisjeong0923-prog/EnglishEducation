@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Quiz from '../components/Quiz.astro';
 import quizzesData from '../data/quizzes.json';
+import { APP_CONFIG } from '../config';
 
 const grade3Quiz = quizzesData.filter(q => q.grade === 3 && q.type === 'grammar');
 const grade3Vocab = quizzesData.filter(q => q.grade === 3 && q.type === 'vocabulary');
@@ -23,80 +24,99 @@ const grade6Vocab = quizzesData.filter(q => q.grade === 6 && q.type === 'vocabul
       <span class="kh-text">ល្បែងតេស្តសាកល្បង ✏️</span>
     </h1>
     <p class="page-subtitle">
-      <span class="en-text">Test your English grammar and vocabulary! Your quiz level is set based on your grade selected on the homepage.</span>
-      <span class="kh-text">សាកល្បងវេយ្យាករណ៍ និងវាក្យសព្ទភាសាអង់គ្លេស! កម្រិតតេស្តត្រូវបានកំណត់ដោយផ្អែកលើថ្នាក់ដែលអ្នកបានជ្រើសរើសនៅលើទំព័រដើម។</span>
+      {APP_CONFIG.singleLevelMode ? (
+        <>
+          <span class="en-text">Test your English grammar and vocabulary!</span>
+          <span class="kh-text">សាកល្បងវេយ្យាករណ៍ និងវាក្យសព្ទភាសាអង់គ្លេស!</span>
+        </>
+      ) : (
+        <>
+          <span class="en-text">Test your English grammar and vocabulary! Your quiz level is set based on your grade selected on the homepage.</span>
+          <span class="kh-text">សាកល្បងវេយ្យាករណ៍ និងវាក្យសព្ទភាសាអង់គ្លេស! កម្រិតតេស្តត្រូវបានកំណត់ដោយផ្អែកលើថ្នាក់ដែលអ្នកបានជ្រើសរើសនៅលើទំព័រដើម។</span>
+        </>
+      )}
     </p>
   </div>
 
   <!-- Grade 3 Quiz Panel -->
-  <div class="quiz-panel" id="grade3-quiz">
-    <div class="quizzes-layout">
-      <Quiz 
-        quizTitle="Grade 3 Grammar Quiz" 
-        quizTitleKh="ថ្នាក់ទី៣ វេយ្យាករណ៍៖ A, An និងសព្វនាម" 
-        questions={grade3Quiz} 
-      />
-      <Quiz 
-        quizTitle="Grade 3 Vocabulary Quiz" 
-        quizTitleKh="ថ្នាក់ទី៣ វាក្យសព្ទ៖ ពាក្យសិក្សារីករាយ" 
-        questions={grade3Vocab} 
-      />
+  {(!APP_CONFIG.singleLevelMode || APP_CONFIG.defaultGrade === 'grade3') && (
+    <div class="quiz-panel" id="grade3-quiz">
+      <div class="quizzes-layout">
+        <Quiz 
+          quizTitle={APP_CONFIG.singleLevelMode ? "Grammar Quiz" : "Grade 3 Grammar Quiz"} 
+          quizTitleKh={APP_CONFIG.singleLevelMode ? "តេស្តសាកល្បងវេយ្យាករណ៍" : "ថ្នាក់ទី៣ វេយ្យាករណ៍៖ A, An និងសព្វនាម"} 
+          questions={grade3Quiz} 
+        />
+        <Quiz 
+          quizTitle={APP_CONFIG.singleLevelMode ? "Vocabulary Quiz" : "Grade 3 Vocabulary Quiz"} 
+          quizTitleKh={APP_CONFIG.singleLevelMode ? "តេស្តសាកល្បងវាក្យសព្ទ" : "ថ្នាក់ទី៣ វាក្យសព្ទ៖ ពាក្យសិក្សារីករាយ"} 
+          questions={grade3Vocab} 
+        />
+      </div>
     </div>
-  </div>
+  )}
 
   <!-- Grade 4 Quiz Panel -->
-  <div class="quiz-panel" id="grade4-quiz">
-    <div class="quizzes-layout">
-      <Quiz 
-        quizTitle="Grade 4 Grammar Quiz" 
-        quizTitleKh="ថ្នាក់ទី៤ វេយ្យាករណ៍៖ កិរិយាសព្ទ និងកាល" 
-        questions={grade4Quiz} 
-      />
-      <Quiz 
-        quizTitle="Grade 4 Vocabulary Quiz" 
-        quizTitleKh="ថ្នាក់ទី៤ វាក្យសព្ទ៖ ពាក្យរុករកសប្បាយៗ" 
-        questions={grade4Vocab} 
-      />
+  {(!APP_CONFIG.singleLevelMode || APP_CONFIG.defaultGrade === 'grade4') && (
+    <div class="quiz-panel" id="grade4-quiz">
+      <div class="quizzes-layout">
+        <Quiz 
+          quizTitle="Grade 4 Grammar Quiz" 
+          quizTitleKh="ថ្នាក់ទី៤ វេយ្យាករណ៍៖ កិរិយាសព្ទ និងកាល" 
+          questions={grade4Quiz} 
+        />
+        <Quiz 
+          quizTitle="Grade 4 Vocabulary Quiz" 
+          quizTitleKh="ថ្នាក់ទី៤ វាក្យសព្ទ៖ ពាក្យរុករកសប្បាយៗ" 
+          questions={grade4Vocab} 
+        />
+      </div>
     </div>
-  </div>
+  )}
 
   <!-- Grade 5 Quiz Panel -->
-  <div class="quiz-panel" id="grade5-quiz">
-    <div class="quizzes-layout">
-      <Quiz 
-        quizTitle="Grade 5 Grammar Quiz" 
-        quizTitleKh="ថ្នាក់ទី៥ វេយ្យាករណ៍៖ ពហុវចនៈ និងអតីតកាល" 
-        questions={grade5Quiz} 
-      />
-      <Quiz 
-        quizTitle="Grade 5 Vocabulary Quiz" 
-        quizTitleKh="ថ្នាក់ទី៥ វាក្យសព្ទ៖ ពាក្យចម្លែកៗ" 
-        questions={grade5Vocab} 
-      />
+  {(!APP_CONFIG.singleLevelMode || APP_CONFIG.defaultGrade === 'grade5') && (
+    <div class="quiz-panel" id="grade5-quiz">
+      <div class="quizzes-layout">
+        <Quiz 
+          quizTitle="Grade 5 Grammar Quiz" 
+          quizTitleKh="ថ្នាក់ទី៥ វេយ្យាករណ៍៖ ពហុវចនៈ និងអតីតកាល" 
+          questions={grade5Quiz} 
+        />
+        <Quiz 
+          quizTitle="Grade 5 Vocabulary Quiz" 
+          quizTitleKh="ថ្នាក់ទី៥ វាក្យសព្ទ៖ ពាក្យចម្លែកៗ" 
+          questions={grade5Vocab} 
+        />
+      </div>
     </div>
-  </div>
+  )}
 
   <!-- Grade 6 Quiz Panel -->
-  <div class="quiz-panel" id="grade6-quiz">
-    <div class="quizzes-layout">
-      <Quiz 
-        quizTitle="Grade 6 Grammar Quiz" 
-        quizTitleKh="ថ្នាក់ទី៦ វេយ្យាករណ៍៖ ល្បះ និងកាលអនាគត" 
-        questions={grade6Quiz} 
-      />
-      <Quiz 
-        quizTitle="Grade 6 Vocabulary Quiz" 
-        quizTitleKh="ថ្នាក់ទី៦ វាក្យសព្ទ៖ ពាក្យកម្រិតខ្ពស់" 
-        questions={grade6Vocab} 
-      />
+  {(!APP_CONFIG.singleLevelMode || APP_CONFIG.defaultGrade === 'grade6') && (
+    <div class="quiz-panel" id="grade6-quiz">
+      <div class="quizzes-layout">
+        <Quiz 
+          quizTitle="Grade 6 Grammar Quiz" 
+          quizTitleKh="ថ្នាក់ទី៦ វេយ្យាករណ៍៖ ល្បះ និងកាលអនាគត" 
+          questions={grade6Quiz} 
+        />
+        <Quiz 
+          quizTitle="Grade 6 Vocabulary Quiz" 
+          quizTitleKh="ថ្នាក់ទី៦ វាក្យសព្ទ៖ ពាក្យកម្រិតខ្ពស់" 
+          questions={grade6Vocab} 
+        />
+      </div>
     </div>
-  </div>
+  )}
 </Layout>
 
 <script>
+  import { APP_CONFIG } from '../config';
+
   function initQuizPage() {
     // Show active quiz panel based on localStorage preference
-    const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
+    const preferredGrade = APP_CONFIG.singleLevelMode ? APP_CONFIG.defaultGrade : (localStorage.getItem('preferredGrade') || 'grade3');
     const activePanel = document.getElementById(`${preferredGrade}-quiz`);
     if (activePanel) {
       activePanel.classList.add('active');

@@ -112,6 +112,7 @@ const questionsJson = JSON.stringify(questions);
 
 <script>
   import { profileManager } from '../scripts/profileManager';
+  import { soundEffects } from '../scripts/soundEffects';
 
   function formatQuestionText(text: string, pdfUrl: string | undefined, isKhmer: boolean): string {
     if (!pdfUrl) return text;
@@ -341,6 +342,9 @@ const questionsJson = JSON.stringify(questions);
 
       if (isCorrect) {
         this.score++;
+        soundEffects.playSuccess();
+      } else {
+        soundEffects.playError();
       }
 
       const optionButtons = this.optionsContainerEl?.querySelectorAll('.option-btn');
@@ -575,14 +579,14 @@ const questionsJson = JSON.stringify(questions);
     line-height: 1.4;
   }
 
-  .options-container {
+  :global(.options-container) {
     display: flex;
     flex-direction: column;
     gap: 12px;
     margin-bottom: 24px;
   }
 
-  .option-btn {
+  :global(.option-btn) {
     width: 100%;
     padding: 16px 20px;
     font-family: var(--font-sans);
@@ -598,36 +602,40 @@ const questionsJson = JSON.stringify(questions);
     box-shadow: 4px 4px 0px #000000;
   }
 
-  .option-btn:hover:not(:disabled) {
+  :global(.option-btn:hover:not(:disabled)) {
     background: #f8fafc;
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0px #000000;
   }
 
-  .option-btn:active:not(:disabled) {
+  :global(.option-btn:active:not(:disabled)) {
     transform: translate(2px, 2px);
     box-shadow: 2px 2px 0px #000000;
   }
 
-  .option-btn.selected {
+  :global(.option-btn.selected) {
     background: #f3e8ff;
     border-color: #000000;
     box-shadow: 4px 4px 0px var(--color-primary);
     color: #1a202c;
   }
 
-  .option-btn.correct {
+  :global(.option-btn.correct),
+  :global(.option-btn.correct:disabled) {
     background: #d1fae5;
     border-color: #000000;
     box-shadow: 4px 4px 0px var(--color-success);
     color: #1a202c;
+    opacity: 1;
   }
 
-  .option-btn.wrong {
+  :global(.option-btn.wrong),
+  :global(.option-btn.wrong:disabled) {
     background: #fee2e2;
     border-color: #000000;
     box-shadow: 4px 4px 0px var(--color-accent);
     color: #1a202c;
+    opacity: 1;
   }
 
   /* Quiz Footer & Feedback */

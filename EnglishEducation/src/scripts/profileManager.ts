@@ -1,3 +1,5 @@
+import { APP_CONFIG } from '../config';
+
 export interface UserProfile {
   id: string; // Unique profile identifier
   nickname: string;
@@ -122,7 +124,11 @@ export const profileManager = {
     const activeId = localStorage.getItem(LOCAL_STORAGE_KEY_ACTIVE);
     if (!activeId) return null;
     const profiles = this.getAllProfiles();
-    return profiles[activeId] || null;
+    const profile = profiles[activeId] || null;
+    if (profile && APP_CONFIG.singleLevelMode) {
+      profile.grade = APP_CONFIG.defaultGrade;
+    }
+    return profile;
   },
 
   // Get all profiles keyed by ID
@@ -151,7 +157,8 @@ export const profileManager = {
     const profiles = this.getAllProfiles();
     const activeProfile = profiles[id];
     if (activeProfile) {
-      localStorage.setItem("preferredGrade", activeProfile.grade);
+      const grade = APP_CONFIG.singleLevelMode ? APP_CONFIG.defaultGrade : activeProfile.grade;
+      localStorage.setItem("preferredGrade", grade);
     }
     window.dispatchEvent(new Event("profileChanged"));
   },
@@ -159,6 +166,9 @@ export const profileManager = {
   // Save/Update profile
   saveProfile(profile: UserProfile): void {
     if (!isBrowser()) return;
+    if (APP_CONFIG.singleLevelMode) {
+      profile.grade = APP_CONFIG.defaultGrade;
+    }
     const profiles = this.getAllProfiles();
     profiles[profile.id] = profile;
     localStorage.setItem(LOCAL_STORAGE_KEY_PROFILES, JSON.stringify(profiles));
@@ -169,11 +179,12 @@ export const profileManager = {
   // Create new profile
   createProfile(nickname: string, avatar: string, grade: string): UserProfile {
     const uniqueId = "profile_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7);
+    const finalGrade = APP_CONFIG.singleLevelMode ? APP_CONFIG.defaultGrade : (grade || "grade3");
     const newProfile: UserProfile = {
       id: uniqueId,
       nickname: nickname.trim() || "Young Learner",
       avatar: avatar || "🐼",
-      grade: grade || "grade3",
+      grade: finalGrade,
       learnedWords: [],
       quizScores: {},
       listeningScores: {}
@@ -329,11 +340,12 @@ export const profileManager = {
       // Basic validation
       if (typeof parsed.nickname === "string" && typeof parsed.avatar === "string" && typeof parsed.grade === "string") {
         const uniqueId = parsed.id || ("profile_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7));
+        const finalGrade = APP_CONFIG.singleLevelMode ? APP_CONFIG.defaultGrade : parsed.grade;
         const validatedProfile: UserProfile = {
           id: uniqueId,
           nickname: parsed.nickname,
           avatar: parsed.avatar,
-          grade: parsed.grade,
+          grade: finalGrade,
           learnedWords: Array.isArray(parsed.learnedWords) ? parsed.learnedWords : [],
           quizScores: parsed.quizScores && typeof parsed.quizScores === "object" ? parsed.quizScores : {},
           listeningScores: parsed.listeningScores && typeof parsed.listeningScores === "object" ? parsed.listeningScores : {}

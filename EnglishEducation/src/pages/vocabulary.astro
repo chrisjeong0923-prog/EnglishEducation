@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Flashcard from '../components/Flashcard.astro';
 import vocabularyData from '../data/vocabulary.json';
+import { APP_CONFIG } from '../config';
 
 const grade3Words = vocabularyData.filter(word => word.grade === 3);
 const grade4Words = vocabularyData.filter(word => word.grade === 4);
@@ -16,8 +17,17 @@ const grade6Words = vocabularyData.filter(word => word.grade === 6);
       <span class="kh-text">កាតពាក្យសិក្សារីករាយ 📇</span>
     </h1>
     <p class="vocab-subtitle">
-      <span class="en-text">Study the words for your grade! You can change your grade on the home page.</span>
-      <span class="kh-text">សិក្សាពាក្យសម្រាប់ថ្នាក់របស់អ្នក! អ្នកអាចប្តូរថ្នាក់របស់អ្នកនៅលើទំព័រដើម។</span>
+      {APP_CONFIG.singleLevelMode ? (
+        <>
+          <span class="en-text">Study and practice English words with cards!</span>
+          <span class="kh-text">សិក្សា និងអនុវត្តពាក្យភាសាអង់គ្លេសជាមួយកាតសិក្សា!</span>
+        </>
+      ) : (
+        <>
+          <span class="en-text">Study the words for your grade! You can change your grade on the home page.</span>
+          <span class="kh-text">សិក្សាពាក្យសម្រាប់ថ្នាក់របស់អ្នក! អ្នកអាចប្តូរថ្នាក់របស់អ្នកនៅលើទំព័រដើម។</span>
+        </>
+      )}
     </p>
   </div>
 
@@ -25,7 +35,7 @@ const grade6Words = vocabularyData.filter(word => word.grade === 6);
   <div class="vocab-progress-wrapper glass-card">
     <div class="vocab-progress-info">
       <h3 class="progress-title">
-        <span class="en-text">Grade Word Mastery 🌟</span>
+        <span class="en-text">{APP_CONFIG.singleLevelMode ? "Word Mastery 🌟" : "Grade Word Mastery 🌟"}</span>
         <span class="kh-text">វឌ្ឍនភាពសិក្សាពាក្យ 🌟</span>
       </h3>
       <span class="vocab-count-badge">
@@ -38,45 +48,54 @@ const grade6Words = vocabularyData.filter(word => word.grade === 6);
   </div>
 
   <!-- Grade 3 Tab Panel -->
-  <div class="tab-panel" id="grade3">
+  {(!APP_CONFIG.singleLevelMode || APP_CONFIG.defaultGrade === 'grade3') && (
+    <div class="tab-panel" id="grade3">
     <div class="cards-grid">
       {grade3Words.map(word => (
         <Flashcard {...word} />
       ))}
     </div>
   </div>
+  )}
 
   <!-- Grade 4 Tab Panel -->
-  <div class="tab-panel" id="grade4">
+  {(!APP_CONFIG.singleLevelMode || APP_CONFIG.defaultGrade === 'grade4') && (
+    <div class="tab-panel" id="grade4">
     <div class="cards-grid">
       {grade4Words.map(word => (
         <Flashcard {...word} />
       ))}
     </div>
   </div>
+  )}
 
   <!-- Grade 5 Tab Panel -->
-  <div class="tab-panel" id="grade5">
+  {(!APP_CONFIG.singleLevelMode || APP_CONFIG.defaultGrade === 'grade5') && (
+    <div class="tab-panel" id="grade5">
     <div class="cards-grid">
       {grade5Words.map(word => (
         <Flashcard {...word} />
       ))}
     </div>
   </div>
+  )}
 
   <!-- Grade 6 Tab Panel -->
-  <div class="tab-panel" id="grade6">
+  {(!APP_CONFIG.singleLevelMode || APP_CONFIG.defaultGrade === 'grade6') && (
+    <div class="tab-panel" id="grade6">
     <div class="cards-grid">
       {grade6Words.map(word => (
         <Flashcard {...word} />
       ))}
     </div>
   </div>
+  )}
 </Layout>
 
 <script>
   import confetti from 'canvas-confetti';
   import { profileManager } from '../scripts/profileManager';
+  import { APP_CONFIG } from '../config';
 
   // Initialization will be performed inside DOMContentLoaded below to ensure elements are parsed.
 
@@ -174,7 +193,7 @@ const grade6Words = vocabularyData.filter(word => word.grade === 6);
 
   function initPage() {
     // Show active tab panel based on localStorage preference
-    const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
+    const preferredGrade = APP_CONFIG.singleLevelMode ? APP_CONFIG.defaultGrade : (localStorage.getItem('preferredGrade') || 'grade3');
     const activePanel = document.getElementById(preferredGrade);
 
     if (activePanel) {

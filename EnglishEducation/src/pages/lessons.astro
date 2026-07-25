@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import lessonsData from '../data/lessons.json';
+import { APP_CONFIG } from '../config';
 
 const grade3Lessons = lessonsData.filter(l => l.grade === 3);
 const grade4Lessons = lessonsData.filter(l => l.grade === 4);
@@ -15,13 +16,23 @@ const grade6Lessons = lessonsData.filter(l => l.grade === 6);
       <span class="kh-text">មេរៀនភាសាអង់គ្លេសរីករាយ 📖</span>
     </h1>
     <p class="page-subtitle">
-      <span class="en-text">Exciting bilingual lessons to help you learn English step-by-step! Your lesson level is based on your grade selected on the homepage.</span>
-      <span class="kh-text">មេរៀនពីរភាសាដ៏គួរឱ្យចាប់អារម្មណ៍ ដើម្បីជួយអ្នករៀនភាសាអង់គ្លេសមួយជំហានម្តងៗ! កម្រិតមេរៀនត្រូវបានកំណត់ដោយផ្អែកលើថ្នាក់ដែលអ្នកបានជ្រើសរើសនៅលើទំព័រដើម។</span>
+      {APP_CONFIG.singleLevelMode ? (
+        <>
+          <span class="en-text">Exciting bilingual lessons to help you learn English step-by-step!</span>
+          <span class="kh-text">មេរៀនពីរភាសាដ៏គួរឱ្យចាប់អារម្មណ៍ ដើម្បីជួយអ្នករៀនភាសាអង់គ្លេសមួយជំហានម្តងៗ!</span>
+        </>
+      ) : (
+        <>
+          <span class="en-text">Exciting bilingual lessons to help you learn English step-by-step! Your lesson level is based on your grade selected on the homepage.</span>
+          <span class="kh-text">មេរៀនពីរភាសាដ៏គួរឱ្យចាប់អារម្មណ៍ ដើម្បីជួយអ្នករៀនភាសាអង់គ្លេសមួយជំហានម្តងៗ! កម្រិតមេរៀនត្រូវបានកំណត់ដោយផ្អែកលើថ្នាក់ដែលអ្នកបានជ្រើសរើសនៅលើទំព័រដើម។</span>
+        </>
+      )}
     </p>
   </div>
 
   <!-- Grade 3 Lessons Panel -->
-  <div class="lessons-panel" id="grade3-lessons">
+  {(!APP_CONFIG.singleLevelMode || APP_CONFIG.defaultGrade === 'grade3') && (
+    <div class="lessons-panel" id="grade3-lessons">
     <div class="lessons-grid">
       {grade3Lessons.length === 0 ? (
         <div class="no-lessons glass-card">
@@ -49,9 +60,11 @@ const grade6Lessons = lessonsData.filter(l => l.grade === 6);
       )}
     </div>
   </div>
+  )}
 
   <!-- Grade 4 Lessons Panel -->
-  <div class="lessons-panel" id="grade4-lessons">
+  {(!APP_CONFIG.singleLevelMode || APP_CONFIG.defaultGrade === 'grade4') && (
+    <div class="lessons-panel" id="grade4-lessons">
     <div class="lessons-grid">
       {grade4Lessons.length === 0 ? (
         <div class="no-lessons glass-card">
@@ -79,9 +92,11 @@ const grade6Lessons = lessonsData.filter(l => l.grade === 6);
       )}
     </div>
   </div>
+  )}
 
   <!-- Grade 5 Lessons Panel -->
-  <div class="lessons-panel" id="grade5-lessons">
+  {(!APP_CONFIG.singleLevelMode || APP_CONFIG.defaultGrade === 'grade5') && (
+    <div class="lessons-panel" id="grade5-lessons">
     <div class="lessons-grid">
       {grade5Lessons.length === 0 ? (
         <div class="no-lessons glass-card">
@@ -109,9 +124,11 @@ const grade6Lessons = lessonsData.filter(l => l.grade === 6);
       )}
     </div>
   </div>
+  )}
 
   <!-- Grade 6 Lessons Panel -->
-  <div class="lessons-panel" id="grade6-lessons">
+  {(!APP_CONFIG.singleLevelMode || APP_CONFIG.defaultGrade === 'grade6') && (
+    <div class="lessons-panel" id="grade6-lessons">
     <div class="lessons-grid">
       {grade6Lessons.length === 0 ? (
         <div class="no-lessons glass-card">
@@ -139,6 +156,7 @@ const grade6Lessons = lessonsData.filter(l => l.grade === 6);
       )}
     </div>
   </div>
+  )}
 
   <!-- Interactive Lesson Dialog Modal -->
   <dialog id="lesson-dialog" closedby="any" class="lesson-modal">
@@ -173,9 +191,11 @@ const grade6Lessons = lessonsData.filter(l => l.grade === 6);
 </Layout>
 
 <script>
+  import { APP_CONFIG } from '../config';
+
   function initLessonsPage() {
     // Show active lessons panel based on localStorage preference
-    const preferredGrade = localStorage.getItem('preferredGrade') || 'grade3';
+    const preferredGrade = APP_CONFIG.singleLevelMode ? APP_CONFIG.defaultGrade : (localStorage.getItem('preferredGrade') || 'grade3');
     const activePanel = document.getElementById(`${preferredGrade}-lessons`);
     if (activePanel) {
       activePanel.classList.add('active');
@@ -212,15 +232,20 @@ const grade6Lessons = lessonsData.filter(l => l.grade === 6);
         modalContentKh.innerText = contentKh;
 
         if (pdfUrl) {
+          const baseUrl = import.meta.env.BASE_URL;
+          const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+          const cleanPdf = pdfUrl.startsWith('/') ? pdfUrl.substring(1) : pdfUrl;
+          const fullPdfUrl = `${cleanBase}${cleanPdf}`;
+
           if (pdfLink) {
-            const baseUrl = import.meta.env.BASE_URL;
-            const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-            const cleanPdf = pdfUrl.startsWith('/') ? pdfUrl.substring(1) : pdfUrl;
-            pdfLink.href = `${cleanBase}${cleanPdf}`;
+            pdfLink.href = fullPdfUrl;
             pdfLink.classList.remove('hidden');
           }
           if (pdfContainer) {
             pdfContainer.classList.remove('hidden');
+          }
+          if (pdfIframe) {
+            pdfIframe.src = fullPdfUrl;
           }
         } else {
           if (pdfLink) {
@@ -228,6 +253,9 @@ const grade6Lessons = lessonsData.filter(l => l.grade === 6);
           }
           if (pdfContainer) {
             pdfContainer.classList.add('hidden');
+          }
+          if (pdfIframe) {
+            pdfIframe.src = '';
           }
         }
 

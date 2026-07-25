@@ -392,3 +392,15 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 		display: none !important;
 	}
 </style>
+
+<script>
+  import { soundEffects } from '../scripts/soundEffects';
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const interactive = target.closest('button, .btn, .nav-link, .sidebar-item-btn, .option-btn, .start-lesson-btn, .dropdown-item, .lang-toggle-btn');
+    if (interactive) {
+      soundEffects.playClick();
+    }
+  });
+</script>

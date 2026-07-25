@@ -1,5 +1,34 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { APP_CONFIG } from '../config';
+import vocabularyData from '../data/vocabulary.json';
+import quizzesData from '../data/quizzes.json';
+import listeningData from '../data/listening.json';
+
+const isSingle = APP_CONFIG.singleLevelMode;
+const defaultG = APP_CONFIG.defaultGrade;
+
+// Filter counts based on active single level mode
+const totalVocabWords = isSingle
+  ? vocabularyData.filter(w => w.grade === parseInt(defaultG.replace('grade', ''))).length
+  : vocabularyData.length;
+
+// There are 2 quizzes for Grade 3 (grammar & vocabulary type)
+const totalQuizzesCount = isSingle
+  ? 2
+  : 8;
+
+// Difficulty matching for listening
+const difficultyMap: Record<string, string> = {
+  grade3: 'Level 1',
+  grade4: 'Level 2',
+  grade5: 'Level 3',
+  grade6: 'Level 4',
+};
+const targetDiff = difficultyMap[defaultG] || 'Level 1';
+const totalListeningCount = isSingle
+  ? listeningData.filter(ex => ex.difficulty === targetDiff).length
+  : listeningData.length;
 ---
 
 <Layout title="My Progress & Profile" description="Create your profile, track your English learning progress, and see your collection of achievement badges!" theme="purple">
@@ -92,13 +121,13 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <!-- Grade Selector -->
-        <div class="form-group">
+        <div class="form-group" class:list={[{ hidden: APP_CONFIG.singleLevelMode }]}>
           <label for="reg-grade" class="form-label">
             <span class="en-text">Select Your School Grade:</span>
             <span class="kh-text">ជ្រើសរើសថ្នាក់រៀនរបស់អ្នក៖</span>
           </label>
           <select id="reg-grade" class="playful-select">
-            <option value="grade3">Grade 3 / ថ្នាក់ទី ៣ (Level 1)</option>
+            <option value="grade3" selected={APP_CONFIG.singleLevelMode}>Grade 3 / ថ្នាក់ទី ៣ (Level 1)</option>
             <option value="grade4">Grade 4 / ថ្នាក់ទី ៤ (Level 2)</option>
             <option value="grade5">Grade 5 / ថ្នាក់ទី ៥ (Level 3)</option>
             <option value="grade6">Grade 6 / ថ្នាក់ទី ៦ (Level 4)</option>
@@ -153,7 +182,7 @@ import Layout from '../layouts/Layout.astro';
               <span class="en-text">Hello, <span id="dash-nickname-display">Learner</span>! 👋</span>
               <span class="kh-text">សួស្តី <span id="dash-nickname-display-kh">សិស្ស</span>! 👋</span>
             </h1>
-            <span class="badge-grade" id="dash-grade-badge">Grade 3</span>
+            {!APP_CONFIG.singleLevelMode && <span class="badge-grade" id="dash-grade-badge">Grade 3</span>}
             <p class="profile-rank-text">
               <span class="en-text">Rank: <strong id="rank-text">English Explorer</strong></span>
               <span class="kh-text">កម្រិត៖ <strong id="rank-text-kh">អ្នករុករកភាសាអង់គ្លេស</strong></span>
@@ -262,13 +291,13 @@ import Layout from '../layouts/Layout.astro';
               <input type="text" id="edit-nickname" class="playful-input sm" required maxlength="15"/>
             </div>
             
-            <div class="form-group inline">
+            <div class="form-group inline" class:list={[{ hidden: APP_CONFIG.singleLevelMode }]}>
               <label for="edit-grade" class="form-label">
                 <span class="en-text">Grade:</span>
                 <span class="kh-text">ថ្នាក់៖</span>
               </label>
               <select id="edit-grade" class="playful-select sm">
-                <option value="grade3">Grade 3</option>
+                <option value="grade3" selected={APP_CONFIG.singleLevelMode}>Grade 3</option>
                 <option value="grade4">Grade 4</option>
                 <option value="grade5">Grade 5</option>
                 <option value="grade6">Grade 6</option>
@@ -352,11 +381,19 @@ import Layout from '../layouts/Layout.astro';
     <!-- Invisible file inputs for importing -->
     <input type="file" id="import-file-selector" accept=".json" class="hidden" />
 
+    <!-- Stats metadata counts -->
+    <div id="stats-data" 
+         class="hidden" 
+         data-total-vocab={totalVocabWords} 
+         data-total-quizzes={totalQuizzesCount} 
+         data-total-listening={totalListeningCount}></div>
+
   </div>
 </Layout>
 
 <script>
   import { profileManager, BADGES } from '../scripts/profileManager';
+  import { APP_CONFIG } from '../config';
 
   // DOM elements cache
   const createView = document.getElementById('profile-create-view');
@@ -443,8 +480,12 @@ import Layout from '../layouts/Layout.astro';
 
     // --- Statistics ---
     
-    // 1. Vocabulary
-    const totalVocabWords = 36;
+    // 1. Statistics counts dynamically read from server payload
+    const statsDataEl = document.getElementById('stats-data');
+    const totalVocabWords = statsDataEl ? parseInt(statsDataEl.getAttribute('data-total-vocab') || '36') : 36;
+    const totalQuizzesCount = statsDataEl ? parseInt(statsDataEl.getAttribute('data-total-quizzes') || '8') : 8;
+    const totalListeningCount = statsDataEl ? parseInt(statsDataEl.getAttribute('data-total-listening') || '4') : 4;
+
     const learnedCount = profile.learnedWords.length;
     const vocabPct = Math.min(100, Math.round((learnedCount / totalVocabWords) * 100));
     const vocabText = document.getElementById('stats-vocab-text');
@@ -453,7 +494,6 @@ import Layout from '../layouts/Layout.astro';
     if (vocabBar) vocabBar.style.width = `${vocabPct}%`;
 
     // 2. Quizzes
-    const totalQuizzesCount = 8;
     const finishedQuizzes = Object.keys(profile.quizScores).length;
     const quizPct = Math.min(100, Math.round((finishedQuizzes / totalQuizzesCount) * 100));
     const quizText = document.getElementById('stats-quiz-text');
@@ -472,7 +512,6 @@ import Layout from '../layouts/Layout.astro';
     if (quizAvgKhEl) quizAvgKhEl.innerText = `${avgQuizScore}%`;
 
     // 3. Listening Exercises
-    const totalListeningCount = 4;
     const completedListeningCount = Object.keys(profile.listeningScores).length;
     const listeningPct = Math.min(100, Math.round((completedListeningCount / totalListeningCount) * 100));
     const listenText = document.getElementById('stats-listen-text');

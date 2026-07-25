@@ -11,6 +11,28 @@
     "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
   },
   {
+    "id": "look",
+    "grade": 3,
+    "title": "Look!",
+    "titleKh": "មើល!",
+    "description": "Learn basic animal words like 'dog', 'cat', and 'horse', and the adjectives 'big' and 'small'.",
+    "descriptionKh": "រៀនពាក្យសត្វមូលដ្ឋានដូចជា 'ឆ្កែ' 'ឆ្មា' និង 'សេះ' និងគុណនាម 'ធំ' និង 'តូច'។",
+    "content": "Study materials generated from PDF lesson \"Look!\". Download the attached PDF to review full reading materials.",
+    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"Look!\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf"
+  },
+  {
+    "id": "how-are-you",
+    "grade": 3,
+    "title": "How are you?",
+    "titleKh": "តើអ្នកសុខសប្បាយជាទេ?",
+    "description": "Learn to express how you feel! You'll learn words like 'good', 'bad', 'tired', 'sleepy', 'sick', and 'mad'.",
+    "descriptionKh": "រៀនបង្ហាញពីអារម្មណ៍របស់អ្នក! អ្នកនឹងរៀនពាក្យដូចជា 'ល្អ' 'មិនល្អ' 'ហត់' 'ងងុយគេង' 'ឈឺ' និង 'ខឹង'។",
+    "content": "Study materials generated from PDF lesson \"How are you?\". Download the attached PDF to review full reading materials.",
+    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"How are you?\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf"
+  },
+  {
     "id": "where-is-it",
     "grade": 4,
     "title": "Where is it?",

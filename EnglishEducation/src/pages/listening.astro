@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import listeningExercises from '../data/listening.json';
+import { APP_CONFIG } from '../config';
 
 const exercisesJson = JSON.stringify(listeningExercises);
 ---
@@ -12,8 +13,17 @@ const exercisesJson = JSON.stringify(listeningExercises);
       <span class="kh-text">ល្បែងស្តាប់ និងសរសេរ 🎧</span>
     </h1>
     <p class="page-subtitle">
-      <span class="en-text">Listen to the sentence read aloud for your grade, type it in the box, and check your accuracy score! You can change your grade on the home page.</span>
-      <span class="kh-text">ស្តាប់ប្រយោគអានខ្លាំងៗសម្រាប់ថ្នាក់របស់អ្នក វាយបញ្ចូលវានៅក្នុងប្រអប់ ហើយពិនិត្យមើលពិន្ទុភាពត្រឹមត្រូវ! អ្នកអាចប្តូរថ្នាក់របស់អ្នកនៅលើទំព័រដើម។</span>
+      {APP_CONFIG.singleLevelMode ? (
+        <>
+          <span class="en-text">Listen to the sentence read aloud, type it in the box, and check your accuracy score!</span>
+          <span class="kh-text">ស្តាប់ប្រយោគអានខ្លាំងៗ វាយបញ្ចូលវានៅក្នុងប្រអប់ ហើយពិនិត្យមើលពិន្ទុភាពត្រឹមត្រូវ!</span>
+        </>
+      ) : (
+        <>
+          <span class="en-text">Listen to the sentence read aloud for your grade, type it in the box, and check your accuracy score! You can change your grade on the home page.</span>
+          <span class="kh-text">ស្តាប់ប្រយោគអានខ្លាំងៗសម្រាប់ថ្នាក់របស់អ្នក វាយបញ្ចូលវានៅក្នុងប្រអប់ ហើយពិនិត្យមើលពិន្ទុភាពត្រឹមត្រូវ! អ្នកអាចប្តូរថ្នាក់របស់អ្នកនៅលើទំព័រដើម។</span>
+        </>
+      )}
     </p>
   </div>
 
@@ -60,15 +70,13 @@ const exercisesJson = JSON.stringify(listeningExercises);
       </div>
 
       <div class="input-section">
-        <label for="dictation-input" class="input-label">
-          <span class="en-text">Type what you hear below:</span>
-          <span class="kh-text">សរសេរអ្វីដែលអ្នកបានឮខាងក្រោម៖</span>
-        </label>
-        <textarea 
-          id="dictation-input" 
-          placeholder="Start typing the sentence here... (hint: start with a capital letter!)" 
-          rows="3"
-        ></textarea>
+        <span class="input-label">
+          <span class="en-text">Choose the correct sentence you hear below:</span>
+          <span class="kh-text">ជ្រើសរើសប្រយោគត្រឹមត្រូវដែលអ្នកបានឮខាងក្រោម៖</span>
+        </span>
+        <div class="options-container" id="listening-options">
+          <!-- Options will be injected by JavaScript -->
+        </div>
         <p class="clue-text">
           💡 <strong>
             <span class="en-text">Clue:</span>
@@ -82,7 +90,7 @@ const exercisesJson = JSON.stringify(listeningExercises);
       </div>
 
       <div class="actions-section">
-        <button class="btn btn-primary" id="check-btn">
+        <button class="btn btn-primary" id="check-btn" disabled>
           <span class="en-text">Check My Answer! 🚀</span>
           <span class="kh-text">ពិនិត្យចម្លើយរបស់ខ្ញុំ! 🚀</span>
         </button>
@@ -148,6 +156,8 @@ const exercisesJson = JSON.stringify(listeningExercises);
 
 <script>
   import { profileManager } from '../scripts/profileManager';
+  import { soundEffects } from '../scripts/soundEffects';
+  import { APP_CONFIG } from '../config';
 
   class ListeningPortal {
     layoutEl: HTMLElement;
@@ -155,6 +165,10 @@ const exercisesJson = JSON.stringify(listeningExercises);
     filteredExercises: any[];
     currentIndex: number;
     saveStatusEl: HTMLElement | null;
+    sessionScores: Map<number, number>;
+    celebrationTriggered: boolean;
+    exerciseOptionsMap: Map<number, string[]>;
+    selectedOptionIndex: number | null;
 
     // DOM Elements
     titleEl: HTMLElement | null;
@@ -162,7 +176,7 @@ const exercisesJson = JSON.stringify(listeningExercises);
     clueEl: HTMLElement | null;
     playNormalBtn: HTMLElement | null;
     playSlowBtn: HTMLElement | null;
-    inputEl: HTMLTextAreaElement | null;
+    optionsContainerEl: HTMLElement | null;
     checkBtn: HTMLElement | null;
     revealBtn: HTMLElement | null;
     feedbackContainer: HTMLElement | null;
@@ -185,6 +199,10 @@ const exercisesJson = JSON.stringify(listeningExercises);
       this.exercises = dataAttr ? JSON.parse(dataAttr) : [];
       this.currentIndex = 0;
       this.filteredExercises = [];
+      this.sessionScores = new Map();
+      this.celebrationTriggered = false;
+      this.exerciseOptionsMap = new Map();
+      this.selectedOptionIndex = null;
 
       // Select elements
       this.titleEl = layoutEl.querySelector('#current-ex-title');
@@ -192,7 +210,7 @@ const exercisesJson = JSON.stringify(listeningExercises);
       this.clueEl = layoutEl.querySelector('#current-ex-clue');
       this.playNormalBtn = layoutEl.querySelector('#play-normal');
       this.playSlowBtn = layoutEl.querySelector('#play-slow');
-      this.inputEl = layoutEl.querySelector('#dictation-input') as HTMLTextAreaElement;
+      this.optionsContainerEl = layoutEl.querySelector('#listening-options');
       this.checkBtn = layoutEl.querySelector('#check-btn');
       this.revealBtn = layoutEl.querySelector('#reveal-btn');
       this.feedbackContainer = layoutEl.querySelector('#result-feedback');
@@ -235,7 +253,7 @@ const exercisesJson = JSON.stringify(listeningExercises);
       }
 
       // Filter exercises by grade preference
-      const savedGrade = localStorage.getItem('preferredGrade') || 'grade3';
+      const savedGrade = APP_CONFIG.singleLevelMode ? APP_CONFIG.defaultGrade : (localStorage.getItem('preferredGrade') || 'grade3');
       const gradeMap: Record<string, string> = {
         'grade3': 'Level 1',
         'grade4': 'Level 2',
@@ -301,11 +319,16 @@ const exercisesJson = JSON.stringify(listeningExercises);
         `;
       }
       if (this.diffEl) {
-        this.diffEl.innerHTML = `
-          <span class="en-text">${ex.difficulty}</span>
-          <span class="kh-text">${ex.difficultyKh}</span>
-        `;
-        this.diffEl.className = `difficulty-badge level`;
+        if (APP_CONFIG.singleLevelMode) {
+          this.diffEl.classList.add('hidden');
+        } else {
+          this.diffEl.classList.remove('hidden');
+          this.diffEl.innerHTML = `
+            <span class="en-text">${ex.difficulty}</span>
+            <span class="kh-text">${ex.difficultyKh}</span>
+          `;
+          this.diffEl.className = `difficulty-badge level`;
+        }
       }
       if (this.clueEl) {
         this.clueEl.innerHTML = `
@@ -313,7 +336,17 @@ const exercisesJson = JSON.stringify(listeningExercises);
           <span class="kh-text">${ex.clueKh}</span>
         `;
       }
-      if (this.inputEl) this.inputEl.value = '';
+
+      this.selectedOptionIndex = null;
+
+      // Get or generate options
+      let options = this.exerciseOptionsMap.get(ex.id);
+      if (!options) {
+        options = this.generateOptions(ex);
+        this.exerciseOptionsMap.set(ex.id, options);
+      }
+
+      this.renderOptions(options);
 
       if (this.feedbackContainer) {
         this.feedbackContainer.classList.add('hidden');
@@ -353,6 +386,87 @@ const exercisesJson = JSON.stringify(listeningExercises);
       if (this.nextBtn) (this.nextBtn as HTMLButtonElement).disabled = (index === this.filteredExercises.length - 1);
     }
 
+    generateOptions(ex: any): string[] {
+      const correctText = ex.text;
+      
+      // 1. Find distractors in the same level
+      let levelDistractors = this.filteredExercises
+        .filter((other: any) => other.text !== correctText)
+        .map((other: any) => other.text);
+      
+      // Deduplicate
+      levelDistractors = [...new Set(levelDistractors)];
+
+      // 2. If not enough, find from all exercises
+      if (levelDistractors.length < 2) {
+        let allDistractors = this.exercises
+          .filter((other: any) => other.text !== correctText)
+          .map((other: any) => other.text);
+        
+        allDistractors = [...new Set(allDistractors)];
+        
+        // Merge level distractors with all distractors, keeping level ones first
+        const extraDistractors = allDistractors.filter(d => !levelDistractors.includes(d));
+        levelDistractors = [...levelDistractors, ...extraDistractors];
+      }
+
+      // Shuffle distractors
+      const shuffledDistractors = this.shuffleArray(levelDistractors);
+      const chosenDistractors = shuffledDistractors.slice(0, 2);
+
+      // Combine and shuffle correct text with chosen distractors
+      const allChoices = [correctText, ...chosenDistractors];
+      return this.shuffleArray(allChoices);
+    }
+
+    shuffleArray(array: any[]): any[] {
+      const copy = [...array];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    renderOptions(options: string[]) {
+      if (!this.optionsContainerEl) return;
+      this.optionsContainerEl.innerHTML = '';
+      
+      options.forEach((optionText, index) => {
+        const button = document.createElement('button');
+        button.className = 'option-btn';
+        button.type = 'button';
+        button.innerText = optionText;
+        button.addEventListener('click', () => this.selectOption(index));
+        this.optionsContainerEl?.appendChild(button);
+      });
+      
+      if (this.checkBtn) {
+        (this.checkBtn as HTMLButtonElement).disabled = true;
+      }
+    }
+
+    selectOption(index: number) {
+      if (this.feedbackContainer && !this.feedbackContainer.classList.contains('hidden')) {
+        // Already checked, don't allow selecting options
+        return;
+      }
+      this.selectedOptionIndex = index;
+      
+      const optionButtons = this.optionsContainerEl?.querySelectorAll('.option-btn');
+      optionButtons?.forEach((btn, idx) => {
+        if (idx === index) {
+          btn.classList.add('selected');
+        } else {
+          btn.classList.remove('selected');
+        }
+      });
+
+      if (this.checkBtn) {
+        (this.checkBtn as HTMLButtonElement).disabled = false;
+      }
+    }
+
     navigateExercise(direction: number) {
       const newIndex = this.currentIndex + direction;
       if (newIndex >= 0 && newIndex < this.filteredExercises.length) {
@@ -384,40 +498,48 @@ const exercisesJson = JSON.stringify(listeningExercises);
     }
 
     checkAnswer() {
-      const userText = this.inputEl?.value.trim() || '';
-      if (!userText) {
-        alert("Please write something first!");
+      if (this.selectedOptionIndex === null) {
+        alert("Please select an option first!");
         return;
       }
 
       const activeExercise = this.filteredExercises[this.currentIndex];
       if (!activeExercise) return;
       
+      const options = this.exerciseOptionsMap.get(activeExercise.id) || [];
+      const selectedText = this.selectedOptionIndex >= 0 ? options[this.selectedOptionIndex] : "(No answer selected)";
       const correctText = activeExercise.text;
       
-      const cleanUser = userText.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").replace(/\s+/g," ");
-      const cleanCorrect = correctText.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").replace(/\s+/g," ");
+      const isCorrect = (selectedText === correctText);
+      const accuracy = isCorrect ? 100 : 0;
 
-      const userWords = cleanUser.split(' ').filter(Boolean);
-      const correctWords = cleanCorrect.split(' ').filter(Boolean);
-      
-      let matches = 0;
-      correctWords.forEach(word => {
-        if (userWords.includes(word)) {
-          matches++;
-        }
-      });
-
-      const accuracy = Math.round((matches / Math.max(correctWords.length, userWords.length)) * 100);
+      if (isCorrect) {
+        soundEffects.playSuccess();
+      } else {
+        soundEffects.playError();
+      }
 
       if (this.feedbackContainer) this.feedbackContainer.classList.remove('hidden');
-      if (this.userTypedOutput) this.userTypedOutput.innerText = userText;
+      if (this.userTypedOutput) this.userTypedOutput.innerText = selectedText;
       if (this.correctTranscript) this.correctTranscript.innerText = correctText;
       if (this.accuracyText) this.accuracyText.innerText = `${accuracy}%`;
       if (this.accuracyFill) this.accuracyFill.style.width = `${accuracy}%`;
 
-      // Dispatch mascot score event
-      window.dispatchEvent(new CustomEvent('kiri-score-achieved', { detail: { accuracy: accuracy } }));
+      // Visual feedback on option buttons
+      const optionButtons = this.optionsContainerEl?.querySelectorAll('.option-btn');
+      optionButtons?.forEach((btn: any, idx) => {
+        btn.disabled = true;
+        const optText = btn.innerText;
+        if (optText === correctText) {
+          btn.classList.add('correct');
+        } else if (idx === this.selectedOptionIndex) {
+          btn.classList.add('wrong');
+        }
+      });
+
+      if (this.checkBtn) {
+        (this.checkBtn as HTMLButtonElement).disabled = true;
+      }
 
       // Save score to profile
       const activeProfile = profileManager.getProfile();
@@ -460,28 +582,115 @@ const exercisesJson = JSON.stringify(listeningExercises);
           this.feedbackCard.classList.add('perfect');
           if (this.feedbackTitle) {
             this.feedbackTitle.innerHTML = `
-              <span class="en-text">🌟 Perfect! You write like a champion! 🌟</span>
-              <span class="kh-text">🌟 ល្អឥតខ្ចោះ! អ្នកសរសេរបានត្រឹមត្រូវទាំងស្រុង! 🌟</span>
-            `;
-          }
-        } else if (accuracy >= 80) {
-          this.feedbackCard.classList.add('good');
-          if (this.feedbackTitle) {
-            this.feedbackTitle.innerHTML = `
-              <span class="en-text">👍 Super close! Check the spelling list.</span>
-              <span class="kh-text">👍 ជិតត្រូវទាំងអស់ហើយ! ពិនិត្យមើលអក្ខរាវិរុទ្ធឡើងវិញ។</span>
+              <span class="en-text">🌟 Perfect! You choose like a champion! 🌟</span>
+              <span class="kh-text">🌟 ល្អឥតខ្ចោះ! អ្នកជ្រើសរើសបានត្រឹមត្រូវទាំងស្រុង! 🌟</span>
             `;
           }
         } else {
           this.feedbackCard.classList.add('poor');
           if (this.feedbackTitle) {
             this.feedbackTitle.innerHTML = `
-              <span class="en-text">💪 Try again! Listen slowly and write what you hear.</span>
-              <span class="kh-text">💪 ព្យាយាមម្តងទៀត! ស្ដាប់សំឡេងយឺតៗ និងសរសេរអ្វីដែលអ្នកឮ។</span>
+              <span class="en-text">💪 Try again! Listen slowly and choose the correct sentence.</span>
+              <span class="kh-text">💪 ព្យាយាមម្តងទៀត! ស្ដាប់សំឡេងយឺតៗ និងជ្រើសរើសប្រយោគដែលត្រឹមត្រូវ។</span>
             `;
           }
         }
       }
+
+      // Track session score and check if set is completed
+      this.sessionScores.set(activeExercise.id, accuracy);
+      this.checkSetCompletion();
+    }
+
+    checkSetCompletion() {
+      const activeProfile = profileManager.getProfile();
+      
+      const getScore = (exId: number): number | null => {
+        if (this.sessionScores.has(exId)) {
+          return this.sessionScores.get(exId)!;
+        }
+        if (activeProfile && activeProfile.listeningScores[exId] !== undefined) {
+          return activeProfile.listeningScores[exId];
+        }
+        return null;
+      };
+
+      const allCompleted = this.filteredExercises.every(ex => getScore(ex.id) !== null);
+      
+      if (allCompleted) {
+        let totalScore = 0;
+        this.filteredExercises.forEach(ex => {
+          totalScore += getScore(ex.id) || 0;
+        });
+        const overallPercentage = Math.round(totalScore / this.filteredExercises.length);
+        
+        if (!this.celebrationTriggered) {
+          this.celebrationTriggered = true;
+          // Dispatch global celebration event (only triggers celebration overlay if overallPercentage >= 80)
+          window.dispatchEvent(new CustomEvent('kiri-score-achieved', { detail: { accuracy: overallPercentage } }));
+          // Show the completion banner in UI
+          this.showSetCompleteUI(overallPercentage);
+        }
+      }
+    }
+
+    showSetCompleteUI(overallPercentage: number) {
+      if (!this.saveStatusEl) return;
+      
+      const isPassing = overallPercentage >= 80;
+      const bannerBg = isPassing ? '#fef08a' : '#fee2e2'; // Pastel Yellow vs Pastel Red
+      const bannerBorder = isPassing ? '#000000' : '#000000';
+      
+      const setCompleteBanner = document.createElement('div');
+      setCompleteBanner.className = 'set-complete-banner animate-bounce-small';
+      setCompleteBanner.style.marginTop = '20px';
+      setCompleteBanner.style.padding = '24px';
+      setCompleteBanner.style.border = '4px solid ' + bannerBorder;
+      setCompleteBanner.style.borderRadius = '20px';
+      setCompleteBanner.style.background = bannerBg;
+      setCompleteBanner.style.boxShadow = '6px 6px 0px #000000';
+      setCompleteBanner.style.textAlign = 'center';
+      
+      let textHtml = '';
+      if (isPassing) {
+        textHtml = `
+          <h3 style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 900; margin-bottom: 8px;">
+            <span class="en-text">🎓 SET COMPLETED! 🎓</span>
+            <span class="kh-text">🎓 បានបញ្ចប់លំហាត់ទាំងអស់! 🎓</span>
+          </h3>
+          <p style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">
+            <span class="en-text">Overall Set Score: <strong style="color: #10b981; font-size: 1.25rem;">${overallPercentage}%</strong> 🏆</span>
+            <span class="kh-text">ពិន្ទុសរុប៖ <strong style="color: #10b981; font-size: 1.25rem;">${overallPercentage}%</strong> 🏆</span>
+          </p>
+          <p style="font-size: 0.95rem; font-weight: 700; color: #4b5563;">
+            <span class="en-text">Great job completing this learning set! Keep up the amazing work! 🚀</span>
+            <span class="kh-text">ធ្វើបានល្អណាស់ក្នុងការបញ្ចប់លំហាត់នេះ! បន្តការខិតខំប្រឹងប្រែងទៀតណា! 🚀</span>
+          </p>
+        `;
+      } else {
+        textHtml = `
+          <h3 style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 900; margin-bottom: 8px;">
+            <span class="en-text">🎓 SET COMPLETED! 🎓</span>
+            <span class="kh-text">🎓 បានបញ្ចប់លំហាត់ទាំងអស់! 🎓</span>
+          </h3>
+          <p style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">
+            <span class="en-text">Overall Set Score: <strong style="color: #ef4444; font-size: 1.25rem;">${overallPercentage}%</strong></span>
+            <span class="kh-text">ពិន្ទុសរុប៖ <strong style="color: #ef4444; font-size: 1.25rem;">${overallPercentage}%</strong></span>
+          </p>
+          <p style="font-size: 0.95rem; font-weight: 700; color: #4b5563;">
+            <span class="en-text">Good try! Practice the listening exercises again to get a score above 80%! 💪</span>
+            <span class="kh-text">ព្យាយាមបានល្អ! ហ្វឹកហាត់ស្តាប់ម្តងទៀតដើម្បីទទួលបានពិន្ទុលើសពី ៨០%! 💪</span>
+          </p>
+        `;
+      }
+
+      setCompleteBanner.innerHTML = textHtml;
+      
+      // Clean up previous set-complete-banners if any exist
+      const existingBanners = this.saveStatusEl.querySelectorAll('.set-complete-banner');
+      existingBanners.forEach(b => b.remove());
+      
+      this.saveStatusEl.appendChild(setCompleteBanner);
     }
 
     revealTranscript() {
@@ -491,8 +700,9 @@ const exercisesJson = JSON.stringify(listeningExercises);
 
       if (isHidden) {
         if (this.feedbackContainer) this.feedbackContainer.classList.remove('hidden');
-        if (this.userTypedOutput) this.userTypedOutput.innerText = this.inputEl?.value || "(Nothing written)";
-        if (this.correctTranscript) this.correctTranscript.innerText = ex.text;
+        if (this.selectedOptionIndex === null) {
+          this.selectedOptionIndex = -1; // No answer selected
+        }
         
         this.checkAnswer();
         if (this.revealBtn) {
@@ -509,6 +719,9 @@ const exercisesJson = JSON.stringify(listeningExercises);
             <span class="kh-text">បង្ហាញចម្លើយ 👁️</span>
           `;
         }
+
+        // Reset selections to allow answering again
+        this.selectExercise(this.currentIndex);
       }
     }
   }
@@ -662,25 +875,63 @@ const exercisesJson = JSON.stringify(listeningExercises);
     color: var(--color-text-muted);
   }
 
-  textarea {
-    width: 100%;
-    background: #ffffff;
-    border: 3px solid #e2e8f0;
-    border-radius: var(--radius-md);
-    padding: 16px;
-    font-family: var(--font-sans);
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: #2d3748;
-    resize: vertical;
-    transition: var(--transition-smooth);
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+  :global(.options-container) {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
   }
 
-  textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
+  :global(.option-btn) {
+    width: 100%;
+    padding: 16px 20px;
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: left;
     background: #ffffff;
+    border: 3px solid #000000;
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: 4px 4px 0px #000000;
+  }
+
+  :global(.option-btn:hover:not(:disabled)) {
+    background: #f8fafc;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000000;
+  }
+
+  :global(.option-btn:active:not(:disabled)) {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000000;
+  }
+
+  :global(.option-btn.selected) {
+    background: #f3e8ff;
+    border-color: #000000;
+    box-shadow: 4px 4px 0px var(--color-primary);
+    color: #1a202c;
+  }
+
+  :global(.option-btn.correct),
+  :global(.option-btn.correct:disabled) {
+    background: #d1fae5;
+    border-color: #000000;
+    box-shadow: 4px 4px 0px var(--color-success);
+    color: #1a202c;
+    opacity: 1;
+  }
+
+  :global(.option-btn.wrong),
+  :global(.option-btn.wrong:disabled) {
+    background: #fee2e2;
+    border-color: #000000;
+    box-shadow: 4px 4px 0px var(--color-accent);
+    color: #1a202c;
+    opacity: 1;
   }
 
   .clue-text {

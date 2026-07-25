@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { APP_CONFIG } from '../config';
 const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
@@ -21,7 +22,7 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
       </p>
       
       <div class="hero-actions">
-        <a href={`${baseUrl}vocabulary`} class="btn btn-primary">
+        <a href={`${baseUrl}lessons`} class="btn btn-primary">
           <span class="en-text">Start Learning! 🚀</span>
           <span class="kh-text">ចាប់ផ្តើមរៀន! 🚀</span>
         </a>
@@ -34,61 +35,63 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
   </section>
 
   <!-- Grade Level Selector Section -->
-  <section class="grade-selection-section glass-card">
-    <h2 class="grade-section-title">
-      <span class="en-text">Select Your School Grade 🌟</span>
-      <span class="kh-text">ជ្រើសរើសថ្នាក់រៀនរបស់អ្នក 🌟</span>
-    </h2>
-    <p class="grade-section-subtitle">
-      <span class="en-text">Pick your grade below. The lessons and quizzes will automatically open at your level!</span>
-      <span class="kh-text">ជ្រើសរើសថ្នាក់របស់អ្នកខាងក្រោម។ មេរៀន និងតេស្តសាកល្បងទាំងអស់នឹងបង្ហាញកម្រិតដែលត្រូវនឹងថ្នាក់របស់អ្នកដោយស្វ័យប្រវត្ត!</span>
-    </p>
-    <div class="grade-bubbles">
-      <button class="grade-bubble-btn" data-grade="grade3">
-        <span class="bubble-title">
-          <span class="en-text">Grade 3</span>
-          <span class="kh-text">ថ្នាក់ទី ៣</span>
-        </span>
-        <span class="bubble-sub">
-          <span class="en-text">Level 1 English</span>
-          <span class="kh-text">កម្រិត ១ (ងាយ)</span>
-        </span>
-      </button>
-      
-      <button class="grade-bubble-btn" data-grade="grade4">
-        <span class="bubble-title">
-          <span class="en-text">Grade 4</span>
-          <span class="kh-text">ថ្នាក់ទី ៤</span>
-        </span>
-        <span class="bubble-sub">
-          <span class="en-text">Level 2 English</span>
-          <span class="kh-text">កម្រិត ២ (មធ្យម)</span>
-        </span>
-      </button>
-      
-      <button class="grade-bubble-btn" data-grade="grade5">
-        <span class="bubble-title">
-          <span class="en-text">Grade 5</span>
-          <span class="kh-text">ថ្នាក់ទី ៥</span>
-        </span>
-        <span class="bubble-sub">
-          <span class="en-text">Level 3 English</span>
-          <span class="kh-text">កម្រិត ៣ (ពិបាក)</span>
-        </span>
-      </button>
-      
-      <button class="grade-bubble-btn" data-grade="grade6">
-        <span class="bubble-title">
-          <span class="en-text">Grade 6</span>
-          <span class="kh-text">ថ្នាក់ទី ៦</span>
-        </span>
-        <span class="bubble-sub">
-          <span class="en-text">Level 4 English</span>
-          <span class="kh-text">កម្រិត ៤ (ពិបាកខ្លាំង)</span>
-        </span>
-      </button>
-    </div>
-  </section>
+  {!APP_CONFIG.singleLevelMode && (
+    <section class="grade-selection-section glass-card">
+      <h2 class="grade-section-title">
+        <span class="en-text">Select Your School Grade 🌟</span>
+        <span class="kh-text">ជ្រើសរើសថ្នាក់រៀនរបស់អ្នក 🌟</span>
+      </h2>
+      <p class="grade-section-subtitle">
+        <span class="en-text">Pick your grade below. The lessons and quizzes will automatically open at your level!</span>
+        <span class="kh-text">ជ្រើសរើសថ្នាក់របស់អ្នកខាងក្រោម។ មេរៀន និងតេស្តសាកល្បងទាំងអស់នឹងបង្ហាញកម្រិតដែលត្រូវនឹងថ្នាក់របស់អ្នកដោយស្វ័យប្រវត្ត!</span>
+      </p>
+      <div class="grade-bubbles">
+        <button class="grade-bubble-btn" data-grade="grade3">
+          <span class="bubble-title">
+            <span class="en-text">Grade 3</span>
+            <span class="kh-text">ថ្នាក់ទី ៣</span>
+          </span>
+          <span class="bubble-sub">
+            <span class="en-text">Level 1 English</span>
+            <span class="kh-text">កម្រិត ១ (ងាយ)</span>
+          </span>
+        </button>
+        
+        <button class="grade-bubble-btn" data-grade="grade4">
+          <span class="bubble-title">
+            <span class="en-text">Grade 4</span>
+            <span class="kh-text">ថ្នាក់ទី ៤</span>
+          </span>
+          <span class="bubble-sub">
+            <span class="en-text">Level 2 English</span>
+            <span class="kh-text">កម្រិត ២ (មធ្យម)</span>
+          </span>
+        </button>
+        
+        <button class="grade-bubble-btn" data-grade="grade5">
+          <span class="bubble-title">
+            <span class="en-text">Grade 5</span>
+            <span class="kh-text">ថ្នាក់ទី ៥</span>
+          </span>
+          <span class="bubble-sub">
+            <span class="en-text">Level 3 English</span>
+            <span class="kh-text">កម្រិត ៣ (ពិបាក)</span>
+          </span>
+        </button>
+        
+        <button class="grade-bubble-btn" data-grade="grade6">
+          <span class="bubble-title">
+            <span class="en-text">Grade 6</span>
+            <span class="kh-text">ថ្នាក់ទី ៦</span>
+          </span>
+          <span class="bubble-sub">
+            <span class="en-text">Level 4 English</span>
+            <span class="kh-text">កម្រិត ៤ (ពិបាកខ្លាំង)</span>
+          </span>
+        </button>
+      </div>
+    </section>
+  )}
 
   <!-- Learning Paths Section -->
   <section id="paths" class="paths-section">
@@ -290,13 +293,13 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
           </div>
 
           <!-- Grade Selection -->
-          <div class="form-group">
+          <div class="form-group" class:list={[{ hidden: APP_CONFIG.singleLevelMode }]}>
             <label for="modal-grade" class="form-label">
               <span class="en-text">School Grade:</span>
               <span class="kh-text">ថ្នាក់រៀន៖</span>
             </label>
             <select id="modal-grade" class="playful-select">
-              <option value="grade3">Grade 3 / ថ្នាក់ទី ៣</option>
+              <option value="grade3" selected={APP_CONFIG.singleLevelMode}>Grade 3 / ថ្នាក់ទី ៣</option>
               <option value="grade4">Grade 4 / ថ្នាក់ទី ៤</option>
               <option value="grade5">Grade 5 / ថ្នាក់ទី ៥</option>
               <option value="grade6">Grade 6 / ថ្នាក់ទី ៦</option>
@@ -326,6 +329,12 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
 
 <script>
   import { profileManager } from '../scripts/profileManager';
+  import { APP_CONFIG } from '../config';
+
+  // Force default grade on load in Single Level Mode
+  if (APP_CONFIG.singleLevelMode) {
+    localStorage.setItem('preferredGrade', APP_CONFIG.defaultGrade);
+  }
 
   const gradeButtons = document.querySelectorAll('.grade-bubble-btn');
   const registerModal = document.getElementById('register-modal-overlay');
@@ -341,11 +350,10 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
   const skipSwitcherBtn = document.getElementById('btn-modal-skip-switcher');
 
   // Read and apply active profile
-  let currentGrade = 'grade3';
+  let currentGrade = APP_CONFIG.singleLevelMode ? APP_CONFIG.defaultGrade : 'grade3';
   const activeProfile = profileManager.getProfile();
-  
   if (activeProfile) {
-    currentGrade = activeProfile.grade;
+    currentGrade = APP_CONFIG.singleLevelMode ? APP_CONFIG.defaultGrade : activeProfile.grade;
     if (welcomeBanner) {
       welcomeBanner.innerHTML = `
         <span class="en-text">🌟 Welcome back, ${activeProfile.avatar} ${activeProfile.nickname}! Ready to learn? <a href="#" id="welcome-switch-user" class="switch-link">Switch User 🔄</a></span>
@@ -362,17 +370,15 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_UR
       });
     }
   } else {
-    currentGrade = localStorage.getItem('preferredGrade') || 'grade3';
-    // Trigger modal if not logged in and not skipped
-    const isSkipped = localStorage.getItem('profilePromptSkipped') === 'true';
-    if (!isSkipped && registerModal) {
-      setTimeout(() => {
-        showProfilePrompt();
-      }, 800);
+    currentGrade = APP_CONFIG.singleLevelMode ? APP_CONFIG.defaultGrade : (localStorage.getItem('preferredGrade') || 'grade3');
+    // Show only when the user first enters the home page link in this session
+    const hasShownThisSession = sessionStorage.getItem('profilePromptShown') === 'true';
+    if (!hasShownThisSession && registerModal) {
+      sessionStorage.setItem('profilePromptShown', 'true');
+      showProfilePrompt();
     }
   }
 
-  // Helper to trigger and render the switcher/creator modal
   function showProfilePrompt() {
     if (!registerModal) return;
     const profiles = profileManager.getProfilesList();
