@@ -85,8 +85,8 @@ Analyze the attached lesson PDF visually and contextually.
 Based on this lesson, generate the following learning materials and translations:
 1. {desc_instruction}
 2. "vocabulary": A list of all primary vocabulary words explicitly listed in the PDF. Provide word, ipa phonetic transcription, type (must be "noun", "verb", "adjective", or "adverb"), fitting emoji, English definition, Khmer translation definition, English example sentence, and Khmer translation example.
-3. "quizzes": A list of 3 to 5 multiple-choice questions (grammar or vocabulary type). Provide questionText, questionTextKh, options (exactly 4 strings), correctAnswer (0-indexed integer choice), explanation in English, and explanationKh in Khmer.
-4. "listening": A list of 1 to 3 listening exercise sentences. Provide title, titleKh, text (the actual spelling sentence read aloud), clue hint, and clueKh hint translation.
+3. "quizzes": A list of 3 to 5 multiple-choice questions. Each question MUST be a simple fill-in-the-blank completion of one vocabulary example sentence word-for-word (e.g. Question: 'Complete the sentence: "I see a yellow _____."', options: ["fish", "dog", "cat", "horse"]). Provide questionText, questionTextKh, options (exactly 4 strings containing simple vocabulary words), correctAnswer (0-indexed integer choice), explanation in English, and explanationKh in Khmer.
+4. "listening": A list of 1 to 3 listening exercise sentences. Each sentence in the "text" field MUST be chosen EXACTLY (word-for-word) from the "example" sentences of the vocabulary words generated in step 2. Provide title, titleKh, text (the actual spelling sentence read aloud), clue hint, and clueKh hint translation.
 
 You MUST conform to the JSON schema specified in responseSchema. Return only valid JSON."""
 

@@ -59,6 +59,13 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
               <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
             </svg>
           </button>
+          <button class="mic-btn" data-word={word} aria-label="Verify pronunciation">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mic-icon">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+              <path d="M19 10v1a7 7 0 0 1-14 0v-1"></path>
+              <line x1="12" x2="12" y1="19" y2="22"></line>
+            </svg>
+          </button>
           <button class="learn-btn" data-word={word} aria-label="Mark as learned">
             <span class="learn-check">✓</span>
           </button>
@@ -74,6 +81,10 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
         </div>
         <h2 class="word-title">{word}</h2>
         <p class="word-ipa">{ipa}</p>
+        <div class="pronounce-feedback hidden">
+          <span class="feedback-badge"></span>
+          <span class="feedback-text"></span>
+        </div>
       </div>
       <div class="card-footer">
         <span class="tap-hint en-text">👉 Tap Card to Flip! 👈</span>
@@ -118,12 +129,15 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
 </div>
 
 <script>
+  import { soundEffects } from '../scripts/soundEffects';
+  import confetti from 'canvas-confetti';
+
   // Add flipping logic
   const cards = document.querySelectorAll('.flashcard-container');
   cards.forEach(card => {
     card.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
-      if (target.closest('.speak-btn') || target.closest('.learn-btn')) {
+      if (target.closest('.speak-btn') || target.closest('.learn-btn') || target.closest('.mic-btn')) {
         return;
       }
       
@@ -238,6 +252,169 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
       } else {
         alert("Text-to-speech is not supported in this browser.");
       }
+    });
+  });
+
+  // Web Speech API / SpeechRecognition Setup
+  const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+  
+  let activeRecognition: any = null;
+  let activeMicBtn: HTMLElement | null = null;
+  let activeFeedback: HTMLElement | null = null;
+
+  function stopActiveRecognition() {
+    if (activeRecognition) {
+      try {
+        activeRecognition.stop();
+      } catch (e) {}
+      activeRecognition = null;
+    }
+    if (activeMicBtn) {
+      activeMicBtn.classList.remove('recording');
+      activeMicBtn = null;
+    }
+  }
+
+  const micButtons = document.querySelectorAll('.mic-btn');
+  micButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      const word = btn.getAttribute('data-word');
+      if (!word) return;
+
+      const card = btn.closest('.flashcard-container') as HTMLElement;
+      if (!card) return;
+
+      const feedbackContainer = card.querySelector('.pronounce-feedback') as HTMLElement;
+      const feedbackBadge = card.querySelector('.feedback-badge') as HTMLElement;
+      const feedbackText = card.querySelector('.feedback-text') as HTMLElement;
+
+      // If we clicked the currently recording button, stop it
+      if (activeMicBtn === btn) {
+        stopActiveRecognition();
+        if (feedbackContainer) {
+          feedbackContainer.classList.add('hidden');
+        }
+        return;
+      }
+
+      // Stop any other active recording
+      stopActiveRecognition();
+
+      if (!SpeechRecognition) {
+        alert("Speech recognition is not supported in this browser. Please try Chrome, Edge, or Safari!");
+        return;
+      }
+
+      // Clear any previous speaking audio
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+
+      // Setup feedback element
+      if (feedbackContainer) {
+        feedbackContainer.className = 'pronounce-feedback';
+        feedbackContainer.classList.remove('hidden');
+        if (feedbackBadge) feedbackBadge.innerText = '🎙️';
+        if (feedbackText) {
+          const isEn = !document.documentElement.classList.contains('lang-khmer');
+          feedbackText.innerText = isEn ? 'Listening...' : 'កំពុងស្តាប់...';
+        }
+      }
+
+      // Mark this button as recording
+      btn.classList.add('recording');
+      activeMicBtn = btn as HTMLElement;
+      activeFeedback = feedbackContainer;
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript || '';
+        const cleanedSpeech = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").trim();
+        const cleanedWord = word.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").trim();
+
+        if (feedbackContainer) {
+          if (cleanedSpeech === cleanedWord) {
+            feedbackContainer.className = 'pronounce-feedback correct';
+            if (feedbackBadge) feedbackBadge.innerText = '🎉';
+            if (feedbackText) {
+              const isEn = !document.documentElement.classList.contains('lang-khmer');
+              feedbackText.innerText = isEn ? 'Perfect!' : 'ល្អឥតខ្ចោះ!';
+            }
+            
+            soundEffects.playSuccess();
+
+            // Confetti burst from microphone button
+            const rect = btn.getBoundingClientRect();
+            const x = (rect.left + rect.width / 2) / window.innerWidth;
+            const y = (rect.top + rect.height / 2) / window.innerHeight;
+            confetti({
+              particleCount: 50,
+              spread: 60,
+              origin: { x, y },
+              colors: ['#34d399', '#10b981', '#6ee7b7'],
+              disableForReducedMotion: true
+            });
+
+            // Auto-mark the learn button as learned
+            const learnBtn = card.querySelector(`.learn-btn[data-word="${word}"]`) as HTMLElement;
+            if (learnBtn && !learnBtn.classList.contains('learned')) {
+              setTimeout(() => {
+                learnBtn.click();
+              }, 400);
+            }
+          } else {
+            feedbackContainer.className = 'pronounce-feedback incorrect';
+            if (feedbackBadge) feedbackBadge.innerText = '🗣️';
+            if (feedbackText) {
+              const isEn = !document.documentElement.classList.contains('lang-khmer');
+              feedbackText.innerText = isEn 
+                ? `Try again! Heard: "${transcript}"`
+                : `ព្យាយាមម្តងទៀត! ឮថា: "${transcript}"`;
+            }
+
+            soundEffects.playError();
+
+            // Playful shake animation on the card
+            card.classList.add('anim-shake');
+            setTimeout(() => {
+              card.classList.remove('anim-shake');
+            }, 500);
+          }
+        }
+      };
+
+      recognition.onerror = (event: any) => {
+        console.error('Speech recognition error:', event.error);
+        if (feedbackContainer) {
+          feedbackContainer.className = 'pronounce-feedback incorrect';
+          if (feedbackBadge) feedbackBadge.innerText = '⚠️';
+          if (feedbackText) {
+            const isEn = !document.documentElement.classList.contains('lang-khmer');
+            if (event.error === 'not-allowed') {
+              feedbackText.innerText = isEn ? 'Microphone blocked!' : 'មីក្រូហ្វូនត្រូវបានបិទ!';
+            } else {
+              feedbackText.innerText = isEn ? 'Could not hear you.' : 'មិនអាចឮសំឡេងអ្នក។';
+            }
+          }
+        }
+        stopActiveRecognition();
+      };
+
+      recognition.onend = () => {
+        if (activeMicBtn === btn) {
+          stopActiveRecognition();
+        }
+      };
+
+      activeRecognition = recognition;
+      recognition.start();
     });
   });
 </script>
@@ -358,6 +535,83 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
   .speaker-icon {
     width: 20px;
     height: 20px;
+  }
+
+  .mic-btn {
+    background: #ffffff;
+    border: 2.5px solid #000000;
+    box-shadow: 3px 3px 0px #000000;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #1a202c;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .mic-btn:hover {
+    background: #fecdd3;
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px #000000;
+  }
+
+  .mic-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px #000000;
+  }
+
+  .mic-btn.recording {
+    background: #fda4af;
+    animation: micPulse 1.0s infinite alternate;
+  }
+
+  .mic-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  @keyframes micPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
+  }
+
+  .pronounce-feedback {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    border: 2px solid #000000;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    align-self: center;
+    max-width: 90%;
+    animation: popReveal 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .pronounce-feedback.correct {
+    background-color: var(--color-success);
+    color: #ffffff;
+    box-shadow: 2px 2px 0px #000000;
+  }
+
+  .pronounce-feedback.incorrect {
+    background-color: var(--color-accent);
+    color: #ffffff;
+    box-shadow: 2px 2px 0px #000000;
+  }
+
+  .feedback-badge {
+    font-size: 1rem;
+  }
+
+  .feedback-text {
+    line-height: 1.2;
   }
 
   /* Card Body styling */
@@ -675,5 +929,16 @@ const typeKhmer = typeTranslations[type.toLowerCase()] || type;
     0% { transform: scale(0.6); }
     70% { transform: scale(1.2); }
     100% { transform: scale(1); }
+  }
+
+  /* Playful shake animation for incorrect pronunciation */
+  .flashcard-container.anim-shake {
+    animation: animShake 0.5s ease-in-out;
+  }
+
+  @keyframes animShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
   }
 </style>

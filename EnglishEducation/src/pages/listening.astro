@@ -70,13 +70,28 @@ const exercisesJson = JSON.stringify(listeningExercises);
       </div>
 
       <div class="input-section">
-        <span class="input-label">
-          <span class="en-text">Choose the correct sentence you hear below:</span>
-          <span class="kh-text">ជ្រើសរើសប្រយោគត្រឹមត្រូវដែលអ្នកបានឮខាងក្រោម៖</span>
+        <span class="input-label" style="margin-bottom: 8px; display: block;">
+          <span class="en-text">Listen to the audio, then speak the sentence:</span>
+          <span class="kh-text">ស្ដាប់សំឡេង រួចនិយាយប្រយោគនោះ៖</span>
         </span>
-        <div class="options-container" id="listening-options">
-          <!-- Options will be injected by JavaScript -->
+
+        <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 12px;">
+          <button class="btn btn-primary mic-speak-btn" id="listening-mic-btn" aria-label="Speak sentence" style="box-shadow: 4px 4px 0px #000000; border: 3.5px solid #000000;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mic-icon" style="width: 20px; height: 20px; margin-right: 4px;">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+              <path d="M19 10v1a7 7 0 0 1-14 0v-1"></path>
+              <line x1="12" x2="12" y1="19" y2="22"></line>
+            </svg>
+            <span class="en-text">Press to Speak 🎙️</span>
+            <span class="kh-text">ចុចដើម្បីនិយាយ 🎙️</span>
+          </button>
+
+          <div class="listening-speech-feedback hidden" id="listening-speech-feedback" style="padding: 10px 16px; border: 2.5px solid #000000; border-radius: var(--radius-md); font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: 3px 3px 0px #000000; background: #ffffff;">
+            <span class="feedback-badge" id="listening-speech-badge">🎙️</span>
+            <span class="feedback-text" id="listening-speech-text">Listening...</span>
+          </div>
         </div>
+
         <p class="clue-text">
           💡 <strong>
             <span class="en-text">Clue:</span>
@@ -90,10 +105,6 @@ const exercisesJson = JSON.stringify(listeningExercises);
       </div>
 
       <div class="actions-section">
-        <button class="btn btn-primary" id="check-btn" disabled>
-          <span class="en-text">Check My Answer! 🚀</span>
-          <span class="kh-text">ពិនិត្យចម្លើយរបស់ខ្ញុំ! 🚀</span>
-        </button>
         <button class="btn btn-secondary" id="reveal-btn">
           <span class="en-text">Show Answer 👁️</span>
           <span class="kh-text">បង្ហាញចម្លើយ 👁️</span>
@@ -167,8 +178,8 @@ const exercisesJson = JSON.stringify(listeningExercises);
     saveStatusEl: HTMLElement | null;
     sessionScores: Map<number, number>;
     celebrationTriggered: boolean;
-    exerciseOptionsMap: Map<number, string[]>;
-    selectedOptionIndex: number | null;
+    recognition: any;
+    isListening: boolean;
 
     // DOM Elements
     titleEl: HTMLElement | null;
@@ -176,8 +187,6 @@ const exercisesJson = JSON.stringify(listeningExercises);
     clueEl: HTMLElement | null;
     playNormalBtn: HTMLElement | null;
     playSlowBtn: HTMLElement | null;
-    optionsContainerEl: HTMLElement | null;
-    checkBtn: HTMLElement | null;
     revealBtn: HTMLElement | null;
     feedbackContainer: HTMLElement | null;
     feedbackCard: HTMLElement | null;
@@ -186,6 +195,10 @@ const exercisesJson = JSON.stringify(listeningExercises);
     correctTranscript: HTMLElement | null;
     accuracyText: HTMLElement | null;
     accuracyFill: HTMLElement | null;
+    micBtn: HTMLElement | null;
+    speechFeedbackEl: HTMLElement | null;
+    speechFeedbackBadge: HTMLElement | null;
+    speechFeedbackText: HTMLElement | null;
 
     // Selector sidebar & nav controls
     sidebarMenuEl: HTMLElement | null;
@@ -201,8 +214,6 @@ const exercisesJson = JSON.stringify(listeningExercises);
       this.filteredExercises = [];
       this.sessionScores = new Map();
       this.celebrationTriggered = false;
-      this.exerciseOptionsMap = new Map();
-      this.selectedOptionIndex = null;
 
       // Select elements
       this.titleEl = layoutEl.querySelector('#current-ex-title');
@@ -210,8 +221,6 @@ const exercisesJson = JSON.stringify(listeningExercises);
       this.clueEl = layoutEl.querySelector('#current-ex-clue');
       this.playNormalBtn = layoutEl.querySelector('#play-normal');
       this.playSlowBtn = layoutEl.querySelector('#play-slow');
-      this.optionsContainerEl = layoutEl.querySelector('#listening-options');
-      this.checkBtn = layoutEl.querySelector('#check-btn');
       this.revealBtn = layoutEl.querySelector('#reveal-btn');
       this.feedbackContainer = layoutEl.querySelector('#result-feedback');
       this.feedbackCard = layoutEl.querySelector('#feedback-card');
@@ -221,6 +230,11 @@ const exercisesJson = JSON.stringify(listeningExercises);
       this.accuracyText = layoutEl.querySelector('#accuracy-score-text');
       this.accuracyFill = layoutEl.querySelector('#accuracy-score-fill');
       this.saveStatusEl = layoutEl.querySelector('#listening-save-status');
+      this.micBtn = layoutEl.querySelector('#listening-mic-btn');
+      this.speechFeedbackEl = layoutEl.querySelector('#listening-speech-feedback');
+      this.speechFeedbackBadge = layoutEl.querySelector('#listening-speech-badge');
+      this.speechFeedbackText = layoutEl.querySelector('#listening-speech-text');
+      this.isListening = false;
 
       // Sidebar & Navigation controls
       this.sidebarMenuEl = layoutEl.querySelector('#exercises-menu-list');
@@ -239,9 +253,78 @@ const exercisesJson = JSON.stringify(listeningExercises);
         this.playSlowBtn.addEventListener('click', () => this.speakText(0.40, this.playSlowBtn));
       }
 
-      if (this.checkBtn) {
-        this.checkBtn.addEventListener('click', () => this.checkAnswer());
+      // Speech Recognition initialization
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        this.recognition = new SpeechRecognition();
+        this.recognition.lang = 'en-US';
+        this.recognition.continuous = false;
+        this.recognition.interimResults = false;
+        this.recognition.maxAlternatives = 1;
+
+        this.recognition.onstart = () => {
+          this.isListening = true;
+          if (this.micBtn) {
+            this.micBtn.classList.add('recording');
+          }
+          if (this.speechFeedbackEl) {
+            this.speechFeedbackEl.className = 'listening-speech-feedback';
+            this.speechFeedbackEl.classList.remove('hidden');
+          }
+          if (this.speechFeedbackBadge) this.speechFeedbackBadge.innerText = '🎙️';
+          if (this.speechFeedbackText) {
+            const isEn = !document.documentElement.classList.contains('lang-khmer');
+            this.speechFeedbackText.innerText = isEn ? 'Listening... Speak the sentence!' : 'កំពុងស្តាប់... និយាយប្រយោគ!';
+          }
+        };
+
+        this.recognition.onresult = (event: any) => {
+          const transcript = event.results[0][0].transcript || '';
+          const activeExercise = this.filteredExercises[this.currentIndex];
+          if (!activeExercise) return;
+
+          const correctText = activeExercise.text;
+          const accuracy = this.calculateSimilarity(transcript, correctText);
+
+          this.handleSpeechResult(transcript, correctText, accuracy);
+        };
+
+        this.recognition.onerror = (event: any) => {
+          console.error('Speech recognition error:', event.error);
+          this.isListening = false;
+          if (this.micBtn) {
+            this.micBtn.classList.remove('recording');
+          }
+          if (this.speechFeedbackEl) {
+            this.speechFeedbackEl.className = 'listening-speech-feedback incorrect';
+            if (this.speechFeedbackBadge) this.speechFeedbackBadge.innerText = '⚠️';
+            if (this.speechFeedbackText) {
+              const isEn = !document.documentElement.classList.contains('lang-khmer');
+              if (event.error === 'not-allowed') {
+                this.speechFeedbackText.innerText = isEn ? 'Microphone blocked!' : 'មីក្រូហ្វូនត្រូវបានបិទ!';
+              } else {
+                this.speechFeedbackText.innerText = isEn ? 'Could not hear you.' : 'មិនអាចឮសំឡេងអ្នក។';
+              }
+            }
+          }
+        };
+
+        this.recognition.onend = () => {
+          this.isListening = false;
+          if (this.micBtn) {
+            this.micBtn.classList.remove('recording');
+          }
+        };
       }
+
+      if (this.micBtn) {
+        if (!SpeechRecognition) {
+          this.micBtn.classList.add('hidden');
+        } else {
+          this.micBtn.addEventListener('click', () => this.toggleListening());
+        }
+      }
+
       if (this.revealBtn) {
         this.revealBtn.addEventListener('click', () => this.revealTranscript());
       }
@@ -312,6 +395,12 @@ const exercisesJson = JSON.stringify(listeningExercises);
         window.speechSynthesis.cancel();
       }
 
+      // Reset speech recognition state
+      this.stopActiveListening();
+      if (this.speechFeedbackEl) {
+        this.speechFeedbackEl.classList.add('hidden');
+      }
+
       if (this.titleEl) {
         this.titleEl.innerHTML = `
           <span class="en-text-block">${ex.title}</span>
@@ -336,17 +425,6 @@ const exercisesJson = JSON.stringify(listeningExercises);
           <span class="kh-text">${ex.clueKh}</span>
         `;
       }
-
-      this.selectedOptionIndex = null;
-
-      // Get or generate options
-      let options = this.exerciseOptionsMap.get(ex.id);
-      if (!options) {
-        options = this.generateOptions(ex);
-        this.exerciseOptionsMap.set(ex.id, options);
-      }
-
-      this.renderOptions(options);
 
       if (this.feedbackContainer) {
         this.feedbackContainer.classList.add('hidden');
@@ -452,6 +530,7 @@ const exercisesJson = JSON.stringify(listeningExercises);
         return;
       }
       this.selectedOptionIndex = index;
+      this.stopActiveListening();
       
       const optionButtons = this.optionsContainerEl?.querySelectorAll('.option-btn');
       optionButtons?.forEach((btn, idx) => {
@@ -724,6 +803,194 @@ const exercisesJson = JSON.stringify(listeningExercises);
         this.selectExercise(this.currentIndex);
       }
     }
+
+    stopActiveListening() {
+      if (this.isListening) {
+        try {
+          this.recognition.stop();
+        } catch (e) {}
+        this.isListening = false;
+      }
+    }
+
+    toggleListening() {
+      if (this.isListening) {
+        this.stopActiveListening();
+      } else {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+        }
+        
+        // Hide general results feedback when re-speaking
+        if (this.feedbackContainer) {
+          this.feedbackContainer.classList.add('hidden');
+        }
+
+        try {
+          this.recognition.start();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+
+    calculateSimilarity(speech: string, target: string): number {
+      const clean = (str: string) => str.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").split(/\s+/).filter(Boolean);
+      const speechWords = clean(speech);
+      const targetWords = clean(target);
+      if (targetWords.length === 0) return 0;
+      
+      let matches = 0;
+      targetWords.forEach(word => {
+        const idx = speechWords.indexOf(word);
+        if (idx !== -1) {
+          matches++;
+          speechWords.splice(idx, 1);
+        }
+      });
+      
+      return Math.round((matches / targetWords.length) * 100);
+    }
+
+    handleSpeechResult(transcript: string, correctText: string, accuracy: number) {
+      const isCorrect = accuracy >= 80;
+
+      if (isCorrect) {
+        soundEffects.playSuccess();
+        if (this.speechFeedbackEl) {
+          this.speechFeedbackEl.className = 'listening-speech-feedback correct';
+          if (this.speechFeedbackBadge) this.speechFeedbackBadge.innerText = '🎉';
+          if (this.speechFeedbackText) {
+            const isEn = !document.documentElement.classList.contains('lang-khmer');
+            this.speechFeedbackText.innerText = isEn 
+              ? `Correct! (${accuracy}% accuracy)`
+              : `ត្រឹមត្រូវ! (ភាពត្រឹមត្រូវ ${accuracy}%)`;
+          }
+        }
+
+        // Fire confetti!
+        if (this.micBtn) {
+          const rect = this.micBtn.getBoundingClientRect();
+          const x = (rect.left + rect.width / 2) / window.innerWidth;
+          const y = (rect.top + rect.height / 2) / window.innerHeight;
+          import('canvas-confetti').then((confettiModule) => {
+            const confetti = confettiModule.default;
+            confetti({
+              particleCount: 50,
+              spread: 60,
+              origin: { x, y },
+              colors: ['#34d399', '#10b981', '#6ee7b7'],
+              disableForReducedMotion: true
+            });
+          });
+        }
+      } else {
+        soundEffects.playError();
+        if (this.speechFeedbackEl) {
+          this.speechFeedbackEl.className = 'listening-speech-feedback incorrect';
+          if (this.speechFeedbackBadge) this.speechFeedbackBadge.innerText = '🗣️';
+          if (this.speechFeedbackText) {
+            const isEn = !document.documentElement.classList.contains('lang-khmer');
+            this.speechFeedbackText.innerText = isEn 
+              ? `Try again! Heard: "${transcript}" (${accuracy}% accuracy)`
+              : `ព្យាយាមម្តងទៀត! ឮថា: "${transcript}" (ភាពត្រឹមត្រូវ ${accuracy}%)`;
+          }
+        }
+
+        // Playful shake animation on the player card
+        const playerCard = this.layoutEl.querySelector('.player-main') as HTMLElement;
+        if (playerCard) {
+          playerCard.classList.add('anim-shake');
+          setTimeout(() => {
+            playerCard.classList.remove('anim-shake');
+          }, 500);
+        }
+      }
+
+      // Also trigger the standard feedback card display!
+      if (this.feedbackContainer) this.feedbackContainer.classList.remove('hidden');
+      if (this.userTypedOutput) {
+        const isEn = !document.documentElement.classList.contains('lang-khmer');
+        this.userTypedOutput.innerText = isEn 
+          ? `Spoken: "${transcript}"` 
+          : `និយាយ៖ "${transcript}"`;
+      }
+      if (this.correctTranscript) this.correctTranscript.innerText = correctText;
+      if (this.accuracyText) this.accuracyText.innerText = `${accuracy}%`;
+      if (this.accuracyFill) this.accuracyFill.style.width = `${accuracy}%`;
+
+      if (this.feedbackCard) {
+        this.feedbackCard.className = "feedback-card";
+        if (accuracy === 100) {
+          this.feedbackCard.classList.add('perfect');
+          if (this.feedbackTitle) {
+            this.feedbackTitle.innerHTML = `
+              <span class="en-text">🌟 Perfect! You spoke like a champion! 🌟</span>
+              <span class="kh-text">🌟 ល្អឥតខ្ចោះ! អ្នកនិយាយបានត្រឹមត្រូវទាំងស្រុង! 🌟</span>
+            `;
+          }
+        } else if (isCorrect) {
+          this.feedbackCard.classList.add('good');
+          if (this.feedbackTitle) {
+            this.feedbackTitle.innerHTML = `
+              <span class="en-text">👍 Good job! Very close to perfect! 👍</span>
+              <span class="kh-text">👍 ធ្វើបានល្អណាស់! ជិតល្អឥតខ្ចោះហើយ! 👍</span>
+            `;
+          }
+        } else {
+          this.feedbackCard.classList.add('poor');
+          if (this.feedbackTitle) {
+            this.feedbackTitle.innerHTML = `
+              <span class="en-text">💪 Try again! Listen slowly and practice speaking.</span>
+              <span class="kh-text">💪 ព្យាយាមម្តងទៀត! ស្ដាប់សំឡេងយឺតៗ និងហាត់និយាយឡើងវិញ។</span>
+            `;
+          }
+        }
+      }
+
+
+
+      // Save score to profile
+      const activeExercise = this.filteredExercises[this.currentIndex];
+      if (!activeExercise) return;
+      
+      const activeProfile = profileManager.getProfile();
+      if (this.saveStatusEl) {
+        if (activeProfile) {
+          const oldStars = profileManager.calculateStars(activeProfile);
+          profileManager.saveListeningScore(activeExercise.id, accuracy);
+          const newProfile = profileManager.getProfile()!;
+          const newStars = profileManager.calculateStars(newProfile);
+          const starsEarned = newStars - oldStars;
+
+          if (starsEarned > 0) {
+            this.saveStatusEl.innerHTML = `
+              <div class="save-status-toast animate-bounce-small">
+                <span class="en-text">🎉 +${starsEarned} Star(s) added to your profile! Total: ${newStars} ⭐</span>
+                <span class="kh-text">🎉 បានបន្ថែមផ្កាយ +${starsEarned} ទៅគណនីរបស់អ្នក! សរុប៖ ${newStars} ⭐</span>
+              </div>
+            `;
+          } else {
+            this.saveStatusEl.innerHTML = `
+              <div class="save-status-toast">
+                <span class="en-text">💾 Score saved to your profile! Current total: ${newStars} ⭐</span>
+                <span class="kh-text">💾 ពិន្ទុត្រូវបានរក្សាទុកក្នុងគណនីរបស់អ្នក! សរុប៖ ${newStars} ⭐</span>
+              </div>
+            `;
+          }
+        } else {
+          this.saveStatusEl.innerHTML = `
+            <div class="save-status-toast warning">
+              <span class="en-text">💡 Create a profile to save your listening scores and earn badges!</span>
+              <span class="kh-text">💡 បង្កើតគណនីដើម្បីរក្សាទុកពិន្ទុ និងទទួលបានមេដាយសមិទ្ធផល!</span>
+            </div>
+          `;
+        }
+      }
+
+      this.sessionScores.set(activeExercise.id, accuracy);
+      this.checkSetCompletion();
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -859,6 +1126,69 @@ const exercisesJson = JSON.stringify(listeningExercises);
   .audio-icon {
     width: 20px;
     height: 20px;
+  }
+
+  .mic-speak-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    color: #1a202c;
+    border: 3px solid #000000;
+    box-shadow: 3px 3px 0 #000000;
+    padding: 8px 16px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+  }
+
+  .mic-speak-btn:hover {
+    background: #fecdd3; /* pastel rose */
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 #000000;
+  }
+
+  .mic-speak-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #000000;
+  }
+
+  .mic-speak-btn.recording {
+    background: #fda4af;
+    animation: micPulse 1.0s infinite alternate;
+  }
+
+  .listening-speech-feedback.correct {
+    background-color: var(--color-success);
+    color: #ffffff;
+    border-color: #000000;
+    box-shadow: 3px 3px 0px #000000;
+  }
+
+  .listening-speech-feedback.incorrect {
+    background-color: var(--color-accent);
+    color: #ffffff;
+    border-color: #000000;
+    box-shadow: 3px 3px 0px #000000;
+  }
+
+  /* Playful shake animation on incorrect match */
+  .player-main.anim-shake {
+    animation: animShake 0.5s ease-in-out;
+  }
+
+  @keyframes micPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
+  }
+
+  @keyframes animShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
   }
 
   /* Input area */

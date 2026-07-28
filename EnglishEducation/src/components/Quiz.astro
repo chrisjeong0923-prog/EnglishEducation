@@ -3,7 +3,7 @@ interface Question {
   questionText: string;
   questionTextKh: string;
   options: string[];
-  correctAnswer: number;
+  correctAnswer: number | number[];
   explanation: string;
   explanationKh: string;
 }
@@ -338,7 +338,12 @@ const questionsJson = JSON.stringify(questions);
     revealAnswer() {
       this.state = 'reviewed';
       const question = this.questions[this.currentQuestionIndex];
-      const isCorrect = this.selectedOptionIndex === question.correctAnswer;
+      
+      const correctAnswers = Array.isArray(question.correctAnswer)
+        ? question.correctAnswer
+        : [question.correctAnswer];
+        
+      const isCorrect = correctAnswers.includes(this.selectedOptionIndex);
 
       if (isCorrect) {
         this.score++;
@@ -350,7 +355,7 @@ const questionsJson = JSON.stringify(questions);
       const optionButtons = this.optionsContainerEl?.querySelectorAll('.option-btn');
       optionButtons?.forEach((btn, idx) => {
         (btn as HTMLButtonElement).disabled = true;
-        if (idx === question.correctAnswer) {
+        if (correctAnswers.includes(idx)) {
           btn.classList.add('correct');
         } else if (idx === this.selectedOptionIndex) {
           btn.classList.add('wrong');

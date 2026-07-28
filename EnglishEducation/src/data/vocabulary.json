@@ -249,8 +249,8 @@
     "emoji": "🛋️",
     "definition": "A long upholstered seat with a back and arms, for seating more than one person.",
     "definitionKh": "កៅអីវែងមានខ្នង និងដៃសម្រាប់អង្គុយបានច្រើននាក់។",
-    "example": "The cat is sleeping on the sofa.",
-    "exampleKh": "ឆ្មាកំពុងដេកនៅ​លើសាឡុង។"
+    "example": "My phone is on the sofa.",
+    "exampleKh": "ទូរស័ព្ទរបស់ខ្ញុំនៅលើសាឡុង。"
   },
   {
     "grade": 4,
@@ -260,8 +260,8 @@
     "emoji": "🚗",
     "definition": "A road vehicle, typically with four wheels, powered by an internal combustion engine or electric motor and able to carry a small number of people.",
     "definitionKh": "យានជំនិះផ្លូវគោក ជាធម្មតាមានកង់បួន ដំណើរការដោយម៉ាស៊ីនចំហេះខាងក្នុង ឬម៉ូទ័រអគ្គិសនី ហើយអាចដឹកមនុស្សបានតិចតួច។",
-    "example": "I have a red car.",
-    "exampleKh": "ខ្ញុំមានឡានពណ៌ក្រហម។"
+    "example": "This is my car.",
+    "exampleKh": "នេះគឺជាឡានរបស់ខ្ញុំ。"
   },
   {
     "grade": 4,
@@ -271,8 +271,8 @@
     "emoji": "⬆️",
     "definition": "Situated at, covering, or forming part of the upper surface of something.",
     "definitionKh": "ស្ថិតនៅ គ្របដណ្តប់ ឬបង្កើតជាផ្នែកនៃផ្ទៃខាងលើនៃអ្វីមួយ។",
-    "example": "The book is on the table.",
-    "exampleKh": "សៀវភៅនៅ​លើតុ។"
+    "example": "My phone is on the sofa.",
+    "exampleKh": "ទូរស័ព្ទរបស់ខ្ញុំនៅលើសាឡុង។"
   },
   {
     "grade": 4,
@@ -282,8 +282,8 @@
     "emoji": "⬇️",
     "definition": "Extending or directly below.",
     "definitionKh": "លាតសន្ធឹង ឬស្ថិតនៅ​ខាងក្រោមដោយផ្ទាល់។",
-    "example": "The cat is under the bed.",
-    "exampleKh": "ឆ្មា​នៅ​ក្រោមគ្រែ។"
+    "example": "The key is under the car.",
+    "exampleKh": "កូនសោនៅក្រោមឡាន។"
   },
   {
     "grade": 4,
@@ -463,17 +463,6 @@
   },
   {
     "grade": 3,
-    "word": "dog",
-    "ipa": "/dɒɡ/",
-    "type": "noun",
-    "emoji": "🐶",
-    "definition": "A common animal often kept as a pet, known for its loyalty.",
-    "definitionKh": "សត្វចិញ្ចឹមទូទៅដែលល្បីល្បាញដោយសារភាពស្មោះត្រង់របស់វា។",
-    "example": "I have a dog.",
-    "exampleKh": "ខ្ញុំមានឆ្កែមួយក្បាល។"
-  },
-  {
-    "grade": 3,
     "word": "He",
     "ipa": "/hiː/",
     "type": "noun",
@@ -493,5 +482,148 @@
     "definitionKh": "សព្វនាមសម្រាប់សំដៅលើមនុស្សស្រី ឬសត្វញីដែលបានលើកឡើងរួចហើយ ឬអាចកំណត់អត្តសញ្ញាណបានយ៉ាងងាយស្រួល។",
     "example": "She is a girl.",
     "exampleKh": "នាងជាក្មេងស្រី។"
+  },
+  {
+    "grade": 3,
+    "word": "good",
+    "ipa": "/ɡʊd/",
+    "type": "adjective",
+    "emoji": "🙂",
+    "definition": "Feeling happy and well.",
+    "definitionKh": "មានអារម្មណ៍សប្បាយរីករាយ និងមានសុខភាពល្អ។",
+    "example": "I am good.",
+    "exampleKh": "ខ្ញុំសុខសប្បាយទេ។"
+  },
+  {
+    "grade": 3,
+    "word": "bad",
+    "ipa": "/bæd/",
+    "type": "adjective",
+    "emoji": "😔",
+    "definition": "Not feeling well or happy; unpleasant.",
+    "definitionKh": "មានអារម្មណ៍មិនល្អ ឬមិនសប្បាយចិត្ត; មិនរីករាយ។",
+    "example": "I am bad.",
+    "exampleKh": "ខ្ញុំមិនសប្បាយចិត្តទេ។"
+  },
+  {
+    "grade": 3,
+    "word": "tired",
+    "ipa": "/ˈtaɪərd/",
+    "type": "adjective",
+    "emoji": "😩",
+    "definition": "Needing rest or sleep.",
+    "definitionKh": "ត្រូវការសម្រាក ឬគេង។",
+    "example": "I am tired.",
+    "exampleKh": "ខ្ញុំហត់នឿយណាស់។"
+  },
+  {
+    "grade": 3,
+    "word": "sleepy",
+    "ipa": "/ˈsliːpi/",
+    "type": "adjective",
+    "emoji": "😴",
+    "definition": "Ready for sleep; feeling drowsy.",
+    "definitionKh": "ត្រៀមខ្លួនសម្រាប់គេង; មានអារម្មណ៍ងងុយគេង។",
+    "example": "I am sleepy.",
+    "exampleKh": "ខ្ញុំងងុយគេងណាស់។"
+  },
+  {
+    "grade": 3,
+    "word": "sick",
+    "ipa": "/sɪk/",
+    "type": "adjective",
+    "emoji": "🤧",
+    "definition": "Feeling ill or unhealthy.",
+    "definitionKh": "មានអារម្មណ៍មិនស្រួលខ្លួន ឬមិនមានសុខភាពល្អ។",
+    "example": "I am sick.",
+    "exampleKh": "ខ្ញុំឈឺហើយ។"
+  },
+  {
+    "grade": 3,
+    "word": "mad",
+    "ipa": "/mæd/",
+    "type": "adjective",
+    "emoji": "😡",
+    "definition": "Feeling angry or annoyed.",
+    "definitionKh": "មានអារម្មណ៍ខឹង ឬរំខាន។",
+    "example": "I am mad.",
+    "exampleKh": "ខ្ញុំខឹងណាស់។"
+  },
+  {
+    "grade": 3,
+    "word": "Look",
+    "ipa": "/lʊk/",
+    "type": "verb",
+    "emoji": "👀",
+    "definition": "To direct your eyes in a particular direction.",
+    "definitionKh": "បែរភ្នែកមើលទៅទិសដៅណាមួយ។",
+    "example": "Look! I see a dog.",
+    "exampleKh": "មើល! ខ្ញុំឃើញឆ្កែមួយ។"
+  },
+  {
+    "grade": 3,
+    "word": "Dog",
+    "ipa": "/dɒɡ/",
+    "type": "noun",
+    "emoji": "🐶",
+    "definition": "A common pet animal with fur, four legs, and a tail.",
+    "definitionKh": "សត្វចិញ្ចឹមទូទៅមួយប្រភេទដែលមានរោម ជើងបួន និងកន្ទុយ។",
+    "example": "I see a dog.",
+    "exampleKh": "ខ្ញុំឃើញឆ្កែមួយ។"
+  },
+  {
+    "grade": 3,
+    "word": "Cat",
+    "ipa": "/kæt/",
+    "type": "noun",
+    "emoji": "🐱",
+    "definition": "A small animal with fur that is often kept as a pet.",
+    "definitionKh": "សត្វតូចមួយដែលមានរោម ដែលត្រូវបានគេចិញ្ចឹមជាសត្វចិញ្ចឹមញឹកញាប់។",
+    "example": "I see a small cat.",
+    "exampleKh": "ខ្ញុំឃើញឆ្មាតូចមួយ។"
+  },
+  {
+    "grade": 3,
+    "word": "Horse",
+    "ipa": "/hɔːrs/",
+    "type": "noun",
+    "emoji": "🐎",
+    "definition": "A large animal with four legs, often used for riding or pulling things.",
+    "definitionKh": "សត្វធំមួយដែលមានជើងបួន ជារឿយៗត្រូវបានប្រើសម្រាប់ជិះ ឬទាញរបស់របរ។",
+    "example": "I see a big horse.",
+    "exampleKh": "ខ្ញុំឃើញសេះធំមួយ។"
+  },
+  {
+    "grade": 3,
+    "word": "Big",
+    "ipa": "/bɪɡ/",
+    "type": "adjective",
+    "emoji": "🐘",
+    "definition": "Of considerable size or extent.",
+    "definitionKh": "មានទំហំធំ ឬវិសាលភាពគួរឲ្យកត់សម្គាល់។",
+    "example": "The horse is big.",
+    "exampleKh": "សេះនោះធំ។"
+  },
+  {
+    "grade": 3,
+    "word": "Small",
+    "ipa": "/smɔːl/",
+    "type": "adjective",
+    "emoji": "🐭",
+    "definition": "Of a size that is less than normal or usual.",
+    "definitionKh": "មានទំហំតូចជាងធម្មតា ឬទូទៅ។",
+    "example": "The cat is small.",
+    "exampleKh": "ឆ្មានោះតូច។"
+  },
+  {
+    "grade": 3,
+    "word": "See",
+    "ipa": "/siː/",
+    "type": "verb",
+    "emoji": "👀",
+    "definition": "To perceive with the eyes; discern visually.",
+    "definitionKh": "ដឹងដោយភ្នែក; មើលឃើញ។",
+    "example": "I see a dog.",
+    "exampleKh": "ខ្ញុំឃើញឆ្កែមួយ។"
   }
 ]

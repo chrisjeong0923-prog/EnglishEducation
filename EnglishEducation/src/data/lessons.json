@@ -11,28 +11,6 @@
     "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
   },
   {
-    "id": "look",
-    "grade": 3,
-    "title": "Look!",
-    "titleKh": "មើល!",
-    "description": "Learn basic animal words like 'dog', 'cat', and 'horse', and the adjectives 'big' and 'small'.",
-    "descriptionKh": "រៀនពាក្យសត្វមូលដ្ឋានដូចជា 'ឆ្កែ' 'ឆ្មា' និង 'សេះ' និងគុណនាម 'ធំ' និង 'តូច'។",
-    "content": "Study materials generated from PDF lesson \"Look!\". Download the attached PDF to review full reading materials.",
-    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"Look!\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
-    "pdfUrl": "/lessons/pdf/grade3/look.pdf"
-  },
-  {
-    "id": "how-are-you",
-    "grade": 3,
-    "title": "How are you?",
-    "titleKh": "តើអ្នកសុខសប្បាយជាទេ?",
-    "description": "Learn to express how you feel! You'll learn words like 'good', 'bad', 'tired', 'sleepy', 'sick', and 'mad'.",
-    "descriptionKh": "រៀនបង្ហាញពីអារម្មណ៍របស់អ្នក! អ្នកនឹងរៀនពាក្យដូចជា 'ល្អ' 'មិនល្អ' 'ហត់' 'ងងុយគេង' 'ឈឺ' និង 'ខឹង'។",
-    "content": "Study materials generated from PDF lesson \"How are you?\". Download the attached PDF to review full reading materials.",
-    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"How are you?\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
-    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf"
-  },
-  {
     "id": "where-is-it",
     "grade": 4,
     "title": "Where is it?",
@@ -64,5 +42,27 @@
     "content": "Study materials generated from PDF lesson \"Hello\". Download the attached PDF to review full reading materials.",
     "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"Hello\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
     "pdfUrl": "/lessons/pdf/grade3/hello.pdf"
+  },
+  {
+    "id": "how-are-you",
+    "grade": 3,
+    "title": "How Are You",
+    "titleKh": "តើអ្នកសុខសប្បាយជាទេ?",
+    "description": "Let's learn how to ask and answer 'How are you?' We'll discover different feelings like good, bad, tired, and sleepy! Get ready to express yourself!",
+    "descriptionKh": "តោះរៀនសួរ និងឆ្លើយថា 'តើអ្នកសុខសប្បាយជាទេ?' យើងនឹងស្វែងយល់ពីអារម្មណ៍ផ្សេងៗដូចជា ល្អ អាក្រក់ នឿយហត់ និងងងុយគេង! ត្រៀមខ្លួនបង្ហាញអារម្មណ៍របស់អ្នក!",
+    "content": "Study materials generated from PDF lesson \"How Are You\". Download the attached PDF to review full reading materials.",
+    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"How Are You\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf"
+  },
+  {
+    "id": "look",
+    "grade": 3,
+    "title": "Look",
+    "titleKh": "មើល!",
+    "description": "Let's learn to look at animals like dogs, cats, and horses, and describe them as big or small!",
+    "descriptionKh": "តោះរៀនមើលសត្វដូចជា ឆ្កែ ឆ្មា និងសេះ ហើយពណ៌នាពួកវាថាធំ ឬតូច!",
+    "content": "Study materials generated from PDF lesson \"Look\". Download the attached PDF to review full reading materials.",
+    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"Look\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf"
   }
 ]

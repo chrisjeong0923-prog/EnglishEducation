@@ -1,354 +1,847 @@
 [
   {
-    "grade": 4,
-    "type": "vocabulary",
-    "questionText": "What animal do you see in the water on page 3?",
-    "questionTextKh": "តើសត្វអ្វីដែលអ្នកឃើញនៅក្នុងទឹកនៅលើទំព័រទី 3?",
-    "options": [
-      "dog",
-      "shark",
-      "cat",
-      "bird"
-    ],
-    "correctAnswer": 1,
-    "explanation": "The lesson on page 3 shows a shark in the water, specifically a 'blue shark'.",
-    "explanationKh": "មេរៀននៅលើទំព័រទី 3 បង្ហាញត្រីឆ្លាមនៅក្នុងទឹក ជាពិសេស 'ត្រីឆ្លាមពណ៌ខៀវ'។",
-    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
-  },
-  {
-    "grade": 4,
-    "type": "vocabulary",
-    "questionText": "Which color is the fish on page 3?",
-    "questionTextKh": "តើត្រីនៅលើទំព័រទី 3 មានពណ៌អ្វី?",
-    "options": [
-      "red",
-      "blue",
-      "yellow",
-      "green"
-    ],
-    "correctAnswer": 2,
-    "explanation": "On page 3, the sentence is 'I see a yellow fish.'",
-    "explanationKh": "នៅលើទំព័រទី 3 ប្រយោគបានសរសេរថា 'ខ្ញុំឃើញត្រីពណ៌លឿងមួយ។'",
-    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
-  },
-  {
-    "grade": 4,
+    "grade": 3,
     "type": "grammar",
-    "questionText": "Choose the correct sentence for seeing two sharks:",
-    "questionTextKh": "ជ្រើសរើសប្រយោគដែលត្រឹមត្រូវសម្រាប់ការឃើញត្រីឆ្លាមពីរ៖",
-    "options": [
-      "I see a two big sharks.",
-      "I see two a big sharks.",
-      "I see two big sharks.",
-      "I see a big sharks."
-    ],
-    "correctAnswer": 2,
-    "explanation": "We do not use 'a' before a plural noun like 'sharks' when it is preceded by a number. The correct form is 'two big sharks'.",
-    "explanationKh": "យើងមិនប្រើ 'a' មុននាមពហុវចនៈដូចជា 'sharks' ទេនៅពេលដែលមានលេខនៅពីមុខ។ ទម្រង់ត្រឹមត្រូវគឺ 'two big sharks'។",
-    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
-  },
-  {
-    "grade": 4,
-    "type": "vocabulary",
-    "questionText": "What do you see? (Referring to an image of a yellow fish)",
-    "questionTextKh": "តើអ្នកឃើញអ្វី? (សំដៅលើរូបភាពត្រីពណ៌លឿង)",
-    "options": [
-      "I see a red fish.",
-      "I see a blue fish.",
-      "I see a yellow fish.",
-      "I see a green fish."
-    ],
-    "correctAnswer": 2,
-    "explanation": "The picture shows a fish that is yellow.",
-    "explanationKh": "រូបភាពបង្ហាញត្រីដែលមានពណ៌លឿង។",
-    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
-  },
-  {
-    "grade": 4,
-    "type": "grammar",
-    "questionText": "Which sentence is correct when you see two sharks?",
-    "questionTextKh": "តើប្រយោគមួយណាត្រឹមត្រូវនៅពេលអ្នកឃើញត្រីឆ្លាមពីរ?",
-    "options": [
-      "I see a two sharks.",
-      "I see two sharks.",
-      "I see two a sharks.",
-      "I see sharks a two."
-    ],
-    "correctAnswer": 1,
-    "explanation": "When you see more than one thing, you don't use 'a' or 'an'.",
-    "explanationKh": "នៅពេលអ្នកឃើញវត្ថុច្រើនជាងមួយ អ្នកមិនប្រើ 'a' ឬ 'an' ទេ។",
-    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
-  },
-  {
-    "grade": 4,
-    "type": "vocabulary",
-    "questionText": "What color is the sky on a sunny day?",
-    "questionTextKh": "តើមេឃមានពណ៌អ្វីនៅថ្ងៃដែលមានពន្លឺព្រះអាទិត្យ?",
-    "options": [
-      "Red",
-      "Yellow",
-      "Blue",
-      "Green"
-    ],
-    "correctAnswer": 2,
-    "explanation": "The sky is usually blue on a sunny day.",
-    "explanationKh": "មេឃជាធម្មតាមានពណ៌ខៀវនៅថ្ងៃដែលមានពន្លឺព្រះអាទិត្យ។",
-    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
-  },
-  {
-    "grade": 4,
-    "type": "grammar",
-    "questionText": "Which sentence describes the object correctly? (Referring to an image of a big scary blue shark)",
-    "questionTextKh": "តើប្រយោគមួយណាពិពណ៌នាអំពីវត្ថុបានត្រឹមត្រូវ? (សំដៅលើរូបភាពត្រីឆ្លាមពណ៌ខៀវធំគួរឱ្យខ្លាច)",
-    "options": [
-      "I see a blue scary big shark.",
-      "I see a big scary blue shark.",
-      "I see a shark scary big blue.",
-      "I see a scary blue big shark."
-    ],
-    "correctAnswer": 1,
-    "explanation": "The common order for adjectives is size, opinion, then color before the noun. (big, scary, blue).",
-    "explanationKh": "លំដាប់ទូទៅនៃគុណនាមគឺ ទំហំ មតិ បន្ទាប់មកពណ៌មុននាម។ (ធំ, គួរឱ្យខ្លាច, ខៀវ)។",
-    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
-  },
-  {
-    "grade": 4,
-    "type": "vocabulary",
-    "questionText": "What is the opposite of 'small'?",
-    "questionTextKh": "តើពាក្យ 'small' ផ្ទុយនឹងពាក្យអ្វី?",
-    "options": [
-      "Pretty",
-      "Scary",
-      "Big",
-      "Red"
-    ],
-    "correctAnswer": 2,
-    "explanation": "'Big' means large, which is the opposite of 'small'.",
-    "explanationKh": "'Big' មានន័យថាធំ ដែលផ្ទុយពី 'small'។",
-    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf"
-  },
-  {
-    "grade": 4,
-    "type": "grammar",
-    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
-    "questionText": "Where _____ my glasses?",
-    "questionTextKh": "តើវ៉ែនតារបស់ខ្ញុំ​នៅឯណា?",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Complete the sentence: \"My name _____ Alice.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"My name _____ Alice.\"",
     "options": [
       "is",
       "am",
       "are",
       "be"
     ],
-    "correctAnswer": 2,
-    "explanation": "''Glasses'' is a plural noun, so we use ''are''.",
-    "explanationKh": "''Glasses'' គឺជា​នាមពហុវចនៈ ដូច្នេះយើងប្រើ ''are''។"
-  },
-  {
-    "grade": 4,
-    "type": "vocabulary",
-    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
-    "questionText": "My phone is _____ the sofa.",
-    "questionTextKh": "ទូរស័ព្ទរបស់ខ្ញុំនៅ _____ សាឡុង។",
-    "options": [
-      "under",
-      "on",
-      "in",
-      "next to"
-    ],
-    "correctAnswer": 1,
-    "explanation": "The lesson shows the phone resting on the top surface of the sofa, meaning ''on'' the sofa.",
-    "explanationKh": "មេរៀនបានបង្ហាញទូរស័ព្ទស្ថិតនៅ​លើផ្ទៃខាងលើនៃសាឡុង ដូច្នេះគឺ ''on'' the sofa។"
-  },
-  {
-    "grade": 4,
-    "type": "grammar",
-    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
-    "questionText": "This is _____ car.",
-    "questionTextKh": "នេះជា _____ ឡាន។",
-    "options": [
-      "I",
-      "my",
-      "mine",
-      "me"
-    ],
-    "correctAnswer": 1,
-    "explanation": "''My'' is a possessive adjective used before a noun to show ownership.",
-    "explanationKh": "''My'' គឺជាគុណនាមកម្មសិទ្ធិដែលប្រើមុននាមដើម្បីបង្ហាញពីភាពជាម្ចាស់។"
-  },
-  {
-    "grade": 4,
-    "type": "vocabulary",
-    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
-    "questionText": "What do you use to open a door?",
-    "questionTextKh": "តើអ្នកប្រើអ្វីដើម្បីបើកទ្វារ?",
-    "options": [
-      "phone",
-      "lamp",
-      "key",
-      "glasses"
-    ],
-    "correctAnswer": 2,
-    "explanation": "A key is a small metal object used to lock or unlock doors.",
-    "explanationKh": "កូនសោគឺជាវត្ថុលោហៈតូចមួយដែលប្រើដើម្បីចាក់សោរ ឬដោះសោទ្វារ។"
-  },
-  {
-    "grade": 4,
-    "type": "grammar",
-    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
-    "questionText": "The boy is hiding _____ the table.",
-    "questionTextKh": "ក្មេងប្រុសកំពុងលាក់ខ្លួន _____ តុ។",
-    "options": [
-      "on",
-      "over",
-      "under",
-      "beside"
-    ],
-    "correctAnswer": 2,
-    "explanation": "''Under'' means directly below something.",
-    "explanationKh": "''Under'' មានន័យថាស្ថិតនៅ​ខាងក្រោមអ្វីមួយដោយផ្ទាល់។"
-  },
-  {
-    "grade": 5,
-    "type": "grammar",
-    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
-    "questionText": "How do you answer the question 'How is the weather?' when the sun is shining brightly?",
-    "questionTextKh": "តើអ្នកឆ្លើយសំណួរ 'How is the weather?' យ៉ាងដូចម្តេច នៅពេលដែលព្រះអាទិត្យរះយ៉ាងភ្លឺស្វាង?",
-    "options": [
-      "It is sun.",
-      "It is sunny.",
-      "It is the sun.",
-      "It is sun + y."
-    ],
-    "correctAnswer": 1,
-    "explanation": "To describe sunny weather, we use the adjective 'sunny'. 'Sun' is a noun.",
-    "explanationKh": "ដើម្បីពិពណ៌នាអាកាសធាតុដែលមានពន្លឺថ្ងៃ យើងប្រើគុណនាម 'sunny'។ 'Sun' គឺជាកិរិយាស័ព្ទ។"
-  },
-  {
-    "grade": 5,
-    "type": "vocabulary",
-    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
-    "questionText": "Which word describes a day when there is a lot of rain?",
-    "questionTextKh": "តើពាក្យមួយណាពិពណ៌នាអំពីថ្ងៃដែលមានភ្លៀងធ្លាក់ច្រើន?",
-    "options": [
-      "Rain",
-      "Raining",
-      "Rainy",
-      "Wet"
-    ],
-    "correctAnswer": 2,
-    "explanation": "'Rainy' is the adjective used to describe a day with a lot of rain. 'Rain' is the noun, and 'raining' is the present participle verb.",
-    "explanationKh": "'Rainy' គឺជាគុណនាមដែលប្រើដើម្បីពិពណ៌នាថ្ងៃដែលមានភ្លៀងធ្លាក់ច្រើន។ 'Rain' គឺជាកិរិយាស័ព្ទ ហើយ 'raining' គឺជាបច្ចុប្បន្នកាលនៃកិរិយាស័ព្ទ។"
-  },
-  {
-    "grade": 5,
-    "type": "grammar",
-    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
-    "questionText": "Complete the sentence: 'I see _______ clouds.'",
-    "questionTextKh": "បំពេញប្រយោគ៖ 'I see _______ clouds។'",
-    "options": [
-      "a",
-      "an",
-      "the",
-      "some"
-    ],
-    "correctAnswer": 2,
-    "explanation": "According to the grammar rule on page 4, when talking about clouds we always say 'the clouds' (using 'the' and plural 's').",
-    "explanationKh": "យោងទៅតាមច្បាប់វេយ្យាករណ៍នៅលើទំព័រទី 4 នៅពេលនិយាយអំពីពពក យើងតែងតែនិយាយថា 'the clouds' (ដោយប្រើ 'the' និង 's' ពហុវចនៈ)។"
-  },
-  {
-    "grade": 5,
-    "type": "vocabulary",
-    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
-    "questionText": "Look at the drawing on page 3. How is the weather?",
-    "questionTextKh": "មើលរូបភាពនៅលើទំព័រទី 3។ តើអាកាសធាតុយ៉ាងណាដែរ?",
-    "options": [
-      "It is snow.",
-      "It is snowing.",
-      "It is snowy outside.",
-      "It is wind."
-    ],
-    "correctAnswer": 2,
-    "explanation": "On page 3, the stick figure describes the snowy weather as: 'It is snowy outside'.",
-    "explanationKh": "នៅលើទំព័រទី 3 រូបមនុស្សក្បាលមូលបានពិពណ៌នាអំពីអាកាសធាតុព្រិលធ្លាក់ថា៖ 'It is snowy outside'។"
-  },
-  {
-    "grade": 5,
-    "type": "grammar",
-    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
-    "questionText": "Complete the sentence to describe seeing snow: 'I see _______.'",
-    "questionTextKh": "បំពេញប្រយោគដើម្បីពិពណ៌នាអំពីការឃើញព្រិល៖ 'I see _______។'",
-    "options": [
-      "the snow",
-      "snow",
-      "snows",
-      "the snows"
-    ],
-    "correctAnswer": 1,
-    "explanation": "As shown on page 4, we say 'I see snow' (and 'I see rain') without using 'the' or adding plural 's'.",
-    "explanationKh": "ដូចដែលបានបង្ហាញនៅលើទំព័រទី 4 យើងនិយាយថា 'I see snow' (និង 'I see rain') ដោយមិនប្រើ 'the' ឬបន្ថែម 's' ពហុវចនៈនោះទេ។"
-  },
-  {
-    "grade": 3,
-    "type": "vocabulary",
-    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
-    "questionText": "What do you say when you meet someone new?",
-    "questionTextKh": "តើអ្នកនិយាយអ្វីនៅពេលអ្នកជួបនរណាម្នាក់ថ្មី?",
-    "options": [
-      "Goodbye",
-      "Thank you",
-      "Hello",
-      "Sorry"
-    ],
-    "correctAnswer": 2,
-    "explanation": "'Hello' is a common greeting used when you meet someone.",
-    "explanationKh": "'សួស្តី' គឺជាពាក្យស្វាគមន៍ទូទៅដែលប្រើនៅពេលអ្នកជួបនរណាម្នាក់។"
-  },
-  {
-    "grade": 3,
-    "type": "vocabulary",
-    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
-    "questionText": "If someone is a young female, what do we call her?",
-    "questionTextKh": "បើសិនជានរណាម្នាក់ជាមនុស្សស្រីវ័យក្មេង តើយើងហៅនាងថាអ្វី?",
-    "options": [
-      "boy",
-      "girl",
-      "dog",
-      "cat"
-    ],
-    "correctAnswer": 1,
-    "explanation": "A young female human is called a 'girl'.",
-    "explanationKh": "មនុស្សស្រីវ័យក្មេងត្រូវបានគេហៅថា 'ក្មេងស្រី'។"
+    "correctAnswer": 0,
+    "explanation": "In the lesson, we say: \"My name is Alice.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងនិយាយថា៖ \"My name is Alice.\""
   },
   {
     "grade": 3,
     "type": "grammar",
     "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
-    "questionText": "Which word do we use for a male person?",
-    "questionTextKh": "តើយើងប្រើពាក្យណាសម្រាប់មនុស្សប្រុស?",
+    "questionText": "Complete the sentence: \"_____ is a boy.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"_____ is a boy.\"",
+    "options": [
+      "He",
+      "She",
+      "It",
+      "They"
+    ],
+    "correctAnswer": 0,
+    "explanation": "We use \"He\" for a boy.",
+    "explanationKh": "យើងប្រើ \"He\" សម្រាប់ក្មេងប្រុស។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Complete the sentence: \"_____ is a girl.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"_____ is a girl.\"",
     "options": [
       "She",
       "He",
       "It",
       "They"
     ],
-    "correctAnswer": 1,
-    "explanation": "'He' is used for a male person.",
-    "explanationKh": "ពាក្យ 'He' ត្រូវបានប្រើសម្រាប់មនុស្សប្រុស។"
+    "correctAnswer": 0,
+    "explanation": "We use \"She\" for a girl.",
+    "explanationKh": "យើងប្រើ \"She\" សម្រាប់ក្មេងស្រី។"
   },
   {
     "grade": 3,
     "type": "grammar",
     "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
-    "questionText": "Fill in the blank: 'My name ____ Alice.'",
-    "questionTextKh": "បំពេញចន្លោះទទេ: 'My name ____ Alice។'",
+    "questionText": "Complete the sentence: \"I _____ a boy.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I _____ a boy.\"",
     "options": [
       "am",
-      "are",
       "is",
+      "are",
       "be"
     ],
-    "correctAnswer": 2,
-    "explanation": "We use 'is' with 'My name' to state a name.",
-    "explanationKh": "យើងប្រើ 'is' ជាមួយ 'My name' ដើម្បីប្រាប់ឈ្មោះ។"
+    "correctAnswer": 0,
+    "explanation": "We use \"am\" with \"I\".",
+    "explanationKh": "យើងប្រើ \"am\" ជាមួយ \"I\"។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the sentence: \"I _____ good.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I _____ good.\"",
+    "options": [
+      "am",
+      "is",
+      "are",
+      "be"
+    ],
+    "correctAnswer": 0,
+    "explanation": "We use \"am\" with \"I\".",
+    "explanationKh": "យើងប្រើ \"am\" ជាមួយ \"I\"។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the sentence: \"He _____ bad.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"He _____ bad.\"",
+    "options": [
+      "is",
+      "am",
+      "are",
+      "be"
+    ],
+    "correctAnswer": 0,
+    "explanation": "We use \"is\" for singular third-person.",
+    "explanationKh": "យើងប្រើ \"is\" សម្រាប់ឯកវចនៈបុរសទីបី។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the sentence: \"She _____ tired.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"She _____ tired.\"",
+    "options": [
+      "is",
+      "am",
+      "are",
+      "be"
+    ],
+    "correctAnswer": 0,
+    "explanation": "We use \"is\" with \"She\".",
+    "explanationKh": "យើងប្រើ \"is\" ជាមួយ \"She\"។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
+    "questionText": "Complete the sentence: \"I _____ a small cat.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I _____ a small cat.\"",
+    "options": [
+      "see",
+      "sees",
+      "seeing",
+      "is see"
+    ],
+    "correctAnswer": 0,
+    "explanation": "We use \"see\" with \"I\".",
+    "explanationKh": "យើងប្រើ \"see\" ជាមួយ \"I\"។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
+    "questionText": "Complete the sentence: \"The horse _____ big.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"The horse _____ big.\"",
+    "options": [
+      "is",
+      "am",
+      "are",
+      "be"
+    ],
+    "correctAnswer": 0,
+    "explanation": "We use \"is\" for a singular animal.",
+    "explanationKh": "យើងប្រើ \"is\" សម្រាប់សត្វឯកវចនៈ។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf",
+    "questionText": "Complete the sentence: \"I see _____ big sharks.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see _____ big sharks.\"",
+    "options": [
+      "two",
+      "a two",
+      "two a",
+      "a"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When plural, we do not use the article \"a\". The correct phrase is \"two big sharks\".",
+    "explanationKh": "នៅពេលនាមជាពហុវចនៈ យើងមិនប្រើ \"a\" ទេ។ ឃ្លាត្រឹមត្រូវគឺ \"two big sharks\"។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf",
+    "questionText": "Complete the sentence: \"I see _____ yellow fish.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see _____ yellow fish.\"",
+    "options": [
+      "a",
+      "an",
+      "two a",
+      "a two"
+    ],
+    "correctAnswer": 0,
+    "explanation": "For a singular noun starting with a consonant sound, we use \"a\".",
+    "explanationKh": "សម្រាប់នាមឯកវចនៈដែលចាប់ផ្តើមដោយព្យញ្ជនៈ យើងប្រើ \"a\"។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"Where _____ my glasses?\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"Where _____ my glasses?\"",
+    "options": [
+      "are",
+      "is",
+      "am",
+      "be"
+    ],
+    "correctAnswer": 0,
+    "explanation": "\"Glasses\" is plural, so we use \"are\".",
+    "explanationKh": "\"Glasses\" ជានាមពហុវចនៈ ដូច្នេះយើងប្រើ \"are\"។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"My phone is _____ the sofa.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"My phone is _____ the sofa.\"",
+    "options": [
+      "on",
+      "under",
+      "in",
+      "at"
+    ],
+    "correctAnswer": [
+      0,
+      1
+    ],
+    "explanation": "The phone is resting on top of the sofa.",
+    "explanationKh": "ទូរស័ព្ទស្ថិតនៅលើសាឡុង។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"The key is _____ the car.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"The key is _____ the car.\"",
+    "options": [
+      "under",
+      "on",
+      "in",
+      "at"
+    ],
+    "correctAnswer": [
+      0,
+      1
+    ],
+    "explanation": "The key is underneath the car.",
+    "explanationKh": "កូនសោស្ថិតនៅក្រោមឡាន។"
+  },
+  {
+    "grade": 5,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Complete the sentence: \"It is _____ outside.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"It is _____ outside.\"",
+    "options": [
+      "sunny",
+      "sun",
+      "sun's",
+      "sunny a"
+    ],
+    "correctAnswer": 0,
+    "explanation": "We use the adjective \"sunny\" to describe the weather.",
+    "explanationKh": "យើងប្រើគុណនាម \"sunny\" ដើម្បីពិពណ៌នាអំពីអាកាសធាតុ។"
+  },
+  {
+    "grade": 5,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Complete the sentence: \"I see _____ clouds.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see _____ clouds.\"",
+    "options": [
+      "the",
+      "a",
+      "an",
+      "some"
+    ],
+    "correctAnswer": [
+      0,
+      3
+    ],
+    "explanation": "We say \"the clouds\" when referring to clouds.",
+    "explanationKh": "យើងនិយាយថា \"the clouds\" នៅពេលសំដៅលើពពក។"
+  },
+  {
+    "grade": 5,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Complete the sentence: \"I see _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see _____.\"",
+    "options": [
+      "rain",
+      "the rain",
+      "rains",
+      "a rain"
+    ],
+    "correctAnswer": 0,
+    "explanation": "We say \"I see rain\" without using \"the\" or adding \"s\".",
+    "explanationKh": "យើងនិយាយថា \"I see rain\" ដោយមិនប្រើ \"the\" ឬបន្ថែម \"s\" ទេ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Complete the sentence: \"I see a _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see a _____.\"",
+    "options": [
+      "boy",
+      "he",
+      "hello",
+      "Dog"
+    ],
+    "correctAnswer": [
+      0,
+      3
+    ],
+    "explanation": "In the lesson, we read: \"I see a dog.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I see a dog.\" (ខ្ញុំឃើញឆ្កែមួយ។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Complete the sentence: \"I am a _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I am a _____.\"",
+    "options": [
+      "hello",
+      "girl",
+      "he",
+      "boy"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "In the lesson, we read: \"I am a boy.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I am a boy.\" (ខ្ញុំជាក្មេងប្រុស។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Complete the sentence: \"I am a _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I am a _____.\"",
+    "options": [
+      "girl",
+      "she",
+      "he",
+      "boy"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "In the lesson, we read: \"I am a girl.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I am a girl.\" (ខ្ញុំជាក្មេងស្រី។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Complete the sentence: \"_____ is a boy.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"_____ is a boy.\"",
+    "options": [
+      "she",
+      "dog",
+      "He",
+      "girl"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "In the lesson, we read: \"He is a boy.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"He is a boy.\" (គាត់ជាក្មេងប្រុស។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Complete the sentence: \"_____! My name is Alice.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"_____! My name is Alice.\"",
+    "options": [
+      "she",
+      "boy",
+      "hello",
+      "dog"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "In the lesson, we read: \"Hello! My name is Alice.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"Hello! My name is Alice.\" (សួស្តី! ខ្ញុំឈ្មោះ Alice។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the sentence: \"I am _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I am _____.\"",
+    "options": [
+      "sick",
+      "bad",
+      "tired",
+      "sleepy"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "In the lesson, we read: \"I am sleepy.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I am sleepy.\" (ខ្ញុំងងុយគេងណាស់។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the sentence: \"I am _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I am _____.\"",
+    "options": [
+      "sleepy",
+      "tired",
+      "sick",
+      "bad"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "In the lesson, we read: \"I am bad.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I am bad.\" (ខ្ញុំមិនសប្បាយចិត្តទេ។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the sentence: \"I am _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I am _____.\"",
+    "options": [
+      "tired",
+      "good",
+      "bad",
+      "sick"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "In the lesson, we read: \"I am tired.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I am tired.\" (ខ្ញុំហត់នឿយណាស់។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the sentence: \"I am _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I am _____.\"",
+    "options": [
+      "good",
+      "mad",
+      "sick",
+      "tired"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "In the lesson, we read: \"I am sick.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I am sick.\" (ខ្ញុំឈឺហើយ។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the sentence: \"I am _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I am _____.\"",
+    "options": [
+      "mad",
+      "sick",
+      "good",
+      "tired"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "In the lesson, we read: \"I am good.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I am good.\" (ខ្ញុំសុខសប្បាយទេ។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
+    "questionText": "Complete the sentence: \"I see a _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see a _____.\"",
+    "options": [
+      "small",
+      "see",
+      "Dog",
+      "horse"
+    ],
+    "correctAnswer": [
+      2,
+      3
+    ],
+    "explanation": "In the lesson, we read: \"I see a dog.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I see a dog.\" (ខ្ញុំឃើញឆ្កែមួយ។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
+    "questionText": "Complete the sentence: \"I see a big _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see a big _____.\"",
+    "options": [
+      "see",
+      "dog",
+      "small",
+      "Horse"
+    ],
+    "correctAnswer": [
+      1,
+      3
+    ],
+    "explanation": "In the lesson, we read: \"I see a big horse.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I see a big horse.\" (ខ្ញុំឃើញសេះធំមួយ។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
+    "questionText": "Complete the sentence: \"The horse is _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"The horse is _____.\"",
+    "options": [
+      "Big",
+      "horse",
+      "dog",
+      "look"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "In the lesson, we read: \"The horse is big.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"The horse is big.\" (សេះនោះធំ។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
+    "questionText": "Complete the sentence: \"I see a small _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see a small _____.\"",
+    "options": [
+      "dog",
+      "Cat",
+      "see",
+      "small"
+    ],
+    "correctAnswer": [
+      0,
+      1
+    ],
+    "explanation": "In the lesson, we read: \"I see a small cat.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I see a small cat.\" (ខ្ញុំឃើញឆ្មាតូចមួយ។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
+    "questionText": "Complete the sentence: \"I _____ a dog.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I _____ a dog.\"",
+    "options": [
+      "cat",
+      "small",
+      "big",
+      "See"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "In the lesson, we read: \"I see a dog.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I see a dog.\" (ខ្ញុំឃើញឆ្កែមួយ។)"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf",
+    "questionText": "Complete the sentence: \"The sun is _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"The sun is _____.\"",
+    "options": [
+      "fish",
+      "blue",
+      "coral",
+      "yellow"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "In the lesson, we read: \"The sun is yellow.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"The sun is yellow.\" (ព្រះអាទិត្យមានពណ៌លឿង។)"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf",
+    "questionText": "Complete the sentence: \"I see a big pretty _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see a big pretty _____.\"",
+    "options": [
+      "shark",
+      "fish",
+      "rainbow",
+      "small"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "In the lesson, we read: \"I see a big pretty rainbow.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I see a big pretty rainbow.\" (ខ្ញុំឃើញឥន្ទធនូដ៏ធំស្អាតមួយ។)"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf",
+    "questionText": "Complete the sentence: \"That monster is very _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"That monster is very _____.\"",
+    "options": [
+      "big",
+      "rainbow",
+      "Scary",
+      "orange"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "In the lesson, we read: \"That monster is very scary.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"That monster is very scary.\" (សត្វចម្លែកនោះគួរឱ្យខ្លាចណាស់។)"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf",
+    "questionText": "Complete the sentence: \"I see a _____ dog.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see a _____ dog.\"",
+    "options": [
+      "pretty",
+      "yellow",
+      "small",
+      "red"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "In the lesson, we read: \"I see a red dog.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I see a red dog.\" (ខ្ញុំឃើញឆ្កែពណ៌ក្រហមមួយ។)"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf",
+    "questionText": "Complete the sentence: \"I see a _____ red dog.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see a _____ red dog.\"",
+    "options": [
+      "coral",
+      "big",
+      "orange",
+      "see"
+    ],
+    "correctAnswer": [
+      0,
+      1
+    ],
+    "explanation": "In the lesson, we read: \"I see a big red dog.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I see a big red dog.\" (ខ្ញុំឃើញឆ្កែពណ៌ក្រហមធំមួយ។)"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"My phone is _____ the sofa.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"My phone is _____ the sofa.\"",
+    "options": [
+      "lamp",
+      "under",
+      "head",
+      "on"
+    ],
+    "correctAnswer": [
+      1,
+      3
+    ],
+    "explanation": "In the lesson, we read: \"My phone is on the sofa.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"My phone is on the sofa.\" (ទូរស័ព្ទរបស់ខ្ញុំនៅលើសាឡុង។)"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"The _____ is on the table.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"The _____ is on the table.\"",
+    "options": [
+      "lamp",
+      "head",
+      "glasses",
+      "my"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "In the lesson, we read: \"The lamp is on the table.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"The lamp is on the table.\" (ចង្កៀងនៅ​លើតុ។)"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"Where are my _____?\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"Where are my _____?\"",
+    "options": [
+      "under",
+      "my",
+      "on",
+      "glasses"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "In the lesson, we read: \"Where are my glasses?\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"Where are my glasses?\" (តើវ៉ែនតារបស់ខ្ញុំនៅឯណា?)"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"The key is _____ the car.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"The key is _____ the car.\"",
+    "options": [
+      "on",
+      "under",
+      "sofa",
+      "car"
+    ],
+    "correctAnswer": [
+      0,
+      1
+    ],
+    "explanation": "In the lesson, we read: \"The key is under the car.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"The key is under the car.\" (កូនសោនៅក្រោមឡាន។)"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"My phone is on the _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"My phone is on the _____.\"",
+    "options": [
+      "sofa",
+      "lamp",
+      "key",
+      "under"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "In the lesson, we read: \"My phone is on the sofa.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"My phone is on the sofa.\" (ទូរស័ព្ទរបស់ខ្ញុំនៅលើសាឡុង。)"
+  },
+  {
+    "grade": 5,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Complete the sentence: \"It's too _____ to play outside today.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"It's too _____ to play outside today.\"",
+    "options": [
+      "sun",
+      "cloud",
+      "snowy",
+      "windy"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "In the lesson, we read: \"It's too windy to play outside today.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"It's too windy to play outside today.\" (ថ្ងៃនេះមានខ្យល់ខ្លាំងពេកមិនអាចលេងនៅខាងក្រៅបានទេ។)"
+  },
+  {
+    "grade": 5,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Complete the sentence: \"I see the _____s.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see the _____s.\"",
+    "options": [
+      "cloud",
+      "snowy",
+      "sun",
+      "snow"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "In the lesson, we read: \"I see the clouds.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I see the clouds.\" (ខ្ញុំឃើញពពក។)"
+  },
+  {
+    "grade": 5,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Complete the sentence: \"It is _____ outside.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"It is _____ outside.\"",
+    "options": [
+      "wind",
+      "outside",
+      "rain",
+      "sunny"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "In the lesson, we read: \"It is sunny outside.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"It is sunny outside.\" (នៅខាងក្រៅមានពន្លឺថ្ងៃ។)"
+  },
+  {
+    "grade": 5,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Complete the sentence: \"I see _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see _____.\"",
+    "options": [
+      "rain",
+      "snow",
+      "rainy",
+      "cloud"
+    ],
+    "correctAnswer": [
+      1
+    ],
+    "explanation": "In the lesson, we read: \"I see snow.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I see snow.\" (ខ្ញុំឃើញព្រិល។)"
+  },
+  {
+    "grade": 5,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Complete the sentence: \"Don't forget your umbrella, it's a _____ day.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"Don't forget your umbrella, it's a _____ day.\"",
+    "options": [
+      "rainy",
+      "windy",
+      "sunny",
+      "weather"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "In the lesson, we read: \"Don't forget your umbrella, it's a rainy day.\"",
+    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"Don't forget your umbrella, it's a rainy day.\" (កុំភ្លេចឆ័ត្ររបស់អ្នក ព្រោះវាជាថ្ងៃដែលមានភ្លៀង។)"
   }
 ]

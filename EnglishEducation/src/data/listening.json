@@ -51,13 +51,13 @@
   },
   {
     "id": 6,
-    "title": "Finding the Key",
-    "titleKh": "ការស្វែងរកកូនសោ",
+    "title": "Finding the Cat",
+    "titleKh": "ការស្វែងរកឆ្មា",
     "difficulty": "Level 2",
     "difficultyKh": "កម្រិត ២",
-    "text": "Your key is under the table.",
-    "clue": "Listen for the location of the key.",
-    "clueKh": "ស្តាប់ទីតាំងរបស់កូនសោ។"
+    "text": "The cat is under the bed.",
+    "clue": "A cat resting below where you sleep.",
+    "clueKh": "ឆ្មាកំពុងសម្រាកនៅខាងក្រោមគ្រែដេករបស់អ្នក។"
   },
   {
     "id": 7,
@@ -71,13 +71,13 @@
   },
   {
     "id": 8,
-    "title": "About the Car",
-    "titleKh": "អំពីឡាន",
+    "title": "On the Table",
+    "titleKh": "នៅលើតុ",
     "difficulty": "Level 2",
     "difficultyKh": "កម្រិត ២",
-    "text": "I am on the car.",
-    "clue": "Listen to know my position related to the car.",
-    "clueKh": "ស្តាប់ដើម្បីដឹងពីទីតាំងរបស់ខ្ញុំទាក់ទងនឹងឡាន។"
+    "text": "The book is on the table.",
+    "clue": "A book placed on top of a table.",
+    "clueKh": "សៀវភៅមួយក្បាលដែលដាក់នៅលើតុ។"
   },
   {
     "id": 9,
@@ -121,13 +121,13 @@
   },
   {
     "id": 13,
-    "title": "Where is Your Phone?",
-    "titleKh": "តើទូរស័ព្ទរបស់អ្នកនៅឯណា?",
+    "title": "Is This Your Phone?",
+    "titleKh": "តើនេះជាទូរស័ព្ទរបស់អ្នកឬ?",
     "difficulty": "Level 2",
     "difficultyKh": "កម្រិត ២",
-    "text": "Where is your phone?",
-    "clue": "Ask for the location of your phone.",
-    "clueKh": "សួររកទីតាំងទូរស័ព្ទរបស់អ្នក។"
+    "text": "Is this your phone?",
+    "clue": "Asking someone if the device belongs to them.",
+    "clueKh": "សួរនរណាម្នាក់ថាតើឧបករណ៍នេះជារបស់ពួកគេឬ។"
   },
   {
     "id": 14,
@@ -141,13 +141,13 @@
   },
   {
     "id": 15,
-    "title": "Under the Car",
-    "titleKh": "នៅក្រោមឡាន",
+    "title": "I Have a Car",
+    "titleKh": "ខ្ញុំមានឡានមួយ",
     "difficulty": "Level 2",
     "difficultyKh": "កម្រិត ២",
-    "text": "I am under the car.",
-    "clue": "Describe being under the car.",
-    "clueKh": "ពិពណ៌នាអំពីការនៅក្រោមឡាន។"
+    "text": "I have a red car.",
+    "clue": "Describe owning a red vehicle.",
+    "clueKh": "រៀបរាប់ពីការមានឡានពណ៌ក្រហមមួយ។"
   },
   {
     "id": 16,
@@ -185,18 +185,68 @@
     "titleKh": "ឈ្មោះរបស់ខ្ញុំ",
     "difficulty": "Level 1",
     "difficultyKh": "កម្រិត ១",
-    "text": "Hello. My name is Sam.",
-    "clue": "Listen for the name.",
-    "clueKh": "ស្ដាប់រកឈ្មោះ។"
+    "text": "Hello! My name is Alice.",
+    "clue": "Say hello and state your name as Alice.",
+    "clueKh": "សួស្តី និងប្រាប់ឈ្មោះរបស់អ្នកថា Alice។"
   },
   {
     "id": 20,
-    "title": "Identifying Gender",
-    "titleKh": "កំណត់ភេទ",
+    "title": "He is a Boy",
+    "titleKh": "គាត់ជាក្មេងប្រុសម្នាក់",
     "difficulty": "Level 1",
     "difficultyKh": "កម្រិត ១",
-    "text": "She is a girl. He is a boy.",
-    "clue": "Listen for 'She' and 'He'.",
-    "clueKh": "ស្ដាប់រកពាក្យ 'She' និង 'He'។"
+    "text": "He is a boy.",
+    "clue": "Identify a young male.",
+    "clueKh": "កំណត់អត្តសញ្ញាណក្មេងប្រុសម្នាក់។"
+  },
+  {
+    "id": 21,
+    "title": "My Feelings",
+    "titleKh": "អារម្មណ៍របស់ខ្ញុំ",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I am good.",
+    "clue": "State that you are feeling well.",
+    "clueKh": "ប្រាប់ថាអ្នកមានអារម្មណ៍ល្អ។"
+  },
+  {
+    "id": 22,
+    "title": "What's Wrong?",
+    "titleKh": "តើមានបញ្ហាអ្វី?",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I am sleepy.",
+    "clue": "Express that you want to sleep.",
+    "clueKh": "បង្ហាញថាអ្នកចង់គេង។"
+  },
+  {
+    "id": 23,
+    "title": "Listen and find the animal!",
+    "titleKh": "ស្តាប់ហើយរកសត្វ!",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "Look! I see a dog.",
+    "clue": "Which animal is mentioned?",
+    "clueKh": "តើសត្វអ្វីត្រូវបានលើកឡើង?"
+  },
+  {
+    "id": 24,
+    "title": "Listen to the description.",
+    "titleKh": "ស្តាប់ការពណ៌នា។",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I see a big horse.",
+    "clue": "What word describes the horse?",
+    "clueKh": "តើពាក្យអ្វីដែលពណ៌នាអំពីសេះ?"
+  },
+  {
+    "id": 25,
+    "title": "Listen and identify the size.",
+    "titleKh": "ស្តាប់ហើយកំណត់ទំហំ។",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I see a small cat.",
+    "clue": "Describe seeing a tiny feline.",
+    "clueKh": "រៀបរាប់ពីការឃើញកូនឆ្មាតូចមួយ។"
   }
 ]
