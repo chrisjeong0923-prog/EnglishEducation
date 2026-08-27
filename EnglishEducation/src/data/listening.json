@@ -248,5 +248,145 @@
     "text": "I see a small cat.",
     "clue": "Describe seeing a tiny feline.",
     "clueKh": "រៀបរាប់ពីការឃើញកូនឆ្មាតូចមួយ។"
+  },
+  {
+    "id": 26,
+    "title": "Listen and Repeat",
+    "titleKh": "ស្តាប់ហើយនិយាយតាម",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I have a pencil.",
+    "clue": "What do I have?",
+    "clueKh": "តើខ្ញុំមានអ្វី?"
+  },
+  {
+    "id": 27,
+    "title": "Listen and Identify",
+    "titleKh": "ស្តាប់ហើយកំណត់អត្តសញ្ញាណ",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I have books in a backpack.",
+    "clue": "Where are the books?",
+    "clueKh": "តើសៀវភៅនៅឯណា?"
+  },
+  {
+    "id": 28,
+    "title": "Listen Carefully",
+    "titleKh": "ស្តាប់ដោយប្រុងប្រយ័ត្ន",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I am in a classroom.",
+    "clue": "Where am I?",
+    "clueKh": "តើខ្ញុំនៅឯណា?"
+  },
+  {
+    "id": 29,
+    "title": "Listen and Repeat",
+    "titleKh": "ស្ដាប់ហើយនិយាយតាម",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I see an apple.",
+    "clue": "What fruit do you see?",
+    "clueKh": "តើអ្នកឃើញផ្លែឈើអ្វី?"
+  },
+  {
+    "id": 30,
+    "title": "Listen and Repeat",
+    "titleKh": "ស្ដាប់ហើយនិយាយតាម",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I like grapes.",
+    "clue": "What fruit do I like?",
+    "clueKh": "តើខ្ញុំចូលចិត្តផ្លែឈើអ្វី?"
+  },
+  {
+    "id": 31,
+    "title": "Listen and Repeat",
+    "titleKh": "ស្ដាប់ហើយនិយាយតាម",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I like oranges.",
+    "clue": "What fruit do I like?",
+    "clueKh": "តើខ្ញុំចូលចិត្តផ្លែឈើអ្វី?"
+  },
+  {
+    "id": 32,
+    "title": "Listen and Identify the Color",
+    "titleKh": "ស្តាប់ហើយសម្គាល់ពណ៌",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I see a red dog.",
+    "clue": "What color is the dog?",
+    "clueKh": "ឆ្កែមានពណ៌អ្វី?"
+  },
+  {
+    "id": 33,
+    "title": "Listen and Learn",
+    "titleKh": "ស្តាប់ហើយរៀន",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "The sky is blue.",
+    "clue": "What color is the sky?",
+    "clueKh": "មេឃមានពណ៌អ្វី?"
+  },
+  {
+    "id": 34,
+    "title": "Listen to the Sentence",
+    "titleKh": "ស្តាប់ប្រយោគ",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "The rainbow has all seven colors.",
+    "clue": "How many colors does a rainbow have?",
+    "clueKh": "ឥន្ទធនូមានប៉ុន្មានពណ៌?"
+  },
+  {
+    "id": 35,
+    "title": "Listen and Repeat",
+    "titleKh": "ស្ដាប់ហើយនិយាយតាម",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I see a cow.",
+    "clue": "What animal did you hear?",
+    "clueKh": "តើអ្នកបានលឺសត្វអ្វី?"
+  },
+  {
+    "id": 36,
+    "title": "Listen Carefully",
+    "titleKh": "ស្ដាប់ដោយយកចិត្តទុកដាក់",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "A cow is an animal.",
+    "clue": "What is a cow?",
+    "clueKh": "តើគោជាអ្វី?"
+  },
+  {
+    "id": 37,
+    "title": "Identify the Place",
+    "titleKh": "កំណត់អត្តសញ្ញាណទីកន្លែង",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "This is a farm.",
+    "clue": "What place is this?",
+    "clueKh": "តើនេះជាកន្លែងអ្វី?"
+  },
+  {
+    "id": 38,
+    "title": "My Favorite Activity",
+    "titleKh": "សកម្មភាពដែលខ្ញុំចូលចិត្ត",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "I like singing.",
+    "clue": "Listen for what someone enjoys doing with their voice.",
+    "clueKh": "ស្តាប់មើលថាតើនរណាម្នាក់រីករាយនឹងធ្វើអ្វីដោយប្រើសំឡេងរបស់ពួកគេ។"
+  },
+  {
+    "id": 39,
+    "title": "Weekend Fun",
+    "titleKh": "ភាពសប្បាយរីករាយចុងសប្តាហ៍",
+    "difficulty": "Level 1",
+    "difficultyKh": "កម្រិត ១",
+    "text": "My sister likes reading storybooks.",
+    "clue": "Pay attention to what the sister enjoys doing with books.",
+    "clueKh": "យកចិត្តទុកដាក់លើអ្វីដែលបងស្រីចូលចិត្តធ្វើជាមួយសៀវភៅ។"
   }
 ]

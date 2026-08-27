@@ -284,25 +284,6 @@
     "grade": 3,
     "type": "vocabulary",
     "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
-    "questionText": "Complete the sentence: \"I see a _____.\"",
-    "questionTextKh": "បំពេញប្រយោគ៖ \"I see a _____.\"",
-    "options": [
-      "boy",
-      "he",
-      "hello",
-      "Dog"
-    ],
-    "correctAnswer": [
-      0,
-      3
-    ],
-    "explanation": "In the lesson, we read: \"I see a dog.\"",
-    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I see a dog.\" (ខ្ញុំឃើញឆ្កែមួយ។)"
-  },
-  {
-    "grade": 3,
-    "type": "vocabulary",
-    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
     "questionText": "Complete the sentence: \"I am a _____.\"",
     "questionTextKh": "បំពេញប្រយោគ៖ \"I am a _____.\"",
     "options": [
@@ -475,25 +456,6 @@
     ],
     "explanation": "In the lesson, we read: \"I am good.\"",
     "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I am good.\" (ខ្ញុំសុខសប្បាយទេ។)"
-  },
-  {
-    "grade": 3,
-    "type": "vocabulary",
-    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
-    "questionText": "Complete the sentence: \"I see a _____.\"",
-    "questionTextKh": "បំពេញប្រយោគ៖ \"I see a _____.\"",
-    "options": [
-      "small",
-      "see",
-      "Dog",
-      "horse"
-    ],
-    "correctAnswer": [
-      2,
-      3
-    ],
-    "explanation": "In the lesson, we read: \"I see a dog.\"",
-    "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"I see a dog.\" (ខ្ញុំឃើញឆ្កែមួយ។)"
   },
   {
     "grade": 3,
@@ -843,5 +805,341 @@
     ],
     "explanation": "In the lesson, we read: \"Don't forget your umbrella, it's a rainy day.\"",
     "explanationKh": "នៅក្នុងមេរៀន យើងបានអាន៖ \"Don't forget your umbrella, it's a rainy day.\" (កុំភ្លេចឆ័ត្ររបស់អ្នក ព្រោះវាជាថ្ងៃដែលមានភ្លៀង។)"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/in-the-classroom.pdf",
+    "questionText": "Complete the sentence: 'I am in a _____.'",
+    "questionTextKh": "បំពេញប្រយោគ៖ 'ខ្ញុំនៅក្នុង _____។'",
+    "options": [
+      "pencil",
+      "classroom",
+      "pen",
+      "book"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The sentence 'I am in a classroom' tells us where the person is.",
+    "explanationKh": "ប្រយោគ 'I am in a classroom' ប្រាប់យើងពីកន្លែងដែលមនុស្សនៅ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/in-the-classroom.pdf",
+    "questionText": "Complete the sentence: 'I have a _____.'",
+    "questionTextKh": "បំពេញប្រយោគ៖ 'ខ្ញុំមាន _____។'",
+    "options": [
+      "classroom",
+      "backpack",
+      "pencil",
+      "book"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The sentence 'I have a pencil' means I own a pencil.",
+    "explanationKh": "ប្រយោគ 'I have a pencil' មានន័យថាខ្ញុំមានខ្មៅដៃមួយ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/in-the-classroom.pdf",
+    "questionText": "Complete the sentence: 'I have a _____.'",
+    "questionTextKh": "បំពេញប្រយោគ៖ 'ខ្ញុំមាន _____។'",
+    "options": [
+      "book",
+      "pen",
+      "pencil",
+      "classroom"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The sentence 'I have a pen' means I own a pen.",
+    "explanationKh": "ប្រយោគ 'I have a pen' មានន័យថាខ្ញុំមានប៊ិចមួយ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/in-the-classroom.pdf",
+    "questionText": "Complete the sentence: 'I have books in a _____.'",
+    "questionTextKh": "បំពេញប្រយោគ៖ 'ខ្ញុំមានសៀវភៅនៅក្នុង _____។'",
+    "options": [
+      "classroom",
+      "pencil",
+      "pen",
+      "backpack"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Books are commonly carried in a backpack.",
+    "explanationKh": "សៀវភៅត្រូវបានគេដាក់ក្នុងកាបូបស្ពាយជាទូទៅ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/fruit.pdf",
+    "questionText": "Complete the sentence: \"I see an _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I see an _____\"។",
+    "options": [
+      "banana",
+      "apple",
+      "orange",
+      "grape"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The sentence uses \"an\", which comes before words starting with a vowel sound. \"Apple\" starts with 'a'.",
+    "explanationKh": "ប្រយោគនេះប្រើពាក្យ \"an\" ដែលមកមុនពាក្យដែលចាប់ផ្តើមដោយស្រៈ។ \"Apple\" ចាប់ផ្តើមដោយ 'a'។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/fruit.pdf",
+    "questionText": "Complete the sentence: \"I like _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I like _____\"។",
+    "options": [
+      "grape",
+      "lemon",
+      "oranges",
+      "grapes"
+    ],
+    "correctAnswer": 3,
+    "explanation": "When you like more than one, we add 's' to the noun to make it plural.",
+    "explanationKh": "នៅពេលអ្នកចូលចិត្តច្រើនជាងមួយ យើងបន្ថែម 's' ទៅនាមដើម្បីធ្វើឱ្យវាក្លាយជាពហុវចនៈ។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/fruit.pdf",
+    "questionText": "Complete the sentence: \"I like _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I like _____\"។",
+    "options": [
+      "orange",
+      "banana",
+      "oranges",
+      "apple"
+    ],
+    "correctAnswer": 2,
+    "explanation": "When you like more than one, we add 's' to the noun to make it plural.",
+    "explanationKh": "នៅពេលអ្នកចូលចិត្តច្រើនជាងមួយ យើងបន្ថែម 's' ទៅនាមដើម្បីធ្វើឱ្យវាក្លាយជាពហុវចនៈ។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/fruit.pdf",
+    "questionText": "Complete the sentence: \"I like _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"I like _____\"។",
+    "options": [
+      "mango",
+      "strawberry",
+      "mangoes",
+      "lemon"
+    ],
+    "correctAnswer": 2,
+    "explanation": "When you like more than one, we add 'es' to nouns ending in 'o' to make them plural.",
+    "explanationKh": "នៅពេលអ្នកចូលចិត្តច្រើនជាងមួយ យើងបន្ថែម 'es' ទៅនាមដែលបញ្ចប់ដោយ 'o' ដើម្បីធ្វើឱ្យវាក្លាយជាពហុវចនៈ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/colors.pdf",
+    "questionText": "Complete the sentence: \"I see a _____ dog.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ខ្ញុំឃើញឆ្កែពណ៌ _____។\"",
+    "options": [
+      "red",
+      "blue",
+      "yellow",
+      "green"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The original sentence is \"I see a red dog.\"",
+    "explanationKh": "ប្រយោគដើមគឺ \"ខ្ញុំឃើញឆ្កែពណ៌ក្រហម។\""
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/colors.pdf",
+    "questionText": "Complete the sentence: \"The sky is _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"មេឃមានពណ៌ _____។\"",
+    "options": [
+      "red",
+      "blue",
+      "orange",
+      "purple"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The original sentence is \"The sky is blue.\"",
+    "explanationKh": "ប្រយោគដើមគឺ \"មេឃមានពណ៌ខៀវ។\""
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/colors.pdf",
+    "questionText": "Complete the sentence: \"The orange is _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ផ្លែក្រូចមានពណ៌ _____។\"",
+    "options": [
+      "yellow",
+      "green",
+      "orange",
+      "red"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The original sentence is \"The orange is orange.\"",
+    "explanationKh": "ប្រយោគដើមគឺ \"ផ្លែក្រូចមានពណ៌ទឹកក្រូច។\""
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/colors.pdf",
+    "questionText": "Complete the sentence: \"The _____ has all seven colors.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"_____ មានគ្រប់ពណ៌ទាំងប្រាំពីរ។\"",
+    "options": [
+      "cloud",
+      "rainbow",
+      "sun",
+      "sky"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The original sentence is \"The rainbow has all seven colors.\"",
+    "explanationKh": "ប្រយោគដើមគឺ \"ឥន្ទធនូមានគ្រប់ពណ៌ទាំងប្រាំពីរ។\""
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/colors.pdf",
+    "questionText": "Complete the sentence: \"The grass is _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ស្មៅមានពណ៌ _____។\"",
+    "options": [
+      "yellow",
+      "blue",
+      "green",
+      "purple"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The original sentence is \"The grass is green.\"",
+    "explanationKh": "ប្រយោគដើមគឺ \"ស្មៅមានពណ៌បៃតង។\""
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/animals.pdf",
+    "questionText": "Complete the sentence: \"I see a _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ខ្ញុំឃើញ _____ មួយ។\"",
+    "options": [
+      "pig",
+      "horse",
+      "cow",
+      "cat"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The sentence from the lesson is \"I see a cow.\"",
+    "explanationKh": "ប្រយោគពីមេរៀនគឺ \"ខ្ញុំឃើញគោមួយ។\""
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/animals.pdf",
+    "questionText": "Complete the sentence: \"A _____ is an animal.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"_____ គឺជាសត្វ។\"",
+    "options": [
+      "dog",
+      "sheep",
+      "cow",
+      "farm"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The sentence from the lesson is \"A cow is an animal.\"",
+    "explanationKh": "ប្រយោគពីមេរៀនគឺ \"គោគឺជាសត្វ។\""
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/animals.pdf",
+    "questionText": "Complete the sentence: \"This is a _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"នេះគឺជា _____ មួយ។\"",
+    "options": [
+      "animal",
+      "farm",
+      "pig",
+      "horse"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The sentence from the lesson is \"This is a farm.\"",
+    "explanationKh": "ប្រយោគពីមេរៀនគឺ \"នេះគឺជាកសិដ្ឋានមួយ។\""
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/animals.pdf",
+    "questionText": "Complete the sentence: \"A farm has _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"កសិដ្ឋានមាន _____។\"",
+    "options": [
+      "animals",
+      "cars",
+      "houses",
+      "flowers"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The sentence from the lesson is \"A farm has animals.\"",
+    "explanationKh": "ប្រយោគពីមេរៀនគឺ \"កសិដ្ឋានមានសត្វ។\""
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/what-do-you-like.pdf",
+    "questionText": "Complete the sentence: 'I like _____ in the park.'",
+    "questionTextKh": "បំពេញប្រយោគ: 'ខ្ញុំចូលចិត្ត _____ នៅក្នុងសួនច្បារ។'",
+    "options": [
+      "running",
+      "reading",
+      "singing",
+      "dancing"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The sentence is about moving quickly in the park. 'Running' is the correct activity.",
+    "explanationKh": "ប្រយោគនេះគឺនិយាយអំពីការធ្វើចលនាយ៉ាងលឿននៅក្នុងសួនច្បារ។ 'Running' គឺជាសកម្មភាពត្រឹមត្រូវ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/what-do-you-like.pdf",
+    "questionText": "Complete the sentence: 'My sister likes _____ storybooks.'",
+    "questionTextKh": "បំពេញប្រយោគ: 'បងស្រីខ្ញុំចូលចិត្ត _____ សៀវភៅរឿង។'",
+    "options": [
+      "singing",
+      "reading",
+      "dancing",
+      "running"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The sentence talks about enjoying storybooks. 'Reading' is what you do with storybooks.",
+    "explanationKh": "ប្រយោគនេះនិយាយអំពីការចូលចិត្តសៀវភៅរឿង។ 'Reading' គឺជាអ្វីដែលអ្នកធ្វើជាមួយសៀវភៅរឿង។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/what-do-you-like.pdf",
+    "questionText": "Complete the sentence: 'I like _____ with my friends.'",
+    "questionTextKh": "បំពេញប្រយោគ: 'ខ្ញុំចូលចិត្ត _____ ជាមួយមិត្តភក្តិរបស់ខ្ញុំ។'",
+    "options": [
+      "dancing",
+      "running",
+      "playing soccer",
+      "singing"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The sentence describes enjoying a team sport with friends. 'Playing soccer' fits best.",
+    "explanationKh": "ប្រយោគនេះពណ៌នាអំពីការរីករាយនឹងកីឡាជាក្រុមជាមួយមិត្តភក្តិ។ 'Playing soccer' គឺសមបំផុត។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/what-do-you-like.pdf",
+    "questionText": "Complete the sentence: 'I like _____.'",
+    "questionTextKh": "បំពេញប្រយោគ: 'ខ្ញុំចូលចិត្ត _____។'",
+    "options": [
+      "reading",
+      "singing",
+      "dancing",
+      "running"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The sentence expresses a general liking for the activity of using one's voice to make music. 'Singing' is the correct word.",
+    "explanationKh": "ប្រយោគនេះបង្ហាញពីការចូលចិត្តទូទៅចំពោះសកម្មភាពនៃការប្រើប្រាស់សំឡេងដើម្បីបង្កើតតន្ត្រី។ 'Singing' គឺជាពាក្យត្រឹមត្រូវ។"
   }
 ]

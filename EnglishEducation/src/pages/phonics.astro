@@ -1,0 +1,1351 @@
+---
+import Layout from '../layouts/Layout.astro';
+import phonicsWordsData from '../data/phonics_words.json';
+
+const phonicsWordsJson = JSON.stringify(phonicsWordsData);
+---
+
+<Layout title="Phonics Word Board" description="Practice 400 phonics-rich English words with correct IPA, slow pronunciation assistants, and microphone verification." theme="green">
+  <div class="phonics-header">
+    <h1 class="phonics-title">
+      <span class="en-text">Phonics Word Board 🔊</span>
+      <span class="kh-text">ក្តារពាក្យហ្វឹកហាត់សំឡេង 🔊</span>
+    </h1>
+    <p class="phonics-subtitle">
+      <span class="en-text">Practice 400 vocabulary words organized by phonetic sounds. Listen at normal/slow speeds and practice speaking!</span>
+      <span class="kh-text">អនុវត្តពាក្យសិក្សាចំនួន ៤០០ ផ្ដោតលើសំឡេងព្យញ្ជនៈ និងស្រៈផ្សំ។ ស្តាប់សំឡេងល្បឿនធម្មតា/យឺត និងហាត់និយាយ!</span>
+    </p>
+  </div>
+
+  <div class="phonics-main-layout">
+    <!-- Main board container (left) -->
+    <div class="phonics-content-area">
+      
+      <!-- Category Tabs Selector -->
+      <div class="category-tabs-container">
+        <button class="category-tab active" data-category="All">
+          <span class="en-text">All Sounds</span>
+          <span class="kh-text">ទាំងអស់</span>
+        </button>
+        <button class="category-tab" data-category="Short Vowels">
+          <span class="en-text">Short Vowels</span>
+          <span class="kh-text">ស្រៈខ្លី</span>
+        </button>
+        <button class="category-tab" data-category="Long Vowels">
+          <span class="en-text">Long Vowels</span>
+          <span class="kh-text">ស្រៈវែង</span>
+        </button>
+        <button class="category-tab" data-category="Consonant Digraphs">
+          <span class="en-text">Consonant Digraphs</span>
+          <span class="kh-text">ព្យញ្ជនៈផ្សំ</span>
+        </button>
+        <button class="category-tab" data-category="Consonant Blends">
+          <span class="en-text">Consonant Blends</span>
+          <span class="kh-text">ព្យញ្ជនៈបន្តគ្នា</span>
+        </button>
+        <button class="category-tab" data-category="Diphthongs & Special Vowels">
+          <span class="en-text">Diphthongs</span>
+          <span class="kh-text">ស្រៈផ្សំ</span>
+        </button>
+        <button class="category-tab" data-category="R-Controlled Vowels">
+          <span class="en-text">R-Controlled</span>
+          <span class="kh-text">ស្រៈមាន R</span>
+        </button>
+        <button class="category-tab" data-category="Silent Letters">
+          <span class="en-text">Silent Letters</span>
+          <span class="kh-text">អក្សរស្ងាត់</span>
+        </button>
+        <button class="category-tab" data-category="Double Consonants">
+          <span class="en-text">Double Consonants</span>
+          <span class="kh-text">ព្យញ្ជនៈទ្វេ</span>
+        </button>
+      </div>
+
+      <!-- Search & statistics container -->
+      <div class="search-stats-container" id="phonics-trainer-top">
+        <div class="search-box-wrapper glass-card">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="phonics-search-input" placeholder="Search phonics words... / ស្វែងរកពាក្យ..." />
+        </div>
+        
+        <div class="stats-box glass-card">
+          <span class="en-text">Showing <strong id="stats-count-val">0</strong> of <strong id="stats-total-val">0</strong> words</span>
+          <span class="kh-text">បង្ហាញ <strong id="stats-count-val-kh">0</strong> ក្នុងចំណោម <strong id="stats-total-val-kh">0</strong> ពាក្យ</span>
+        </div>
+      </div>
+
+      <!-- Cards Grid -->
+      <div class="phonics-cards-grid" id="phonics-cards-grid">
+        <!-- Loaded dynamically via JS -->
+      </div>
+
+      <!-- Pagination Controls -->
+      <div class="pagination-container" id="phonics-pagination">
+        <!-- Loaded dynamically via JS -->
+      </div>
+
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="game-scoreboard glass-card">
+      <h3 class="scoreboard-title">
+        <span class="en-text">Star Rewards 🏆</span>
+        <span class="kh-text">រង្វាន់ផ្កាយ 🏆</span>
+      </h3>
+      <p class="scoreboard-subtitle">
+        <span class="en-text">Practice speaking correctly or mark words as learned to earn stars!</span>
+        <span class="kh-text">ហាត់និយាយពាក្យឱ្យបានត្រឹមត្រូវ ឬកត់សម្គាល់ថាបានរៀនដើម្បីទទួលបានផ្កាយ!</span>
+      </p>
+
+      <!-- Active Profile Mini Card -->
+      <div class="profile-card-mini" id="game-profile-card">
+        <div class="profile-empty-state">
+          <span class="en-text">No active profile. Create one to collect stars!</span>
+          <span class="kh-text">មិនទាន់មានគណនីសកម្ម។ បង្កើតគណនីដើម្បីប្រមូលផ្កាយ!</span>
+        </div>
+      </div>
+
+      <!-- Plant Progression Widget -->
+      <div class="gardening-widget glass-card" id="gardening-progression-card">
+        <h4 class="gardening-title">
+          <span class="en-text">Garden Growth 🌱</span>
+          <span class="kh-text">ការលូតលាស់សួនច្បារ 🌱</span>
+        </h4>
+        <div class="gardening-display-container">
+          <div class="plant-pot">🪵</div>
+          <div class="plant-stage" id="plant-growth-stage">🌱</div>
+        </div>
+        <div class="gardening-status">
+          <p class="growth-text">
+            <span class="en-text">Stars: <strong id="growth-stars-count">0</strong></span>
+            <span class="kh-text">ផ្កាយសរុប៖ <strong id="growth-stars-count-kh">0</strong></span>
+          </p>
+          <p class="growth-stage-label" id="growth-stage-label">
+            <span class="en-text">Sprout Stage</span>
+            <span class="kh-text">ដំណាក់កាលកូនពន្លក</span>
+          </p>
+        </div>
+        <div class="growth-bar-container">
+          <div class="growth-bar" id="plant-growth-bar" style="width: 10%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="phonics-data-holder" data-words={phonicsWordsJson}></div>
+</Layout>
+
+<script>
+  import confetti from 'canvas-confetti';
+  import { profileManager } from '../scripts/profileManager';
+  import { soundEffects } from '../scripts/soundEffects';
+
+  // Global variables
+  let phonicsWords: any[] = [];
+  let filteredWords: any[] = [];
+  let currentCategory = 'All';
+  let searchQuery = '';
+  let currentPage = 1;
+  const itemsPerPage = 12;
+
+  // Dictionary of homophones (words with identical pronunciation)
+  const HOMOPHONES: Record<string, string[]> = {
+    knew: ['knew', 'new'],
+    new: ['new', 'knew'],
+    see: ['see', 'sea'],
+    sea: ['sea', 'see'],
+    write: ['write', 'right', 'rite'],
+    right: ['right', 'write'],
+    blue: ['blue', 'blew'],
+    blew: ['blew', 'blue'],
+    road: ['road', 'rode'],
+    rode: ['rode', 'road'],
+    meat: ['meat', 'meet'],
+    meet: ['meet', 'meat'],
+    wood: ['wood', 'would'],
+    would: ['would', 'wood'],
+    knight: ['knight', 'night'],
+    night: ['night', 'knight'],
+    nose: ['nose', 'knows'],
+    knows: ['knows', 'nose'],
+    knot: ['knot', 'not'],
+    not: ['not', 'knot'],
+    rain: ['rain', 'reign', 'rein'],
+    red: ['red', 'read'],
+    where: ['where', 'wear', 'ware'],
+    wear: ['wear', 'where'],
+    sun: ['sun', 'son'],
+    son: ['son', 'sun'],
+    flower: ['flower', 'flour'],
+    flour: ['flour', 'flower'],
+    cent: ['cent', 'sent', 'scent'],
+    sent: ['sent', 'cent'],
+    hear: ['hear', 'here'],
+    here: ['here', 'hear'],
+    hair: ['hair', 'hare'],
+    hare: ['hare', 'hair'],
+    hour: ['hour', 'our'],
+    our: ['our', 'hour'],
+    heir: ['heir', 'air'],
+    air: ['air', 'heir'],
+    be: ['be', 'bee'],
+    bee: ['bee', 'be'],
+    so: ['so', 'sew', 'sow'],
+    sew: ['sew', 'so'],
+    weak: ['weak', 'week'],
+    week: ['week', 'weak'],
+    too: ['too', 'to', 'two'],
+    two: ['two', 'too', 'to'],
+    one: ['one', 'won'],
+    won: ['won', 'one'],
+    hole: ['hole', 'whole'],
+    whole: ['whole', 'hole'],
+    deer: ['deer', 'dear'],
+    dear: ['dear', 'deer']
+  };
+
+  // Speech variables
+  let activeUtterance: SpeechSynthesisUtterance | null = null;
+
+  // Mic recognition variables
+  const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+  let activeRecognition: any = null;
+  let activeMicBtn: HTMLElement | null = null;
+  let activeFeedback: HTMLElement | null = null;
+
+  function initPage() {
+    // Load words from data holder
+    const dataHolder = document.getElementById('phonics-data-holder');
+    if (dataHolder) {
+      const dataAttr = dataHolder.getAttribute('data-words');
+      if (dataAttr) {
+        phonicsWords = JSON.parse(dataAttr);
+      }
+    }
+
+    setupCategoryFilters();
+    setupSearch();
+    updateMiniProfile();
+    applyFilters();
+  }
+
+  function setupCategoryFilters() {
+    const filterButtons = document.querySelectorAll('.category-tab');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.getAttribute('data-category') || 'All';
+        currentPage = 1;
+        applyFilters();
+      });
+    });
+  }
+
+  function setupSearch() {
+    const searchInput = document.getElementById('phonics-search-input') as HTMLInputElement;
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = (e.target as HTMLInputElement).value.trim().toLowerCase();
+        currentPage = 1;
+        applyFilters();
+      });
+    }
+  }
+
+  function applyFilters() {
+    filteredWords = phonicsWords.filter(item => {
+      const matchesCategory = currentCategory === 'All' || item.category === currentCategory;
+      const matchesSearch = item.word.toLowerCase().includes(searchQuery) ||
+                            item.definition.toLowerCase().includes(searchQuery) ||
+                            item.definitionKh.includes(searchQuery);
+      return matchesCategory && matchesSearch;
+    });
+
+    renderCards();
+    renderPagination();
+    updateStats();
+  }
+
+  function updateStats() {
+    const statsCount = document.getElementById('stats-count-val');
+    const statsTotal = document.getElementById('stats-total-val');
+    const statsCountKh = document.getElementById('stats-count-val-kh');
+    const statsTotalKh = document.getElementById('stats-total-val-kh');
+
+    if (statsCount && statsTotal) {
+      statsCount.innerText = filteredWords.length.toString();
+      statsTotal.innerText = phonicsWords.length.toString();
+    }
+    if (statsCountKh && statsTotalKh) {
+      statsCountKh.innerText = filteredWords.length.toString();
+      statsTotalKh.innerText = phonicsWords.length.toString();
+    }
+  }
+
+  function renderCards() {
+    const grid = document.getElementById('phonics-cards-grid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+
+    if (filteredWords.length === 0) {
+      grid.innerHTML = `
+        <div class="empty-state-card glass-card">
+          <p class="en-text">🔍 No words found matching your filters.</p>
+          <p class="kh-text">🔍 រកមិនឃើញពាក្យដែលត្រូវនឹងតម្រងរបស់អ្នកឡើយ។</p>
+        </div>
+      `;
+      return;
+    }
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const pageItems = filteredWords.slice(startIndex, endIndex);
+
+    const profile = profileManager.getProfile();
+    const learnedList = profile ? profile.learnedWords : [];
+
+    pageItems.forEach(item => {
+      const isLearned = learnedList.includes(item.word);
+      const card = document.createElement('div');
+      card.className = `phonics-card glass-card ${isLearned ? 'learned' : ''}`;
+      card.setAttribute('data-word', item.word);
+
+      // Clean type translation
+      const typeTranslations: Record<string, string> = {
+        noun: 'នាម (Noun)',
+        verb: 'កិរិយា (Verb)',
+        adjective: 'គុណនាម (Adj)',
+        number: 'លេខ (Num)'
+      };
+      const typeKh = typeTranslations[item.type.toLowerCase()] || item.type;
+
+      card.innerHTML = `
+        <div class="card-header-row">
+          <div class="card-badges">
+            <span class="badge badge-category">${item.category}</span>
+            <span class="badge badge-type">${item.type.toUpperCase()} / ${typeKh}</span>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn speak-btn no-click-sound" data-word="${item.word}" title="Listen (Normal)">
+              🔊
+            </button>
+            <button class="action-btn speak-slow-btn no-click-sound" data-word="${item.word}" title="Listen (Slow)">
+              🐢
+            </button>
+            <button class="action-btn mic-btn no-click-sound" data-word="${item.word}" title="Speak and Verify">
+              🎙️
+            </button>
+            <button class="action-btn learn-btn no-click-sound ${isLearned ? 'learned' : ''}" data-word="${item.word}" title="Mark Learned">
+              ⭐
+            </button>
+          </div>
+        </div>
+        <div class="card-main-content">
+          <div class="word-flex-row">
+            <span class="card-emoji">${item.emoji}</span>
+            <div class="word-text-block">
+              <h2 class="card-word">${item.word}</h2>
+              <span class="card-ipa">${item.ipa}</span>
+            </div>
+          </div>
+          <div class="card-details">
+            <div class="detail-section definition-section">
+              <div class="section-label">
+                <span class="en-text">Meaning:</span>
+                <span class="kh-text">ន័យពាក្យ៖</span>
+              </div>
+              <p class="meaning-text en-text">${item.definition}</p>
+              <p class="meaning-text kh-text-block">${item.definitionKh}</p>
+            </div>
+            <div class="detail-section example-section">
+              <div class="section-label">
+                <span class="en-text">Sentence:</span>
+                <span class="kh-text">ល្បះឧទាហរណ៍៖</span>
+              </div>
+              <p class="example-text en-text">"${item.example}"</p>
+              <p class="example-text kh-text-block">"${item.exampleKh}"</p>
+            </div>
+          </div>
+          <div class="pronounce-feedback hidden">
+            <span class="feedback-badge">🎙️</span>
+            <span class="feedback-text">Listening...</span>
+          </div>
+        </div>
+      `;
+
+      // Bind speak normal
+      const normalBtn = card.querySelector('.speak-btn');
+      if (normalBtn) {
+        normalBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          playText(item.word, 1.0);
+          animateButton(normalBtn as HTMLElement);
+        });
+      }
+
+      // Bind speak slow
+      const slowBtn = card.querySelector('.speak-slow-btn');
+      if (slowBtn) {
+        slowBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          playText(item.word, 0.55);
+          animateButton(slowBtn as HTMLElement);
+        });
+      }
+
+      // Bind learn toggle
+      const learnBtn = card.querySelector('.learn-btn');
+      if (learnBtn) {
+        learnBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleWordLearned(item.word, learnBtn as HTMLElement, card);
+        });
+      }
+
+      // Bind voice verification
+      const micBtn = card.querySelector('.mic-btn');
+      if (micBtn) {
+        micBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          handleMicClick(item.word, micBtn as HTMLElement, card);
+        });
+      }
+
+      grid.appendChild(card);
+    });
+  }
+
+  function animateButton(btn: HTMLElement) {
+    btn.classList.add('bouncing');
+    setTimeout(() => btn.classList.remove('bouncing'), 600);
+  }
+
+  function playText(text: string, rate: number = 1.0) {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = rate;
+      utterance.pitch = 1.05;
+      
+      const voices = window.speechSynthesis.getVoices();
+      const engVoice = voices.find(v => v.lang.startsWith('en-US') && v.name.includes('Google')) 
+                    || voices.find(v => v.lang.startsWith('en-GB')) 
+                    || voices.find(v => v.lang.startsWith('en'));
+      if (engVoice) {
+        utterance.voice = engVoice;
+      }
+      window.speechSynthesis.speak(utterance);
+    }
+  }
+
+  function handleMicClick(word: string, btn: HTMLElement, card: HTMLElement) {
+    const feedbackContainer = card.querySelector('.pronounce-feedback') as HTMLElement;
+    const feedbackBadge = card.querySelector('.feedback-badge') as HTMLElement;
+    const feedbackText = card.querySelector('.feedback-text') as HTMLElement;
+
+    if (activeMicBtn === btn) {
+      stopActiveRecognition();
+      if (feedbackContainer) feedbackContainer.classList.add('hidden');
+      return;
+    }
+
+    stopActiveRecognition();
+
+    if (!SpeechRecognition) {
+      const isEn = !document.documentElement.classList.contains('lang-khmer');
+      alert(isEn 
+        ? "Speech recognition is not supported in this browser. Please try Chrome or Safari!" 
+        : "កម្មវិធីរុករកនេះមិនគាំទ្រការសម្គាល់សំឡេងឡើយ។ សូមសាកល្បងជាមួយ Chrome ឬ Safari!"
+      );
+      return;
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+
+    if (feedbackContainer) {
+      feedbackContainer.className = 'pronounce-feedback';
+      feedbackContainer.classList.remove('hidden');
+      if (feedbackBadge) feedbackBadge.innerText = '🎙️';
+      if (feedbackText) {
+        const isEn = !document.documentElement.classList.contains('lang-khmer');
+        feedbackText.innerText = isEn ? 'Listening...' : 'កំពុងស្តាប់...';
+      }
+    }
+
+    btn.classList.add('recording');
+    activeMicBtn = btn;
+    activeFeedback = feedbackContainer;
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript || '';
+      const cleanedSpeech = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").trim();
+      const cleanedWord = word.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").trim();
+
+      if (feedbackContainer) {
+        const isHomophone = HOMOPHONES[cleanedWord]?.includes(cleanedSpeech);
+        if (cleanedSpeech === cleanedWord || isHomophone) {
+          feedbackContainer.className = 'pronounce-feedback correct';
+          if (feedbackBadge) feedbackBadge.innerText = '🎉';
+          if (feedbackText) {
+            const isEn = !document.documentElement.classList.contains('lang-khmer');
+            feedbackText.innerText = isEn ? 'Perfect!' : 'ល្អឥតខ្ចោះ!';
+          }
+          
+          soundEffects.playSuccess();
+          triggerConfetti(btn);
+
+          // Earn star & mark learned
+          const learnBtn = card.querySelector('.learn-btn') as HTMLElement;
+          if (learnBtn && !learnBtn.classList.contains('learned')) {
+            earnSessionStar();
+            markActiveProfileWordLearned(word);
+            learnBtn.classList.add('learned');
+            card.classList.add('learned');
+            updateMiniProfile();
+          }
+        } else {
+          feedbackContainer.className = 'pronounce-feedback incorrect';
+          if (feedbackBadge) feedbackBadge.innerText = '❌';
+          if (feedbackText) {
+            const isEn = !document.documentElement.classList.contains('lang-khmer');
+            feedbackText.innerText = isEn ? `Heard: "${transcript}"` : `ឮពាក្យ៖ "${transcript}"`;
+          }
+          soundEffects.playError();
+        }
+      }
+    };
+
+    recognition.onerror = () => {
+      stopActiveRecognition();
+    };
+
+    recognition.onend = () => {
+      btn.classList.remove('recording');
+      if (activeMicBtn === btn) {
+        activeMicBtn = null;
+      }
+    };
+
+    activeRecognition = recognition;
+    recognition.start();
+  }
+
+  function stopActiveRecognition() {
+    if (activeRecognition) {
+      activeRecognition.abort();
+      activeRecognition = null;
+    }
+    if (activeMicBtn) {
+      activeMicBtn.classList.remove('recording');
+      activeMicBtn = null;
+    }
+    if (activeFeedback) {
+      activeFeedback.classList.add('hidden');
+      activeFeedback = null;
+    }
+  }
+
+  function triggerConfetti(btn: HTMLElement) {
+    const rect = btn.getBoundingClientRect();
+    const x = (rect.left + rect.width / 2) / window.innerWidth;
+    const y = (rect.top + rect.height / 2) / window.innerHeight;
+    confetti({
+      particleCount: 50,
+      spread: 60,
+      origin: { x, y },
+      colors: ['#10b981', '#3b82f6', '#fbbf24', '#ec4899', '#8b5cf6'],
+      disableForReducedMotion: true
+    });
+  }
+
+  function toggleWordLearned(word: string, btn: HTMLElement, card: HTMLElement) {
+    const profile = profileManager.getProfile();
+    if (!profile) {
+      const isEn = !document.documentElement.classList.contains('lang-khmer');
+      alert(isEn 
+        ? "Create a profile first to collect stars! Go to 'Join Academy'." 
+        : "សូមបង្កើតគណនីដំបូង ដើម្បីប្រមូលផ្កាយ! ចុច 'ចុះឈ្មោះរៀន'។"
+      );
+      return;
+    }
+
+    const isCurrentlyLearned = profile.learnedWords.includes(word);
+    if (isCurrentlyLearned) {
+      profileManager.unmarkWordAsLearned(word);
+      btn.classList.remove('learned');
+      card.classList.remove('learned');
+      soundEffects.playClick();
+    } else {
+      profileManager.markWordAsLearned(word);
+      btn.classList.add('learned');
+      card.classList.add('learned');
+      soundEffects.playSuccess();
+      triggerConfetti(btn);
+    }
+    
+    updateMiniProfile();
+  }
+
+  function earnSessionStar() {
+    const profile = profileManager.getProfile();
+    if (profile) {
+      profileManager.addStars(5);
+    }
+  }
+
+  function markActiveProfileWordLearned(word: string) {
+    const profile = profileManager.getProfile();
+    if (profile) {
+      profileManager.markWordAsLearned(word);
+    }
+  }
+
+  function renderPagination() {
+    const container = document.getElementById('phonics-pagination');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    const totalPages = Math.ceil(filteredWords.length / itemsPerPage);
+    if (totalPages <= 1) return;
+
+    const createBtn = (page: number, label: string, active: boolean) => {
+      const btn = document.createElement('button');
+      btn.className = `page-btn glass-card ${active ? 'active' : ''}`;
+      btn.innerText = label;
+      btn.addEventListener('click', () => {
+        currentPage = page;
+        renderCards();
+        renderPagination();
+        // Scroll back to top of main trainer area
+        const topEl = document.getElementById('phonics-trainer-top');
+        if (topEl) topEl.scrollIntoView({ behavior: 'smooth' });
+      });
+      return btn;
+    };
+
+    // Prev Button
+    if (currentPage > 1) {
+      container.appendChild(createBtn(currentPage - 1, '◀', false));
+    }
+
+    // Number Buttons
+    const maxVisible = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
+    if (endPage - startPage + 1 < maxVisible) {
+      startPage = Math.max(1, endPage - maxVisible + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      container.appendChild(createBtn(i, i.toString(), i === currentPage));
+    }
+
+    // Next Button
+    if (currentPage < totalPages) {
+      container.appendChild(createBtn(currentPage + 1, '▶', false));
+    }
+  }
+
+  function updateMiniProfile() {
+    const sidebar = document.getElementById('game-profile-card');
+    if (!sidebar) return;
+
+    const profile = profileManager.getProfile();
+    if (profile) {
+      const calculatedStars = profileManager.calculateStars(profile);
+      sidebar.innerHTML = `
+        <div class="mini-profile-wrapper">
+          <div class="mini-avatar">${profile.avatar}</div>
+          <div class="mini-details">
+            <div class="mini-name">${profile.nickname}</div>
+            <div class="mini-meta">Grade ${profile.grade.replace('grade', '')}</div>
+          </div>
+          <div class="mini-stars">⭐ ${calculatedStars}</div>
+        </div>
+        <div class="mini-words-learned">
+          <div class="mini-label">
+            <span class="en-text">Words Learned:</span>
+            <span class="kh-text">ពាក្យរៀនរួច៖</span>
+          </div>
+          <div class="mini-value">${profile.learnedWords.length}</div>
+        </div>
+      `;
+      updateGardeningWidget(calculatedStars);
+    } else {
+      const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+      sidebar.innerHTML = `
+        <div class="profile-empty-state">
+          <p class="en-text">No active profile. Create one to collect stars!</p>
+          <p class="kh-text">មិនទាន់មានគណនីសកម្ម។ បង្កើតគណនីដើម្បីប្រមូលផ្កាយ!</p>
+          <a href="${baseUrl}profile" class="btn btn-secondary" style="margin-top: 10px; width: 100%; justify-content: center; text-align: center;">
+            <span class="en-text">Join Academy 🚀</span>
+            <span class="kh-text">ចុះឈ្មោះរៀន 🚀</span>
+          </a>
+        </div>
+      `;
+      updateGardeningWidget(0);
+    }
+  }
+
+  function updateGardeningWidget(stars: number) {
+    const stageEmojiEl = document.getElementById('plant-growth-stage');
+    const starsCountEl = document.getElementById('growth-stars-count');
+    const starsCountKhEl = document.getElementById('growth-stars-count-kh');
+    const stageLabelEl = document.getElementById('growth-stage-label');
+    const progressBarEl = document.getElementById('plant-growth-bar');
+    
+    if (!stageEmojiEl || !starsCountEl || !stageLabelEl || !progressBarEl) return;
+    
+    starsCountEl.innerText = stars.toString();
+    if (starsCountKhEl) starsCountKhEl.innerText = stars.toString();
+    
+    let emoji = '🌱';
+    let labelEn = 'Sprout Stage';
+    let labelKh = 'ដំណាក់កាលកូនពន្លក';
+    let percent = 0;
+    
+    if (stars < 10) {
+      emoji = '🌱';
+      labelEn = 'Sprout Stage';
+      labelKh = 'ដំណាក់កាលកូនពន្លក';
+      percent = Math.min(100, Math.max(10, (stars / 10) * 100));
+    } else if (stars < 25) {
+      emoji = '🌿';
+      labelEn = 'Seedling Stage';
+      labelKh = 'ដំណាក់កាលដើមខ្ចី';
+      percent = Math.min(100, Math.max(10, ((stars - 10) / 15) * 100));
+    } else if (stars < 50) {
+      emoji = '🌿🌸';
+      labelEn = 'Budding Stage';
+      labelKh = 'ដំណាក់កាលចេញផ្កា';
+      percent = Math.min(100, Math.max(10, ((stars - 25) / 25) * 100));
+    } else {
+      emoji = '💐✨';
+      labelEn = 'Full Bloom Stage!';
+      labelKh = 'ដំណាក់កាលរីកស្គុសស្គាយ!';
+      percent = 100;
+    }
+    
+    stageEmojiEl.innerText = emoji;
+    stageLabelEl.innerHTML = `
+      <span class="en-text">${labelEn}</span>
+      <span class="kh-text">${labelKh}</span>
+    `;
+    progressBarEl.style.width = `${percent}%`;
+  }
+
+  // Bind initPage
+  if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', initPage);
+    if (document.readyState !== 'loading') {
+      initPage();
+    }
+    
+    window.addEventListener('profileChanged', () => {
+      updateMiniProfile();
+      renderCards(); // Refresh cards to show learned markers
+    });
+  }
+</script>
+
+<style>
+  /* ==========================================================================
+     Cambodian Cultural Theme Variables Local Override
+     ========================================================================== */
+  :global(body.theme-green) {
+    --color-primary: #EA580C;   /* Monk Orange */
+    --color-secondary: #1D4ED8; /* Cobalt Blue */
+    --color-success: #10B981;   /* Leaf Green */
+    --color-accent: #3D5A80;    /* Cobalt Muted Accent */
+    --color-warning: #D97706;   /* Rich Amber for Alerts */
+  }
+
+  .phonics-header {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .phonics-title {
+    font-size: 2.6rem;
+    margin-bottom: 8px;
+    color: #1a202c;
+  }
+
+  .phonics-subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.15rem;
+    font-weight: 600;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Two-column layout */
+  .phonics-main-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  @media (max-width: 1024px) {
+    .phonics-main-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Category selectors */
+  .category-tabs-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .category-tab {
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 10px 16px;
+    border: 2px solid #000000;
+    border-radius: var(--radius-md);
+    background: #ffffff;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 #000000;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .category-tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 #000000;
+    background: #f8fafc;
+  }
+
+  .category-tab:active {
+    transform: translateY(0);
+    box-shadow: 1px 1px 0 #000000;
+  }
+
+  .category-tab.active {
+    background: var(--color-primary);
+    color: #ffffff;
+    border-color: #000000;
+    box-shadow: 2px 2px 0 #000000;
+  }
+
+  /* Search & Stats styles */
+  .search-stats-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-items: center;
+  }
+
+  @media (max-width: 640px) {
+    .search-stats-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .search-box-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 2px solid #000000;
+    box-shadow: 2px 2px 0 #000000;
+  }
+
+  .search-icon {
+    font-size: 1.2rem;
+  }
+
+  #phonics-search-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .stats-box {
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: 2px solid #000000;
+    border-radius: var(--radius-md);
+    background: #f8fafc;
+    box-shadow: 2px 2px 0 #000000;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  /* Phonics cards grid */
+  .phonics-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  /* Phonics Card layout */
+  .phonics-card {
+    background: #ffffff;
+    border: 3px solid #000000 !important;
+    border-radius: var(--radius-md);
+    padding: 18px;
+    box-shadow: 4px 4px 0 #000000 !important;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  .phonics-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 6px 6px 0 #000000 !important;
+  }
+
+  .phonics-card.learned {
+    background: #f0fdf4;
+    border-color: var(--color-success) !important;
+    box-shadow: 4px 4px 0 var(--color-success) !important;
+  }
+
+  .card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .card-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .badge {
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1.5px solid #000000;
+    width: fit-content;
+  }
+
+  .badge-category {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .badge-type {
+    background: #e0f2fe;
+    color: #0369a1;
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 6px;
+  }
+
+  .action-btn {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #000000;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    box-shadow: 1px 1px 0 #000000;
+    transition: all 0.15s ease;
+  }
+
+  .action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 2px 2px 0 #000000;
+    background: #f1f5f9;
+  }
+
+  .action-btn:active {
+    transform: translateY(0);
+    box-shadow: 0px 0px 0 #000000;
+  }
+
+  .action-btn.recording {
+    background: #ef4444 !important;
+    color: #ffffff !important;
+    animation: recordingPulse 1.2s infinite alternate;
+  }
+
+  @keyframes recordingPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0px rgba(239, 68, 68, 0.4); }
+    100% { transform: scale(1.1); box-shadow: 0 0 10px 4px rgba(239, 68, 68, 0.6); }
+  }
+
+  .action-btn.learn-btn.learned {
+    background: #f59e0b;
+    color: #ffffff;
+    border-color: #d97706;
+  }
+
+  .word-flex-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .card-emoji {
+    font-size: 2.2rem;
+  }
+
+  .word-text-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-word {
+    font-size: 1.6rem;
+    font-family: var(--font-display);
+    font-weight: 900;
+    margin: 0;
+    color: #1a202c;
+  }
+
+  .card-ipa {
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-family: monospace;
+  }
+
+  .card-ipa::before {
+    content: '[';
+  }
+
+  .card-ipa::after {
+    content: ']';
+  }
+
+  .card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1.5px dashed #e2e8f0;
+    padding-top: 10px;
+  }
+
+  .detail-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .meaning-text {
+    font-size: 0.9rem;
+    margin: 0;
+    font-weight: 600;
+    color: #2d3748;
+  }
+
+  .example-text {
+    font-size: 0.85rem;
+    margin: 0;
+    font-style: italic;
+    font-weight: 600;
+    color: #4a5568;
+  }
+
+  /* Micro feedback messages */
+  .pronounce-feedback {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f1f5f9;
+    border: 2px solid #000000;
+    border-radius: var(--radius-sm);
+    padding: 6px 12px;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .pronounce-feedback.correct {
+    background: #d1fae5;
+    border-color: var(--color-success);
+    color: #065f46;
+  }
+
+  .pronounce-feedback.incorrect {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #991b1b;
+  }
+
+  /* Empty state card */
+  .empty-state-card {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 2px dashed #a0aec0;
+  }
+
+  /* Pagination styles */
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+
+  .page-btn {
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 8px 14px;
+    border: 2px solid #000000;
+    border-radius: var(--radius-sm);
+    background: #ffffff;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 #000000;
+    transition: all 0.15s ease;
+  }
+
+  .page-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0 #000000;
+    background: #f8fafc;
+  }
+
+  .page-btn.active {
+    background: var(--color-primary);
+    color: #ffffff;
+    box-shadow: 1px 1px 0 #000000;
+    transform: translateY(1px);
+  }
+
+  /* Scoreboard sidebar */
+  .game-scoreboard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .scoreboard-title {
+    font-size: 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 900;
+    margin: 0 0 6px 0;
+    color: #1a202c;
+  }
+
+  .scoreboard-subtitle {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .profile-card-mini {
+    background: #ffffff;
+    border: 3px solid #000000;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    box-shadow: 4px 4px 0 #000000;
+  }
+
+  .mini-profile-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    border-bottom: 2px dashed #cbd5e1;
+    padding-bottom: 12px;
+  }
+
+  .mini-avatar {
+    font-size: 2.2rem;
+  }
+
+  .mini-details {
+    flex-grow: 1;
+  }
+
+  .mini-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-family: var(--font-display);
+    color: #1a202c;
+  }
+
+  .mini-meta {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 700;
+  }
+
+  .mini-stars {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #d97706;
+  }
+
+  .mini-words-learned {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mini-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #475569;
+  }
+
+  .mini-value {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-primary);
+  }
+
+  .profile-empty-state {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .profile-empty-state p {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #475569;
+  }
+
+  /* Gardening Progression widget styles */
+  .gardening-widget {
+    background: #f0fdf4 !important;
+    border: 3px solid #000000 !important;
+    box-shadow: 4px 4px 0 #000000 !important;
+    padding: 20px;
+    border-radius: var(--radius-md);
+  }
+
+  .gardening-title {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+    text-align: center;
+    color: #064e3b;
+    font-family: var(--font-display);
+    font-weight: 900;
+  }
+
+  .gardening-display-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100px;
+    margin-bottom: 12px;
+    border-bottom: 2px dashed #a7f3d0;
+  }
+
+  .plant-pot {
+    font-size: 2.5rem;
+    position: absolute;
+    bottom: 5px;
+    z-index: 1;
+  }
+
+  .plant-stage {
+    font-size: 3rem;
+    position: absolute;
+    bottom: 24px;
+    z-index: 2;
+    animation: growPulse 2s infinite ease-in-out;
+  }
+
+  @keyframes growPulse {
+    0% { transform: scale(0.96) rotate(-2deg); }
+    50% { transform: scale(1.04) rotate(2deg); }
+    100% { transform: scale(0.96) rotate(-2deg); }
+  }
+
+  .gardening-status {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .growth-text {
+    font-size: 0.9rem;
+    margin: 0;
+    color: #064e3b;
+    font-weight: 700;
+  }
+
+  .growth-stage-label {
+    font-size: 0.95rem;
+    margin: 4px 0 0 0;
+    color: var(--color-primary);
+    font-weight: 900;
+    font-family: var(--font-display);
+  }
+
+  .growth-bar-container {
+    height: 12px;
+    background: #e2e8f0;
+    border: 2px solid #000000;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .growth-bar {
+    height: 100%;
+    background: var(--color-success);
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Micro interaction animations */
+  .bouncing {
+    animation: buttonBounce 0.5s ease-out;
+  }
+
+  @keyframes buttonBounce {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.2) translateY(-2px); }
+    60% { transform: scale(0.9) translateY(1px); }
+    100% { transform: scale(1); }
+  }
+</style>

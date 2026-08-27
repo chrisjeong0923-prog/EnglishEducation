@@ -64,5 +64,60 @@
     "content": "Study materials generated from PDF lesson \"Look\". Download the attached PDF to review full reading materials.",
     "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"Look\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
     "pdfUrl": "/lessons/pdf/grade3/look.pdf"
+  },
+  {
+    "id": "in-the-classroom",
+    "grade": 3,
+    "title": "In The Classroom",
+    "titleKh": "នៅក្នុងថ្នាក់រៀន",
+    "description": "Let's explore all the cool things we can find and use in our classroom, from pencils to backpacks!",
+    "descriptionKh": "តោះ រៀនស្វែងយល់ពីរបស់ល្អៗទាំងអស់ ដែលយើងអាចរកឃើញ និងប្រើប្រាស់នៅក្នុងថ្នាក់រៀនរបស់យើង ចាប់ពីខ្មៅដៃរហូតដល់កាបូបស្ពាយ!",
+    "content": "Study materials generated from PDF lesson \"In The Classroom\". Download the attached PDF to review full reading materials.",
+    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"In The Classroom\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
+    "pdfUrl": "/lessons/pdf/grade3/in-the-classroom.pdf"
+  },
+  {
+    "id": "fruit",
+    "grade": 3,
+    "title": "Fruit",
+    "titleKh": "ផ្លែឈើ!",
+    "description": "Let's learn about delicious fruits like apples, bananas, and oranges! We'll practice saying their names and learn how to use them in sentences.",
+    "descriptionKh": "តោះរៀនអំពីផ្លែឈើឆ្ងាញ់ៗដូចជា ផ្លែប៉ោម ផ្លែចេក និងផ្លែក្រូច! យើងនឹងហាត់និយាយឈ្មោះពួកវា និងរៀនពីរបៀបប្រើពួកវាជាប្រយោគ។",
+    "content": "Study materials generated from PDF lesson \"Fruit\". Download the attached PDF to review full reading materials.",
+    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"Fruit\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
+    "pdfUrl": "/lessons/pdf/grade3/fruit.pdf"
+  },
+  {
+    "id": "colors",
+    "grade": 3,
+    "title": "Colors",
+    "titleKh": "ពណ៌",
+    "description": "Let's explore the wonderful world of colors! Learn to identify different hues, from bright red to deep blue, and discover how they make our world vibrant and fun!",
+    "descriptionKh": "តោះរៀនស្គាល់ពិភពពណ៌ដ៏អស្ចារ្យ! រៀនសម្គាល់ពណ៌ផ្សេងៗ ពីពណ៌ក្រហមភ្លឺដល់ពណ៌ខៀវចាស់ ហើយស្វែងយល់ពីរបៀបដែលពណ៌ធ្វើឲ្យពិភពលោករបស់យើងស្រស់ស្អាត និងរីករាយ!",
+    "content": "Study materials generated from PDF lesson \"Colors\". Download the attached PDF to review full reading materials.",
+    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"Colors\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
+    "pdfUrl": "/lessons/pdf/grade3/colors.pdf"
+  },
+  {
+    "id": "animals",
+    "grade": 3,
+    "title": "Animals",
+    "titleKh": "សត្វ",
+    "description": "Let's learn about different animals like pigs, horses, and cows! We'll see where they live and what they do.",
+    "descriptionKh": "តោះរៀនអំពីសត្វផ្សេងៗ ដូចជា ជ្រូក សេះ និង គោ! យើងនឹងឃើញថាពួកវាស់នៅទីណា និងធ្វើអ្វីខ្លះ។",
+    "content": "Study materials generated from PDF lesson \"Animals\". Download the attached PDF to review full reading materials.",
+    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"Animals\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
+    "pdfUrl": "/lessons/pdf/grade3/animals.pdf"
+  },
+  {
+    "id": "what-do-you-like",
+    "grade": 3,
+    "title": "What Do You Like",
+    "titleKh": "តើអ្នកចូលចិត្តអ្វី?",
+    "description": "Let's learn to talk about our favorite activities! Discover fun things like running, reading, and dancing, and share what you enjoy doing!",
+    "descriptionKh": "តោះរៀននិយាយអំពីសកម្មភាពដែលយើងចូលចិត្ត! ស្វែងយល់ពីសកម្មភាពសប្បាយៗ ដូចជា រត់ អាន និងរាំ ហើយចែករំលែកនូវអ្វីដែលអ្នករីករាយធ្វើ!",
+    "content": "Study materials generated from PDF lesson \"What Do You Like\". Download the attached PDF to review full reading materials.",
+    "contentKh": "ឯកសារសិក្សាត្រូវបានបង្កើតចេញពីមេរៀន PDF \"What Do You Like\"។ សូមទាញយកឯកសារ PDF ដែលភ្ជាប់មកជាមួយដើម្បីពិនិត្យឡើងវិញនូវខ្លឹមសារពេញលេញ។",
+    "pdfUrl": "/lessons/pdf/grade3/what-do-you-like.pdf"
   }
 ]
