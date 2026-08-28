@@ -1141,5 +1141,995 @@
     "correctAnswer": 1,
     "explanation": "The sentence expresses a general liking for the activity of using one's voice to make music. 'Singing' is the correct word.",
     "explanationKh": "ប្រយោគនេះបង្ហាញពីការចូលចិត្តទូទៅចំពោះសកម្មភាពនៃការប្រើប្រាស់សំឡេងដើម្បីបង្កើតតន្ត្រី។ 'Singing' គឺជាពាក្យត្រឹមត្រូវ។"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf",
+    "questionText": "Complete the sentence: \"I see _____ coral.\"",
+    "questionTextKh": "បំពេញប្រយោគ: \"ខ្ញុំឃើញផ្កាថ្ម_____។\"",
+    "options": [
+      "green",
+      "dog",
+      "shark",
+      "fish"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "The lesson shows a green coral. The word 'green' is a color adjective used to describe the coral.",
+    "explanationKh": "មេរៀនបង្ហាញផ្កាថ្មពណ៌បៃតង។ ពាក្យ 'green' គឺជាគុណនាមពណ៌ដែលប្រើដើម្បីពិពណ៌នាអំពីផ្កាថ្ម។"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf",
+    "questionText": "Complete the sentence: \"I see the _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ: \"ខ្ញុំឃើញ_____។\"",
+    "options": [
+      "sea",
+      "dog",
+      "rainbow",
+      "coral"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "\"Sea\" is a body of saltwater, introduced in the lesson's vocabulary. The image on page 2 clearly depicts the sea.",
+    "explanationKh": "\"សមុទ្រ\" គឺជាតួនៃទឹកប្រៃ ដែលបានណែនាំនៅក្នុងវាក្យសព្ទនៃមេរៀន។ រូបភាពនៅលើទំព័រទី 2 បង្ហាញយ៉ាងច្បាស់ពីសមុទ្រ។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf",
+    "questionText": "Complete the sentence: \"I see two red _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ: \"ខ្ញុំឃើញឆ្កែក្រហមពីរ_____។\"",
+    "options": [
+      "dog",
+      "dogs",
+      "doggy",
+      "dog's"
+    ],
+    "correctAnswer": [
+      1
+    ],
+    "explanation": "When you have a number like \"two\" (more than one), the noun that follows must be in its plural form, which is \"dogs\". The lesson also explains \"no 'a' when there is more than 1\" and shows plural nouns.",
+    "explanationKh": "នៅពេលអ្នកមានលេខដូចជា \"two\" (ច្រើនជាងមួយ) នាមដែលនៅពីក្រោយត្រូវតែជាទម្រង់ពហុវចនៈ គឺ \"dogs\"។ មេរៀនក៏បានពន្យល់ថា \"no 'a' when there is more than 1\" និងបង្ហាញពីនាមពហុវចនៈផងដែរ។"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf",
+    "questionText": "Complete the sentence: \"I see a scary _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ: \"ខ្ញុំឃើញ_____គួរឱ្យខ្លាច។\"",
+    "options": [
+      "shark",
+      "rainbow",
+      "fish",
+      "dog"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "The lesson uses the adjective \"scary\" to describe a shark, as seen in the sentence \"I see a scary blue shark!\" on page 3 and the 'Scary!!' monster image on page 2.",
+    "explanationKh": "មេរៀនប្រើគុណនាម \"scary\" ដើម្បីពិពណ៌នាអំពីត្រីឆ្លាម ដូចដែលបានឃើញក្នុងប្រយោគ \"I see a scary blue shark!\" នៅទំព័រទី 3 និងរូបភាពបិសាច 'Scary!!' នៅទំព័រទី 2។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/what-i-see.pdf",
+    "questionText": "Complete the sentence: \"I see _____ rainbow.\"",
+    "questionTextKh": "បំពេញប្រយោគ: \"ខ្ញុំឃើញ _____ឥន្ធនូ។\"",
+    "options": [
+      "a",
+      "two",
+      "many",
+      "some"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "Since \"rainbow\" is a singular count noun, we use the indefinite article \"a\" before it to indicate one. The lesson emphasizes \"I see a ______ one thing.\"",
+    "explanationKh": "ដោយសារតែ \"rainbow\" គឺជាគំនូសដែលអាចរាប់បានតែមួយ យើងប្រើអត្ថបទមិនកំណត់ \"a\" នៅពីមុខវាដើម្បីបង្ហាញពីមួយ។ មេរៀនបានសង្កត់ធ្ងន់ថា \"I see a ______ one thing.\""
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"Where _____ the lamp?\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"តើអំពូលភ្លើង _____ នៅឯណា?\"",
+    "options": [
+      "is",
+      "are",
+      "am",
+      "be"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "\"Is\" is used with singular nouns like \"lamp.\"",
+    "explanationKh": "\"Is\" ត្រូវបានប្រើជាមួយនាមឯកវចនៈដូចជា \"lamp\" (អំពូលភ្លើង)។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"I cannot find _____ phone. Is it on the sofa?\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ខ្ញុំរកទូរស័ព្ទ _____ មិនឃើញ។ តើវាស្ថិតនៅលើសាឡុងទេ?\"",
+    "options": [
+      "my",
+      "you",
+      "mine",
+      "I"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "\"My\" is a possessive adjective used before a noun to show ownership, referring to the speaker.",
+    "explanationKh": "\"My\" គឺជាគុណនាមកម្មសិទ្ធិដែលប្រើនៅពីមុខនាមដើម្បីបង្ហាញពីភាពជាម្ចាស់ ដែលសំដៅលើអ្នកនិយាយ។"
+  },
+  {
+    "grade": 4,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"The _____ is on top of the neck.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"_____ នៅពីលើកញ្ចឹងក។\"",
+    "options": [
+      "head",
+      "lamp",
+      "car",
+      "phone"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "The \"head\" is the part of the body that is typically on top of the neck.",
+    "explanationKh": "\"Head\" (ក្បាល) គឺជាផ្នែកនៃរាងកាយដែលជាធម្មតានៅពីលើកញ្ចឹងក។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"I am _____ the car.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ខ្ញុំស្ថិតនៅ _____ រថយន្ត។\"",
+    "options": [
+      "on",
+      "in",
+      "above",
+      "next"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "The lesson shows \"I am on the car\" when someone is standing on it. \"On\" indicates a position directly above and in contact with.",
+    "explanationKh": "មេរៀនបង្ហាញថា \"I am on the car\" នៅពេលអ្នកណាម្នាក់ឈរនៅលើវា។ \"On\" (នៅលើ) បង្ហាញពីទីតាំងនៅពីលើ និងប៉ះជាមួយផ្ទៃ។"
+  },
+  {
+    "grade": 4,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade4/where-is-it.pdf",
+    "questionText": "Complete the sentence: \"Your _____ are on the table.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"_____ របស់អ្នកនៅលើតុ។\"",
+    "options": [
+      "key",
+      "car",
+      "glasses",
+      "phone"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "\"Are\" is used with plural nouns like \"glasses\".",
+    "explanationKh": "\"Are\" (គឺ) ត្រូវបានប្រើជាមួយនាមពហុវចនៈដូចជា \"glasses\" (វ៉ែនតា)។"
+  },
+  {
+    "grade": 5,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "The sky is clear and bright, so it is a _____ day.",
+    "questionTextKh": "មេឃស្រឡះ និងភ្លឺច្បាស់ ដូច្នេះវាជាថ្ងៃ _____។",
+    "options": [
+      "sun",
+      "sunny",
+      "rainy",
+      "snowy"
+    ],
+    "correctAnswer": [
+      1
+    ],
+    "explanation": "\"Sunny\" is the adjective used to describe a day with a lot of sun. \"Sun\" is a noun.",
+    "explanationKh": "«Sunny» គឺជាគុណនាមដែលប្រើសម្រាប់ពិពណ៌នាថ្ងៃដែលមានពន្លឺថ្ងៃច្រើន។ «Sun» គឺជា​នាម​។"
+  },
+  {
+    "grade": 5,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "When the _____ blows strongly, the trees move.",
+    "questionTextKh": "នៅពេលដែល _____ បក់ខ្លាំង ដើមឈើក៏រញ្ជួយ។",
+    "options": [
+      "sun",
+      "cloud",
+      "wind",
+      "rain"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "\"Wind\" is the noun for the moving air that causes trees to move.",
+    "explanationKh": "«Wind» គឺជា​នាម​សម្រាប់​ខ្យល់​ដែល​បក់​ធ្វើ​ឱ្យ​ដើមឈើ​រញ្ជួយ។"
+  },
+  {
+    "grade": 5,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "Don't forget your umbrella because it might _____ later.",
+    "questionTextKh": "កុំភ្លេចឆ័ត្ររបស់អ្នក ព្រោះប្រហែលជា _____ នៅពេលក្រោយ។",
+    "options": [
+      "sun",
+      "wind",
+      "rain",
+      "snow"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "\"Rain\" is the correct word here, referring to precipitation. The lesson lists 'rain' as a noun for this weather.",
+    "explanationKh": "«Rain» គឺជា​ពាក្យ​ត្រឹមត្រូវ​នៅទីនេះ​ដែល​សំដៅ​លើ​ទឹកភ្លៀង។ មេរៀន​រាយ​បញ្ជី «rain» ជា​នាម​សម្រាប់​អាកាសធាតុ​នេះ។"
+  },
+  {
+    "grade": 5,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "During winter, we sometimes see white _____ falling from the sky.",
+    "questionTextKh": "ក្នុងរដូវរងា យើងជួនកាលឃើញ _____ ពណ៌សធ្លាក់ពីលើមេឃ។",
+    "options": [
+      "clouds",
+      "wind",
+      "rain",
+      "snow"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "\"Snow\" is the white frozen water that falls from the sky in winter.",
+    "explanationKh": "«Snow» គឺជាទឹកកកពណ៌សដែលធ្លាក់ពីលើមេឃក្នុងរដូវរងា។"
+  },
+  {
+    "grade": 5,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade5/how-is-the-weather.pdf",
+    "questionText": "When it's cloudy, there are many _____ in the sky.",
+    "questionTextKh": "នៅពេលមេឃស្រទំ មាន _____ ច្រើននៅលើមេឃ។",
+    "options": [
+      "cloud",
+      "clouds",
+      "cloudy",
+      "clouded"
+    ],
+    "correctAnswer": [
+      1
+    ],
+    "explanation": "When referring to multiple instances of the weather phenomenon, we use the plural form \"clouds\". The lesson indicates that 'clouds' (plural) is always used.",
+    "explanationKh": "នៅពេលសំដៅលើបាតុភូតអាកាសធាតុច្រើន យើងប្រើទម្រង់ពហុវចនៈ «clouds»។ មេរៀន​បាន​បង្ហាញ​ថា «clouds» (ពហុវចនៈ) ត្រូវ​បាន​ប្រើ​ជានិច្ច។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Complete the sentence: \"I have a big _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ខ្ញុំមាន _____ ធំមួយ។\"",
+    "options": [
+      "dog",
+      "cat",
+      "bird",
+      "fish"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "The word \"dog\" is an animal shown in the lesson. The sentence \"I have a dog\" is also present.",
+    "explanationKh": "ពាក្យ \"dog\" គឺជាឈ្មោះសត្វដែលបានបង្ហាញនៅក្នុងមេរៀន។ ប្រយោគ \"I have a dog\" ក៏មាននៅក្នុងមេរៀនដែរ។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Complete the sentence: \"She _____ a girl.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"នាង _____ ជាក្មេងស្រី។\"",
+    "options": [
+      "am",
+      "is",
+      "have",
+      "are"
+    ],
+    "correctAnswer": [
+      1
+    ],
+    "explanation": "For a singular subject like \"She\", the verb \"to be\" in the present simple is \"is\". The lesson states \"She is a girl.\"",
+    "explanationKh": "សម្រាប់ប្រធានឯកវចនៈដូចជា \"She\" កិរិយាស័ព្ទ \"to be\" ក្នុងបច្ចុប្បន្នកាលគឺ \"is\"។ មេរៀនមានប្រយោគ \"She is a girl\"។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Complete the sentence: \"I _____ a dog.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ខ្ញុំ _____ ឆ្កែមួយក្បាល។\"",
+    "options": [
+      "am",
+      "is",
+      "have",
+      "are"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "The verb \"have\" is used to show possession, as in \"I have a dog\" from the lesson.",
+    "explanationKh": "កិរិយាស័ព្ទ \"have\" ត្រូវបានប្រើដើម្បីបង្ហាញពីកម្មសិទ្ធិ ដូចជាប្រយោគ \"I have a dog\" ពីមេរៀន។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Complete the sentence: \"A young female person is a _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"មនុស្សស្រីវ័យក្មេងគឺជា _____។\"",
+    "options": [
+      "boy",
+      "man",
+      "girl",
+      "woman"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "The word \"girl\" refers to a young female person, as taught in the lesson.",
+    "explanationKh": "ពាក្យ \"girl\" សំដៅលើមនុស្សស្រីវ័យក្មេង ដូចដែលបានបង្រៀននៅក្នុងមេរៀន។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/hello.pdf",
+    "questionText": "Complete the sentence: \"When you meet someone, you say _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"នៅពេលអ្នកជួបនរណាម្នាក់ អ្នកនិយាយ _____។\"",
+    "options": [
+      "Goodbye",
+      "Hello",
+      "Thank you",
+      "Please"
+    ],
+    "correctAnswer": [
+      1
+    ],
+    "explanation": "\"Hello\" is a common greeting used when meeting someone, as introduced at the beginning of the lesson.",
+    "explanationKh": "\"Hello\" គឺជាពាក្យស្វាគមន៍ទូទៅដែលប្រើនៅពេលជួបនរណាម្នាក់ ដូចដែលបានណែនាំនៅដើមមេរៀន។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the question: \"_____ are you?\"",
+    "questionTextKh": "បំពេញប្រយោគសំណួរ: \"_____ are you?\"",
+    "options": [
+      "What",
+      "Who",
+      "How",
+      "Where"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "The correct word to complete the question 'How are you?' is 'How'. This question is used to ask about someone's well-being.",
+    "explanationKh": "ពាក្យត្រឹមត្រូវដើម្បីបំពេញសំណួរ 'How are you?' គឺ 'How'។ សំណួរនេះត្រូវបានប្រើដើម្បីសួរអំពីសុខភាព ឬអារម្មណ៍របស់នរណាម្នាក់។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the sentence: \"I am good, _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ: \"I am good, _____។\"",
+    "options": [
+      "also",
+      "to",
+      "two",
+      "too"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "The word 'too' means 'also' or 'in addition'. It is used here to indicate that the speaker is also good, similar to another person.",
+    "explanationKh": "ពាក្យ 'too' មានន័យថា 'ផងដែរ' ឬ 'បន្ថែម'។ វាត្រូវបានប្រើនៅទីនេះដើម្បីបង្ហាញថាអ្នកនិយាយក៏ល្អផងដែរ ស្រដៀងនឹងអ្នកផ្សេង។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the sentence: \"After a long day, I feel very _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ: \"បន្ទាប់ពីថ្ងៃដ៏វែងឆ្ងាយ ខ្ញុំមានអារម្មណ៍ _____ ណាស់។\"",
+    "options": [
+      "good",
+      "mad",
+      "tired",
+      "sick"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "When you have a long day, you usually feel 'tired', meaning you want to rest or sleep.",
+    "explanationKh": "នៅពេលអ្នកមានថ្ងៃដ៏វែងឆ្ងាយ ជាធម្មតាអ្នកមានអារម្មណ៍ 'tired' (នឿយហត់) ដែលមានន័យថាអ្នកចង់សម្រាក ឬគេង។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the sentence: \"When I have a cold, I feel _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ: \"នៅពេលខ្ញុំផ្ដាសាយ ខ្ញុំមានអារម្មណ៍ _____។\"",
+    "options": [
+      "good",
+      "mad",
+      "sick",
+      "sleepy"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "A cold is an illness, so if you have a cold, you usually feel 'sick'.",
+    "explanationKh": "ផ្ដាសាយគឺជាជំងឺ ដូច្នេះប្រសិនបើអ្នកផ្ដាសាយ ជាធម្មតាអ្នកមានអារម្មណ៍ 'sick' (ឈឺ)។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/how-are-you.pdf",
+    "questionText": "Complete the sentence: \"When someone is very angry, they feel _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ: \"នៅពេលនរណាម្នាក់ខឹងខ្លាំង ពួកគេមានអារម្មណ៍ _____។\"",
+    "options": [
+      "happy",
+      "sad",
+      "mad",
+      "calm"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "The word 'mad' in this context means very angry. When someone is angry, they feel 'mad'.",
+    "explanationKh": "ពាក្យ 'mad' ក្នុងបរិបទនេះមានន័យថា ខឹងខ្លាំងណាស់។ នៅពេលនរណាម្នាក់ខឹង ពួកគេមានអារម្មណ៍ 'mad' (ខឹង)។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
+    "questionText": "____! I see a cat.",
+    "questionTextKh": "____! ខ្ញុំឃើញឆ្មាមួយក្បាល។",
+    "options": [
+      "Look",
+      "See",
+      "Find",
+      "Hear"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "\"Look!\" is used to draw attention to something being seen.",
+    "explanationKh": "\"Look!\" ត្រូវបានប្រើដើម្បីទាញការចាប់អារម្មណ៍ទៅលើអ្វីមួយដែលកំពុងត្រូវបានគេឃើញ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
+    "questionText": "I see a _____ cat.",
+    "questionTextKh": "ខ្ញុំឃើញឆ្មា _____ មួយក្បាល។",
+    "options": [
+      "small",
+      "tall",
+      "blue",
+      "run"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "The lesson introduces \"small\" to describe animals.",
+    "explanationKh": "មេរៀននេះណែនាំពាក្យ \"small\" ដើម្បីពិពណ៌នាអំពីសត្វ។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
+    "questionText": "I see _____ big dog.",
+    "questionTextKh": "ខ្ញុំឃើញឆ្កែធំ _____ មួយក្បាល។",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "some"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "\"A\" is used before singular countable nouns that start with a consonant sound. \"Big\" starts with a consonant sound.",
+    "explanationKh": "\"A\" ត្រូវបានប្រើមុននាមរាប់បានឯកវចនៈដែលចាប់ផ្តើមដោយព្យញ្ជនៈ។ \"Big\" ចាប់ផ្តើមដោយព្យញ្ជនៈ។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
+    "questionText": "_____ see a dog.",
+    "questionTextKh": "_____ ឃើញឆ្កែមួយក្បាល។",
+    "options": [
+      "I",
+      "He",
+      "She",
+      "It"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "\"I\" is the subject pronoun used in the lesson to indicate the person performing the action of seeing.",
+    "explanationKh": "\"I\" គឺជាសព្វនាមប្រធានដែលប្រើក្នុងមេរៀនដើម្បីបង្ហាញពីអ្នកដែលធ្វើសកម្មភាពមើលឃើញ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/look.pdf",
+    "questionText": "I see a _____.",
+    "questionTextKh": "ខ្ញុំឃើញ _____ មួយក្បាល។",
+    "options": [
+      "dog",
+      "big",
+      "small",
+      "look"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "\"Dog\" is an animal shown in the lesson that can be seen.",
+    "explanationKh": "\"Dog\" គឺជាសត្វមួយក្នុងចំណោមសត្វដែលបានបង្ហាញក្នុងមេរៀន ដែលអាចត្រូវបានគេឃើញ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/in-the-classroom.pdf",
+    "questionText": "I read a _____.",
+    "questionTextKh": "ខ្ញុំអាន _____។",
+    "options": [
+      "pencil",
+      "pen",
+      "book",
+      "backpack"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "Books are for reading.",
+    "explanationKh": "សៀវភៅគឺសម្រាប់អាន។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/in-the-classroom.pdf",
+    "questionText": "I use a _____ to write.",
+    "questionTextKh": "ខ្ញុំប្រើ _____ សម្រាប់សរសេរ។",
+    "options": [
+      "book",
+      "backpack",
+      "pencil",
+      "desk"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "You use a pencil to write.",
+    "explanationKh": "អ្នកប្រើខ្មៅដៃដើម្បីសរសេរ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/in-the-classroom.pdf",
+    "questionText": "I carry my books in a _____.",
+    "questionTextKh": "ខ្ញុំដាក់សៀវភៅក្នុង _____។",
+    "options": [
+      "desk",
+      "backpack",
+      "chair",
+      "pencil"
+    ],
+    "correctAnswer": [
+      1
+    ],
+    "explanation": "A backpack is used to carry books.",
+    "explanationKh": "កាបូបស្ពាយត្រូវបានប្រើដើម្បីដាក់សៀវភៅ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/in-the-classroom.pdf",
+    "questionText": "Students learn in a _____.",
+    "questionTextKh": "សិស្សរៀននៅ _____។",
+    "options": [
+      "house",
+      "park",
+      "classroom",
+      "store"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "A classroom is where students learn.",
+    "explanationKh": "ថ្នាក់រៀនគឺជាកន្លែងដែលសិស្សរៀន។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/in-the-classroom.pdf",
+    "questionText": "I have _____ pen.",
+    "questionTextKh": "ខ្ញុំមាន _____ ប៊ិច។",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "some"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "Use 'a' before singular nouns that start with a consonant sound.",
+    "explanationKh": "ប្រើ 'a' មុននាមឯកវចនៈដែលចាប់ផ្តើមដោយសំឡេងព្យញ្ជនៈ។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/fruit.pdf",
+    "questionText": "Complete the sentence: 'I eat a yellow _____.'",
+    "questionTextKh": "បំពេញប្រយោគ៖ 'ខ្ញុំញ៉ាំ _____ ពណ៌លឿង។'",
+    "options": [
+      "apple",
+      "orange",
+      "banana",
+      "grape"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "'Banana' starts with a consonant sound, so we use 'a' before it. 'Apple' and 'orange' start with vowel sounds, requiring 'an'.",
+    "explanationKh": "'Banana' ចាប់ផ្តើមដោយព្យញ្ជនៈ ដូច្នេះយើងប្រើ 'a' នៅពីមុខវា។ 'Apple' និង 'orange' ចាប់ផ្តើមដោយស្រៈ ដូច្នេះត្រូវប្រើ 'an'។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/fruit.pdf",
+    "questionText": "Complete the sentence: 'He wants an _____.'",
+    "questionTextKh": "បំពេញប្រយោគ៖ 'គាត់ចង់បាន _____។'",
+    "options": [
+      "lemon",
+      "banana",
+      "strawberry",
+      "apple"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "'Apple' starts with a vowel sound, so we use 'an' before it. 'Lemon', 'banana', and 'strawberry' start with consonant sounds, requiring 'a'.",
+    "explanationKh": "'Apple' ចាប់ផ្តើមដោយស្រៈ ដូច្នេះយើងប្រើ 'an' នៅពីមុខវា។ 'Lemon', 'banana' និង 'strawberry' ចាប់ផ្តើមដោយព្យញ្ជនៈ ដូច្នេះត្រូវប្រើ 'a'។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/fruit.pdf",
+    "questionText": "Complete the sentence: 'My favorite red fruit is a _____.'",
+    "questionTextKh": "បំពេញប្រយោគ៖ 'ផ្លែឈើពណ៌ក្រហមដែលខ្ញុំចូលចិត្តគឺ _____។'",
+    "options": [
+      "lemon",
+      "orange",
+      "apple",
+      "grape"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "The apple in the lesson is shown as red, making it the correct choice for a red fruit among the options.",
+    "explanationKh": "ផ្លែប៉ោមនៅក្នុងមេរៀនត្រូវបានបង្ហាញជាពណ៌ក្រហម ដូច្នេះវាជាជម្រើសត្រឹមត្រូវសម្រាប់ផ្លែឈើពណ៌ក្រហមក្នុងចំណោមជម្រើស។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/fruit.pdf",
+    "questionText": "Complete the sentence: 'They like sweet _____.'",
+    "questionTextKh": "បំពេញប្រយោគ៖ 'ពួកគេចូលចិត្ត _____ ផ្អែម។'",
+    "options": [
+      "mango",
+      "strawberry",
+      "lemons",
+      "mangoes"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "When expressing a general preference for multiple items or a type of fruit, we typically use the plural form. 'Mangoes' is the plural form of 'mango'.",
+    "explanationKh": "នៅពេលបង្ហាញចំណូលចិត្តទូទៅសម្រាប់វត្ថុច្រើន ឬប្រភេទផ្លែឈើ យើងជាធម្មតាប្រើទម្រង់ពហុវចនៈ។ 'Mangoes' គឺជាទម្រង់ពហុវចនៈរបស់ 'mango'។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/fruit.pdf",
+    "questionText": "Complete the sentence: 'I picked a purple _____ from the vine.'",
+    "questionTextKh": "បំពេញប្រយោគ៖ 'ខ្ញុំបានបេះ _____ ពណ៌ស្វាយពីដើមទំពាំងបាយជូរ។'",
+    "options": [
+      "orange",
+      "lemon",
+      "grape",
+      "banana"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "Grapes are commonly purple and grow on vines, as depicted in the lesson.",
+    "explanationKh": "ទំពាំងបាយជូរជាទូទៅមានពណ៌ស្វាយ ហើយដុះនៅលើដើមទំពាំងបាយជូរ ដូចដែលបានបង្ហាញក្នុងមេរៀន។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/colors.pdf",
+    "questionText": "Complete the sentence: \"Grapes are often _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ផ្លែទំពាំងបាយជូរ ជាទូទៅមានពណ៌ _____។\"",
+    "options": [
+      "red",
+      "blue",
+      "purple",
+      "yellow"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "Grapes are commonly purple.",
+    "explanationKh": "ផ្លែទំពាំងបាយជូរជាទូទៅមានពណ៌ស្វាយ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/colors.pdf",
+    "questionText": "Complete the sentence: \"A bright sun is typically _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ព្រះអាទិត្យភ្លឺថ្លា ជាទូទៅមានពណ៌ _____។\"",
+    "options": [
+      "green",
+      "blue",
+      "yellow",
+      "red"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "The sun is commonly depicted as yellow.",
+    "explanationKh": "ព្រះអាទិត្យជាទូទៅត្រូវបានបង្ហាញជាពណ៌លឿង។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/colors.pdf",
+    "questionText": "Complete the sentence: \"When plants grow, new leaves are often _____ green.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"នៅពេលរុក្ខជាតិលូតលាស់ ស្លឹកថ្មីៗតែងតែមានពណ៌បៃតង _____។\"",
+    "options": [
+      "dark",
+      "light",
+      "deep",
+      "bright"
+    ],
+    "correctAnswer": [
+      1
+    ],
+    "explanation": "New leaves are often a lighter shade of green.",
+    "explanationKh": "ស្លឹកថ្មីៗតែងតែមានពណ៌បៃតងខ្ចី។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/colors.pdf",
+    "questionText": "Complete the sentence: \"The color indigo is a type of _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ពណ៌ឥន្ទនូ គឺជាប្រភេទពណ៌ _____។\"",
+    "options": [
+      "red",
+      "green",
+      "blue",
+      "yellow"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "Indigo is a color on the spectrum between blue and violet, often described as dark blue.",
+    "explanationKh": "ពណ៌ឥន្ទនូគឺជាពណ៌មួយក្នុងចំណោមពណ៌ដែលស្ថិតនៅចន្លោះពណ៌ខៀវនិងពណ៌ស្វាយ ជារឿយៗត្រូវបានគេពិពណ៌នាថាជាពណ៌ខៀវចាស់។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/colors.pdf",
+    "questionText": "Complete the sentence: \"A stop sign is usually _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ផ្លាកសញ្ញាឈប់ ជាទូទៅមានពណ៌ _____។\"",
+    "options": [
+      "blue",
+      "green",
+      "red",
+      "yellow"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "Stop signs are universally red.",
+    "explanationKh": "ផ្លាកសញ្ញាឈប់ជាសកលមានពណ៌ក្រហម។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/animals.pdf",
+    "questionText": "Complete the sentence: \"I see ____ horse.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ខ្ញុំឃើញ ____ សេះ។\"",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "some"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "\"A\" is used before words that start with a consonant sound. \"Horse\" starts with a consonant sound.",
+    "explanationKh": "\"A\" ត្រូវបានប្រើមុនពាក្យដែលចាប់ផ្តើមដោយសំឡេងព្យញ្ជនៈ។ \"Horse\" ចាប់ផ្តើមដោយសំឡេងព្យញ្ជនៈ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/animals.pdf",
+    "questionText": "Complete the sentence: \"A cat is an _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ឆ្មាគឺជា _____។\"",
+    "options": [
+      "animal",
+      "plant",
+      "food",
+      "car"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "A cat belongs to the category of animals, which is a key vocabulary word from the lesson.",
+    "explanationKh": "ឆ្មាស្ថិតក្នុងចំណាត់ថ្នាក់ជាសត្វ ដែលជាពាក្យវាក្យសព្ទសំខាន់ពីមេរៀន។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/animals.pdf",
+    "questionText": "Complete the sentence: \"Many animals live on a _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"សត្វជាច្រើនរស់នៅលើ _____។\"",
+    "options": [
+      "farm",
+      "house",
+      "city",
+      "tree"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "The lesson introduces the word \"farm\" and states that \"A farm has animals,\" implying that animals live there.",
+    "explanationKh": "មេរៀនបានណែនាំពាក្យ \"កសិដ្ឋាន\" ហើយបានបញ្ជាក់ថា \"កសិដ្ឋានមានសត្វ\" ដែលបង្កប់ន័យថាសត្វរស់នៅទីនោះ។"
+  },
+  {
+    "grade": 3,
+    "type": "vocabulary",
+    "pdfUrl": "/lessons/pdf/grade3/animals.pdf",
+    "questionText": "Complete the sentence: \"I have a pet _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"ខ្ញុំមានសត្វចិញ្ចឹមមួយ _____\",",
+    "options": [
+      "dog",
+      "tree",
+      "river",
+      "mountain"
+    ],
+    "correctAnswer": [
+      0
+    ],
+    "explanation": "A dog is a common pet, and the word \"dog\" is introduced as an animal in the lesson.",
+    "explanationKh": "ឆ្កែគឺជាសត្វចិញ្ចឹមទូទៅ ហើយពាក្យ \"ឆ្កែ\" ត្រូវបានណែនាំជាសត្វនៅក្នុងមេរៀន។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/animals.pdf",
+    "questionText": "Complete the sentence: \"We see many _____.\"",
+    "questionTextKh": "បំពេញប្រយោគ៖ \"យើងឃើញ _____ ជាច្រើន។\"",
+    "options": [
+      "horse",
+      "horses",
+      "a horse",
+      "the horse"
+    ],
+    "correctAnswer": [
+      1
+    ],
+    "explanation": "The word \"many\" indicates that the following noun should be in its plural form. \"Horses\" is the correct plural form of \"horse\".",
+    "explanationKh": "ពាក្យ \"many\" បង្ហាញថានាមដែលតាមពីក្រោយគួរតែជាទម្រង់ពហុវចនៈ។ \"Horses\" គឺជាទម្រង់ពហុវចនៈត្រឹមត្រូវរបស់ \"horse\"។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/what-do-you-like.pdf",
+    "questionText": "I am very tired after _____.",
+    "questionTextKh": "ខ្ញុំហត់ខ្លាំងណាស់បន្ទាប់ពី _____។",
+    "options": [
+      "run",
+      "runs",
+      "running",
+      "to run"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "After prepositions like 'after', we usually use the gerund (-ing form) of the verb.",
+    "explanationKh": "បន្ទាប់ពីបុព្វបទដូចជា 'after' យើងតែងតែប្រើកិរិយាសព្ទជាកិរិយាវិសេស (ទម្រង់ -ing)។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/what-do-you-like.pdf",
+    "questionText": "Her favorite activity is _____.",
+    "questionTextKh": "សកម្មភាពដែលនាងចូលចិត្តជាងគេគឺ _____។",
+    "options": [
+      "read",
+      "reads",
+      "reading",
+      "to read"
+    ],
+    "correctAnswer": [
+      2
+    ],
+    "explanation": "When describing a hobby or activity after 'is', the gerund form (-ing) is used.",
+    "explanationKh": "នៅពេលពណ៌នាចំណូលចិត្ត ឬសកម្មភាពបន្ទាប់ពី 'is' គេប្រើទម្រង់កិរិយាវិសេស (-ing)។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/what-do-you-like.pdf",
+    "questionText": "The children are _____ soccer outside.",
+    "questionTextKh": "ក្មេងៗកំពុង _____ បាល់ទាត់នៅខាងក្រៅ។",
+    "options": [
+      "play",
+      "plays",
+      "played",
+      "playing"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "To form the present continuous tense (actions happening now), we use 'be' verb + verb-ing.",
+    "explanationKh": "ដើម្បីបង្កើតកាលបច្ចុប្បន្នបន្ត (សកម្មភាពកំពុងកើតឡើងឥឡូវនេះ) យើងប្រើកិរិយាសព្ទ 'be' + ទម្រង់កិរិយាសព្ទ-ing។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/what-do-you-like.pdf",
+    "questionText": "I enjoy _____ in the shower.",
+    "questionTextKh": "ខ្ញុំរីករាយនឹង _____ នៅក្នុងបន្ទប់ទឹក។",
+    "options": [
+      "sing",
+      "sings",
+      "sang",
+      "singing"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "The verb 'enjoy' is typically followed by a gerund (-ing form).",
+    "explanationKh": "កិរិយាសព្ទ 'enjoy' ត្រូវតាមដោយកិរិយាវិសេស (ទម្រង់ -ing)។"
+  },
+  {
+    "grade": 3,
+    "type": "grammar",
+    "pdfUrl": "/lessons/pdf/grade3/what-do-you-like.pdf",
+    "questionText": "We spent the evening _____ at the party.",
+    "questionTextKh": "យើងបានចំណាយពេលល្ងាច _____ នៅឯពិធីជប់លៀង។",
+    "options": [
+      "dance",
+      "dances",
+      "danced",
+      "dancing"
+    ],
+    "correctAnswer": [
+      3
+    ],
+    "explanation": "When 'spend' is followed by an activity, the gerund (-ing form) is used.",
+    "explanationKh": "នៅពេល 'spend' ត្រូវតាមដោយសកម្មភាព គេប្រើកិរិយាវិសេស (ទម្រង់ -ing)។"
   }
 ]

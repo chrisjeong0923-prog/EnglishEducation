@@ -25,9 +25,9 @@
     "titleKh": "តើអ្នកឃើញអ្វី?",
     "difficulty": "Level 2",
     "difficultyKh": "កម្រិត ២",
-    "text": "I see a yellow fish.",
-    "clue": "A sentence about seeing one yellow animal.",
-    "clueKh": "ប្រយោគអំពីការឃើញសត្វពណ៌លឿងមួយ។"
+    "text": "I see a scary blue shark!",
+    "clue": "A scary blue sea animal.",
+    "clueKh": "សត្វសមុទ្រពណ៌ខៀវគួរឱ្យខ្លាចមួយ។"
   },
   {
     "id": 4,
@@ -51,13 +51,13 @@
   },
   {
     "id": 6,
-    "title": "Finding the Cat",
-    "titleKh": "ការស្វែងរកឆ្មា",
+    "title": "Finding the Key",
+    "titleKh": "ការស្វែងរកកូនសោ",
     "difficulty": "Level 2",
     "difficultyKh": "កម្រិត ២",
-    "text": "The cat is under the bed.",
-    "clue": "A cat resting below where you sleep.",
-    "clueKh": "ឆ្មាកំពុងសម្រាកនៅខាងក្រោមគ្រែដេករបស់អ្នក។"
+    "text": "The key is under the car.",
+    "clue": "Listen for where the key is.",
+    "clueKh": "ស្ដាប់មើលថាតើកូនសោនៅឯណា។"
   },
   {
     "id": 7,
@@ -71,13 +71,13 @@
   },
   {
     "id": 8,
-    "title": "On the Table",
-    "titleKh": "នៅលើតុ",
+    "title": "My Car",
+    "titleKh": "ឡានរបស់ខ្ញុំ",
     "difficulty": "Level 2",
     "difficultyKh": "កម្រិត ២",
-    "text": "The book is on the table.",
-    "clue": "A book placed on top of a table.",
-    "clueKh": "សៀវភៅមួយក្បាលដែលដាក់នៅលើតុ។"
+    "text": "This is my car.",
+    "clue": "Listen for whose car it is.",
+    "clueKh": "ស្ដាប់មើលថាជាឡានរបស់អ្នកណា។"
   },
   {
     "id": 9,
@@ -265,9 +265,9 @@
     "titleKh": "ស្តាប់ហើយកំណត់អត្តសញ្ញាណ",
     "difficulty": "Level 1",
     "difficultyKh": "កម្រិត ១",
-    "text": "I have books in a backpack.",
-    "clue": "Where are the books?",
-    "clueKh": "តើសៀវភៅនៅឯណា?"
+    "text": "I have a backpack.",
+    "clue": "What do I have?",
+    "clueKh": "តើខ្ញុំមានអ្វី?"
   },
   {
     "id": 28,
@@ -335,9 +335,9 @@
     "titleKh": "ស្តាប់ប្រយោគ",
     "difficulty": "Level 1",
     "difficultyKh": "កម្រិត ១",
-    "text": "The rainbow has all seven colors.",
-    "clue": "How many colors does a rainbow have?",
-    "clueKh": "ឥន្ទធនូមានប៉ុន្មានពណ៌?"
+    "text": "The grass is green.",
+    "clue": "What color is the grass?",
+    "clueKh": "តើស្មៅមានពណ៌អ្វី?"
   },
   {
     "id": 35,
@@ -351,13 +351,13 @@
   },
   {
     "id": 36,
-    "title": "Listen Carefully",
-    "titleKh": "ស្ដាប់ដោយយកចិត្តទុកដាក់",
+    "title": "Listen and Repeat",
+    "titleKh": "ស្ដាប់ហើយនិយាយតាម",
     "difficulty": "Level 1",
     "difficultyKh": "កម្រិត ១",
-    "text": "A cow is an animal.",
-    "clue": "What is a cow?",
-    "clueKh": "តើគោជាអ្វី?"
+    "text": "I see a horse.",
+    "clue": "What animal did you hear?",
+    "clueKh": "តើអ្នកបានលឺសត្វអ្វី?"
   },
   {
     "id": 37,
@@ -381,12 +381,12 @@
   },
   {
     "id": 39,
-    "title": "Weekend Fun",
-    "titleKh": "ភាពសប្បាយរីករាយចុងសប្តាហ៍",
+    "title": "Listen and Identify",
+    "titleKh": "ស្តាប់ហើយកំណត់អត្តសញ្ញាណ",
     "difficulty": "Level 1",
     "difficultyKh": "កម្រិត ១",
-    "text": "My sister likes reading storybooks.",
-    "clue": "Pay attention to what the sister enjoys doing with books.",
-    "clueKh": "យកចិត្តទុកដាក់លើអ្វីដែលបងស្រីចូលចិត្តធ្វើជាមួយសៀវភៅ។"
+    "text": "I like running.",
+    "clue": "Listen for what I enjoy doing.",
+    "clueKh": "ស្ដាប់មើលថាខ្ញុំចូលចិត្តធ្វើអ្វី។"
   }
 ]
