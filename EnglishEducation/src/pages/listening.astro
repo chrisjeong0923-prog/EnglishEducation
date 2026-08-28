@@ -246,11 +246,14 @@ const exercisesJson = JSON.stringify(listeningExercises);
     }
 
     init() {
+      const normalSpeed = 0.60;
+      const slowSpeed = normalSpeed * 0.4; // 0.24
+
       if (this.playNormalBtn) {
-        this.playNormalBtn.addEventListener('click', () => this.speakText(0.60, this.playNormalBtn));
+        this.playNormalBtn.addEventListener('click', () => this.speakText(normalSpeed, this.playNormalBtn));
       }
       if (this.playSlowBtn) {
-        this.playSlowBtn.addEventListener('click', () => this.speakText(0.40, this.playSlowBtn));
+        this.playSlowBtn.addEventListener('click', () => this.speakText(slowSpeed, this.playSlowBtn));
       }
 
       // Speech Recognition initialization
